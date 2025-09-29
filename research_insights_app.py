@@ -17,7 +17,19 @@ import plotly.graph_objects as go
 from plotly.subplots import make_subplots
 import os
 from dotenv import load_dotenv
+import nltk
 
+# Download NLTK data at startup
+@st.cache_resource
+def download_nltk_data():
+    try:
+        nltk.data.find('corpora/stopwords')
+        nltk.data.find('tokenizers/punkt')
+    except LookupError:
+        nltk.download('stopwords', quiet=True)
+        nltk.download('punkt', quiet=True)
+
+download_nltk_data()
 # BERTopic and related imports
 try:
     from bertopic import BERTopic

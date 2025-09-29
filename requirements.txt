@@ -1,22 +1,10 @@
-streamlit==1.28.0
-pandas==1.5.3
-numpy==1.23.5
-plotly==5.17.0
-requests==2.31.0
-python-dateutil==2.8.2
-nltk==3.8.1
-scikit-learn==1.3.0
-joblib==1.3.0
-tqdm==4.66.0
-
-# BERTopic and dependencies - simplified versions
-bertopic==0.15.0
-sentence-transformers==2.2.2
-umap-learn==0.5.4
-hdbscan==0.8.33
-
-# Export functionality
-openpyxl==3.1.0
-xlsxwriter==3.1.0
-python-dotenv==1.0.0
-pyarrow==14.0.0
+streamlit>=1.28.0
+pandas>=2.0.0
+numpy>=1.24.0
+requests
+nltk
+python-dotenv
+plotly>=5.0.0
+bertopic
+sentence-transformers
+scikit-learn
