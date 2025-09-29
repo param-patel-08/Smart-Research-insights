@@ -39,8 +39,23 @@ if 'topics_info' not in st.session_state:
     st.session_state.topics_info = None
 
 # Configuration
-CORE_API_KEY = "icHUxkngRzK0PqTZl1paCoyw2Y3XV8tA"
-CORE_API_BASE_URL = "https://api.core.ac.uk/v3"
+with st.sidebar:
+    st.header("Configuration")
+    
+    # API Key input
+    api_key = st.text_input(
+        "CORE API Key",
+        type="password",
+        value="icHUxkngRzK0PqTZl1paCoyw2Y3XV8tA",  # Default value (remove in production)
+        help="Enter your CORE API key. Get one at: https://core.ac.uk/api-keys"
+    )
+    
+    if not api_key:
+        st.error("Please enter a CORE API key")
+        st.stop()
+    
+    # Use this key for the API client
+    CORE_API_KEY = api_key
 
 # Babcock Technology Themes
 BABCOCK_THEMES = [
