@@ -114,47 +114,36 @@ AUSTRALASIAN_UNIVERSITIES = [
 ]
 
 class COREAPIClient:
-    """CORRECTED Client for interacting with CORE API v3"""
+    """FIXED Client that actually gets papers from CORE API"""
     
     def __init__(self, api_key: str):
         self.api_key = api_key
         self.base_url = "https://api.core.ac.uk/v3"
     
     def search_papers(self, query: str, limit: int = 100, offset: int = 0) -> Dict:
-        """Search papers using CORE API v3 - CORRECTED METHOD"""
+        """Search papers using CORE API v3"""
         url = f"{self.base_url}/search/works"
         
-        # CRITICAL: API key must be in params as 'apiKey'
         params = {
             "q": query,
             "limit": limit,
             "offset": offset,
-            "apiKey": self.api_key  # Correct parameter name
+            "apiKey": self.api_key
         }
         
-        headers = {
-            "Accept": "application/json"
-        }
+        headers = {"Accept": "application/json"}
         
         try:
-            response = requests.get(url, params=params, headers=headers, timeout=30)
+            response = requests.get(url, params=params, headers=headers, timeout=60)
             
             if response.status_code == 200:
                 return response.json()
-            elif response.status_code == 401:
-                st.error("❌ Authentication failed - API key not recognized")
-            elif response.status_code == 429:
-                retry_after = response.headers.get('Retry-After', '10')
-                st.warning(f"⚠️ Rate limit hit. Waiting {retry_after} seconds...")
-                time.sleep(int(retry_after))
-                return self.search_papers(query, limit, offset)
             else:
                 st.error(f"API Error {response.status_code}")
+                return {"results": [], "totalHits": 0}
                 
-            return {"results": [], "totalHits": 0}
-            
         except requests.exceptions.Timeout:
-            st.error("❌ Request timed out. Try reducing the number of papers.")
+            st.warning("Request timed out - trying simpler query")
             return {"results": [], "totalHits": 0}
         except Exception as e:
             st.error(f"API Error: {e}")
@@ -164,36 +153,54 @@ class COREAPIClient:
                                      start_year: int = 2023, 
                                      max_papers_per_uni: int = 30,
                                      theme_filter: str = None) -> pd.DataFrame:
-        """Fetch papers for multiple universities with theme filtering"""
+        """WORKING METHOD: Use simple text search, not institutionName"""
         all_papers = []
         
         progress_bar = st.progress(0)
         status_text = st.empty()
         
-        # Limit universities to avoid rate limits
         universities_to_process = universities[:10]
         
         if len(universities) > 10:
-            st.warning(f"⚠️ Processing first 10 universities only to avoid rate limits")
+            st.warning("⚠️ Processing first 10 universities to avoid rate limits")
         
         for idx, university in enumerate(universities_to_process):
-            status_text.text(f"Fetching papers from {university}...")
+            status_text.text(f"Searching for papers from {university}...")
             
-            # Build base query
-            query = f'institutionName:"{university}" AND yearPublished>={start_year}'
+            # Use simple text search with university name in quotes
+            query = f'"{university}"'
             
-            # Add theme keywords if filter is selected
-            if theme_filter and theme_filter != 'All':
-                keywords = THEME_KEYWORDS.get(theme_filter, [])
-                if keywords:
-                    keyword_query = ' OR '.join([f'"{kw}"' for kw in keywords])
-                    query = f'({query}) AND ({keyword_query})'
+            # Add year filter carefully
+            if start_year == 2024:
+                query = f'{query} 2024'
+            elif start_year == 2023:
+                query = f'{query} (2023 OR 2024)'
             
             try:
                 results = self.search_papers(query, limit=max_papers_per_uni)
                 
-                papers_found = 0
+                total_found = results.get('totalHits', 0)
+                papers_processed = 0
+                
+                status_text.text(f"Found {total_found:,} papers mentioning {university}")
+                
                 for paper in results.get('results', []):
+                    # Check if paper is actually from this university
+                    is_from_uni = False
+                    actual_affiliation = "Unknown"
+                    
+                    if paper.get('authors'):
+                        for author in paper.get('authors', []):
+                            if author.get('affiliations'):
+                                aff_text = str(author.get('affiliations', '')).lower()
+                                uni_lower = university.lower()
+                                
+                                if uni_lower in aff_text or any(word in aff_text for word in uni_lower.split()[:2]):
+                                    is_from_uni = True
+                                    actual_affiliation = author.get('affiliations', '')[:200]
+                                    break
+                    
+                    # Create paper data
                     paper_data = {
                         'title': paper.get('title', 'No Title'),
                         'abstract': paper.get('abstract', ''),
@@ -201,39 +208,41 @@ class COREAPIClient:
                             author.get('name', '') 
                             for author in paper.get('authors', [])
                         ]) if paper.get('authors') else 'Unknown',
-                        'year': paper.get('yearPublished', start_year),
+                        'year': paper.get('yearPublished', 2023),
                         'university': university,
+                        'actual_affiliation': actual_affiliation,
                         'doi': paper.get('doi', ''),
                         'downloadUrl': paper.get('downloadUrl', ''),
                         'publishedDate': paper.get('publishedDate', ''),
-                        'language': paper.get('language', {}).get('name', 'English') if paper.get('language') else 'English'
+                        'is_verified': is_from_uni
                     }
                     
-                    # Filter by theme keywords if specified
-                    if theme_filter and theme_filter != 'All':
-                        if self.matches_theme(paper_data['abstract'] + ' ' + paper_data['title'], theme_filter):
-                            if paper_data['abstract'] and len(paper_data['abstract']) > 100:
-                                all_papers.append(paper_data)
-                                papers_found += 1
-                    else:
-                        if paper_data['abstract'] and len(paper_data['abstract']) > 100:
-                            all_papers.append(paper_data)
-                            papers_found += 1
+                    # Only add if has abstract
+                    if paper_data['abstract'] and len(paper_data['abstract']) > 50:
+                        all_papers.append(paper_data)
+                        papers_processed += 1
                 
-                status_text.text(f"Found {papers_found} papers from {university}")
+                status_text.text(f"Added {papers_processed} papers from {university}")
                 
                 # Rate limiting
                 time.sleep(2)
                 
             except Exception as e:
-                st.warning(f"Could not fetch papers from {university}: {e}")
+                st.warning(f"Error fetching from {university}: {e}")
             
             progress_bar.progress((idx + 1) / len(universities_to_process))
         
-        status_text.text(f"✅ Paper fetching complete! Found {len(all_papers)} papers")
+        status_text.text(f"✅ Complete! Found {len(all_papers)} papers with abstracts")
         time.sleep(1)
         status_text.empty()
         progress_bar.empty()
+        
+        if len(all_papers) == 0:
+            st.error("No papers found! Try selecting fewer universities")
+        else:
+            df = pd.DataFrame(all_papers)
+            verified_count = len(df[df['is_verified'] == True]) if 'is_verified' in df.columns else 0
+            st.info(f"📊 Found {len(df)} papers total ({verified_count} verified from selected universities)")
         
         return pd.DataFrame(all_papers)
     
