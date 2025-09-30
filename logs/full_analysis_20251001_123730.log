@@ -1,0 +1,215 @@
+2025-10-01 12:37:30,223 - __main__ - INFO - Analysis started at: 2025-10-01 12:37:30.223718
+2025-10-01 12:37:30,224 - __main__ - INFO - Log file: logs/full_analysis_20251001_123730.log
+2025-10-01 12:37:30,250 - __main__ - INFO - 
+================================================================================
+2025-10-01 12:37:30,251 - __main__ - INFO - CONFIGURATION
+2025-10-01 12:37:30,251 - __main__ - INFO - ================================================================================
+2025-10-01 12:37:30,251 - __main__ - INFO - Email: param.pat01@gmail.com
+2025-10-01 12:37:30,252 - __main__ - INFO - Date range: 2020-01-01 to 2024-12-31
+2025-10-01 12:37:30,252 - __main__ - INFO - Universities: 44
+2025-10-01 12:37:30,253 - __main__ - INFO - Themes: 9
+2025-10-01 12:37:32,912 - __main__ - INFO - Mode: Full collection
+2025-10-01 12:37:33,806 - src.openalex_collector - INFO - OpenAlex Collector initialized
+2025-10-01 12:37:33,806 - src.openalex_collector - INFO - Date range: 2020-01-01 to 2024-12-31
+2025-10-01 12:37:33,806 - src.openalex_collector - INFO - Using email: param.pat01@gmail.com
+2025-10-01 12:37:33,806 - src.openalex_collector - INFO - 
+================================================================================
+2025-10-01 12:37:33,806 - src.openalex_collector - INFO - COLLECTING PAPERS FROM 44 UNIVERSITIES
+2025-10-01 12:37:33,806 - src.openalex_collector - INFO - ================================================================================
+
+2025-10-01 12:37:33,813 - src.openalex_collector - INFO - 
+Fetching papers from: University of Melbourne
+2025-10-01 12:37:36,260 - src.openalex_collector - INFO -   Page 1: Fetched 200 papers (Total: 198)
+2025-10-01 12:37:38,703 - src.openalex_collector - INFO -   Page 2: Fetched 200 papers (Total: 398)
+2025-10-01 12:37:41,115 - src.openalex_collector - INFO -   Page 3: Fetched 200 papers (Total: 596)
+2025-10-01 12:37:45,207 - src.openalex_collector - INFO -   Page 4: Fetched 200 papers (Total: 792)
+2025-10-01 12:37:49,165 - src.openalex_collector - INFO -   Page 5: Fetched 200 papers (Total: 991)
+2025-10-01 12:37:53,043 - src.openalex_collector - INFO -   Page 6: Fetched 200 papers (Total: 1190)
+2025-10-01 12:37:57,191 - src.openalex_collector - INFO -   Page 7: Fetched 200 papers (Total: 1387)
+2025-10-01 12:38:00,873 - src.openalex_collector - INFO -   Page 8: Fetched 200 papers (Total: 1586)
+2025-10-01 12:38:04,545 - src.openalex_collector - INFO -   Page 9: Fetched 200 papers (Total: 1782)
+2025-10-01 12:38:08,305 - src.openalex_collector - INFO -   Page 10: Fetched 200 papers (Total: 1982)
+2025-10-01 12:38:12,244 - src.openalex_collector - INFO -   Page 11: Fetched 200 papers (Total: 2181)
+2025-10-01 12:38:15,939 - src.openalex_collector - INFO -   Page 12: Fetched 200 papers (Total: 2381)
+2025-10-01 12:38:20,019 - src.openalex_collector - INFO -   Page 13: Fetched 200 papers (Total: 2579)
+2025-10-01 12:38:23,689 - src.openalex_collector - INFO -   Page 14: Fetched 200 papers (Total: 2776)
+2025-10-01 12:38:27,277 - src.openalex_collector - INFO -   Page 15: Fetched 200 papers (Total: 2972)
+2025-10-01 12:38:30,782 - src.openalex_collector - INFO -   Page 16: Fetched 200 papers (Total: 3169)
+2025-10-01 12:38:34,155 - src.openalex_collector - INFO -   Page 17: Fetched 200 papers (Total: 3369)
+2025-10-01 12:38:42,540 - src.openalex_collector - INFO -   Page 18: Fetched 200 papers (Total: 3567)
+2025-10-01 12:38:46,202 - src.openalex_collector - INFO -   Page 19: Fetched 200 papers (Total: 3767)
+2025-10-01 12:38:50,415 - src.openalex_collector - INFO -   Page 20: Fetched 200 papers (Total: 3965)
+2025-10-01 12:38:57,652 - src.openalex_collector - INFO -   Page 21: Fetched 200 papers (Total: 4160)
+2025-10-01 12:39:00,938 - src.openalex_collector - INFO -   Page 22: Fetched 200 papers (Total: 4357)
+2025-10-01 12:39:04,995 - src.openalex_collector - INFO -   Page 23: Fetched 200 papers (Total: 4555)
+2025-10-01 12:39:08,476 - src.openalex_collector - INFO -   Page 24: Fetched 200 papers (Total: 4752)
+2025-10-01 12:39:12,078 - src.openalex_collector - INFO -   Page 25: Fetched 200 papers (Total: 4951)
+2025-10-01 12:39:15,720 - src.openalex_collector - INFO -   Page 26: Fetched 200 papers (Total: 5151)
+2025-10-01 12:39:19,260 - src.openalex_collector - INFO -   Page 27: Fetched 200 papers (Total: 5350)
+2025-10-01 12:39:22,891 - src.openalex_collector - INFO -   Page 28: Fetched 200 papers (Total: 5548)
+2025-10-01 12:39:26,748 - src.openalex_collector - INFO -   Page 29: Fetched 200 papers (Total: 5743)
+2025-10-01 12:39:30,624 - src.openalex_collector - INFO -   Page 30: Fetched 200 papers (Total: 5942)
+2025-10-01 12:39:34,598 - src.openalex_collector - INFO -   Page 31: Fetched 200 papers (Total: 6140)
+2025-10-01 12:39:38,261 - src.openalex_collector - INFO -   Page 32: Fetched 200 papers (Total: 6339)
+2025-10-01 12:39:45,993 - src.openalex_collector - INFO -   Page 33: Fetched 200 papers (Total: 6536)
+2025-10-01 12:39:49,722 - src.openalex_collector - INFO -   Page 34: Fetched 200 papers (Total: 6735)
+2025-10-01 12:39:52,996 - src.openalex_collector - INFO -   Page 35: Fetched 200 papers (Total: 6934)
+2025-10-01 12:39:56,267 - src.openalex_collector - INFO -   Page 36: Fetched 200 papers (Total: 7132)
+2025-10-01 12:39:59,376 - src.openalex_collector - INFO -   Page 37: Fetched 200 papers (Total: 7330)
+2025-10-01 12:40:03,043 - src.openalex_collector - INFO -   Page 38: Fetched 200 papers (Total: 7529)
+2025-10-01 12:40:06,468 - src.openalex_collector - INFO -   Page 39: Fetched 200 papers (Total: 7726)
+2025-10-01 12:40:09,956 - src.openalex_collector - INFO -   Page 40: Fetched 200 papers (Total: 7926)
+2025-10-01 12:40:14,088 - src.openalex_collector - INFO -   Page 41: Fetched 200 papers (Total: 8121)
+2025-10-01 12:40:17,770 - src.openalex_collector - INFO -   Page 42: Fetched 200 papers (Total: 8320)
+2025-10-01 12:40:21,717 - src.openalex_collector - INFO -   Page 43: Fetched 200 papers (Total: 8520)
+2025-10-01 12:40:25,276 - src.openalex_collector - INFO -   Page 44: Fetched 200 papers (Total: 8718)
+2025-10-01 12:40:28,739 - src.openalex_collector - INFO -   Page 45: Fetched 200 papers (Total: 8915)
+2025-10-01 12:40:32,054 - src.openalex_collector - INFO -   Page 46: Fetched 200 papers (Total: 9115)
+2025-10-01 12:40:36,024 - src.openalex_collector - INFO -   Page 47: Fetched 200 papers (Total: 9313)
+2025-10-01 12:40:39,407 - src.openalex_collector - INFO -   Page 48: Fetched 200 papers (Total: 9512)
+2025-10-01 12:40:42,698 - src.openalex_collector - INFO -   Page 49: Fetched 200 papers (Total: 9710)
+2025-10-01 12:40:46,255 - src.openalex_collector - INFO -   Page 50: Fetched 200 papers (Total: 9909)
+2025-10-01 12:40:47,075 - src.openalex_collector - ERROR -   Error fetching page 51: 403 Client Error: Forbidden for url: https://api.openalex.org/works?filter=institutions.id%3AI145311948%2Cfrom_publication_date%3A2020-01-01%2Cto_publication_date%3A2024-12-31&per-page=200&page=51&mailto=param.pat01%40gmail.com&select=id%2Cdoi%2Ctitle%2Cpublication_date%2Cabstract_inverted_index%2Cauthorships%2Cprimary_location%2Cconcepts%2Ccited_by_count
+2025-10-01 12:40:47,585 - src.openalex_collector - INFO - 
+Fetching papers from: University of Sydney
+2025-10-01 12:40:48,412 - src.openalex_collector - INFO -   No more results at page 1
+2025-10-01 12:40:48,918 - src.openalex_collector - INFO - 
+Fetching papers from: University of Queensland
+2025-10-01 12:40:49,835 - src.openalex_collector - INFO -   No more results at page 1
+2025-10-01 12:40:50,340 - src.openalex_collector - INFO - 
+Fetching papers from: Monash University
+2025-10-01 12:40:51,270 - src.openalex_collector - INFO -   No more results at page 1
+2025-10-01 12:40:51,774 - src.openalex_collector - INFO - 
+Fetching papers from: University of New South Wales
+2025-10-01 12:40:52,702 - src.openalex_collector - INFO -   No more results at page 1
+2025-10-01 12:40:53,207 - src.openalex_collector - INFO - 
+Fetching papers from: Australian National University
+2025-10-01 12:40:54,136 - src.openalex_collector - INFO -   No more results at page 1
+2025-10-01 12:40:54,640 - src.openalex_collector - INFO - 
+Fetching papers from: University of Western Australia
+2025-10-01 12:40:55,467 - src.openalex_collector - INFO -   No more results at page 1
+2025-10-01 12:40:55,972 - src.openalex_collector - INFO - 
+Fetching papers from: University of Adelaide
+2025-10-01 12:40:56,900 - src.openalex_collector - INFO -   No more results at page 1
+2025-10-01 12:40:57,405 - src.openalex_collector - INFO - 
+Fetching papers from: University of Technology Sydney
+2025-10-01 12:40:58,125 - src.openalex_collector - INFO -   No more results at page 1
+2025-10-01 12:40:58,630 - src.openalex_collector - INFO - 
+Fetching papers from: Queensland University of Technology
+2025-10-01 12:40:59,565 - src.openalex_collector - INFO -   No more results at page 1
+2025-10-01 12:41:00,068 - src.openalex_collector - INFO - 
+Fetching papers from: University of Auckland
+2025-10-01 12:41:03,045 - src.openalex_collector - INFO -   No more results at page 1
+2025-10-01 12:41:03,549 - src.openalex_collector - INFO - 
+Fetching papers from: University of Otago
+2025-10-01 12:41:04,580 - src.openalex_collector - INFO -   No more results at page 1
+2025-10-01 12:41:05,085 - src.openalex_collector - INFO - 
+Fetching papers from: University of Canterbury
+2025-10-01 12:41:06,322 - src.openalex_collector - INFO -   No more results at page 1
+2025-10-01 12:41:06,830 - src.openalex_collector - INFO - 
+Fetching papers from: Massey University
+2025-10-01 12:41:07,960 - src.openalex_collector - INFO -   No more results at page 1
+2025-10-01 12:41:08,465 - src.openalex_collector - INFO - 
+Fetching papers from: Victoria University of Wellington
+2025-10-01 12:41:11,441 - src.openalex_collector - INFO -   No more results at page 1
+2025-10-01 12:41:11,946 - src.openalex_collector - INFO - 
+Fetching papers from: Auckland University of Technology
+2025-10-01 12:41:13,081 - src.openalex_collector - INFO -   No more results at page 1
+2025-10-01 12:41:13,586 - src.openalex_collector - INFO - 
+Fetching papers from: University of Waikato
+2025-10-01 12:41:14,616 - src.openalex_collector - INFO -   No more results at page 1
+2025-10-01 12:41:15,120 - src.openalex_collector - INFO - 
+Fetching papers from: Lincoln University
+2025-10-01 12:41:16,133 - src.openalex_collector - INFO -   No more results at page 1
+2025-10-01 12:41:16,638 - src.openalex_collector - INFO - 
+Fetching papers from: University of Tasmania
+2025-10-01 12:41:17,709 - src.openalex_collector - INFO -   No more results at page 1
+2025-10-01 12:41:18,215 - src.openalex_collector - INFO - 
+Fetching papers from: Griffith University
+2025-10-01 12:41:19,531 - src.openalex_collector - INFO -   No more results at page 1
+2025-10-01 12:41:20,035 - src.openalex_collector - INFO - 
+Fetching papers from: Deakin University
+2025-10-01 12:41:21,272 - src.openalex_collector - INFO -   No more results at page 1
+2025-10-01 12:41:21,776 - src.openalex_collector - INFO - 
+Fetching papers from: La Trobe University
+2025-10-01 12:41:23,012 - src.openalex_collector - INFO -   No more results at page 1
+2025-10-01 12:41:23,517 - src.openalex_collector - INFO - 
+Fetching papers from: Swinburne University of Technology
+2025-10-01 12:41:24,470 - src.openalex_collector - INFO -   No more results at page 1
+2025-10-01 12:41:24,974 - src.openalex_collector - INFO - 
+Fetching papers from: University of South Australia
+2025-10-01 12:41:26,290 - src.openalex_collector - INFO -   No more results at page 1
+2025-10-01 12:41:26,794 - src.openalex_collector - INFO - 
+Fetching papers from: Macquarie University
+2025-10-01 12:41:27,828 - src.openalex_collector - INFO -   No more results at page 1
+2025-10-01 12:41:28,332 - src.openalex_collector - INFO - 
+Fetching papers from: University of Newcastle
+2025-10-01 12:41:29,308 - src.openalex_collector - INFO -   No more results at page 1
+2025-10-01 12:41:29,813 - src.openalex_collector - INFO - 
+Fetching papers from: Curtin University
+2025-10-01 12:41:30,764 - src.openalex_collector - INFO -   No more results at page 1
+2025-10-01 12:41:31,268 - src.openalex_collector - INFO - 
+Fetching papers from: University of Wollongong
+2025-10-01 12:41:32,330 - src.openalex_collector - INFO -   No more results at page 1
+2025-10-01 12:41:32,835 - src.openalex_collector - INFO - 
+Fetching papers from: Flinders University
+2025-10-01 12:41:33,867 - src.openalex_collector - INFO -   No more results at page 1
+2025-10-01 12:41:34,371 - src.openalex_collector - INFO - 
+Fetching papers from: Bond University
+2025-10-01 12:41:35,521 - src.openalex_collector - INFO -   No more results at page 1
+2025-10-01 12:41:36,026 - src.openalex_collector - INFO - 
+Fetching papers from: James Cook University
+2025-10-01 12:41:37,247 - src.openalex_collector - INFO -   No more results at page 1
+2025-10-01 12:41:37,751 - src.openalex_collector - INFO - 
+Fetching papers from: University of Southern Queensland
+2025-10-01 12:41:38,884 - src.openalex_collector - INFO -   No more results at page 1
+2025-10-01 12:41:39,390 - src.openalex_collector - INFO - 
+Fetching papers from: Central Queensland University
+2025-10-01 12:41:40,523 - src.openalex_collector - INFO -   No more results at page 1
+2025-10-01 12:41:41,030 - src.openalex_collector - INFO - 
+Fetching papers from: Edith Cowan University
+2025-10-01 12:41:42,093 - src.openalex_collector - INFO -   No more results at page 1
+2025-10-01 12:41:42,598 - src.openalex_collector - INFO - 
+Fetching papers from: Murdoch University
+2025-10-01 12:41:43,493 - src.openalex_collector - INFO -   No more results at page 1
+2025-10-01 12:41:43,998 - src.openalex_collector - INFO - 
+Fetching papers from: University of the Sunshine Coast
+2025-10-01 12:41:45,029 - src.openalex_collector - INFO -   No more results at page 1
+2025-10-01 12:41:45,533 - src.openalex_collector - INFO - 
+Fetching papers from: Charles Darwin University
+2025-10-01 12:41:46,535 - src.openalex_collector - INFO -   No more results at page 1
+2025-10-01 12:41:47,040 - src.openalex_collector - INFO - 
+Fetching papers from: University of New England
+2025-10-01 12:41:48,100 - src.openalex_collector - INFO -   No more results at page 1
+2025-10-01 12:41:48,605 - src.openalex_collector - INFO - 
+Fetching papers from: Southern Cross University
+2025-10-01 12:41:49,944 - src.openalex_collector - INFO -   No more results at page 1
+2025-10-01 12:41:50,448 - src.openalex_collector - INFO - 
+Fetching papers from: Federation University Australia
+2025-10-01 12:41:51,581 - src.openalex_collector - INFO -   No more results at page 1
+2025-10-01 12:41:52,086 - src.openalex_collector - INFO - 
+Fetching papers from: Charles Sturt University
+2025-10-01 12:41:53,220 - src.openalex_collector - INFO -   No more results at page 1
+2025-10-01 12:41:53,725 - src.openalex_collector - INFO - 
+Fetching papers from: Australian Catholic University
+2025-10-01 12:41:54,756 - src.openalex_collector - INFO -   No more results at page 1
+2025-10-01 12:41:55,261 - src.openalex_collector - INFO - 
+Fetching papers from: University of Notre Dame Australia
+2025-10-01 12:41:56,276 - src.openalex_collector - INFO -   No more results at page 1
+2025-10-01 12:41:56,780 - src.openalex_collector - INFO - 
+Fetching papers from: Torrens University Australia
+2025-10-01 12:42:18,922 - src.openalex_collector - INFO -   No more results at page 1
+2025-10-01 12:42:19,470 - src.openalex_collector - INFO - 
+================================================================================
+2025-10-01 12:42:19,471 - src.openalex_collector - INFO - COLLECTION COMPLETE
+2025-10-01 12:42:19,471 - src.openalex_collector - INFO - ================================================================================
+2025-10-01 12:42:19,471 - src.openalex_collector - INFO - Total papers collected: 9909
+2025-10-01 12:42:19,474 - src.openalex_collector - INFO - Date range: 2020-01-01 00:00:00 to 2024-12-31 00:00:00
+2025-10-01 12:42:19,475 - src.openalex_collector - INFO - Universities: 1
+2025-10-01 12:42:19,479 - src.openalex_collector - INFO - Papers with abstracts: 9909 (100.0%)
+2025-10-01 12:42:19,516 - src.openalex_collector - INFO - 
+Deduplication: Removed 65 duplicates (0.7%)
+2025-10-01 12:42:19,516 - src.openalex_collector - INFO - Papers remaining: 9844
+2025-10-01 12:42:20,242 - __main__ - ERROR - 
+
+Fatal error: not enough values to unpack (expected 3, got 2)

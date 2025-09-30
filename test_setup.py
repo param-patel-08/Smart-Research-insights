@@ -151,7 +151,7 @@ def test_modules():
         from src.openalex_collector import OpenAlexCollector
         print("✓ openalex_collector.py")
         
-        from src.preprocessor import PaperPreprocessor
+        from src.paper_preprocessor import PaperPreprocessor
         print("✓ preprocessor.py")
         
         from config.themes import BABCOCK_THEMES

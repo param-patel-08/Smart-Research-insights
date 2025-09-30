@@ -1,0 +1,5 @@
+2025-10-01 12:33:11,931 - __main__ - INFO - Analysis started at: 2025-10-01 12:33:11.931191
+2025-10-01 12:33:11,931 - __main__ - INFO - Log file: logs/full_analysis_20251001_123311.log
+2025-10-01 12:33:11,962 - __main__ - ERROR - 
+
+Fatal error: cannot import name 'BERTOPIC_MODEL_PATH' from 'config.settings' (C:\Users\param\Desktop\Smart-Research-insights-1\config\settings.py)

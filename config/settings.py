@@ -1,132 +1,94 @@
 """
-Babcock's 9 Strategic Themes with keywords for filtering and mapping
+Configuration settings for Babcock Research Trends Analysis
 """
 
-BABCOCK_THEMES = {
-    "Defense_Security": {
-        "keywords": [
-            "defense", "military", "surveillance", "threat detection", 
-            "security systems", "radar", "sonar", "command control",
-            "tactical systems", "weapons systems", "defense technology",
-            "situational awareness", "force protection", "intelligence systems",
-            "defense capability", "military technology", "combat systems"
-        ],
-        "strategic_priority": "HIGH",
-        "description": "Defense and security systems for military applications"
-    },
-    
-    "Autonomous_Systems": {
-        "keywords": [
-            "autonomous", "robot", "robotics", "UAV", "AUV", "UGV",
-            "drone", "unmanned", "self-driving", "autonomous vehicle",
-            "SLAM", "path planning", "navigation", "obstacle avoidance",
-            "multi-agent", "swarm", "mobile robot", "manipulation",
-            "autonomous navigation", "robotic system", "unmanned system"
-        ],
-        "strategic_priority": "HIGH",
-        "description": "Autonomous systems and robotics for various domains"
-    },
-    
-    "Cybersecurity": {
-        "keywords": [
-            "cybersecurity", "cyber security", "information security",
-            "encryption", "cryptography", "network security", "malware",
-            "vulnerability", "threat", "firewall", "intrusion detection",
-            "zero-trust", "penetration testing", "security architecture",
-            "cyber attack", "cyber defense", "security protocol",
-            "information assurance", "data protection"
-        ],
-        "strategic_priority": "HIGH",
-        "description": "Cybersecurity and information assurance"
-    },
-    
-    "Energy_Sustainability": {
-        "keywords": [
-            "renewable energy", "solar", "wind", "battery", "energy storage",
-            "hydrogen", "fuel cell", "grid", "power system", "sustainability",
-            "carbon", "emission", "green energy", "photovoltaic",
-            "energy efficiency", "microgrid", "smart grid", "clean energy",
-            "energy transition", "decarbonization"
-        ],
-        "strategic_priority": "MEDIUM",
-        "description": "Energy systems and sustainability technologies"
-    },
-    
-    "Advanced_Manufacturing": {
-        "keywords": [
-            "additive manufacturing", "3D printing", "composite materials",
-            "advanced materials", "metallurgy", "manufacturing process",
-            "materials science", "carbon fiber", "lightweight materials",
-            "fabrication", "materials characterization", "coating",
-            "corrosion resistance", "structural materials", "metal alloy",
-            "advanced composites"
-        ],
-        "strategic_priority": "MEDIUM",
-        "description": "Advanced manufacturing and materials technologies"
-    },
-    
-    "AI_Machine_Learning": {
-        "keywords": [
-            "artificial intelligence", "machine learning", "deep learning",
-            "neural network", "computer vision", "natural language processing",
-            "NLP", "reinforcement learning", "AI", "predictive model",
-            "data analytics", "pattern recognition", "image recognition",
-            "explainable AI", "federated learning", "transfer learning",
-            "convolutional neural network", "recurrent neural network"
-        ],
-        "strategic_priority": "HIGH",
-        "description": "AI and machine learning applications"
-    },
-    
-    "Marine_Naval": {
-        "keywords": [
-            "marine", "naval", "ship", "submarine", "underwater",
-            "ocean", "maritime", "vessel", "hydrodynamic", "marine engineering",
-            "offshore", "subsea", "acoustic", "marine robotics",
-            "ship design", "marine structures", "oceanography",
-            "marine technology", "naval architecture", "underwater vehicle"
-        ],
-        "strategic_priority": "HIGH",
-        "description": "Marine and naval technologies"
-    },
-    
-    "Space_Aerospace": {
-        "keywords": [
-            "space", "satellite", "aerospace", "rocket", "orbital",
-            "launch", "spacecraft", "aviation", "aeronautics",
-            "space systems", "remote sensing", "space debris",
-            "propulsion", "aerodynamic", "flight control",
-            "space technology", "satellite system", "aerospace engineering"
-        ],
-        "strategic_priority": "MEDIUM",
-        "description": "Space and aerospace systems"
-    },
-    
-    "Digital_Transformation": {
-        "keywords": [
-            "IoT", "internet of things", "digital twin", "industry 4.0",
-            "smart sensor", "edge computing", "5G", "cloud computing",
-            "digital transformation", "sensor network", "wireless sensor",
-            "industrial IoT", "smart manufacturing", "connectivity",
-            "digitalization", "smart system"
-        ],
-        "strategic_priority": "MEDIUM",
-        "description": "Digital transformation and IoT technologies"
-    }
+import os
+from datetime import datetime
+from dotenv import load_dotenv
+
+# Load environment variables from .env file
+load_dotenv()
+
+# OpenAlex API Configuration
+OPENALEX_EMAIL = os.getenv('OPENALEX_EMAIL', 'param.pat01@gmail.com')
+
+# Analysis Date Range
+ANALYSIS_START_DATE = datetime(2020, 1, 1)
+ANALYSIS_END_DATE = datetime(2024, 12, 31)
+
+# Australasian Universities and their OpenAlex IDs
+ALL_UNIVERSITIES = {
+    "University of Melbourne": "I145311948",
+    "University of Sydney": "I145311949", 
+    "University of Queensland": "I145311950",
+    "Monash University": "I145311951",
+    "University of New South Wales": "I145311952",
+    "Australian National University": "I145311953",
+    "University of Western Australia": "I145311954",
+    "University of Adelaide": "I145311955",
+    "University of Technology Sydney": "I145311956",
+    "Queensland University of Technology": "I145311957",
+    "University of Auckland": "I145311958",
+    "University of Otago": "I145311959",
+    "University of Canterbury": "I145311960",
+    "Massey University": "I145311961",
+    "Victoria University of Wellington": "I145311962",
+    "Auckland University of Technology": "I145311963",
+    "University of Waikato": "I145311964",
+    "Lincoln University": "I145311965",
+    "University of Tasmania": "I145311966",
+    "Griffith University": "I145311967",
+    "Deakin University": "I145311968",
+    "La Trobe University": "I145311969",
+    "Swinburne University of Technology": "I145311970",
+    "University of South Australia": "I145311971",
+    "Macquarie University": "I145311972",
+    "University of Newcastle": "I145311973",
+    "Curtin University": "I145311974",
+    "University of Wollongong": "I145311975",
+    "Flinders University": "I145311976",
+    "Bond University": "I145311977",
+    "James Cook University": "I145311978",
+    "University of Southern Queensland": "I145311979",
+    "Central Queensland University": "I145311980",
+    "Edith Cowan University": "I145311981",
+    "Murdoch University": "I145311982",
+    "University of the Sunshine Coast": "I145311983",
+    "Charles Darwin University": "I145311984",
+    "University of New England": "I145311985",
+    "Southern Cross University": "I145311986",
+    "Federation University Australia": "I145311987",
+    "Charles Sturt University": "I145311988",
+    "Australian Catholic University": "I145311989",
+    "University of Notre Dame Australia": "I145311990",
+    "Torrens University Australia": "I145311991"
 }
 
-# Get all unique keywords for initial filtering
-def get_all_keywords():
-    """Get flattened list of all keywords across themes"""
-    all_keywords = []
-    for theme_data in BABCOCK_THEMES.values():
-        all_keywords.extend(theme_data['keywords'])
-    return list(set(all_keywords))
+# File Paths
+RAW_PAPERS_CSV = "data/raw/papers_raw.csv"
+PROCESSED_PAPERS_CSV = "data/processed/papers_processed.csv"
+METADATA_CSV = "data/processed/metadata.csv"
+EMBEDDINGS_PATH = "data/processed/embeddings.npy"
+BERTOPIC_MODEL_PATH = "models/bertopic_model.pkl"
+TOPICS_OVER_TIME_CSV = "data/processed/topics_over_time.csv"
+TOPIC_MAPPING_PATH = "data/processed/topic_mapping.csv"
+TREND_ANALYSIS_PATH = "data/processed/trend_analysis.csv"
+RESULTS_CSV = "data/exports/results.csv"
+DASHBOARD_DATA_JSON = "data/exports/dashboard_data.json"
 
-# Get themes by priority
-def get_themes_by_priority(priority):
-    """Get list of theme names with specific priority level"""
-    return [
-        theme_name for theme_name, data in BABCOCK_THEMES.items() 
-        if data['strategic_priority'] == priority
-    ]
+# Analysis Parameters
+MIN_ABSTRACT_LENGTH = 50
+MAX_PAPERS_PER_UNIVERSITY = 1000
+NR_TIME_BINS = 10
+MIN_RELEVANCE_SCORE = 0.3
+TOPIC_MODEL_PARAMS = {
+    'min_topic_size': 10,
+    'min_cluster_size': 15,
+    'min_samples': 5,
+    'metric': 'euclidean',
+    'cluster_selection_method': 'eom'
+}
+
+# Dashboard Configuration
+DASHBOARD_TITLE = "Babcock Research Trends Dashboard"
+DASHBOARD_DESCRIPTION = "Analysis of research trends across Australasian universities"
