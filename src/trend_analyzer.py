@@ -170,7 +170,7 @@ class TrendAnalyzer:
         # Sort by growth rate
         emerging.sort(key=lambda x: x['growth_rate'], reverse=True)
         
-        logger.info(f"✓ Found {len(emerging)} emerging topics (>{threshold*100:.0f}% growth)")
+        logger.info(f"[OK] Found {len(emerging)} emerging topics (>{threshold*100:.0f}% growth)")
         
         return emerging
     
@@ -246,7 +246,7 @@ class TrendAnalyzer:
         
         priorities.sort(key=lambda x: x['priority_score'], reverse=True)
         
-        logger.info(f"✓ Strategic priorities calculated")
+        logger.info(f"[OK] Strategic priorities calculated")
         
         return priorities
 
@@ -272,12 +272,12 @@ def main():
     # Load data
     logger.info("\nLoading data...")
     papers_df = pd.read_csv(PROCESSED_PAPERS_CSV)
-    logger.info(f"✓ Loaded {len(papers_df)} papers")
+    logger.info(f"[OK] Loaded {len(papers_df)} papers")
     
     # Load theme mapping
     with open(TOPIC_MAPPING_PATH, 'r') as f:
         mapping = json.load(f)
-    logger.info(f"✓ Loaded topic-theme mapping")
+    logger.info(f"[OK] Loaded topic-theme mapping")
     
     # Initialize analyzer
     trend_analyzer = TrendAnalyzer(mapping, BABCOCK_THEMES)
@@ -320,8 +320,8 @@ def main():
     with open(TREND_ANALYSIS_PATH, 'w') as f:
         json.dump(results, f, indent=2)
     
-    logger.info(f"✓ Saved trend analysis to {TREND_ANALYSIS_PATH}")
-    logger.info("\n✓ Trend analysis complete!")
+    logger.info(f"[OK] Saved trend analysis to {TREND_ANALYSIS_PATH}")
+    logger.info("\n[OK] Trend analysis complete!")
 
 
 if __name__ == "__main__":

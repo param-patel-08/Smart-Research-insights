@@ -1,0 +1,28 @@
+2025-10-03 15:24:05,267 - __main__ - INFO - Analysis started at: 2025-10-03 15:24:05.267857
+2025-10-03 15:24:05,268 - __main__ - INFO - Log file: logs/full_analysis_20251003_152405.log
+2025-10-03 15:24:05,325 - __main__ - INFO - 
+================================================================================
+2025-10-03 15:24:05,325 - __main__ - INFO - CONFIGURATION
+2025-10-03 15:24:05,326 - __main__ - INFO - ================================================================================
+2025-10-03 15:24:05,326 - __main__ - INFO - Email: param.pat01@gmail.com
+2025-10-03 15:24:05,327 - __main__ - INFO - Date range: 2020-01-01 to 2024-12-31
+2025-10-03 15:24:05,327 - __main__ - INFO - Universities: 44
+2025-10-03 15:24:05,328 - __main__ - INFO - Themes: 9
+2025-10-03 15:24:05,330 - __main__ - INFO - Mode: Quick test
+2025-10-03 15:24:07,672 - src.openalex_collector - INFO - OpenAlex Collector initialized
+2025-10-03 15:24:07,672 - src.openalex_collector - INFO - Date range: 2020-01-01 to 2024-12-31
+2025-10-03 15:24:07,672 - src.openalex_collector - INFO - Using email: param.pat01@gmail.com
+2025-10-03 15:24:07,673 - src.openalex_collector - INFO - 
+================================================================================
+2025-10-03 15:24:07,674 - src.openalex_collector - INFO - COLLECTING PAPERS FROM 3 UNIVERSITIES
+2025-10-03 15:24:07,674 - src.openalex_collector - INFO - ================================================================================
+
+2025-10-03 15:24:07,707 - src.openalex_collector - INFO - 
+Fetching papers from: University of Melbourne
+2025-10-03 15:24:15,704 - src.openalex_collector - INFO -   Page 1: Fetched 200 papers (Total: 198)
+2025-10-03 15:24:15,704 - src.openalex_collector - INFO -   Reached max results limit: 100
+2025-10-03 15:24:16,263 - src.openalex_collector - INFO - 
+Fetching papers from: University of Sydney
+2025-10-03 15:24:18,760 - src.openalex_collector - INFO -   No more results at page 1
+2025-10-03 15:24:19,267 - src.openalex_collector - INFO - 
+Fetching papers from: University of Queensland

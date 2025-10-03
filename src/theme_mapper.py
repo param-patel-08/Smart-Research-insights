@@ -150,7 +150,7 @@ class ThemeMapper:
         """Log summary statistics of the mapping"""
         confidences = [data['confidence'] for data in self.topic_theme_mapping.values()]
         
-        logger.info(f"\n✓ Mapped {len(self.topic_theme_mapping)} topics to themes")
+        logger.info(f"\n[OK] Mapped {len(self.topic_theme_mapping)} topics to themes")
         logger.info(f"  Average confidence: {np.mean(confidences):.3f}")
         logger.info(f"  Confidence range: {np.min(confidences):.3f} - {np.max(confidences):.3f}")
         
@@ -189,7 +189,7 @@ class ThemeMapper:
                     'keywords': data['keywords']
                 })
         
-        logger.info(f"\n✓ Found {len(cross_theme_topics)} cross-theme topics")
+        logger.info(f"\n[OK] Found {len(cross_theme_topics)} cross-theme topics")
         
         return cross_theme_topics
     
@@ -197,13 +197,13 @@ class ThemeMapper:
         """Save theme mapping to JSON"""
         with open(filepath, 'w') as f:
             json.dump(self.topic_theme_mapping, f, indent=2)
-        logger.info(f"✓ Saved theme mapping to {filepath}")
+        logger.info(f"[OK] Saved theme mapping to {filepath}")
     
     def load_mapping(self, filepath: str):
         """Load theme mapping from JSON"""
         with open(filepath, 'r') as f:
             self.topic_theme_mapping = json.load(f)
-        logger.info(f"✓ Loaded theme mapping from {filepath}")
+        logger.info(f"[OK] Loaded theme mapping from {filepath}")
 
 
 # ==================== USAGE EXAMPLE ====================
@@ -223,7 +223,7 @@ def main():
     # Load trained model
     logger.info(f"\nLoading BERTopic model from {BERTOPIC_MODEL_PATH}...")
     topic_model = BERTopic.load(BERTOPIC_MODEL_PATH)
-    logger.info("✓ Model loaded")
+    logger.info("[OK] Model loaded")
     
     # Create mapper
     mapper = ThemeMapper(BABCOCK_THEMES)
@@ -243,7 +243,7 @@ def main():
     # Save mapping
     mapper.save_mapping(TOPIC_MAPPING_PATH)
     
-    logger.info("\n✓ Theme mapping complete!")
+    logger.info("\n[OK] Theme mapping complete!")
 
 
 if __name__ == "__main__":

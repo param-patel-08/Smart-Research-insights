@@ -1,0 +1,114 @@
+{
+  "0": {
+    "theme": "Cybersecurity",
+    "confidence": 0.02361277134359696,
+    "all_scores": {
+      "Defense_Security": 0.0,
+      "Autonomous_Systems": 0.0,
+      "Cybersecurity": 0.02361277134359696,
+      "Energy_Sustainability": 0.0,
+      "Advanced_Manufacturing": 0.0,
+      "AI_Machine_Learning": 0.021210962029075308,
+      "Marine_Naval": 0.0,
+      "Space_Aerospace": 0.0,
+      "Digital_Transformation": 0.0
+    },
+    "keywords": [
+      "data",
+      "analysis",
+      "challenges",
+      "large",
+      "medical",
+      "present",
+      "imaging",
+      "features",
+      "review",
+      "high"
+    ],
+    "count": 19
+  },
+  "1": {
+    "theme": "Cybersecurity",
+    "confidence": 0.02361277134359696,
+    "all_scores": {
+      "Defense_Security": 0.0,
+      "Autonomous_Systems": 0.0,
+      "Cybersecurity": 0.02361277134359696,
+      "Energy_Sustainability": 0.0,
+      "Advanced_Manufacturing": 0.0,
+      "AI_Machine_Learning": 0.021210962029075308,
+      "Marine_Naval": 0.0,
+      "Space_Aerospace": 0.0,
+      "Digital_Transformation": 0.0
+    },
+    "keywords": [
+      "treatment",
+      "data",
+      "new",
+      "single",
+      "complete",
+      "additional",
+      "review",
+      "total",
+      "provide",
+      "results"
+    ],
+    "count": 35
+  },
+  "2": {
+    "theme": "Defense_Security",
+    "confidence": 0.0,
+    "all_scores": {
+      "Defense_Security": 0.0,
+      "Autonomous_Systems": 0.0,
+      "Cybersecurity": 0.0,
+      "Energy_Sustainability": 0.0,
+      "Advanced_Manufacturing": 0.0,
+      "AI_Machine_Learning": 0.0,
+      "Marine_Naval": 0.0,
+      "Space_Aerospace": 0.0,
+      "Digital_Transformation": 0.0
+    },
+    "keywords": [
+      "early",
+      "needs",
+      "evidence",
+      "based",
+      "high",
+      "research",
+      "increased",
+      "assessment",
+      "global",
+      "development"
+    ],
+    "count": 20
+  },
+  "3": {
+    "theme": "Cybersecurity",
+    "confidence": 0.02361277134359696,
+    "all_scores": {
+      "Defense_Security": 0.0,
+      "Autonomous_Systems": 0.0,
+      "Cybersecurity": 0.02361277134359696,
+      "Energy_Sustainability": 0.0,
+      "Advanced_Manufacturing": 0.0,
+      "AI_Machine_Learning": 0.021210962029075308,
+      "Marine_Naval": 0.0,
+      "Space_Aerospace": 0.0,
+      "Digital_Transformation": 0.0
+    },
+    "keywords": [
+      "years",
+      "data",
+      "study",
+      "cases",
+      "case",
+      "level",
+      "results",
+      "time",
+      "clinical",
+      "public"
+    ],
+    "count": 33
+  }
+}

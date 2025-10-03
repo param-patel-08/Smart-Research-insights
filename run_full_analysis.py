@@ -41,12 +41,12 @@ def run_step(step_name, function, *args, **kwargs):
         result = function(*args, **kwargs)
         elapsed = (datetime.now() - start_time).total_seconds()
         
-        logger.info(f"✓ {step_name} completed in {elapsed:.1f} seconds")
+        logger.info(f"[OK] {step_name} completed in {elapsed:.1f} seconds")
         return result, True
         
     except Exception as e:
         elapsed = (datetime.now() - start_time).total_seconds()
-        logger.error(f"✗ {step_name} failed after {elapsed:.1f} seconds: {e}")
+        logger.error(f"[ERROR] {step_name} failed after {elapsed:.1f} seconds: {e}")
         import traceback
         traceback.print_exc()
         return None, False
@@ -146,20 +146,19 @@ def main():
     
     def step2_preprocess():
         import pandas as pd
-        from src.preprocessor import PaperPreprocessor
+        from src.paper_preprocessor import PaperPreprocessor
         
         df = pd.read_csv(RAW_PAPERS_CSV)
         
         preprocessor = PaperPreprocessor(
-            babcock_themes=BABCOCK_THEMES,
-            min_relevance=MIN_RELEVANCE_SCORE
+            min_abstract_length=MIN_ABSTRACT_LENGTH
         )
         
-        df = preprocessor.handle_missing_data(df)
-        df = preprocessor.remove_short_abstracts(df, min_length=MIN_ABSTRACT_LENGTH)
-        df = preprocessor.filter_by_babcock_themes(df)
+        df = preprocessor.preprocess_abstracts(df)
         
-        documents, metadata = preprocessor.prepare_for_bertopic(df)
+        # Prepare documents and metadata for BERTopic
+        documents = df['processed_text'].tolist()
+        metadata = df[['title', 'university', 'date', 'authors', 'journal', 'citations']].copy()
         
         # Save
         metadata.to_csv(METADATA_CSV, index=False)
@@ -168,12 +167,14 @@ def main():
         with open(documents_file, 'w', encoding='utf-8') as f:
             f.write('\n'.join(documents))
         
-        return documents, metadata
+        return (documents, metadata)
     
-    documents, metadata, success = run_step("2. PREPROCESSING", step2_preprocess)
+    result, success = run_step("2. PREPROCESSING", step2_preprocess)
     if not success:
         logger.error("Pipeline stopped due to preprocessing failure")
         return
+    
+    documents, metadata = result
     
     # ==================== STEP 3: TOPIC MODELING ====================
     
@@ -280,18 +281,21 @@ def main():
     logger.info("="*80)
     logger.info(f"Total processing time: {total_time/60:.1f} minutes")
     logger.info(f"Papers analyzed: {len(metadata)}")
-    logger.info(f"Topics discovered: {len(set(metadata['topic_id'])) - 1}")
+    if 'topic_id' in metadata.columns:
+        logger.info(f"Topics discovered: {len(set(metadata['topic_id'])) - 1}")
+    else:
+        logger.info("Topics discovered: Processing...")
     logger.info(f"Themes covered: {len(BABCOCK_THEMES)}")
     
     logger.info(f"\n{'='*80}")
     logger.info("OUTPUT FILES")
     logger.info("="*80)
-    logger.info(f"✓ Raw papers: {RAW_PAPERS_CSV}")
-    logger.info(f"✓ Processed papers: {PROCESSED_PAPERS_CSV}")
-    logger.info(f"✓ BERTopic model: {BERTOPIC_MODEL_PATH}")
-    logger.info(f"✓ Topic-theme mapping: {TOPIC_MAPPING_PATH}")
-    logger.info(f"✓ Trend analysis: {TREND_ANALYSIS_PATH}")
-    logger.info(f"✓ Log file: {log_file}")
+    logger.info(f"[OK] Raw papers: {RAW_PAPERS_CSV}")
+    logger.info(f"[OK] Processed papers: {PROCESSED_PAPERS_CSV}")
+    logger.info(f"[OK] BERTopic model: {BERTOPIC_MODEL_PATH}")
+    logger.info(f"[OK] Topic-theme mapping: {TOPIC_MAPPING_PATH}")
+    logger.info(f"[OK] Trend analysis: {TREND_ANALYSIS_PATH}")
+    logger.info(f"[OK] Log file: {log_file}")
     
     logger.info(f"\n{'='*80}")
     logger.info("NEXT STEPS")
@@ -300,7 +304,7 @@ def main():
     logger.info("2. Launch dashboard: streamlit run dashboard/app.py")
     logger.info("3. Generate reports: python scripts/generate_report.py")
     
-    print_banner("SUCCESS! ✓")
+    print_banner("SUCCESS! [OK]")
 
 
 if __name__ == "__main__":

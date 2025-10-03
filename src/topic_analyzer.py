@@ -87,7 +87,7 @@ class BabcockTopicAnalyzer:
             verbose=True
         )
         
-        logger.info("✓ BERTopic model initialized")
+        logger.info("[OK] BERTopic model initialized")
         
         return self.topic_model
     
@@ -108,7 +108,7 @@ class BabcockTopicAnalyzer:
         # Check if embeddings already exist
         embeddings = None
         if embeddings_path and os.path.exists(embeddings_path):
-            logger.info(f"\n✓ Loading cached embeddings from {embeddings_path}")
+            logger.info(f"\n[OK] Loading cached embeddings from {embeddings_path}")
             embeddings = np.load(embeddings_path)
         else:
             logger.info("\nGenerating embeddings (this may take 1-2 minutes)...")
@@ -123,9 +123,10 @@ class BabcockTopicAnalyzer:
         
         # Save embeddings for future use
         if embeddings_path and embeddings is None:
-            embeddings = self.topic_model.embedding_model.encode(documents, show_progress_bar=True)
+            # Get embeddings from the fitted model
+            embeddings = self.topic_model.embedding_model.embed_documents(documents)
             np.save(embeddings_path, embeddings)
-            logger.info(f"✓ Saved embeddings to {embeddings_path}")
+            logger.info(f"[OK] Saved embeddings to {embeddings_path}")
         
         # Log results
         unique_topics = len(set(topics)) - 1  # Exclude -1 (outliers)
@@ -168,7 +169,7 @@ class BabcockTopicAnalyzer:
             nr_bins=nr_bins
         )
         
-        logger.info(f"✓ Temporal analysis complete")
+        logger.info(f"[OK] Temporal analysis complete")
         logger.info(f"  Time periods analyzed: {topics_over_time['Timestamp'].nunique()}")
         
         return topics_over_time
@@ -190,14 +191,14 @@ class BabcockTopicAnalyzer:
         Save trained model to disk
         """
         self.topic_model.save(filepath, serialization="pickle")
-        logger.info(f"\n✓ Model saved to {filepath}")
+        logger.info(f"\n[OK] Model saved to {filepath}")
     
     def load_model(self, filepath: str) -> None:
         """
         Load trained model from disk
         """
         self.topic_model = BERTopic.load(filepath)
-        logger.info(f"✓ Model loaded from {filepath}")
+        logger.info(f"[OK] Model loaded from {filepath}")
     
     def get_topic_keywords(self, topic_id: int, n_words: int = 10) -> List[str]:
         """
@@ -240,7 +241,7 @@ def main():
     with open(documents_file, 'r', encoding='utf-8') as f:
         documents = [line.strip() for line in f if line.strip()]
     
-    logger.info(f"✓ Loaded {len(documents)} documents")
+    logger.info(f"[OK] Loaded {len(documents)} documents")
     
     # Load metadata for timestamps
     metadata = pd.read_csv(METADATA_CSV)
@@ -273,11 +274,11 @@ def main():
     metadata['topic_id'] = topics
     metadata['topic_probability'] = [p.max() if len(p) > 0 else 0 for p in probs]
     metadata.to_csv(PROCESSED_PAPERS_CSV, index=False)
-    logger.info(f"✓ Saved papers with topics to {PROCESSED_PAPERS_CSV}")
+    logger.info(f"[OK] Saved papers with topics to {PROCESSED_PAPERS_CSV}")
     
     # Save temporal data
     topics_over_time.to_csv(TOPICS_OVER_TIME_CSV, index=False)
-    logger.info(f"✓ Saved temporal analysis to {TOPICS_OVER_TIME_CSV}")
+    logger.info(f"[OK] Saved temporal analysis to {TOPICS_OVER_TIME_CSV}")
     
     # Show topic summary
     topic_info = analyzer.get_topic_info()
@@ -294,7 +295,7 @@ def main():
         keywords = analyzer.get_topic_keywords(topic_id, n_words=5)
         logger.info(f"Topic {topic_id}: {', '.join(keywords)} ({count} papers)")
     
-    logger.info("\n✓ Topic analysis complete!")
+    logger.info("\n[OK] Topic analysis complete!")
 
 
 if __name__ == "__main__":

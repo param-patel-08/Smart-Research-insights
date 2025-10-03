@@ -1,0 +1,68 @@
+2025-10-03 16:03:52,110 - __main__ - INFO - Analysis started at: 2025-10-03 16:03:52.110904
+2025-10-03 16:03:52,110 - __main__ - INFO - Log file: logs/full_analysis_20251003_160352.log
+2025-10-03 16:03:52,149 - __main__ - INFO - 
+================================================================================
+2025-10-03 16:03:52,149 - __main__ - INFO - CONFIGURATION
+2025-10-03 16:03:52,149 - __main__ - INFO - ================================================================================
+2025-10-03 16:03:52,149 - __main__ - INFO - Email: param.pat01@gmail.com
+2025-10-03 16:03:52,149 - __main__ - INFO - Date range: 2020-01-01 to 2024-12-31
+2025-10-03 16:03:52,150 - __main__ - INFO - Universities: 44
+2025-10-03 16:03:52,151 - __main__ - INFO - Themes: 9
+2025-10-03 16:03:52,152 - __main__ - INFO - Mode: Quick test
+2025-10-03 16:03:53,411 - src.openalex_collector - INFO - OpenAlex Collector initialized
+2025-10-03 16:03:53,412 - src.openalex_collector - INFO - Date range: 2020-01-01 to 2024-12-31
+2025-10-03 16:03:53,412 - src.openalex_collector - INFO - Using email: param.pat01@gmail.com
+2025-10-03 16:03:53,412 - src.openalex_collector - INFO - 
+================================================================================
+2025-10-03 16:03:53,413 - src.openalex_collector - INFO - COLLECTING PAPERS FROM 3 UNIVERSITIES
+2025-10-03 16:03:53,413 - src.openalex_collector - INFO - ================================================================================
+
+2025-10-03 16:03:53,419 - src.openalex_collector - INFO - 
+Fetching papers from: University of Melbourne
+2025-10-03 16:03:59,217 - src.openalex_collector - INFO -   Page 1: Fetched 200 papers (Total: 198)
+2025-10-03 16:03:59,217 - src.openalex_collector - INFO -   Reached max results limit: 100
+2025-10-03 16:03:59,217 - src.openalex_collector - INFO - [OK] Collected 198 papers from University of Melbourne
+2025-10-03 16:03:59,726 - src.openalex_collector - INFO - 
+Fetching papers from: University of Sydney
+2025-10-03 16:04:03,171 - src.openalex_collector - INFO -   No more results at page 1
+2025-10-03 16:04:03,172 - src.openalex_collector - INFO - [OK] Collected 0 papers from University of Sydney
+2025-10-03 16:04:03,674 - src.openalex_collector - INFO - 
+Fetching papers from: University of Queensland
+2025-10-03 16:04:10,323 - src.openalex_collector - INFO -   No more results at page 1
+2025-10-03 16:04:10,325 - src.openalex_collector - INFO - [OK] Collected 0 papers from University of Queensland
+2025-10-03 16:04:10,834 - src.openalex_collector - INFO - 
+================================================================================
+2025-10-03 16:04:10,835 - src.openalex_collector - INFO - COLLECTION COMPLETE
+2025-10-03 16:04:10,836 - src.openalex_collector - INFO - ================================================================================
+2025-10-03 16:04:10,837 - src.openalex_collector - INFO - Total papers collected: 198
+2025-10-03 16:04:10,842 - src.openalex_collector - INFO - Date range: 2020-01-01 00:00:00 to 2024-08-01 00:00:00
+2025-10-03 16:04:10,844 - src.openalex_collector - INFO - Universities: 1
+2025-10-03 16:04:10,846 - src.openalex_collector - INFO - Papers with abstracts: 198 (100.0%)
+2025-10-03 16:04:10,855 - src.openalex_collector - INFO - 
+Deduplication: Removed 11 duplicates (5.6%)
+2025-10-03 16:04:10,855 - src.openalex_collector - INFO - Papers remaining: 187
+2025-10-03 16:04:10,872 - src.openalex_collector - INFO - 
+[OK] Saved 187 papers to: data/raw/papers_raw.csv
+2025-10-03 16:04:10,873 - __main__ - INFO - [OK] 1. DATA COLLECTION completed in 18.7 seconds
+2025-10-03 16:04:11,766 - src.paper_preprocessor - WARNING - NLTK not available. Using basic preprocessing.
+2025-10-03 16:04:11,766 - src.paper_preprocessor - INFO - PaperPreprocessor initialized with min_abstract_length=50
+2025-10-03 16:04:11,766 - src.paper_preprocessor - INFO - Preprocessing abstracts...
+2025-10-03 16:04:11,796 - src.paper_preprocessor - INFO - Filtered abstracts: 187 -> 125 (66.8% kept)
+2025-10-03 16:04:11,805 - src.paper_preprocessor - INFO - Final processed papers: 125
+2025-10-03 16:04:11,813 - __main__ - INFO - [OK] 2. PREPROCESSING completed in 0.9 seconds
+2025-10-03 16:04:41,505 - src.topic_analyzer - INFO - Topic Analyzer initialized
+2025-10-03 16:04:41,505 - src.topic_analyzer - INFO -   Min topic size: 15
+2025-10-03 16:04:41,505 - src.topic_analyzer - INFO -   Target topics: 60
+2025-10-03 16:04:41,506 - src.topic_analyzer - INFO - 
+Initializing BERTopic model...
+2025-10-03 16:04:41,506 - src.topic_analyzer - INFO -   Loading embedding model: all-MiniLM-L6-v2
+2025-10-03 16:04:41,507 - sentence_transformers.SentenceTransformer - INFO - Use pytorch device_name: cpu
+2025-10-03 16:04:41,508 - sentence_transformers.SentenceTransformer - INFO - Load pretrained SentenceTransformer: all-MiniLM-L6-v2
+2025-10-03 16:04:44,747 - huggingface_hub.file_download - WARNING - Xet Storage is enabled for this repo, but the 'hf_xet' package is not installed. Falling back to regular HTTP download. For better performance, install the package with: `pip install huggingface_hub[hf_xet]` or `pip install hf_xet`
+2025-10-03 16:04:51,566 - src.topic_analyzer - INFO - 
+Generating embeddings (this may take 1-2 minutes)...
+2025-10-03 16:04:51,566 - src.topic_analyzer - INFO - 
+Training BERTopic on 125 documents...
+2025-10-03 16:04:51,566 - src.topic_analyzer - INFO - This will take approximately 60-90 seconds...
+2025-10-03 16:05:02,949 - __main__ - ERROR - [ERROR] 3. TOPIC MODELING (BERTopic) failed after 51.1 seconds: 'SentenceTransformerBackend' object has no attribute 'encode'
+2025-10-03 16:05:02,951 - __main__ - ERROR - Pipeline stopped due to topic modeling failure

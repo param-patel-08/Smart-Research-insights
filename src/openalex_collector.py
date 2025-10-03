@@ -120,7 +120,7 @@ class OpenAlexCollector:
                 logger.error(f"  Unexpected error on page {page}: {e}")
                 break
         
-        logger.info(f"✓ Collected {len(papers)} papers from {institution_name}")
+        logger.info(f"[OK] Collected {len(papers)} papers from {institution_name}")
         return papers
     
     def _parse_paper(self, work: Dict, institution_name: str) -> Optional[Dict]:
@@ -312,7 +312,7 @@ class OpenAlexCollector:
         df_copy['keywords'] = df_copy['keywords'].apply(json.dumps)
         
         df_copy.to_csv(filepath, index=False)
-        logger.info(f"\n✓ Saved {len(df)} papers to: {filepath}")
+        logger.info(f"\n[OK] Saved {len(df)} papers to: {filepath}")
     
     def get_summary_stats(self, df: pd.DataFrame) -> Dict:
         """
