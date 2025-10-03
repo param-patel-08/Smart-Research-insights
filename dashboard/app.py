@@ -48,14 +48,16 @@ st.markdown("""
         margin-bottom: 1rem;
     }
     .metric-card {
-        background-color: #f0f2f6;
+        background-color: #e6e9f0;
         padding: 1rem;
         border-radius: 0.5rem;
         border-left: 4px solid #1f4788;
+        color: #0f172a; /* Dark text for readability */
     }
-    .priority-high { background-color: #ffebee; border-left-color: #d32f2f; }
-    .priority-medium { background-color: #fff3e0; border-left-color: #f57c00; }
-    .priority-low { background-color: #e8f5e9; border-left-color: #388e3c; }
+    /* Darker, richer colors for better contrast */
+    .priority-high { background-color: #ef9a9a; border-left-color: #c62828; }
+    .priority-medium { background-color: #ffcc80; border-left-color: #ef6c00; }
+    .priority-low { background-color: #c8e6c9; border-left-color: #2e7d32; }
     .stTabs [data-baseweb="tab-list"] { gap: 2rem; }
     .stTabs [data-baseweb="tab"] { padding: 1rem 2rem; }
     </style>
