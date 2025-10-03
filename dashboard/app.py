@@ -1,5 +1,5 @@
 """
-Babcock Research Trends - Streamlit Dashboard
+Babcock Research trends - Streamlit Dashboard
 Interactive dashboard for exploring research trends
 """
 
@@ -16,6 +16,11 @@ import os
 sys.path.append(os.path.dirname(os.path.dirname(__file__)))
 
 from config.themes import BABCOCK_THEMES
+from config.settings import (
+    PROCESSED_PAPERS_CSV,
+    TREND_ANALYSIS_PATH,
+    TOPIC_MAPPING_PATH,
+)
 
 # ==================== PAGE CONFIG ====================
 
@@ -27,7 +32,6 @@ st.set_page_config(
 )
 
 # ==================== CUSTOM CSS ====================
-
 st.markdown("""
     <style>
     .main-header {
@@ -49,54 +53,51 @@ st.markdown("""
         border-radius: 0.5rem;
         border-left: 4px solid #1f4788;
     }
-    .priority-high {
-        background-color: #ffebee;
-        border-left-color: #d32f2f;
-    }
-    .priority-medium {
-        background-color: #fff3e0;
-        border-left-color: #f57c00;
-    }
-    .priority-low {
-        background-color: #e8f5e9;
-        border-left-color: #388e3c;
-    }
-    .stTabs [data-baseweb="tab-list"] {
-        gap: 2rem;
-    }
-    .stTabs [data-baseweb="tab"] {
-        padding: 1rem 2rem;
-    }
+    .priority-high { background-color: #ffebee; border-left-color: #d32f2f; }
+    .priority-medium { background-color: #fff3e0; border-left-color: #f57c00; }
+    .priority-low { background-color: #e8f5e9; border-left-color: #388e3c; }
+    .stTabs [data-baseweb="tab-list"] { gap: 2rem; }
+    .stTabs [data-baseweb="tab"] { padding: 1rem 2rem; }
     </style>
 """, unsafe_allow_html=True)
 
 # ==================== LOAD DATA ====================
-
 @st.cache_data
 def load_data():
-    """Load all analysis data"""
-    try:
-        papers_df = pd.read_csv('data/processed/papers_with_topics.csv')
-        papers_df['date'] = pd.to_datetime(papers_df['date'])
-        
-        with open('data/processed/trend_analysis.json', 'r') as f:
-            trends = json.load(f)
-        
-        with open('models/topic_theme_mapping.json', 'r') as f:
-            mapping = json.load(f)
-        
-        return papers_df, trends, mapping
-    except FileNotFoundError as e:
-        st.error(f"⚠️ Data files not found! Please run the analysis first: `python run_full_analysis.py`")
-        st.stop()
+    """Load analysis data from configured paths with robust JSON handling"""
+    # Papers with topics
+    if not os.path.exists(PROCESSED_PAPERS_CSV):
+        raise FileNotFoundError(PROCESSED_PAPERS_CSV)
+    df = pd.read_csv(PROCESSED_PAPERS_CSV)
+    if 'date' in df.columns:
+        df['date'] = pd.to_datetime(df['date'])
 
-# Load data
-papers_df, trends, mapping = load_data()
+    # Helper to load JSON, even if extension is .csv
+    def load_json_file(path):
+        if not os.path.exists(path):
+            raise FileNotFoundError(path)
+        try:
+            with open(path, 'r', encoding='utf-8') as f:
+                return json.load(f)
+        except json.JSONDecodeError:
+            with open(path, 'r', encoding='utf-8') as f:
+                return json.loads(f.read())
 
-# Add theme to papers
-papers_df['theme'] = papers_df['topic_id'].astype(str).map(
-    lambda tid: mapping.get(tid, {}).get('theme', 'Other')
-)
+    trends_obj = load_json_file(TREND_ANALYSIS_PATH)
+    mapping_obj = load_json_file(TOPIC_MAPPING_PATH)
+    return df, trends_obj, mapping_obj
+
+try:
+    papers_df, trends, mapping = load_data()
+except FileNotFoundError as e:
+    st.error(
+        "⚠️ Data files not found! Please run the analysis first: `python run_full_analysis.py`\n"
+        f"Missing: {e}"
+    )
+    st.stop()
+
+# Derive helper columns
+papers_df['theme'] = papers_df['topic_id'].astype(str).map(lambda tid: mapping.get(str(tid), {}).get('theme', 'Other'))
 papers_df['quarter'] = papers_df['date'].dt.to_period('Q')
 
 # ==================== SIDEBAR ====================

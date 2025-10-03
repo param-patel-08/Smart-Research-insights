@@ -86,7 +86,6 @@ def main():
     # Print configuration
     logger.info("\n" + "="*80)
     logger.info("CONFIGURATION")
-    logger.info("="*80)
     logger.info(f"Email: {OPENALEX_EMAIL}")
     logger.info(f"Date range: {ANALYSIS_START_DATE.date()} to {ANALYSIS_END_DATE.date()}")
     logger.info(f"Universities: {len(ALL_UNIVERSITIES)}")
@@ -101,7 +100,12 @@ def main():
     print("  2. Medium test (10 universities, 500 papers each) - 15 minutes")
     print("  3. Full collection (all 24 universities, no limit) - 30-60 minutes")
     
-    choice = input("\nEnter your choice (1/2/3) [default: 1]: ").strip() or "1"
+    # Check for command line argument
+    if len(sys.argv) > 1:
+        choice = sys.argv[1]
+        print(f"\nUsing command line choice: {choice}")
+    else:
+        choice = input("\nEnter your choice (1/2/3) [default: 1]: ").strip() or "1"
     
     if choice == "1":
         test_universities = dict(list(ALL_UNIVERSITIES.items())[:3])
