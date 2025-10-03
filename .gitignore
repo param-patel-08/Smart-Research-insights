@@ -8,3 +8,6 @@
 # API Keys
 *api_key*
 *API_KEY*
+
+# Python virtual environment
+.venv/
