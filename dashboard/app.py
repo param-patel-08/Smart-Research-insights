@@ -13,6 +13,8 @@ import pandas as pd
 import plotly.express as px
 import plotly.graph_objects as go
 import streamlit as st
+from pptx import Presentation
+from pptx.util import Inches, Pt
 
 # Add parent directory to import config
 sys.path.append(os.path.dirname(os.path.dirname(__file__)))
@@ -82,6 +84,47 @@ def load_data():
     return df, trends, mapping
 
 
+def _pptx_from_summary(summary_title: str, kpis: dict, tables: dict | None = None) -> bytes:
+    prs = Presentation()
+    # Title slide
+    slide_layout = prs.slide_layouts[0]
+    slide = prs.slides.add_slide(slide_layout)
+    slide.shapes.title.text = summary_title
+    slide.placeholders[1].text = f"Generated: {datetime.now().strftime('%Y-%m-%d %H:%M')}"
+    # KPI slide
+    slide = prs.slides.add_slide(prs.slide_layouts[5])
+    title = slide.shapes.title
+    title.text = "Key Metrics"
+    left = Inches(0.7)
+    top = Inches(1.5)
+    width = Inches(9)
+    height = Inches(4)
+    txBox = slide.shapes.add_textbox(left, top, width, height)
+    tf = txBox.text_frame
+    tf.clear()
+    for k, v in kpis.items():
+        p = tf.add_paragraph()
+        p.text = f"• {k}: {v}"
+        p.font.size = Pt(18)
+    # Tables slide
+    if tables:
+        for t_title, df in tables.items():
+            slide = prs.slides.add_slide(prs.slide_layouts[5])
+            slide.shapes.title.text = t_title
+            rows, cols = min(11, len(df) + 1), min(6, len(df.columns))
+            table = slide.shapes.add_table(rows, cols, Inches(0.6), Inches(1.5), Inches(9.2), Inches(4.5)).table
+            # headers
+            for j, col in enumerate(df.columns[:cols]):
+                table.cell(0, j).text = str(col)
+            # rows
+            for i in range(min(10, len(df))):
+                for j, col in enumerate(df.columns[:cols]):
+                    table.cell(i + 1, j).text = str(df.iloc[i][col])
+    bio = BytesIO()
+    prs.save(bio)
+    return bio.getvalue()
+
+
 def add_export_section(df: pd.DataFrame, page_name: str):
     st.markdown("---")
     st.markdown("## 📤 Export Options")
@@ -128,6 +171,25 @@ def add_export_section(df: pd.DataFrame, page_name: str):
         except Exception:
             st.info("Install openpyxl for Excel export: pip install openpyxl")
 
+    # PowerPoint export (KPIs + top table preview)
+    try:
+        kpis = {
+            "Total Papers": len(df),
+            "Universities": df["university"].nunique() if "university" in df.columns else "N/A",
+            "Avg Confidence": f"{df['confidence'].mean():.0f}%" if 'confidence' in df.columns else 'N/A',
+        }
+        top_table = df.head(10).copy()
+        pptx_bytes = _pptx_from_summary(f"Babcock — {page_name.replace('_',' ').title()}", kpis, {"Preview": top_table})
+        st.download_button(
+            label="📽️ Download PowerPoint",
+            data=pptx_bytes,
+            file_name=f"babcock_{page_name}_{datetime.now().strftime('%Y%m%d_%H%M')}.pptx",
+            mime="application/vnd.openxmlformats-officedocument.presentationml.presentation",
+            use_container_width=True,
+        )
+    except Exception:
+        st.info("Install python-pptx for PPT export: pip install python-pptx")
+
 
 # Load
 try:
@@ -152,20 +214,53 @@ st.sidebar.markdown("---")
 min_date = papers_df["date"].min().date()
 max_date = papers_df["date"].max().date()
 cd1, cd2 = st.sidebar.columns(2)
-start_date = cd1.date_input("From", value=min_date, min_value=min_date, max_value=max_date)
-end_date = cd2.date_input("To", value=max_date, min_value=min_date, max_value=max_date)
+if "filters" not in st.session_state:
+    st.session_state["filters"] = {
+        "start": min_date,
+        "end": max_date,
+        "themes": None,
+        "unis": None,
+        "min_conf": 0,
+        "min_cit": 0,
+        "kw": "",
+    }
+
+start_date = cd1.date_input("From", value=st.session_state["filters"]["start"], min_value=min_date, max_value=max_date, key="flt_start")
+end_date = cd2.date_input("To", value=st.session_state["filters"]["end"], min_value=min_date, max_value=max_date, key="flt_end")
 
 all_themes = sorted([t for t in papers_df["theme"].unique() if t != "Other"]) if "theme" in papers_df.columns else []
-sel_themes = st.sidebar.multiselect("🎯 Themes", options=all_themes, default=all_themes)
+sel_themes = st.sidebar.multiselect("🎯 Themes", options=all_themes, default=all_themes, key="flt_themes")
 sel_unis = st.sidebar.multiselect(
     "🏛️ Universities",
     options=sorted(papers_df["university"].unique()),
     default=sorted(papers_df["university"].unique())[:10],
+    key="flt_unis",
 )
-min_conf = st.sidebar.slider("Min Confidence (%)", 0, 100, 0, 5)
+min_conf = st.sidebar.slider("Min Confidence (%)", 0, 100, st.session_state["filters"]["min_conf"], 5, key="flt_conf")
 max_cit = int(papers_df["citations"].max()) if "citations" in papers_df.columns else 100
-min_cit = st.sidebar.slider("Min Citations", 0, max_cit, 0)
-kw = st.sidebar.text_input("🔎 Keyword(s)", placeholder="e.g., autonomy, additive manufacturing")
+min_cit = st.sidebar.slider("Min Citations", 0, max_cit, st.session_state["filters"]["min_cit"], key="flt_cit")
+kw = st.sidebar.text_input("🔎 Keyword(s)", value=st.session_state["filters"]["kw"], placeholder="e.g., autonomy, additive manufacturing", key="flt_kw")
+
+cols_reset = st.sidebar.columns(2)
+if cols_reset[0].button("Reset Filters"):
+    st.session_state["filters"] = {
+        "start": min_date,
+        "end": max_date,
+        "themes": all_themes,
+        "unis": sorted(papers_df["university"].unique())[:10],
+        "min_conf": 0,
+        "min_cit": 0,
+        "kw": "",
+    }
+    st.rerun()
+
+st.session_state["filters"]["start"] = start_date
+st.session_state["filters"]["end"] = end_date
+st.session_state["filters"]["themes"] = sel_themes
+st.session_state["filters"]["unis"] = sel_unis
+st.session_state["filters"]["min_conf"] = min_conf
+st.session_state["filters"]["min_cit"] = min_cit
+st.session_state["filters"]["kw"] = kw
 
 filtered = papers_df.copy()
 filtered = filtered[(filtered["date"].dt.date >= start_date) & (filtered["date"].dt.date <= end_date)]
@@ -205,7 +300,7 @@ st.sidebar.metric("Universities", papers_df["university"].nunique())
 # Navigation
 page = st.sidebar.radio(
     "Navigation",
-    ["📊 Overview", "🎯 Theme Analysis", "⚡ Emerging Topics", "🏛️ Universities", "📈 Trends Over Time"],
+    ["📊 Overview", "🎯 Theme Analysis", "⚡ Emerging Topics", "🏛️ Universities", "📈 Trends Over Time", "🧪 Data Quality"],
     label_visibility="collapsed",
 )
 
@@ -356,9 +451,11 @@ elif page == "🎯 Theme Analysis":
 
     st.markdown("---")
     st.subheader("📰 Recent Papers in This Theme")
-    recent = theme_papers.nlargest(10, "date")
+    # Sort by relevance then date
+    recent = theme_papers.sort_values(["relevance_score", "date"], ascending=[False, False]).head(10)
     for _, p in recent.iterrows():
-        st.markdown(f"**{p['title']}**")
+        badge = f"<span style='background:#1f4788;color:#fff;padding:2px 6px;border-radius:6px;font-size:0.8rem;'>Relevance {p['relevance_score']:.0f}</span>"
+        st.markdown(f"**{p['title']}**  {badge}", unsafe_allow_html=True)
         st.caption(f"🏛️ {p['university']} | 📅 {p['date'].strftime('%Y-%m-%d')}")
         if pd.notna(p.get("abstract")) and p.get("abstract"):
             with st.expander("View Abstract"):
@@ -473,7 +570,7 @@ elif page == "🏛️ Universities":
         st.plotly_chart(fig, use_container_width=True)
 
     st.subheader(f"📰 Recent Papers from {sel_uni}")
-    for _, p in uni_p.nlargest(10, "date").iterrows():
+    for _, p in uni_p.sort_values(["relevance_score", "date"], ascending=[False, False]).head(10).iterrows():
         st.markdown(f"**{p['title']}**")
         st.caption(f"🎯 {p['theme'].replace('_',' ').title()} | 📅 {p['date'].strftime('%Y-%m-%d')}")
         if pd.notna(p.get("abstract")) and p.get("abstract"):
@@ -513,3 +610,43 @@ elif page == "📈 Trends Over Time":
         st.dataframe(pd.DataFrame(rows), use_container_width=True, hide_index=True)
 
     add_export_section(papers_df, "trends")
+
+# Data Quality
+elif page == "🧪 Data Quality":
+    st.markdown('<p class="main-header">🧪 Data Quality</p>', unsafe_allow_html=True)
+    c1, c2, c3 = st.columns(3)
+    missing_abs = papers_df['abstract'].isna().sum() if 'abstract' in papers_df.columns else 0
+    c1.metric("Missing Abstracts", f"{missing_abs:,}")
+    c2.metric("Avg Confidence", f"{papers_df['confidence'].mean():.0f}%" if 'confidence' in papers_df.columns else 'N/A')
+    c3.metric("Has Citations", f"{papers_df['citations'].notna().mean()*100:.0f}%" if 'citations' in papers_df.columns else 'N/A')
+
+    st.markdown("---")
+    colA, colB = st.columns(2)
+    with colA:
+        st.subheader("Confidence Distribution")
+        if 'confidence' in papers_df.columns:
+            fig = px.histogram(papers_df, x='confidence', nbins=20, title='Confidence (%)')
+            st.plotly_chart(fig, use_container_width=True)
+        else:
+            st.info("No confidence field available")
+    with colB:
+        st.subheader("Citations Distribution")
+        if 'citations' in papers_df.columns:
+            fig = px.histogram(papers_df, x='citations', nbins=20, title='Citations')
+            st.plotly_chart(fig, use_container_width=True)
+        else:
+            st.info("No citations field available")
+
+    st.markdown("---")
+    st.subheader("Records with Missing Data")
+    issues = []
+    if 'abstract' in papers_df.columns:
+        issues.append(papers_df[papers_df['abstract'].isna()].assign(issue='missing_abstract'))
+    if 'citations' in papers_df.columns:
+        issues.append(papers_df[papers_df['citations'].isna()].assign(issue='missing_citations'))
+    if issues:
+        issues_df = pd.concat(issues, ignore_index=True).drop_duplicates(subset=['title'])
+        st.dataframe(issues_df[['title','university','date','issue','confidence']].sort_values('date', ascending=False), use_container_width=True)
+        add_export_section(issues_df, 'data_quality')
+    else:
+        st.success("No data quality issues detected in filtered dataset")
