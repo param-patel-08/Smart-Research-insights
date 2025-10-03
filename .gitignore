@@ -8,3 +8,7 @@
 # API Keys
 *api_key*
 *API_KEY*
+
+# Virtual environment
+.venv/
+venv/
