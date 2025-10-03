@@ -87,6 +87,41 @@ def load_data():
 
     trends_obj = load_json_file(TREND_ANALYSIS_PATH)
     mapping_obj = load_json_file(TOPIC_MAPPING_PATH)
+
+    # Append theme from mapping
+    df['theme'] = df['topic_id'].astype(str).map(lambda tid: mapping_obj.get(str(tid), {}).get('theme', 'Other'))
+
+    # Append confidence from mapping (0-100 scale)
+    df['confidence'] = df['topic_id'].astype(str).map(lambda tid: mapping_obj.get(str(tid), {}).get('confidence', 0))
+    # If confidence is [0,1], scale up (best-effort detection)
+    if df['confidence'].max() <= 1.0:
+        df['confidence'] = (df['confidence'] * 100).round(0)
+
+    # Relevance score combining confidence, citations, recency (0-100)
+    def calculate_relevance(df_in: pd.DataFrame) -> pd.DataFrame:
+        out = df_in.copy()
+        # Citation score normalized
+        if 'citations' in out.columns and pd.api.types.is_numeric_dtype(out['citations']):
+            max_cit = max(1, out['citations'].max())
+            out['citation_score'] = (out['citations'] / max_cit) * 100
+        else:
+            out['citation_score'] = 0
+        # Recency score over ~2 years
+        if 'date' in out.columns:
+            days_old = (pd.Timestamp.now() - pd.to_datetime(out['date'])).dt.days.clip(lower=0)
+            out['recency_score'] = (100 - (days_old / 730.0) * 100).clip(lower=0, upper=100)
+        else:
+            out['recency_score'] = 50
+        # Combine
+        out['relevance_score'] = (
+            out['confidence'].fillna(0) * 0.40 +
+            out['citation_score'].fillna(0) * 0.30 +
+            out['recency_score'].fillna(0) * 0.30
+        ).clip(lower=0, upper=100)
+        return out
+
+    df = calculate_relevance(df)
+
     return df, trends_obj, mapping_obj
 
 try:
@@ -99,7 +134,6 @@ except FileNotFoundError as e:
     st.stop()
 
 # Derive helper columns
-papers_df['theme'] = papers_df['topic_id'].astype(str).map(lambda tid: mapping.get(str(tid), {}).get('theme', 'Other'))
 papers_df['quarter'] = papers_df['date'].dt.to_period('Q')
 
 # ==================== SIDEBAR ====================
@@ -108,20 +142,90 @@ st.sidebar.image("https://via.placeholder.com/300x80/1f4788/ffffff?text=BABCOCK"
 st.sidebar.title("🔬 Research Trends")
 st.sidebar.markdown("---")
 
+# ==================== GLOBAL FILTERS ====================
+st.sidebar.markdown("## 🔍 Global Filters")
+
+# Date Range
+st.sidebar.markdown("### 📅 Date Range")
+min_date = papers_df['date'].min().date() if 'date' in papers_df.columns else None
+max_date = papers_df['date'].max().date() if 'date' in papers_df.columns else None
+col_d1, col_d2 = st.sidebar.columns(2)
+start_date = col_d1.date_input("From", value=min_date, min_value=min_date, max_value=max_date, key="global_start_date")
+end_date = col_d2.date_input("To", value=max_date, min_value=min_date, max_value=max_date, key="global_end_date")
+
+# Themes
+st.sidebar.markdown("### 🎯 Technology Themes")
+all_themes = sorted([t for t in papers_df['theme'].unique() if t != 'Other']) if 'theme' in papers_df.columns else []
+if 'selected_themes' not in st.session_state:
+    st.session_state['selected_themes'] = all_themes
+selected_themes = st.sidebar.multiselect(
+    "Select themes",
+    options=all_themes,
+    default=st.session_state['selected_themes'],
+    key="theme_multiselect"
+)
+st.session_state['selected_themes'] = selected_themes
+
+# Universities
+st.sidebar.markdown("### 🏛️ Universities")
+selected_unis = st.sidebar.multiselect(
+    "Select universities",
+    options=sorted(papers_df['university'].unique()),
+    default=sorted(papers_df['university'].unique())[:10],
+    key="uni_multiselect"
+)
+
+# Confidence and Citations
+st.sidebar.markdown("### 📊 Data Quality & Impact")
+min_conf = st.sidebar.slider("Min Confidence (%)", 0, 100, 0, 5, key="min_confidence")
+max_citations_cap = int(papers_df['citations'].max()) if 'citations' in papers_df.columns else 100
+min_cit = st.sidebar.slider("Min Citations", 0, max_citations_cap, 0, key="min_citations")
+
+# Keyword search
+st.sidebar.markdown("### 🔎 Keyword Search")
+kw_query = st.sidebar.text_input("Search title/abstract", placeholder="e.g., autonomy, additive manufacturing", key="kw_search")
+
+# Apply filters
+filtered_papers = papers_df.copy()
+if 'date' in filtered_papers.columns:
+    filtered_papers = filtered_papers[(filtered_papers['date'].dt.date >= start_date) & (filtered_papers['date'].dt.date <= end_date)]
+if selected_themes:
+    filtered_papers = filtered_papers[filtered_papers['theme'].isin(selected_themes)]
+if selected_unis:
+    filtered_papers = filtered_papers[filtered_papers['university'].isin(selected_unis)]
+filtered_papers = filtered_papers[filtered_papers['confidence'] >= min_conf]
+if 'citations' in filtered_papers.columns:
+    filtered_papers = filtered_papers[filtered_papers['citations'] >= min_cit]
+if kw_query:
+    kws = [k.strip().lower() for k in kw_query.split(',') if k.strip()]
+    if kws:
+        mask = filtered_papers.apply(lambda r: any(kw in str(r.get('title','')).lower() or kw in str(r.get('abstract','')).lower() for kw in kws), axis=1)
+        filtered_papers = filtered_papers[mask]
+
+# Data Freshness Indicator
+st.sidebar.markdown("---")
+st.sidebar.markdown("### ⏱️ Data Freshness")
+if 'date' in papers_df.columns and len(filtered_papers) > 0:
+    latest_dt = filtered_papers['date'].max()
+    days_since = (pd.Timestamp.now() - latest_dt).days
+    status = "🟢 Fresh" if days_since < 7 else ("🟡 Recent" if days_since < 30 else "🔴 Needs Update")
+    st.sidebar.info(f"{status}\n\nLast paper: {latest_dt.strftime('%Y-%m-%d')} ({days_since} days ago)")
+
+# Replace global dataframe so all pages use filters transparently
+papers_df = filtered_papers
+
+st.sidebar.markdown("---")
+st.sidebar.markdown("### 📊 Quick Stats")
+st.sidebar.metric("Total Papers", f"{len(papers_df):,}")
+st.sidebar.metric("Topics Found", len(mapping))
+st.sidebar.metric("Universities", papers_df['university'].nunique())
+
+# Navigation after filters so KPIs reflect filtered data
 page = st.sidebar.radio(
     "Navigation",
     ["📊 Overview", "🎯 Theme Analysis", "⚡ Emerging Topics", "🏛️ Universities", "📈 Trends Over Time"],
     label_visibility="collapsed"
 )
-
-st.sidebar.markdown("---")
-st.sidebar.markdown("### 📅 Analysis Period")
-st.sidebar.info(f"{papers_df['date'].min().strftime('%b %Y')} - {papers_df['date'].max().strftime('%b %Y')}")
-
-st.sidebar.markdown("### 📊 Quick Stats")
-st.sidebar.metric("Total Papers", f"{len(papers_df):,}")
-st.sidebar.metric("Topics Found", len(mapping))
-st.sidebar.metric("Universities", papers_df['university'].nunique())
 
 # ==================== OVERVIEW PAGE ====================
 
