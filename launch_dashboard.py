@@ -15,8 +15,8 @@ try:
     )
 except Exception:
     PROCESSED_PAPERS_CSV = 'data/processed/papers_processed.csv'
-    TREND_ANALYSIS_PATH = 'data/processed/trend_analysis.csv'
-    TOPIC_MAPPING_PATH = 'data/processed/topic_mapping.csv'
+    TREND_ANALYSIS_PATH = 'data/processed/trend_analysis.json'
+    TOPIC_MAPPING_PATH = 'data/processed/topic_mapping.json'
 
 
 def check_data_exists():

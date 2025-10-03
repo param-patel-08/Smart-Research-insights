@@ -58,7 +58,6 @@ ALL_UNIVERSITIES = {
     "University of New England": "I145311985",
     "Southern Cross University": "I145311986",
     "Federation University Australia": "I145311987",
-    "Charles Sturt University": "I145311988",
     "Australian Catholic University": "I145311989",
     "University of Notre Dame Australia": "I145311990",
     "Torrens University Australia": "I145311991"
@@ -71,8 +70,8 @@ METADATA_CSV = "data/processed/metadata.csv"
 EMBEDDINGS_PATH = "data/processed/embeddings.npy"
 BERTOPIC_MODEL_PATH = "models/bertopic_model.pkl"
 TOPICS_OVER_TIME_CSV = "data/processed/topics_over_time.csv"
-TOPIC_MAPPING_PATH = "data/processed/topic_mapping.csv"
-TREND_ANALYSIS_PATH = "data/processed/trend_analysis.csv"
+TOPIC_MAPPING_PATH = "data/processed/topic_mapping.json"
+TREND_ANALYSIS_PATH = "data/processed/trend_analysis.json"
 RESULTS_CSV = "data/exports/results.csv"
 DASHBOARD_DATA_JSON = "data/exports/dashboard_data.json"
 
@@ -80,7 +79,6 @@ DASHBOARD_DATA_JSON = "data/exports/dashboard_data.json"
 MIN_ABSTRACT_LENGTH = 50
 MAX_PAPERS_PER_UNIVERSITY = 1000
 NR_TIME_BINS = 10
-MIN_RELEVANCE_SCORE = 0.3
 TOPIC_MODEL_PARAMS = {
     'min_topic_size': 10,
     'min_cluster_size': 15,

@@ -31,14 +31,11 @@ All code is complete! Here's what's built:
 ### Step 1: Install Packages
 
 ```powershell
-# In your project folder
-cd C:\Users\param\Desktop\Smart-Research-insights-1
-
 # Activate virtual environment (if created)
 .\venv\Scripts\Activate
 
 # Install all packages
-pip install bertopic sentence-transformers umap-learn hdbscan plotly scikit-learn python-dotenv pandas numpy requests streamlit tqdm
+pip install -r requirements.txt
 ```
 
 **Wait for installation** (5-10 minutes). You'll see:
@@ -54,13 +51,11 @@ Successfully installed bertopic-0.16.0 ...
 
 ### Step 2: Create .env File
 
-Your `.env` file already has your email:
+Create a `.env` file with your OpenAlex polite pool email:
 
 ```
-OPENALEX_EMAIL=sdv6266@autuni.ac.nz
+OPENALEX_EMAIL=your.email@domain.com
 ```
-
-✅ **This is already done!** No changes needed.
 
 ---
 
@@ -169,29 +164,25 @@ python view_results.py
 
 After analysis completes, check these folders:
 
-```
 data/
 ├── raw/
 │   └── collected_papers.csv       ← All papers collected
 ├── processed/
 │   ├── paper_metadata.csv         ← Filtered papers
-│   ├── papers_with_topics.csv     ← Papers + topic assignments
+│   ├── papers_processed.csv       ← Papers + topic assignments
 │   ├── documents.txt              ← Text for BERTopic
 │   ├── topics_over_time.csv       ← Quarterly trends
+│   ├── topic_mapping.json         ← Topics → Themes mapping
 │   └── trend_analysis.json        ← Strategic insights
-└── exports/
-    └── (reports go here)
 
 models/
-├── bertopic_model/                ← Trained BERTopic model
-├── embeddings.npy                 ← Cached embeddings (fast re-runs!)
-└── topic_theme_mapping.json      ← Topics → Themes mapping
+└── bertopic_model.pkl            ← Trained BERTopic model
+
+data/processed/
+└── embeddings.npy                 ← Cached embeddings (fast re-runs!)
 
 logs/
 └── full_analysis_YYYYMMDD.log    ← Detailed logs
-```
-
----
 
 ## 🎓 What You'll Get
 
