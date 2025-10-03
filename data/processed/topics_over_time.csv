@@ -1,38 +1,24 @@
 Topic,Words,Frequency,Timestamp
--1,"evidence, based, international, literature, used",5,2019-12-30 11:11:02.400
-0,"size, scientific, large, release, determine",2,2019-12-30 11:11:02.400
-1,"data, treatment, new, single, using",13,2019-12-30 11:11:02.400
-2,"evidence, review, based, use, assessment",4,2019-12-30 11:11:02.400
-3,"cases, data, case, control, study",12,2019-12-30 11:11:02.400
--1,"current, potential, clinical, review, treatment",2,2020-06-02 09:36:00.000
-0,"development, known, given, future, comprehensive",3,2020-06-02 09:36:00.000
-1,"data, complete, new, complex, treatment",6,2020-06-02 09:36:00.000
-2,"early, based, assessment, increased, study",3,2020-06-02 09:36:00.000
-3,"years, study, data, results, public",12,2020-06-02 09:36:00.000
--1,"new, present, considered, used, clinical",3,2020-11-02 19:12:00.000
-0,"imaging, data, medical, present, scale",3,2020-11-02 19:12:00.000
-1,"treatment, methods, data, new, mean",5,2020-11-02 19:12:00.000
-2,"needs, need, development, global, research",5,2020-11-02 19:12:00.000
-3,"years, median, cases, results, clinical",2,2020-11-02 19:12:00.000
--1,"public, type, clinical, major, work",2,2021-04-05 04:48:00.000
-0,"data, large, detection, features, level",4,2021-04-05 04:48:00.000
-1,"clinical, treatment, single, developed, non",2,2021-04-05 04:48:00.000
-2,"reviews, review, analyses, methods, use",2,2021-04-05 04:48:00.000
-3,"increase, long, years, data, study",1,2021-04-05 04:48:00.000
--1,"new, non, current, median, using",3,2021-09-05 14:24:00.000
-1,"previously, review, general, related, treatment",2,2021-09-05 14:24:00.000
-2,"years, median, community, non, case",3,2021-09-05 14:24:00.000
-3,"years, study, level, mean, previous",3,2021-09-05 14:24:00.000
-0,"analysis, data, high, tools, include",3,2022-02-06 00:00:00.000
-1,"release, complex, complete, known, important",3,2022-02-06 00:00:00.000
-3,"clinical, time, related, need, review",2,2022-02-06 00:00:00.000
--1,"scientific, evidence, rapidly, new, literature",1,2022-07-09 09:36:00.000
-0,"data, review, analysis, challenges, medical",4,2022-07-09 09:36:00.000
-2,"including, provided, assessment, previous, published",1,2022-07-09 09:36:00.000
-3,"long, years, studies, data, mean",1,2022-07-09 09:36:00.000
--1,"work, new, present, clinical, used",1,2022-12-09 19:12:00.000
-1,"increased, new, based, complex, additional",3,2022-12-09 19:12:00.000
-2,"increased, current, evidence, years, early",1,2022-12-09 19:12:00.000
-1,"highly, treatment, major, cross, factor",1,2023-05-12 04:48:00.000
--1,"approaches, rapidly, current, scientific, new",1,2023-10-12 14:24:00.000
-2,"global, years, include, cases, increased",1,2023-10-12 14:24:00.000
+-1,"image, throughput, high throughput, image analysis, meeting",2,2019-12-30 11:11:02.400
+0,"training, size, compute, dataset, models",2,2019-12-30 11:11:02.400
+1,"patients, sars, cov, sars cov, recommendations",32,2019-12-30 11:11:02.400
+-1,"gender, sex gender, sex, clinicians, influences",1,2020-06-02 09:36:00.000
+0,"reaction, development, reduction, known, evolution",3,2020-06-02 09:36:00.000
+1,"associated, patients, delivery, cov, sars",22,2020-06-02 09:36:00.000
+0,"act, present, assays, phenotype, good",5,2020-11-02 19:12:00.000
+1,"care, million, people, needed, needs",13,2020-11-02 19:12:00.000
+-1,"public health, messages, pathogens, analyzing, apply",2,2021-04-05 04:48:00.000
+0,"models, physics, tension, large, level",4,2021-04-05 04:48:00.000
+1,"recommendations, systematic, patients, reporting, reviews",5,2021-04-05 04:48:00.000
+-1,"standards, integrating, society, patterns clinical, normal range",1,2021-09-05 14:24:00.000
+1,"patients, equations, years, prevalence, efficacy",10,2021-09-05 14:24:00.000
+0,"sample, training, project, measurement, applications",3,2022-02-06 00:00:00.000
+1,"death, genome, dependent, mechanisms, cell",5,2022-02-06 00:00:00.000
+-1,"standards, care, professional, promote, gender",1,2022-07-09 09:36:00.000
+0,"project, algorithms, image, physics, measurements",4,2022-07-09 09:36:00.000
+1,"individuals, long, sars cov, cov, sars",2,2022-07-09 09:36:00.000
+-1,"health care, patient, care, aid, creating",1,2022-12-09 19:12:00.000
+1,"reference, increased, care, disparities, base",4,2022-12-09 19:12:00.000
+1,"pathway, resistance, cell, axis, signal",1,2023-05-12 04:48:00.000
+-1,"document, basic, biology, cell, rapidly evolving",1,2023-10-12 14:24:00.000
+1,"loss, attributed, cause, prevalence, years",1,2023-10-12 14:24:00.000

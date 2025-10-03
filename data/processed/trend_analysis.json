@@ -1,0 +1,44 @@
+{
+  "theme_trends": {
+    "Defense_Security": {
+      "total_papers": 116,
+      "growth_rate": -0.11887445887445887,
+      "quarterly_counts": {
+        "2020Q1": 21,
+        "2020Q2": 18,
+        "2020Q3": 15,
+        "2020Q4": 12,
+        "2021Q1": 11,
+        "2021Q2": 6,
+        "2021Q3": 5,
+        "2021Q4": 7,
+        "2022Q1": 5,
+        "2022Q2": 3,
+        "2022Q3": 5,
+        "2022Q4": 4,
+        "2023Q1": 1,
+        "2023Q2": 1,
+        "2023Q3": 1,
+        "2024Q1": 1
+      },
+      "top_topics": {
+        "1": 95,
+        "0": 21
+      },
+      "universities": {
+        "University of Melbourne": 116
+      }
+    }
+  },
+  "emerging_topics": [],
+  "strategic_priorities": [
+    {
+      "theme": "Defense_Security",
+      "priority_score": 0.0,
+      "category": "LOW",
+      "growth_rate": -0.11887445887445887,
+      "total_papers": 116,
+      "babcock_priority": "HIGH"
+    }
+  ]
+}

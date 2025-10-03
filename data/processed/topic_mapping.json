@@ -1,0 +1,58 @@
+{
+  "0": {
+    "theme": "Defense_Security",
+    "confidence": 0.0,
+    "all_scores": {
+      "Defense_Security": 0.0,
+      "Autonomous_Systems": 0.0,
+      "Cybersecurity": 0.0,
+      "Energy_Sustainability": 0.0,
+      "Advanced_Manufacturing": 0.0,
+      "AI_Machine_Learning": 0.0,
+      "Marine_Naval": 0.0,
+      "Space_Aerospace": 0.0,
+      "Digital_Transformation": 0.0
+    },
+    "keywords": [
+      "present",
+      "models",
+      "training",
+      "project",
+      "sample",
+      "large",
+      "set",
+      "act",
+      "measurement",
+      "physics"
+    ],
+    "count": 21
+  },
+  "1": {
+    "theme": "Defense_Security",
+    "confidence": 0.0,
+    "all_scores": {
+      "Defense_Security": 0.0,
+      "Autonomous_Systems": 0.0,
+      "Cybersecurity": 0.0,
+      "Energy_Sustainability": 0.0,
+      "Advanced_Manufacturing": 0.0,
+      "AI_Machine_Learning": 0.0,
+      "Marine_Naval": 0.0,
+      "Space_Aerospace": 0.0,
+      "Digital_Transformation": 0.0
+    },
+    "keywords": [
+      "patients",
+      "sars",
+      "cov",
+      "sars cov",
+      "care",
+      "associated",
+      "years",
+      "recommendations",
+      "risk",
+      "population"
+    ],
+    "count": 95
+  }
+}

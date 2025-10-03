@@ -79,6 +79,7 @@ DASHBOARD_DATA_JSON = "data/exports/dashboard_data.json"
 MIN_ABSTRACT_LENGTH = 50
 MAX_PAPERS_PER_UNIVERSITY = 1000
 NR_TIME_BINS = 10
+MIN_RELEVANCE_SCORE = 0  # 0-100 threshold for filtering by relevance; pipeline default not filtering
 TOPIC_MODEL_PARAMS = {
     'min_topic_size': 10,
     'min_cluster_size': 15,

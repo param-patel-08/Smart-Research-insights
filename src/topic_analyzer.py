@@ -63,7 +63,6 @@ class BabcockTopicAnalyzer:
         hdbscan_model = HDBSCAN(
             min_cluster_size=self.min_topic_size,
             min_samples=5,
-            metric='euclidean',
             cluster_selection_method='eom',
             prediction_data=True
         )
@@ -72,7 +71,8 @@ class BabcockTopicAnalyzer:
         vectorizer_model = CountVectorizer(
             ngram_range=(1, 3),
             stop_words='english',
-            min_df=5
+            min_df=2,
+            max_df=0.95
         )
         
         # Create BERTopic model

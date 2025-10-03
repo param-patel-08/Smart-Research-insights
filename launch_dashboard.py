@@ -60,7 +60,7 @@ def main():
     try:
         subprocess.run([
             sys.executable, "-m", "streamlit", "run",
-            "dashboard/app.py",
+            "dashboard/app_enhanced.py",
             "--server.headless", "false",
         ])
     except KeyboardInterrupt:
@@ -68,7 +68,7 @@ def main():
     except Exception as e:
         print(f"\n❌ Error launching dashboard: {e}")
         print("\nTry running manually:")
-        print("  streamlit run dashboard/app.py")
+        print("  streamlit run dashboard/app_enhanced.py")
 
 
 if __name__ == "__main__":
