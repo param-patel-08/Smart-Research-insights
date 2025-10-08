@@ -1,1 +1,18 @@
-# Auto-generated
+"""Config package for OpenAlex ingestion"""
+from .settings import (
+    OPENALEX_EMAIL,
+    ANALYSIS_START_DATE,
+    ANALYSIS_END_DATE,
+    ALL_UNIVERSITIES,
+    QUERY_PARAMS,
+    OPENALEX_SELECT_FIELDS,
+)
+
+__all__ = [
+    'OPENALEX_EMAIL',
+    'ANALYSIS_START_DATE',
+    'ANALYSIS_END_DATE',
+    'ALL_UNIVERSITIES',
+    'QUERY_PARAMS',
+    'OPENALEX_SELECT_FIELDS',
+]

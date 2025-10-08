@@ -12,3 +12,14 @@
 # Virtual environment
 .venv/
 venv/
+
+# Database
+*.sql.backup
+postgres_data/
+
+# Model artifacts
+models/bertopic_model_*
+artifacts/
+
+# Logs
+logs/*.log
