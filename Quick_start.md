@@ -1,32 +1,32 @@
-# 🚀 Quick Start Guide - Babcock Research Trends
+#   Quick Start Guide - Babcock Research Trends
 
-## ✅ What You Have Now
+##   What You Have Now
 
 All code is complete! Here's what's built:
 
 ### Core Modules (Ready to Run)
 
-- ✅ **OpenAlex Data Collector** - Fetches papers from 24 universities
-- ✅ **Preprocessor** - Cleans and filters papers
-- ✅ **BERTopic Analyzer** - Discovers research topics
-- ✅ **Theme Mapper** - Maps topics to 9 Babcock themes
-- ✅ **Trend Analyzer** - Identifies growth patterns
+-   **OpenAlex Data Collector** - Fetches papers from 24 universities
+-   **Preprocessor** - Cleans and filters papers
+-   **BERTopic Analyzer** - Discovers research topics
+-   **Theme Mapper** - Maps topics to 9 Babcock themes
+-   **Trend Analyzer** - Identifies growth patterns
 
 ### Scripts
 
-- ✅ **run_full_analysis.py** - One command runs everything!
-- ✅ **view_results.py** - Quick text summary of results
-- ✅ **test_setup.py** - Verify installation
+-   **run_full_analysis.py** - One command runs everything!
+-   **exploration/view_results.py** - Quick text summary of results
+-   **tests/test_setup.py** - Verify installation
 
 ### Configuration
 
-- ✅ **config/themes.py** - 9 Babcock strategic themes defined
-- ✅ **config/settings.py** - All settings configured
-- ✅ **requirements.txt** - All dependencies listed
+-   **config/themes.py** - 9 Babcock strategic themes defined
+-   **config/settings.py** - All settings configured
+-   **requirements.txt** - All dependencies listed
 
 ---
 
-## 🎯 3-Step Setup (5 Minutes)
+##   3-Step Setup (5 Minutes)
 
 ### Step 1: Install Packages
 
@@ -62,26 +62,26 @@ OPENALEX_EMAIL=your.email@domain.com
 ### Step 3: Test Setup
 
 ```powershell
-python test_setup.py
+python tests/test_setup.py
 ```
 
 **You should see:**
 
 ```
 ================================================================================
-✓ ALL TESTS PASSED! System is ready to use.
+  ALL TESTS PASSED! System is ready to use.
 ================================================================================
 ```
 
 If you see errors, check:
 
-- ❌ Packages not installed → Run Step 1 again
-- ❌ .env file missing → Check your project folder
-- ❌ Python version → Need Python 3.9+
+-   Packages not installed   Run Step 1 again
+-   .env file missing   Check your project folder
+-   Python version   Need Python 3.9+
 
 ---
 
-## 🏃 Running the Analysis
+##   Running the Analysis
 
 ### Option A: Full Automatic Pipeline (Recommended!)
 
@@ -107,12 +107,12 @@ Enter your choice (1/2/3) [default: 1]:
 
 **What happens:**
 
-1. ✅ Collects papers from OpenAlex
-2. ✅ Filters by Babcock themes
-3. ✅ Runs BERTopic (discovers ~60 topics)
-4. ✅ Maps topics to 9 themes
-5. ✅ Calculates growth trends
-6. ✅ Saves all results
+1.   Collects papers from OpenAlex
+2.   Filters by Babcock themes
+3.   Runs BERTopic (discovers ~60 topics)
+4.   Maps topics to 9 themes
+5.   Calculates growth trends
+6.   Saves all results
 
 **Total time:**
 
@@ -142,7 +142,7 @@ python src/trend_analyzer.py
 
 ---
 
-## 📊 Viewing Results
+##   Viewing Results
 
 ### Quick Text Summary
 
@@ -152,39 +152,39 @@ python view_results.py
 
 **Shows:**
 
-- 📄 Papers analyzed
-- 🎯 Strategic priorities
-- ⚡ Emerging topics
-- 🏛️ Top universities
-- 📈 Growth trends
+-   Papers analyzed
+-   Strategic priorities
+-   Emerging topics
+-    Top universities
+-   Growth trends
 
 ---
 
-## 📁 Where Are My Results?
+##   Where Are My Results?
 
 After analysis completes, check these folders:
 
 data/
-├── raw/
-│   └── collected_papers.csv       ← All papers collected
-├── processed/
-│   ├── paper_metadata.csv         ← Filtered papers
-│   ├── papers_processed.csv       ← Papers + topic assignments
-│   ├── documents.txt              ← Text for BERTopic
-│   ├── topics_over_time.csv       ← Quarterly trends
-│   ├── topic_mapping.json         ← Topics → Themes mapping
-│   └── trend_analysis.json        ← Strategic insights
+    raw/
+        collected_papers.csv         All papers collected
+    processed/
+        paper_metadata.csv           Filtered papers
+        papers_processed.csv         Papers + topic assignments
+        documents.txt                Text for BERTopic
+        topics_over_time.csv         Quarterly trends
+        topic_mapping.json           Topics   Themes mapping
+        trend_analysis.json          Strategic insights
 
 models/
-└── bertopic_model.pkl            ← Trained BERTopic model
+    bertopic_model.pkl              Trained BERTopic model
 
 data/processed/
-└── embeddings.npy                 ← Cached embeddings (fast re-runs!)
+    embeddings.npy                   Cached embeddings (fast re-runs!)
 
 logs/
-└── full_analysis_YYYYMMDD.log    ← Detailed logs
+    full_analysis_YYYYMMDD.log      Detailed logs
 
-## 🎓 What You'll Get
+##   What You'll Get
 
 ### Quantitative Results
 
@@ -196,24 +196,24 @@ logs/
 
 ### Strategic Insights
 
-- ✅ Growth rate per theme (quarter-over-quarter)
-- ✅ Emerging topics (>50% growth)
-- ✅ Declining topics
-- ✅ Top universities per theme
-- ✅ Cross-theme topics
-- ✅ Strategic priority scores
+-   Growth rate per theme (quarter-over-quarter)
+-   Emerging topics (>50% growth)
+-   Declining topics
+-   Top universities per theme
+-   Cross-theme topics
+-   Strategic priority scores
 
 ### Deliverables for Babcock
 
-- ✅ Interactive dashboard (coming soon!)
-- ✅ Quarterly trend analysis
-- ✅ University partnership recommendations
-- ✅ CONOPS document
-- ✅ Development strategy
+-   Interactive dashboard (coming soon!)
+-   Quarterly trend analysis
+-   University partnership recommendations
+-   CONOPS document
+-   Development strategy
 
 ---
 
-## 🆘 Common Issues & Solutions
+##   Common Issues & Solutions
 
 ### "ModuleNotFoundError: No module named 'bertopic'"
 
@@ -249,7 +249,7 @@ pip install bertopic sentence-transformers umap-learn hdbscan
 
 ---
 
-## ⏱️ Time Expectations
+##    Time Expectations
 
 | Task            | Quick Test | Full Analysis  |
 | --------------- | ---------- | -------------- |
@@ -262,33 +262,33 @@ pip install bertopic sentence-transformers umap-learn hdbscan
 
 ---
 
-## 🎯 Your Action Plan
+##   Your Action Plan
 
 ### Today (5 minutes):
 
-1. ✅ Install packages
-2. ✅ Run `test_setup.py`
-3. ✅ Run quick test: `python run_full_analysis.py` (choose option 1)
-4. ✅ View results: `python view_results.py`
+1.   Install packages
+2.   Run `tests/test_setup.py`
+3.   Run quick test: `python run_full_analysis.py` (choose option 1)
+4.   View results: `python view_results.py`
 
 ### Tonight (if time):
 
-1. ✅ Run full analysis: `python run_full_analysis.py` (choose option 3)
-2. ✅ Let it run while you do other things (~1 hour)
+1.   Run full analysis: `python run_full_analysis.py` (choose option 3)
+2.   Let it run while you do other things (~1 hour)
 
 ### Tomorrow:
 
-1. ✅ View full results
-2. ✅ Start writing your project report
-3. ✅ Build dashboard (next step!)
+1.   View full results
+2.   Start writing your project report
+3.   Build dashboard (next step!)
 
 ---
 
-## 🚀 Ready to Start?
+##   Ready to Start?
 
 ```powershell
 # Run this now!
-python test_setup.py
+python tests/test_setup.py
 ```
 
 If all tests pass, you're ready to go:
@@ -297,14 +297,14 @@ If all tests pass, you're ready to go:
 python run_full_analysis.py
 ```
 
-**That's it!** The system will guide you through the rest. 🎉
+**That's it!** The system will guide you through the rest.  
 
 ---
 
-## 📧 Questions?
+##   Questions?
 
 - Check logs: `logs/full_analysis_*.log`
 - Review output files in `data/processed/`
-- Re-run `test_setup.py` to diagnose issues
+- Re-run `tests/test_setup.py` to diagnose issues
 
-**You've got everything you need - just run it!** 🚀
+**You've got everything you need - just run it!**  

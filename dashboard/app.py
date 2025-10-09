@@ -1,4 +1,4 @@
-"""
+﻿"""
 Babcock Research Trends - Enhanced Streamlit Dashboard (updated-test)
 Implements global filters, adjacent themes, university trend alerts, strength ranking, and exports.
 """
@@ -25,17 +25,48 @@ from config.settings import (
 )
 from config.themes import BABCOCK_THEMES
 
-st.set_page_config(page_title="Babcock Research Trends", page_icon="🔬", layout="wide")
+st.set_page_config(page_title="Babcock Research Trends", page_icon="", layout="wide")
 
+# Global Plotly defaults (light Prescience-style)
+px.defaults.template = "plotly_white"
 st.markdown(
     """
     <style>
-    .main-header{font-size:2.1rem;font-weight:700;color:#1f4788;margin:.3rem 0 1rem}
-    .sub-header{font-size:1.25rem;font-weight:700;color:#2c5aa0;margin:1.2rem 0 .6rem}
-    .metric-card{background:#e6e9f0;padding:1rem;border-radius:8px;border-left:4px solid #1f4788}
-    .priority-high{background:#ef9a9a;border-left-color:#c62828}
-    .priority-medium{background:#ffcc80;border-left-color:#ef6c00}
-    .priority-low{background:#c8e6c9;border-left-color:#2e7d32}
+    :root{
+      --bg:#f8fafc;             /* light content area */
+      --text:#0b0f19;           /* near-black text */
+      --muted:#6b7280;          /* gray-500 */
+      --brand:#22c55e;          /* green accent */
+      --brand-2:#16a34a;        /* darker green */
+      --accent-1:#e2f7ea;       /* light green tint */
+      --accent-2:#fde68a;       /* amber tint */
+      --accent-3:#fee2e2;       /* red tint */
+      --accent-4:#e5e7eb;       /* gray-200 */
+      --accent-5:#cbd5e1;       /* gray-300 */
+      --card:#ffffff;           /* card background */
+      --border:#e5e7eb;         /* subtle border */
+    }
+
+    .main-header{font-size:2.1rem;font-weight:800;color:#111827;margin:.3rem 0 1rem}
+    .sub-header{font-size:1.2rem;font-weight:700;color:#111827;margin:1.2rem 0 .6rem}
+
+    /* Metric cards with strong contrast */
+    .metric-card{background:var(--card);color:var(--text);padding:1rem;border-radius:10px;border:1px solid var(--border);box-shadow:0 1px 2px rgba(0,0,0,.06)}
+    .priority-high{background:var(--accent-3);border-left:6px solid #ef4444}
+    .priority-medium{background:var(--accent-2);border-left:6px solid #f59e0b}
+    .priority-low{background:var(--accent-1);border-left:6px solid var(--brand)}
+
+    /* Badges */
+    .badge{background:var(--brand);color:#fff;padding:2px 8px;border-radius:999px;font-size:.8rem}
+
+    /* App & sidebar backgrounds (sidebar dark like Prescience example) */
+    .stApp{background-color:var(--bg);color:var(--text)}
+    [data-testid="stSidebar"]{background-color:#1f2937;color:#f9fafb}
+    [data-testid="stSidebar"] *{color:#f9fafb}
+
+    /* Streamlit metric readability */
+    [data-testid="stMetricValue"]{color:#111827;}
+    [data-testid="stMetricLabel"]{color:var(--muted);} 
     </style>
     """,
     unsafe_allow_html=True,
@@ -104,7 +135,7 @@ def _pptx_from_summary(summary_title: str, kpis: dict, tables: dict | None = Non
     tf.clear()
     for k, v in kpis.items():
         p = tf.add_paragraph()
-        p.text = f"• {k}: {v}"
+        p.text = f"- {k}: {v}"
         p.font.size = Pt(18)
     # Tables slide
     if tables:
@@ -127,12 +158,12 @@ def _pptx_from_summary(summary_title: str, kpis: dict, tables: dict | None = Non
 
 def add_export_section(df: pd.DataFrame, page_name: str):
     st.markdown("---")
-    st.markdown("## 📤 Export Options")
+    st.markdown("## Export Options")
     c1, c2 = st.columns(2)
     with c1:
         csv = df.to_csv(index=False)
         st.download_button(
-            label="📊 Download CSV",
+            label="Download CSV",
             data=csv,
             file_name=f"babcock_{page_name}_{datetime.now().strftime('%Y%m%d_%H%M')}.csv",
             mime="text/csv",
@@ -162,7 +193,7 @@ def add_export_section(df: pd.DataFrame, page_name: str):
                 )
                 summary.to_excel(writer, sheet_name="Summary", index=False)
             st.download_button(
-                label="📈 Download Excel",
+                label="Download Excel",
                 data=out.getvalue(),
                 file_name=f"babcock_{page_name}_{datetime.now().strftime('%Y%m%d_%H%M')}.xlsx",
                 mime="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
@@ -179,9 +210,9 @@ def add_export_section(df: pd.DataFrame, page_name: str):
             "Avg Confidence": f"{df['confidence'].mean():.0f}%" if 'confidence' in df.columns else 'N/A',
         }
         top_table = df.head(10).copy()
-        pptx_bytes = _pptx_from_summary(f"Babcock — {page_name.replace('_',' ').title()}", kpis, {"Preview": top_table})
+        pptx_bytes = _pptx_from_summary(f"Babcock - {page_name.replace('_',' ').title()}", kpis, {"Preview": top_table})
         st.download_button(
-            label="📽️ Download PowerPoint",
+            label="Download PowerPoint",
             data=pptx_bytes,
             file_name=f"babcock_{page_name}_{datetime.now().strftime('%Y%m%d_%H%M')}.pptx",
             mime="application/vnd.openxmlformats-officedocument.presentationml.presentation",
@@ -200,8 +231,43 @@ except FileNotFoundError as e:
     )
     st.stop()
 
+# ---------- Utilities for paper details ----------
+def _paper_external_link(row: pd.Series) -> str:
+    doi = str(row.get("doi", "")).strip()
+    url = str(row.get("url", "")).strip()
+    openalex = str(row.get("openalex_id", "")).strip()
+    if doi and doi != "nan":
+        return f"https://doi.org/{doi}" if not doi.startswith("http") else doi
+    if url and url != "nan":
+        return url
+    if openalex and openalex != "nan":
+        return f"https://openalex.org/{openalex}"
+    return ""
+
+def render_paper_card(row: pd.Series):
+    badge = f"<span class='badge'>Relevance {row.get('relevance_score',0):.0f}</span>"
+    st.markdown(f"**{row.get('title','(untitled)')}**  {badge}", unsafe_allow_html=True)
+    st.caption(
+        f" {row.get('university','')} |  {str(row.get('theme','')).replace('_',' ').title()} | Date {pd.to_datetime(row.get('date')).strftime('%Y-%m-%d') if pd.notna(row.get('date')) else ''}"
+    )
+    with st.expander("View Details"):
+        colA, colB, colC = st.columns(3)
+        colA.metric("Citations", f"{row.get('citations', 0)}")
+        colB.metric("Confidence", f"{row.get('confidence', 0):.0f}%")
+        colC.metric("Topic ID", f"{row.get('topic_id','')}")
+        if pd.notna(row.get("authors")) and row.get("authors"):
+            st.write(f"**Authors:** {row.get('authors')}")
+        if pd.notna(row.get("journal")) and row.get("journal"):
+            st.write(f"**Venue:** {row.get('journal')}")
+        link = _paper_external_link(row)
+        if link:
+            st.markdown(f"[Open Source ->]({link})")
+        if pd.notna(row.get("abstract")) and row.get("abstract"):
+            st.markdown("**Abstract**")
+            st.write(str(row.get("abstract")))
+
 # Sidebar: Global Filters
-st.sidebar.title("🔬 Research Trends")
+st.sidebar.title(" Research Trends")
 try:
     st.sidebar.image(
         "https://via.placeholder.com/300x80/1f4788/ffffff?text=BABCOCK",
@@ -228,10 +294,10 @@ if "filters" not in st.session_state:
 start_date = cd1.date_input("From", value=st.session_state["filters"]["start"], min_value=min_date, max_value=max_date, key="flt_start")
 end_date = cd2.date_input("To", value=st.session_state["filters"]["end"], min_value=min_date, max_value=max_date, key="flt_end")
 
-all_themes = sorted([t for t in papers_df["theme"].unique() if t != "Other"]) if "theme" in papers_df.columns else []
-sel_themes = st.sidebar.multiselect("🎯 Themes", options=all_themes, default=all_themes, key="flt_themes")
+all_themes = sorted(list(BABCOCK_THEMES.keys()))
+sel_themes = st.sidebar.multiselect(" Themes", options=all_themes, default=all_themes, key="flt_themes")
 sel_unis = st.sidebar.multiselect(
-    "🏛️ Universities",
+    "Universities",
     options=sorted(papers_df["university"].unique()),
     default=sorted(papers_df["university"].unique())[:10],
     key="flt_unis",
@@ -239,7 +305,7 @@ sel_unis = st.sidebar.multiselect(
 min_conf = st.sidebar.slider("Min Confidence (%)", 0, 100, st.session_state["filters"]["min_conf"], 5, key="flt_conf")
 max_cit = int(papers_df["citations"].max()) if "citations" in papers_df.columns else 100
 min_cit = st.sidebar.slider("Min Citations", 0, max_cit, st.session_state["filters"]["min_cit"], key="flt_cit")
-kw = st.sidebar.text_input("🔎 Keyword(s)", value=st.session_state["filters"]["kw"], placeholder="e.g., autonomy, additive manufacturing", key="flt_kw")
+kw = st.sidebar.text_input("Keyword(s)", value=st.session_state["filters"]["kw"], placeholder="e.g., autonomy, additive manufacturing", key="flt_kw")
 
 cols_reset = st.sidebar.columns(2)
 if cols_reset[0].button("Reset Filters"):
@@ -289,7 +355,7 @@ st.sidebar.markdown("---")
 if len(papers_df) > 0:
     last_dt = papers_df["date"].max()
     days_since = (pd.Timestamp.now() - last_dt).days
-    status = "🟢 Fresh" if days_since < 7 else ("🟡 Recent" if days_since < 30 else "🔴 Needs Update")
+    status = "Fresh" if days_since < 7 else ("Recent" if days_since < 30 else "Needs Update")
     st.sidebar.info(f"{status}\n\nLast paper: {last_dt.strftime('%Y-%m-%d')} ({days_since} days ago)")
 
 st.sidebar.markdown("---")
@@ -300,47 +366,65 @@ st.sidebar.metric("Universities", papers_df["university"].nunique())
 # Navigation
 page = st.sidebar.radio(
     "Navigation",
-    ["📊 Overview", "🎯 Theme Analysis", "⚡ Emerging Topics", "🏛️ Universities", "📈 Trends Over Time", "🧪 Data Quality"],
+    ["Overview", "Theme Analysis", "Emerging Topics", "Universities", "Trends Over Time", "Data Quality", "Report Builder"],
     label_visibility="collapsed",
 )
 
 # Overview
-if page == "📊 Overview":
-    st.markdown('<p class="main-header">🔬 Babcock Research Trends Dashboard</p>', unsafe_allow_html=True)
+if page == "Overview":
+    st.markdown('<p class="main-header">Babcock Research Trends Dashboard</p>', unsafe_allow_html=True)
+    # Set distinct colorways per component for readability
+    colorway_overview_kpis = ["#16a34a", "#22c55e", "#0ea5e9", "#f59e0b"]
+    colorway_theme_counts = px.colors.sequential.Greens
     c1, c2, c3, c4 = st.columns(4)
-    c1.metric("📄 Papers Analyzed", f"{len(papers_df):,}")
-    c2.metric("🧩 Topics", len(mapping))
-    c3.metric("🏛️ Universities", papers_df["university"].nunique())
+    c1.metric("Papers Analyzed", f"{len(papers_df):,}")
+    c2.metric("Topics", len(mapping))
+    c3.metric("Universities", papers_df["university"].nunique())
     try:
         avg_growth = sum(p["growth_rate"] for p in trends["strategic_priorities"]) / max(1, len(trends["strategic_priorities"]))
-        c4.metric("📈 Avg Growth", f"{avg_growth*100:+.1f}%")
+        c4.metric("Average Growth", f"{avg_growth*100:+.1f}%")
     except Exception:
-        c4.metric("📈 Avg Growth", "N/A")
+        c4.metric("Average Growth", "N/A")
 
     st.markdown("---")
-    st.markdown('<p class="sub-header">🎯 Strategic Theme Priorities</p>', unsafe_allow_html=True)
+    st.markdown('<p class="sub-header">Strategic Theme Priorities</p>', unsafe_allow_html=True)
     for pr in trends.get("strategic_priorities", []):
         theme = pr["theme"].replace("_", " ").title()
         growth = pr.get("growth_rate", 0)
         papers = pr.get("total_papers", 0)
         category = pr.get("category", "LOW").lower()
-        indicator = "🚀 HIGH GROWTH" if growth > 0.5 else ("📈 GROWING" if growth > 0.1 else ("➡️ STABLE" if growth >= 0 else "📉 DECLINING"))
+        indicator = "HIGH GROWTH" if growth > 0.5 else ("GROWING" if growth > 0.1 else ("STABLE" if growth >= 0 else "DECLINING"))
         st.markdown(
             f"<div class='metric-card priority-{category}'><h4>{theme}</h4><p><strong>{indicator}</strong> ({category.upper()})</p><p>Growth: <strong>{growth*100:+.1f}%</strong> | Papers: <strong>{papers:,}</strong></p></div>",
             unsafe_allow_html=True,
         )
 
     st.markdown("---")
-    st.markdown('<p class="sub-header">📊 Papers per Strategic Theme</p>', unsafe_allow_html=True)
-    theme_counts = papers_df["theme"].value_counts()
-    theme_counts = theme_counts[theme_counts.index != "Other"]
-    fig = px.bar(x=theme_counts.values, y=[t.replace("_", " ").title() for t in theme_counts.index], orientation="h", color=theme_counts.values, color_continuous_scale="Blues", title="Papers per Theme")
-    fig.update_layout(height=400, showlegend=False)
+    st.markdown('<p class="sub-header">Papers per Strategic Theme</p>', unsafe_allow_html=True)
+    # Count papers and include all 9 Babcock themes (zero-filled)
+    theme_counts = papers_df.groupby("theme").size()
+    theme_counts = theme_counts.reindex(list(BABCOCK_THEMES.keys()), fill_value=0)
+    fig = px.bar(
+        x=theme_counts.values,
+        y=[t.replace("_", " ").title() for t in theme_counts.index],
+        orientation="h",
+        color=theme_counts.values,
+        color_continuous_scale="Greens",
+        title="Papers per Theme (All Babcock Themes)"
+    )
+    fig.update_layout(
+        height=400,
+        showlegend=False,
+        template="plotly_white",
+        paper_bgcolor="#ffffff",
+        plot_bgcolor="#ffffff",
+        font=dict(color="#0b0f19")
+    )
     st.plotly_chart(fig, use_container_width=True)
 
 # Theme Analysis
-elif page == "🎯 Theme Analysis":
-    st.markdown('<p class="main-header">🎯 Theme Analysis</p>', unsafe_allow_html=True)
+elif page == "Theme Analysis":
+    st.markdown('<p class="main-header">Theme Analysis</p>', unsafe_allow_html=True)
     theme_names = [t.replace('_', ' ').title() for t in BABCOCK_THEMES.keys()]
     selected_theme_display = st.selectbox("Select Theme", theme_names)
     selected_theme = selected_theme_display.replace(" ", "_")
@@ -359,14 +443,14 @@ elif page == "🎯 Theme Analysis":
     # Trend and Top Universities
     c1, c2 = st.columns(2)
     with c1:
-        st.subheader("📈 Trend Over Time")
+        st.subheader(" Trend Over Time")
         q = theme_papers.groupby("quarter").size().reset_index(name="count")
         q["quarter"] = q["quarter"].astype(str)
-        fig = px.bar(q, x="quarter", y="count", color="count", color_continuous_scale="Blues", title=f"{selected_theme_display} - Quarterly Output")
+        fig = px.bar(q, x="quarter", y="count", color="count", color_continuous_scale="Greens", title=f"{selected_theme_display} - Quarterly Output")
         fig.update_layout(height=350)
         st.plotly_chart(fig, use_container_width=True)
     with c2:
-        st.subheader("🏛️ Top Universities")
+        st.subheader(" Top Universities")
         uc = theme_papers["university"].value_counts().head(10)
         fig = px.bar(x=uc.values, y=uc.index, orientation="h", color=uc.values, color_continuous_scale="Greens", title=f"Top 10 Universities in {selected_theme_display}")
         fig.update_layout(height=350, showlegend=False)
@@ -374,7 +458,7 @@ elif page == "🎯 Theme Analysis":
 
     st.markdown("---")
     # Adjacent Themes via keyword overlap
-    st.subheader("🔗 Adjacent Technology Themes")
+    st.subheader("Adjacent Technology Themes")
     def find_adjacent_themes(papers: pd.DataFrame, theme_key: str, mapping_obj: dict) -> dict:
         adjacent: dict[str, int] = {}
         theme_p = papers[papers["theme"] == theme_key]
@@ -392,7 +476,7 @@ elif page == "🎯 Theme Analysis":
     adj = find_adjacent_themes(papers_df, selected_theme, mapping)
     if adj:
         adj_df = pd.DataFrame({"Theme": [t.replace("_", " ").title() for t in list(adj.keys())[:5]], "Connections": list(adj.values())[:5]})
-        fig_adj = px.bar(adj_df, x="Connections", y="Theme", orientation="h", color="Connections", color_continuous_scale="Blues", title=f"Top Adjacent Themes to {selected_theme_display}")
+        fig_adj = px.bar(adj_df, x="Connections", y="Theme", orientation="h", color="Connections", color_continuous_scale="Greens", title=f"Top Adjacent Themes to {selected_theme_display}")
         fig_adj.update_layout(height=300, showlegend=False)
         st.plotly_chart(fig_adj, use_container_width=True)
     else:
@@ -400,7 +484,7 @@ elif page == "🎯 Theme Analysis":
 
     st.markdown("---")
     # University Trend Alerts
-    st.subheader("🚨 University Trend Alerts")
+    st.subheader("University Trend Alerts")
     thr = st.slider("Alert threshold (% change)", 20, 200, 50, 10)
     def detect_university_trends(papers: pd.DataFrame, theme_key: str, threshold: float = 50.0):
         alerts = []
@@ -433,40 +517,35 @@ elif page == "🎯 Theme Analysis":
     alerts = detect_university_trends(papers_df, selected_theme, thr)
     if alerts:
         c1, c2, c3 = st.columns(3)
-        c1.metric("🚀 Surging", sum(1 for a in alerts if a["type"] == "SURGE"))
-        c2.metric("📉 Declining", sum(1 for a in alerts if a["type"] == "DECLINE"))
-        c3.metric("🆕 New Entrants", sum(1 for a in alerts if a["type"] == "NEW"))
+        c1.metric(" Surging", sum(1 for a in alerts if a["type"] == "SURGE"))
+        c2.metric(" Declining", sum(1 for a in alerts if a["type"] == "DECLINE"))
+        c3.metric("New Entrants", sum(1 for a in alerts if a["type"] == "NEW"))
         for a in alerts[:10]:
-            with st.expander(f"{a['university']} — {a['change_pct']:.0f}% ({a['type']})"):
+            with st.expander(f"{a['university']} - {a['change_pct']:.0f}% ({a['type']})"):
                 cc1, cc2, cc3 = st.columns(3)
                 cc1.metric("Recent Quarter", f"{a['recent']} papers", delta=f"{a['recent']-a['previous']} vs prev")
                 cc2.metric("Previous Quarter", f"{a['previous']} papers")
                 cc3.metric("Change", f"{a['change_pct']:.0f}%")
                 qdf = pd.DataFrame({"Quarter": list(a["quarters"].keys()), "Papers": list(a["quarters"].values())})
-                figq = px.line(qdf, x="Quarter", y="Papers", markers=True, title=f"Quarterly Trend — {a['university']}")
+                figq = px.line(qdf, x="Quarter", y="Papers", markers=True, title=f"Quarterly Trend - {a['university']}")
                 figq.update_layout(height=250, showlegend=False)
                 st.plotly_chart(figq, use_container_width=True)
     else:
-        st.info(f"No universities changed by more than ±{thr}% in {selected_theme_display}")
+        st.info(f"No universities changed by more than +/-{thr}% in {selected_theme_display}")
 
     st.markdown("---")
-    st.subheader("📰 Recent Papers in This Theme")
+    st.subheader("Recent Papers in This Theme")
     # Sort by relevance then date
     recent = theme_papers.sort_values(["relevance_score", "date"], ascending=[False, False]).head(10)
     for _, p in recent.iterrows():
-        badge = f"<span style='background:#1f4788;color:#fff;padding:2px 6px;border-radius:6px;font-size:0.8rem;'>Relevance {p['relevance_score']:.0f}</span>"
-        st.markdown(f"**{p['title']}**  {badge}", unsafe_allow_html=True)
-        st.caption(f"🏛️ {p['university']} | 📅 {p['date'].strftime('%Y-%m-%d')}")
-        if pd.notna(p.get("abstract")) and p.get("abstract"):
-            with st.expander("View Abstract"):
-                st.write(str(p["abstract"])[:500] + ("..." if len(str(p["abstract"])) > 500 else ""))
+        render_paper_card(p)
         st.markdown("---")
 
     add_export_section(theme_papers, "theme_analysis")
 
 # Emerging Topics
-elif page == "⚡ Emerging Topics":
-    st.markdown('<p class="main-header">⚡ Emerging Research Topics</p>', unsafe_allow_html=True)
+elif page == "Emerging Topics":
+    st.markdown('<p class="main-header">Emerging Research Topics</p>', unsafe_allow_html=True)
     min_growth = st.slider("Minimum Growth Rate", 0, 200, 50, 10, format="%d%%")
     emerging = [t for t in trends.get("emerging_topics", []) if t.get("growth_rate", 0) * 100 >= min_growth]
     st.info(f"{len(emerging)} topics with >{min_growth}% growth")
@@ -474,7 +553,7 @@ elif page == "⚡ Emerging Topics":
         keys = ", ".join(t.get("keywords", [])[:8])
         theme = t.get("theme", "").replace("_", " ").title()
         growth = t.get("growth_rate", 0)
-        with st.expander(f"#{i} - {keys} ({growth*100:+.0f}% growth) — {theme}"):
+        with st.expander(f"#{i} - {keys} ({growth*100:+.0f}% growth) - {theme}"):
             c1, c2, c3, c4 = st.columns(4)
             c1.metric("Theme", theme)
             c2.metric("Growth", f"{growth*100:+.0f}%")
@@ -484,13 +563,13 @@ elif page == "⚡ Emerging Topics":
             if topic_id is not None and "topic_id" in papers_df.columns:
                 demo = papers_df[papers_df["topic_id"] == topic_id].nlargest(3, "date")
                 for _, p in demo.iterrows():
-                    st.markdown(f"- **{p['title']}** — {p['university']} ({p['date'].strftime('%Y-%m-%d')})")
+                    st.markdown(f"- **{p['title']}** - {p['university']} ({p['date'].strftime('%Y-%m-%d')})")
     add_export_section(papers_df, "emerging_topics")
 
 # Universities
-elif page == "🏛️ Universities":
-    st.markdown('<p class="main-header">🏛️ University Analysis</p>', unsafe_allow_html=True)
-    st.markdown("## 🏛️ University Rankings by Technology Theme")
+elif page == "Universities":
+    st.markdown('<p class="main-header"> University Analysis</p>', unsafe_allow_html=True)
+    st.markdown("##  University Rankings by Technology Theme")
     ranking_theme = st.selectbox("Rank universities by:", options=["All Themes"] + sorted([t for t in papers_df["theme"].unique() if t != "Other"]))
 
     def calc_strength(df: pd.DataFrame, uni: str, theme_key: str | None):
@@ -527,21 +606,21 @@ elif page == "🏛️ Universities":
     rdf.insert(0, "Rank", range(1, len(rdf) + 1))
     st.dataframe(rdf, use_container_width=True, hide_index=True)
     st.download_button(
-        label="📥 Download University Rankings (CSV)",
+        label="Download University Rankings (CSV)",
         data=rdf.to_csv(index=False),
         file_name=f"university_rankings_{ranking_theme.replace(' ', '_')}_{datetime.now().strftime('%Y%m%d')}.csv",
         mime="text/csv",
     )
 
     st.markdown("---")
-    st.subheader("📊 Overall Research Output Rankings")
+    st.subheader(" Overall Research Output Rankings")
     uc = papers_df["university"].value_counts()
-    fig = px.bar(x=uc.head(15).values, y=uc.head(15).index, orientation="h", color=uc.head(15).values, color_continuous_scale="Blues", title="Top 15 Universities by Total Papers")
+    fig = px.bar(x=uc.head(15).values, y=uc.head(15).index, orientation="h", color=uc.head(15).values, color_continuous_scale="Greens", title="Top 15 Universities by Total Papers")
     fig.update_layout(height=380, showlegend=False)
     st.plotly_chart(fig, use_container_width=True)
 
     st.markdown("---")
-    st.subheader("🔍 University Deep Dive")
+    st.subheader("University Deep Dive")
     sel_uni = st.selectbox("Select University", sorted(papers_df["university"].unique()))
     uni_p = papers_df[papers_df["university"] == sel_uni]
     c1, c2, c3, c4 = st.columns(4)
@@ -557,52 +636,51 @@ elif page == "🏛️ Universities":
 
     c1, c2 = st.columns(2)
     with c1:
-        st.subheader("🎯 Research Themes")
+        st.subheader(" Research Themes")
         tdist = uni_p["theme"].value_counts()
         fig = px.pie(values=tdist.values, names=[t.replace('_',' ').title() for t in tdist.index], title=f"{sel_uni} - Theme Distribution")
         fig.update_layout(height=350)
         st.plotly_chart(fig, use_container_width=True)
     with c2:
-        st.subheader("📈 Output Over Time")
+        st.subheader(" Output Over Time")
         q = uni_p.groupby("quarter").size().reset_index(name="count"); q["quarter"] = q["quarter"].astype(str)
         fig = px.line(q, x="quarter", y="count", markers=True, title=f"{sel_uni} - Quarterly Output")
         fig.update_layout(height=350)
         st.plotly_chart(fig, use_container_width=True)
 
-    st.subheader(f"📰 Recent Papers from {sel_uni}")
+    st.subheader(f"Recent Papers from {sel_uni}")
     for _, p in uni_p.sort_values(["relevance_score", "date"], ascending=[False, False]).head(10).iterrows():
-        st.markdown(f"**{p['title']}**")
-        st.caption(f"🎯 {p['theme'].replace('_',' ').title()} | 📅 {p['date'].strftime('%Y-%m-%d')}")
-        if pd.notna(p.get("abstract")) and p.get("abstract"):
-            with st.expander("View Abstract"):
-                st.write(str(p["abstract"])[:400] + ("..." if len(str(p["abstract"])) > 400 else ""))
+        render_paper_card(p)
         st.markdown("---")
 
     add_export_section(uni_p, "universities")
 
 # Trends Over Time
-elif page == "📈 Trends Over Time":
-    st.markdown('<p class="main-header">📈 Temporal Trends Analysis</p>', unsafe_allow_html=True)
-    st.subheader("📊 Overall Research Activity")
+elif page == "Trends Over Time":
+    st.markdown('<p class="main-header"> Temporal Trends Analysis</p>', unsafe_allow_html=True)
+    st.subheader(" Overall Research Activity")
     qa = papers_df.groupby("quarter").size().reset_index(name="count"); qa["quarter"] = qa["quarter"].astype(str)
     fig = go.Figure()
     fig.add_trace(go.Scatter(x=qa["quarter"], y=qa["count"], mode="lines+markers", name="All Themes"))
     fig.update_layout(title="Overall Research Output", xaxis_title="Quarter", yaxis_title="Papers", height=380)
     st.plotly_chart(fig, use_container_width=True)
 
-    st.subheader("🎯 Trends by Theme")
-    names = sorted([t.replace("_", " ").title() for t in papers_df["theme"].unique() if t != "Other"]) if "theme" in papers_df.columns else []
-    picks = st.multiselect("Select Themes to Compare", names, default=names[:3])
+    st.subheader(" Trends by Theme")
+    names = [t.replace("_", " ").title() for t in BABCOCK_THEMES.keys()]
+    picks = st.multiselect("Select Themes to Compare", names, default=names)
     if picks:
         raw = [t.replace(" ", "_") for t in picks]
         f = papers_df[papers_df["theme"].isin(raw)]
-        qt = f.groupby(["quarter", "theme"]).size().reset_index(name="count")
+        # Build grid of quarters x selected themes and fill zeros
+        quarters = sorted(papers_df["quarter"].unique())
+        base = pd.MultiIndex.from_product([quarters, raw], names=["quarter", "theme"]) 
+        qt = f.groupby(["quarter", "theme"]).size().reindex(base, fill_value=0).reset_index(name="count")
         qt["quarter"], qt["theme"] = qt["quarter"].astype(str), qt["theme"].str.replace("_", " ").str.title()
-        fig = px.line(qt, x="quarter", y="count", color="theme", title="Research Output Trends")
+        fig = px.line(qt, x="quarter", y="count", color="theme", title="Research Output Trends (All Selected Themes)")
         fig.update_layout(height=420, hovermode="x unified")
         st.plotly_chart(fig, use_container_width=True)
 
-        st.subheader("📊 Growth Rates by Theme")
+        st.subheader(" Growth Rates by Theme")
         rows = []
         for t in raw:
             tr = trends.get("theme_trends", {}).get(t, {})
@@ -612,8 +690,8 @@ elif page == "📈 Trends Over Time":
     add_export_section(papers_df, "trends")
 
 # Data Quality
-elif page == "🧪 Data Quality":
-    st.markdown('<p class="main-header">🧪 Data Quality</p>', unsafe_allow_html=True)
+elif page == "Data Quality":
+    st.markdown('<p class="main-header">Data Quality</p>', unsafe_allow_html=True)
     c1, c2, c3 = st.columns(3)
     missing_abs = papers_df['abstract'].isna().sum() if 'abstract' in papers_df.columns else 0
     c1.metric("Missing Abstracts", f"{missing_abs:,}")
@@ -650,3 +728,68 @@ elif page == "🧪 Data Quality":
         add_export_section(issues_df, 'data_quality')
     else:
         st.success("No data quality issues detected in filtered dataset")
+
+# Report Builder
+elif page == "Report Builder":
+    st.markdown('<p class="main-header">Custom Report Builder</p>', unsafe_allow_html=True)
+    st.markdown("Build a custom report across selected themes, universities, and date range.")
+    rb1, rb2 = st.columns(2)
+    with rb1:
+        rb_themes = st.multiselect("Themes", options=sorted([t for t in papers_df['theme'].unique() if t != 'Other']), default=st.session_state['filters']['themes'] or [])
+        rb_unis = st.multiselect("Universities", options=sorted(papers_df['university'].unique()), default=st.session_state['filters']['unis'] or [])
+    with rb2:
+        rb_from = st.date_input("From", value=st.session_state['filters']['start'])
+        rb_to = st.date_input("To", value=st.session_state['filters']['end'])
+        include_papers = st.checkbox("Include top papers list", value=True)
+        include_rankings = st.checkbox("Include university rankings", value=True)
+
+    df_sel = papers_df[(papers_df['date'].dt.date >= rb_from) & (papers_df['date'].dt.date <= rb_to)].copy()
+    if rb_themes:
+        df_sel = df_sel[df_sel['theme'].isin(rb_themes)]
+    if rb_unis:
+        df_sel = df_sel[df_sel['university'].isin(rb_unis)]
+
+    st.info(f"Selected: {len(df_sel):,} papers | {df_sel['university'].nunique()} universities | {df_sel['theme'].nunique()} themes")
+
+    def _build_report_assets(df_in: pd.DataFrame):
+        # Excel
+        out = BytesIO()
+        with pd.ExcelWriter(out, engine='openpyxl') as writer:
+            df_in.to_excel(writer, sheet_name='Data', index=False)
+            summary = pd.DataFrame({
+                'Metric': ['Total Papers','Universities','Avg Confidence','Date Range'],
+                'Value': [len(df_in), df_in['university'].nunique(), f"{df_in['confidence'].mean():.0f}%", f"{df_in['date'].min().date()} to {df_in['date'].max().date()}" ]
+            })
+            summary.to_excel(writer, sheet_name='Summary', index=False)
+            if include_rankings:
+                uc = df_in['university'].value_counts().reset_index()
+                uc.columns = ['University','Papers']
+                uc.to_excel(writer, sheet_name='Rankings', index=False)
+            if include_papers:
+                top = df_in.sort_values(['relevance_score','date'], ascending=[False, False]).head(50)
+                top.to_excel(writer, sheet_name='Top Papers', index=False)
+        excel_bytes = out.getvalue()
+        # PPTX
+        kpis = {
+            'Total Papers': len(df_in),
+            'Universities': df_in['university'].nunique(),
+            'Avg Confidence': f"{df_in['confidence'].mean():.0f}%",
+        }
+        tables = {}
+        if include_rankings:
+            tables['Top Universities'] = df_in['university'].value_counts().reset_index().rename(columns={'index':'University','university':'Papers'}).head(10)
+        if include_papers:
+            tables['Top Papers'] = df_in[['title','university','date','relevance_score']].sort_values(['relevance_score','date'], ascending=[False, False]).head(10)
+        pptx_bytes = _pptx_from_summary('Babcock - Custom Report', kpis, tables)
+        return excel_bytes, pptx_bytes
+
+    colE1, colE2 = st.columns(2)
+    with colE1:
+        if st.button('Generate Excel Report'):
+            excel_bytes, _ = _build_report_assets(df_sel)
+            st.download_button(' Download Excel', data=excel_bytes, file_name=f"babcock_report_{datetime.now().strftime('%Y%m%d_%H%M')}.xlsx", mime='application/vnd.openxmlformats-officedocument.spreadsheetml.sheet')
+    with colE2:
+        if st.button('Generate PowerPoint Report'):
+            _, pptx_bytes = _build_report_assets(df_sel)
+            st.download_button(' Download PowerPoint', data=pptx_bytes, file_name=f"babcock_report_{datetime.now().strftime('%Y%m%d_%H%M')}.pptx", mime='application/vnd.openxmlformats-officedocument.presentationml.presentation')
+

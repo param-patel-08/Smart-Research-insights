@@ -12,3 +12,18 @@
 # Virtual environment
 .venv/
 venv/
+
+# Model artifacts
+models/bertopic_model.pkl
+models/bertopic_model_local.pkl
+
+# Logs
+logs/
+
+# Cache files
+**/__pycache__/
+*.pyc
+
+# Processed data (large files)
+data/processed/embeddings.npy
+data/processed/documents.txt

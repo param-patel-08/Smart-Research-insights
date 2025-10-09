@@ -26,7 +26,7 @@ from config.settings import (
 
 st.set_page_config(
     page_title="Babcock Research Trends",
-    page_icon="🔬",
+    page_icon=" ",
     layout="wide",
     initial_sidebar_state="expanded"
 )
@@ -128,7 +128,7 @@ try:
     papers_df, trends, mapping = load_data()
 except FileNotFoundError as e:
     st.error(
-        "⚠️ Data files not found! Please run the analysis first: `python run_full_analysis.py`\n"
+        "   Data files not found! Please run the analysis first: `python run_full_analysis.py`\n"
         f"Missing: {e}"
     )
     st.stop()
@@ -139,14 +139,14 @@ papers_df['quarter'] = papers_df['date'].dt.to_period('Q')
 # ==================== SIDEBAR ====================
 
 st.sidebar.image("https://via.placeholder.com/300x80/1f4788/ffffff?text=BABCOCK", use_container_width=True)
-st.sidebar.title("🔬 Research Trends")
+st.sidebar.title("  Research Trends")
 st.sidebar.markdown("---")
 
 # ==================== GLOBAL FILTERS ====================
-st.sidebar.markdown("## 🔍 Global Filters")
+st.sidebar.markdown("##   Global Filters")
 
 # Date Range
-st.sidebar.markdown("### 📅 Date Range")
+st.sidebar.markdown("###   Date Range")
 min_date = papers_df['date'].min().date() if 'date' in papers_df.columns else None
 max_date = papers_df['date'].max().date() if 'date' in papers_df.columns else None
 col_d1, col_d2 = st.sidebar.columns(2)
@@ -154,7 +154,7 @@ start_date = col_d1.date_input("From", value=min_date, min_value=min_date, max_v
 end_date = col_d2.date_input("To", value=max_date, min_value=min_date, max_value=max_date, key="global_end_date")
 
 # Themes
-st.sidebar.markdown("### 🎯 Technology Themes")
+st.sidebar.markdown("###   Technology Themes")
 all_themes = sorted([t for t in papers_df['theme'].unique() if t != 'Other']) if 'theme' in papers_df.columns else []
 if 'selected_themes' not in st.session_state:
     st.session_state['selected_themes'] = all_themes
@@ -167,7 +167,7 @@ selected_themes = st.sidebar.multiselect(
 st.session_state['selected_themes'] = selected_themes
 
 # Universities
-st.sidebar.markdown("### 🏛️ Universities")
+st.sidebar.markdown("###    Universities")
 selected_unis = st.sidebar.multiselect(
     "Select universities",
     options=sorted(papers_df['university'].unique()),
@@ -176,13 +176,13 @@ selected_unis = st.sidebar.multiselect(
 )
 
 # Confidence and Citations
-st.sidebar.markdown("### 📊 Data Quality & Impact")
+st.sidebar.markdown("###   Data Quality & Impact")
 min_conf = st.sidebar.slider("Min Confidence (%)", 0, 100, 0, 5, key="min_confidence")
 max_citations_cap = int(papers_df['citations'].max()) if 'citations' in papers_df.columns else 100
 min_cit = st.sidebar.slider("Min Citations", 0, max_citations_cap, 0, key="min_citations")
 
 # Keyword search
-st.sidebar.markdown("### 🔎 Keyword Search")
+st.sidebar.markdown("###   Keyword Search")
 kw_query = st.sidebar.text_input("Search title/abstract", placeholder="e.g., autonomy, additive manufacturing", key="kw_search")
 
 # Apply filters
@@ -204,18 +204,18 @@ if kw_query:
 
 # Data Freshness Indicator
 st.sidebar.markdown("---")
-st.sidebar.markdown("### ⏱️ Data Freshness")
+st.sidebar.markdown("###    Data Freshness")
 if 'date' in papers_df.columns and len(filtered_papers) > 0:
     latest_dt = filtered_papers['date'].max()
     days_since = (pd.Timestamp.now() - latest_dt).days
-    status = "🟢 Fresh" if days_since < 7 else ("🟡 Recent" if days_since < 30 else "🔴 Needs Update")
+    status = "  Fresh" if days_since < 7 else ("  Recent" if days_since < 30 else "  Needs Update")
     st.sidebar.info(f"{status}\n\nLast paper: {latest_dt.strftime('%Y-%m-%d')} ({days_since} days ago)")
 
 # Replace global dataframe so all pages use filters transparently
 papers_df = filtered_papers
 
 st.sidebar.markdown("---")
-st.sidebar.markdown("### 📊 Quick Stats")
+st.sidebar.markdown("###   Quick Stats")
 st.sidebar.metric("Total Papers", f"{len(papers_df):,}")
 st.sidebar.metric("Topics Found", len(mapping))
 st.sidebar.metric("Universities", papers_df['university'].nunique())
@@ -223,14 +223,14 @@ st.sidebar.metric("Universities", papers_df['university'].nunique())
 # Navigation after filters so KPIs reflect filtered data
 page = st.sidebar.radio(
     "Navigation",
-    ["📊 Overview", "🎯 Theme Analysis", "⚡ Emerging Topics", "🏛️ Universities", "📈 Trends Over Time"],
+    ["  Overview", "  Theme Analysis", "  Emerging Topics", "   Universities", "  Trends Over Time"],
     label_visibility="collapsed"
 )
 
 # ==================== OVERVIEW PAGE ====================
 
-if page == "📊 Overview":
-    st.markdown('<p class="main-header">🔬 Babcock Research Trends Dashboard</p>', unsafe_allow_html=True)
+if page == "  Overview":
+    st.markdown('<p class="main-header">  Babcock Research Trends Dashboard</p>', unsafe_allow_html=True)
     
     st.markdown("""
     ### Australasian Research Intelligence System
@@ -245,21 +245,21 @@ if page == "📊 Overview":
     
     with col1:
         st.metric(
-            "📄 Papers Analyzed",
+            "  Papers Analyzed",
             f"{len(papers_df):,}",
             help="Total papers collected and analyzed"
         )
     
     with col2:
         st.metric(
-            "🔬 Topics Discovered",
+            "  Topics Discovered",
             len(mapping),
             help="Research topics identified by BERTopic"
         )
     
     with col3:
         st.metric(
-            "🏛️ Universities",
+            "   Universities",
             papers_df['university'].nunique(),
             help="Australian and New Zealand universities tracked"
         )
@@ -267,7 +267,7 @@ if page == "📊 Overview":
     with col4:
         avg_growth = sum(p['growth_rate'] for p in trends['strategic_priorities']) / len(trends['strategic_priorities'])
         st.metric(
-            "📈 Avg Growth Rate",
+            "  Avg Growth Rate",
             f"{avg_growth*100:+.1f}%",
             help="Average quarterly growth across all themes"
         )
@@ -275,7 +275,7 @@ if page == "📊 Overview":
     st.markdown("---")
     
     # Strategic Priorities
-    st.markdown('<p class="sub-header">🎯 Strategic Theme Priorities</p>', unsafe_allow_html=True)
+    st.markdown('<p class="sub-header">  Strategic Theme Priorities</p>', unsafe_allow_html=True)
     
     priorities = trends['strategic_priorities']
     
@@ -297,13 +297,13 @@ if page == "📊 Overview":
             
             # Growth indicator
             if growth > 0.5:
-                indicator = "🚀 RAPIDLY GROWING"
+                indicator = "  RAPIDLY GROWING"
             elif growth > 0.2:
-                indicator = "📈 GROWING"
+                indicator = "  GROWING"
             elif growth > -0.1:
-                indicator = "➡️ STABLE"
+                indicator = "   STABLE"
             else:
-                indicator = "📉 DECLINING"
+                indicator = "  DECLINING"
             
             st.markdown(f"""
             <div class="metric-card {priority_class}">
@@ -318,7 +318,7 @@ if page == "📊 Overview":
     st.markdown("---")
     
     # Theme Distribution Chart
-    st.markdown('<p class="sub-header">📊 Research Distribution by Theme</p>', unsafe_allow_html=True)
+    st.markdown('<p class="sub-header">  Research Distribution by Theme</p>', unsafe_allow_html=True)
     
     theme_counts = papers_df['theme'].value_counts()
     theme_counts = theme_counts[theme_counts.index != 'Other']
@@ -339,7 +339,7 @@ if page == "📊 Overview":
     st.markdown("---")
     
     # Quarterly Trend
-    st.markdown('<p class="sub-header">📈 Research Output Over Time</p>', unsafe_allow_html=True)
+    st.markdown('<p class="sub-header">  Research Output Over Time</p>', unsafe_allow_html=True)
     
     quarterly = papers_df.groupby(['quarter', 'theme']).size().reset_index(name='count')
     quarterly['quarter'] = quarterly['quarter'].astype(str)
@@ -360,8 +360,8 @@ if page == "📊 Overview":
 
 # ==================== THEME ANALYSIS PAGE ====================
 
-elif page == "🎯 Theme Analysis":
-    st.markdown('<p class="main-header">🎯 Theme Analysis</p>', unsafe_allow_html=True)
+elif page == "  Theme Analysis":
+    st.markdown('<p class="main-header">  Theme Analysis</p>', unsafe_allow_html=True)
     
     # Theme selector
     theme_names = [t.replace('_', ' ').title() for t in BABCOCK_THEMES.keys()]
@@ -402,7 +402,7 @@ elif page == "🎯 Theme Analysis":
     
     with col1:
         # Temporal trend
-        st.subheader("📈 Trend Over Time")
+        st.subheader("  Trend Over Time")
         
         quarterly_theme = theme_papers.groupby('quarter').size().reset_index(name='count')
         quarterly_theme['quarter'] = quarterly_theme['quarter'].astype(str)
@@ -422,7 +422,7 @@ elif page == "🎯 Theme Analysis":
     
     with col2:
         # Top universities
-        st.subheader("🏛️ Leading Universities")
+        st.subheader("   Leading Universities")
         
         uni_counts = theme_papers['university'].value_counts().head(10)
         
@@ -442,7 +442,7 @@ elif page == "🎯 Theme Analysis":
     st.markdown("---")
     
     # Top Topics in Theme
-    st.subheader("🔍 Top Research Topics")
+    st.subheader("  Top Research Topics")
     
     topic_counts = theme_papers['topic_id'].value_counts().head(10)
     
@@ -452,13 +452,13 @@ elif page == "🎯 Theme Analysis":
             keywords = ', '.join(topic_data['keywords'][:8])
             count = topic_counts[topic_id]
             
-            with st.expander(f"📌 Topic {topic_id}: {keywords} ({count} papers)"):
+            with st.expander(f"  Topic {topic_id}: {keywords} ({count} papers)"):
                 # Show sample papers
                 topic_papers = theme_papers[theme_papers['topic_id'] == topic_id].head(5)
                 
                 for idx, paper in topic_papers.iterrows():
                     st.markdown(f"**{paper['title']}**")
-                    st.caption(f"🏛️ {paper['university']} | 📅 {paper['date'].strftime('%Y-%m-%d')}")
+                    st.caption(f"   {paper['university']} |   {paper['date'].strftime('%Y-%m-%d')}")
                     if pd.notna(paper['abstract']) and paper['abstract']:
                         st.write(paper['abstract'][:300] + "...")
                     st.markdown("---")
@@ -466,7 +466,7 @@ elif page == "🎯 Theme Analysis":
     st.markdown("---")
     
     # Recent Papers
-    st.subheader("📰 Recent Papers in This Theme")
+    st.subheader("  Recent Papers in This Theme")
     
     recent = theme_papers.nlargest(10, 'date')
     
@@ -476,10 +476,10 @@ elif page == "🎯 Theme Analysis":
             
             with col1:
                 st.markdown(f"**{paper['title']}**")
-                st.caption(f"🏛️ {paper['university']}")
+                st.caption(f"   {paper['university']}")
             
             with col2:
-                st.caption(f"📅 {paper['date'].strftime('%Y-%m-%d')}")
+                st.caption(f"  {paper['date'].strftime('%Y-%m-%d')}")
             
             if pd.notna(paper['abstract']) and paper['abstract']:
                 with st.expander("View Abstract"):
@@ -489,8 +489,8 @@ elif page == "🎯 Theme Analysis":
 
 # ==================== EMERGING TOPICS PAGE ====================
 
-elif page == "⚡ Emerging Topics":
-    st.markdown('<p class="main-header">⚡ Emerging Research Topics</p>', unsafe_allow_html=True)
+elif page == "  Emerging Topics":
+    st.markdown('<p class="main-header">  Emerging Research Topics</p>', unsafe_allow_html=True)
     
     st.markdown("""
     Topics showing **>50% growth** in recent quarters, indicating rapidly developing research areas
@@ -528,11 +528,11 @@ elif page == "⚡ Emerging Topics":
         
         # Color based on growth
         if growth > 1.5:
-            color = "🔥"
+            color = " "
         elif growth > 1.0:
-            color = "⚡"
+            color = " "
         else:
-            color = "📈"
+            color = " "
         
         with st.expander(f"{color} **#{i} - {keywords}** ({growth*100:+.0f}% growth)"):
             col1, col2, col3, col4 = st.columns(4)
@@ -560,8 +560,8 @@ elif page == "⚡ Emerging Topics":
 
 # ==================== UNIVERSITIES PAGE ====================
 
-elif page == "🏛️ Universities":
-    st.markdown('<p class="main-header">🏛️ University Analysis</p>', unsafe_allow_html=True)
+elif page == "   Universities":
+    st.markdown('<p class="main-header">   University Analysis</p>', unsafe_allow_html=True)
     
     # University rankings
     uni_counts = papers_df['university'].value_counts()
@@ -569,7 +569,7 @@ elif page == "🏛️ Universities":
     st.markdown("---")
     
     # Overall ranking
-    st.subheader("📊 Overall Research Output Rankings")
+    st.subheader("  Overall Research Output Rankings")
     
     fig = px.bar(
         x=uni_counts.head(15).values,
@@ -587,7 +587,7 @@ elif page == "🏛️ Universities":
     st.markdown("---")
     
     # University selector
-    st.subheader("🔍 University Deep Dive")
+    st.subheader("  University Deep Dive")
     
     selected_uni = st.selectbox("Select University", sorted(papers_df['university'].unique()))
     
@@ -619,7 +619,7 @@ elif page == "🏛️ Universities":
     col1, col2 = st.columns(2)
     
     with col1:
-        st.subheader("🎯 Research Themes")
+        st.subheader("  Research Themes")
         
         theme_dist = uni_papers['theme'].value_counts()
         
@@ -633,7 +633,7 @@ elif page == "🏛️ Universities":
         st.plotly_chart(fig, use_container_width=True)
     
     with col2:
-        st.subheader("📈 Output Over Time")
+        st.subheader("  Output Over Time")
         
         quarterly_uni = uni_papers.groupby('quarter').size().reset_index(name='count')
         quarterly_uni['quarter'] = quarterly_uni['quarter'].astype(str)
@@ -653,7 +653,7 @@ elif page == "🏛️ Universities":
     st.markdown("---")
     
     # Recent papers
-    st.subheader(f"📰 Recent Papers from {selected_uni}")
+    st.subheader(f"  Recent Papers from {selected_uni}")
     
     recent = uni_papers.nlargest(10, 'date')
     
@@ -662,7 +662,7 @@ elif page == "🏛️ Universities":
         
         with st.container():
             st.markdown(f"**{paper['title']}**")
-            st.caption(f"🎯 {theme} | 📅 {paper['date'].strftime('%Y-%m-%d')}")
+            st.caption(f"  {theme} |   {paper['date'].strftime('%Y-%m-%d')}")
             
             if pd.notna(paper['abstract']) and paper['abstract']:
                 with st.expander("View Abstract"):
@@ -672,8 +672,8 @@ elif page == "🏛️ Universities":
 
 # ==================== TRENDS OVER TIME PAGE ====================
 
-elif page == "📈 Trends Over Time":
-    st.markdown('<p class="main-header">📈 Temporal Trends Analysis</p>', unsafe_allow_html=True)
+elif page == "  Trends Over Time":
+    st.markdown('<p class="main-header">  Temporal Trends Analysis</p>', unsafe_allow_html=True)
     
     st.markdown("""
     Quarterly breakdown showing how research themes evolve over the 24-month analysis period.
@@ -682,7 +682,7 @@ elif page == "📈 Trends Over Time":
     st.markdown("---")
     
     # Overall trend
-    st.subheader("📊 Overall Research Activity")
+    st.subheader("  Overall Research Activity")
     
     quarterly_all = papers_df.groupby('quarter').size().reset_index(name='count')
     quarterly_all['quarter'] = quarterly_all['quarter'].astype(str)
@@ -711,7 +711,7 @@ elif page == "📈 Trends Over Time":
     st.markdown("---")
     
     # Theme-specific trends
-    st.subheader("🎯 Trends by Theme")
+    st.subheader("  Trends by Theme")
     
     # Theme selector (multi-select)
     all_themes = sorted([t.replace('_', ' ').title() for t in papers_df['theme'].unique() if t != 'Other'])
@@ -744,7 +744,7 @@ elif page == "📈 Trends Over Time":
         st.plotly_chart(fig, use_container_width=True)
         
         # Growth rates table
-        st.subheader("📊 Growth Rates by Theme")
+        st.subheader("  Growth Rates by Theme")
         
         growth_data = []
         for theme in selected_themes_raw:
@@ -761,7 +761,7 @@ elif page == "📈 Trends Over Time":
     st.markdown("---")
     
     # Heatmap
-    st.subheader("🗺️ Theme Activity Heatmap")
+    st.subheader("   Theme Activity Heatmap")
     
     pivot = papers_df.groupby(['quarter', 'theme']).size().reset_index(name='count')
     pivot['quarter'] = pivot['quarter'].astype(str)

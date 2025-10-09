@@ -78,24 +78,26 @@ class TrendAnalyzer:
         papers_df['quarter'] = pd.to_datetime(papers_df['date']).dt.to_period('Q')
         
         theme_trends = {}
+        all_themes = list(self.babcock_themes.keys())
         
-        for theme in papers_df['theme'].unique():
-            if theme == 'Uncategorized':
-                continue
-            
+        for theme in all_themes:
             theme_papers = papers_df[papers_df['theme'] == theme]
             
-            # Count papers per quarter
-            quarterly_counts = theme_papers.groupby('quarter').size()
+            if theme_papers.empty:
+                theme_trends[theme] = {
+                    'total_papers': 0,
+                    'growth_rate': 0.0,
+                    'quarterly_counts': {},
+                    'top_topics': {},
+                    'universities': {}
+                }
+                logger.info(f"  {theme}: 0 papers, +0.0% avg growth (no assignments)")
+                continue
             
-            # Calculate metrics
+            quarterly_counts = theme_papers.groupby('quarter').size()
             total_papers = len(theme_papers)
             growth_rate = self.calculate_growth_rate(quarterly_counts.tolist())
-            
-            # Identify sub-topics
             topic_counts = theme_papers['topic_id'].value_counts()
-            
-            # Top universities
             uni_counts = theme_papers['university'].value_counts()
             
             theme_trends[theme] = {

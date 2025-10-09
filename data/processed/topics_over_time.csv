@@ -1,24 +1,512 @@
 Topic,Words,Frequency,Timestamp
--1,"image, throughput, high throughput, image analysis, meeting",2,2019-12-30 11:11:02.400
-0,"training, size, compute, dataset, models",2,2019-12-30 11:11:02.400
-1,"patients, sars, cov, sars cov, recommendations",32,2019-12-30 11:11:02.400
--1,"gender, sex gender, sex, clinicians, influences",1,2020-06-02 09:36:00.000
-0,"reaction, development, reduction, known, evolution",3,2020-06-02 09:36:00.000
-1,"associated, patients, delivery, cov, sars",22,2020-06-02 09:36:00.000
-0,"act, present, assays, phenotype, good",5,2020-11-02 19:12:00.000
-1,"care, million, people, needed, needs",13,2020-11-02 19:12:00.000
--1,"public health, messages, pathogens, analyzing, apply",2,2021-04-05 04:48:00.000
-0,"models, physics, tension, large, level",4,2021-04-05 04:48:00.000
-1,"recommendations, systematic, patients, reporting, reviews",5,2021-04-05 04:48:00.000
--1,"standards, integrating, society, patterns clinical, normal range",1,2021-09-05 14:24:00.000
-1,"patients, equations, years, prevalence, efficacy",10,2021-09-05 14:24:00.000
-0,"sample, training, project, measurement, applications",3,2022-02-06 00:00:00.000
-1,"death, genome, dependent, mechanisms, cell",5,2022-02-06 00:00:00.000
--1,"standards, care, professional, promote, gender",1,2022-07-09 09:36:00.000
-0,"project, algorithms, image, physics, measurements",4,2022-07-09 09:36:00.000
-1,"individuals, long, sars cov, cov, sars",2,2022-07-09 09:36:00.000
--1,"health care, patient, care, aid, creating",1,2022-12-09 19:12:00.000
-1,"reference, increased, care, disparities, base",4,2022-12-09 19:12:00.000
-1,"pathway, resistance, cell, axis, signal",1,2023-05-12 04:48:00.000
--1,"document, basic, biology, cell, rapidly evolving",1,2023-10-12 14:24:00.000
-1,"loss, attributed, cause, prevalence, years",1,2023-10-12 14:24:00.000
+-1,"health, people, care, social, covid",223,2019-12-30 04:22:04.800
+0,"covid, sars, cov, sars cov, coronavirus",96,2019-12-30 04:22:04.800
+1,"iot, security, blockchain, network, detection",48,2019-12-30 04:22:04.800
+2,"learning, image, deep, model, segmentation",51,2019-12-30 04:22:04.800
+3,"reaction, catalysts, oxygen, metal, active",39,2019-12-30 04:22:04.800
+4,"mangrove, carbon, coral, mangroves, marine",30,2019-12-30 04:22:04.800
+5,"cancer, patients, carcinoma, breast, survival",33,2019-12-30 04:22:04.800
+6,"species, google, scholar, google scholar, scopus google",27,2019-12-30 04:22:04.800
+7,"reviews, guidance, mixed methods, design, systematic",18,2019-12-30 04:22:04.800
+8,"education, students, learning, teaching, higher education",17,2019-12-30 04:22:04.800
+9,"stroke, burden, age, risk, mortality",25,2019-12-30 04:22:04.800
+10,"physical activity, physical, activity, sedentary, children",28,2019-12-30 04:22:04.800
+11,"genome, gene, genomes, species, search papers author",20,2019-12-30 04:22:04.800
+12,"mml, binary, black, gravitational, mml mml",14,2019-12-30 04:22:04.800
+13,"customer, tourism, hospitality, consumer, satisfaction",22,2019-12-30 04:22:04.800
+14,"mental, disorders, disorder, mental health, autism",27,2019-12-30 04:22:04.800
+15,"electrolyte, batteries, ion, battery, ion batteries",19,2019-12-30 04:22:04.800
+16,"dialysis, kidney, diabetes, foot, volume",18,2019-12-30 04:22:04.800
+17,"mxene, conductivity, materials, flexible, thermal",18,2019-12-30 04:22:04.800
+18,"adoption, income, rural, feed, livestock",6,2019-12-30 04:22:04.800
+19,"brain, diffusion, cortical, signal, cognitive",9,2019-12-30 04:22:04.800
+20,"ice, sea, cmip, climate, ocean",10,2019-12-30 04:22:04.800
+21,"optimization, algorithm, feature selection, multi objective, feature",7,2019-12-30 04:22:04.800
+22,"indigenous, peoples, ori, indigenous peoples, principles",16,2019-12-30 04:22:04.800
+23,"tissue, hydrogels, wound, healing, properties",13,2019-12-30 04:22:04.800
+24,"islamic, innovation, supply, islamic banks, banks",6,2019-12-30 04:22:04.800
+25,"salt, stress, plants, tolerance, plant",11,2019-12-30 04:22:04.800
+26,"compounds, bjp, compound, natural, pharmacological",6,2019-12-30 04:22:04.800
+27,"allergy, sepsis, patients, penicillin, management",13,2019-12-30 04:22:04.800
+28,"soil, biochar, peat, soc, perennial",9,2019-12-30 04:22:04.800
+29,"pain, knee, opioid, evidence, ligands",5,2019-12-30 04:22:04.800
+30,"solar, perovskite, stability, solar cells, materials",12,2019-12-30 04:22:04.800
+31,"gut, microbiota, gut microbiota, fish, probiotics",8,2019-12-30 04:22:04.800
+32,"energy, renewable energy, renewable, emissions, economic growth",4,2019-12-30 04:22:04.800
+33,"plastic, microplastics, plastics, marine, plastic debris",2,2019-12-30 04:22:04.800
+34,"self, wellbeing, autonomy, motivation, achievement",9,2019-12-30 04:22:04.800
+35,"peg, nanoparticles, exosomes, therapeutic, exosome",7,2019-12-30 04:22:04.800
+36,"optical, nonlinear, films, integrated, resonant",11,2019-12-30 04:22:04.800
+37,"cryptocurrencies, price, bitcoin, china, news",9,2019-12-30 04:22:04.800
+38,"alloys, path, spray, planning, titanium",5,2019-12-30 04:22:04.800
+39,"solar, evaporation, energy, photothermal, refrigeration",4,2019-12-30 04:22:04.800
+40,"brain, eeg, eye, stimulation, epilepsy",7,2019-12-30 04:22:04.800
+41,"tourism, covid, industry, travel, pandemic",12,2019-12-30 04:22:04.800
+42,"cancer, cell, genome, somatic, cells",10,2019-12-30 04:22:04.800
+43,"cats, pet, smoke, predation, feral",3,2019-12-30 04:22:04.800
+44,"sleep, osa, sleep quality, poor sleep, stress",4,2019-12-30 04:22:04.800
+45,"aging, clock, muscle, mitochondrial, senescence",4,2019-12-30 04:22:04.800
+46,"gender, equality, gender equality, men, country level",5,2019-12-30 04:22:04.800
+47,"edna, fossil, variation, spatiotemporal variation, preservation",4,2019-12-30 04:22:04.800
+48,"waste, electronic, electronic devices, recycling, electronics",2,2019-12-30 04:22:04.800
+49,"sentinel, model, machine, machine learning, agb",6,2019-12-30 04:22:04.800
+50,"media, sentiment, social media, conspiracy, covid",5,2019-12-30 04:22:04.800
+52,"plate, log, tectonic, earth, silicate",5,2019-12-30 04:22:04.800
+53,"gas, hydrates, storage, hydrogen, hydrogen storage",2,2019-12-30 04:22:04.800
+54,"liver, fibrosis, nafld, liver disease, nash",6,2019-12-30 04:22:04.800
+55,"urban, urbanization, wealthy, nations, health problems",1,2019-12-30 04:22:04.800
+56,"theory, electronic structure, complexes, program, geometry",7,2019-12-30 04:22:04.800
+57,"antenatal, depression, birth, fetal, gdm",4,2019-12-30 04:22:04.800
+58,"entrepreneurship, open innovation, innovation, culture, dynamics",3,2019-12-30 04:22:04.800
+-1,"health, care, plant, covid, risk",162,2020-06-30 19:12:00.000
+0,"covid, cov, sars, sars cov, pandemic",108,2020-06-30 19:12:00.000
+1,"iot, security, smart, learning, detection",37,2020-06-30 19:12:00.000
+2,"learning, deep, deep learning, detection, model",13,2020-06-30 19:12:00.000
+3,"reaction, metal, catalysts, oxygen, reduction",22,2020-06-30 19:12:00.000
+4,"marine, ocean, carbon, coral, mangroves",16,2020-06-30 19:12:00.000
+5,"cancer, patients, survival, treatment, year",25,2020-06-30 19:12:00.000
+6,"species, conservation, biodiversity, native, non native",18,2020-06-30 19:12:00.000
+7,"police, officers, reporting, arrive, reviews",28,2020-06-30 19:12:00.000
+8,"teaching, learning, online, students, education",11,2020-06-30 19:12:00.000
+9,"cardiovascular, stroke, million, risk, burden",18,2020-06-30 19:12:00.000
+10,"physical activity, physical, sedentary, activity, sedentary behaviour",16,2020-06-30 19:12:00.000
+11,"search papers author, papers author, search papers, author, papers",13,2020-06-30 19:12:00.000
+12,"mml, mml mml, gravitational, binary, black",12,2020-06-30 19:12:00.000
+13,"tourist, islamic, tourism, avs, financial performance",8,2020-06-30 19:12:00.000
+14,"autism, disorders, disorder, gaming, depression",9,2020-06-30 19:12:00.000
+15,"batteries, electrolyte, ion, ion batteries, anode",15,2020-06-30 19:12:00.000
+16,"ckd, diabetes, disease, kidney, cardiovascular",14,2020-06-30 19:12:00.000
+17,"flexible, thermal, materials, wearable, devices",8,2020-06-30 19:12:00.000
+18,"farm, income, household, irrigation, adoption",9,2020-06-30 19:12:00.000
+19,"brain, disease, cortical, parkinson disease, parkinson",12,2020-06-30 19:12:00.000
+20,"ice, climate, ocean, sheet, global",17,2020-06-30 19:12:00.000
+21,"feature selection, selection, feature, algorithm, proposed",3,2020-06-30 19:12:00.000
+22,"indigenous, rights, peoples, laws, indigenous peoples",11,2020-06-30 19:12:00.000
+23,"fibre, fibres, drug, cnps, properties",10,2020-06-30 19:12:00.000
+24,"csr, innovation, sustainable, multi stakeholder, partnerships",7,2020-06-30 19:12:00.000
+25,"plant, wheat, breeding, crop, genome",10,2020-06-30 19:12:00.000
+26,"peel, proteins, protein, phenolic, antioxidant",6,2020-06-30 19:12:00.000
+27,"asthma, patients, icu, pressure injuries, pylori",8,2020-06-30 19:12:00.000
+28,"soil, som, carbon, denitrification, soils",5,2020-06-30 19:12:00.000
+29,"pain, diagnostic imaging, low pain, cannabinoids, imaging",4,2020-06-30 19:12:00.000
+30,"perovskite, perovskites, stacking, solar cells, graphene",4,2020-06-30 19:12:00.000
+31,"microbiota, gut, probiotics, inflammatory, fish",9,2020-06-30 19:12:00.000
+32,"china, emissions, environmental governance, governance, environmental",2,2020-06-30 19:12:00.000
+33,"plastic, microplastics, plastics, microplastic, mps",7,2020-06-30 19:12:00.000
+34,"achievement, emotions, test performance, test, enjoyment",2,2020-06-30 19:12:00.000
+35,"nanoparticles, core shell, shell, antiviral, exosomes",7,2020-06-30 19:12:00.000
+36,"optical, photonic, integrated, films, wavelengths",7,2020-06-30 19:12:00.000
+37,"volatility, markets, chinese, price, market",9,2020-06-30 19:12:00.000
+38,"alloys, steels, titanium, wear, coatings",6,2020-06-30 19:12:00.000
+40,"vision, impairment, million, blindness, eye",4,2020-06-30 19:12:00.000
+41,"tourism, cruise, covid, hospitality, crisis",8,2020-06-30 19:12:00.000
+42,"human, genome, chromosome, complete, telomere",3,2020-06-30 19:12:00.000
+43,"wildfires, ecosystems, review changes, mental health effects, biodiversity natural",2,2020-06-30 19:12:00.000
+44,"sleep, gaba, whoop, stress, stress sleep",3,2020-06-30 19:12:00.000
+46,"cultural, color, gender, cross cultural, emotion",3,2020-06-30 19:12:00.000
+47,"cave, thousand, plateau, sediment, modern",1,2020-06-30 19:12:00.000
+48,"waste, torrefaction, pyrolysis, recycling, glass",4,2020-06-30 19:12:00.000
+49,"bootstrap, brt, auc, optimism, svm",1,2020-06-30 19:12:00.000
+50,"conspiracy, conspiracy theories, stigma, misinformation, covid",3,2020-06-30 19:12:00.000
+51,"biodiesel, cfp, fuel, cold, diesel",1,2020-06-30 19:12:00.000
+52,"crust, spreading, curve, calibration, age",6,2020-06-30 19:12:00.000
+53,"hydrogen, storage, hydrogen economy, wettability, storage hydrogen",2,2020-06-30 19:12:00.000
+54,"hcc, nafld, liver, fibrosis, cohort",3,2020-06-30 19:12:00.000
+55,"green, street, urban, cities, landscape",3,2020-06-30 19:12:00.000
+56,"structure, pyridine, electron, cross sections, software",3,2020-06-30 19:12:00.000
+57,"fetal, placental, growth, maternal, perinatal",3,2020-06-30 19:12:00.000
+58,"entrepreneurship, crisis, entrepreneurs, covid crisis, covid",4,2020-06-30 19:12:00.000
+-1,"health, covid, change, global, climate",168,2020-12-29 14:24:00.000
+0,"covid, cov, sars, sars cov, vaccine",65,2020-12-29 14:24:00.000
+1,"iot, security, smart, learning, network",36,2020-12-29 14:24:00.000
+2,"learning, image, deep, images, deep learning",37,2020-12-29 14:24:00.000
+3,"reaction, catalysts, metal, oxygen, electrocatalysts",37,2020-12-29 14:24:00.000
+4,"coral, carbon, marine, coastal, ocean",29,2020-12-29 14:24:00.000
+5,"cancer, patients, chemotherapy, cell, renal",17,2020-12-29 14:24:00.000
+6,"species, diversity, genetic, genetic diversity, hydraulic",14,2020-12-29 14:24:00.000
+7,"reporting, reviews, systematic, prisma, systematic reviews",17,2020-12-29 14:24:00.000
+8,"education, learning, students, student, teaching",14,2020-12-29 14:24:00.000
+9,"stroke, osteoporosis, countries, income countries, cvd risk",5,2020-12-29 14:24:00.000
+10,"physical, physical activity, activity, sport, athletes",8,2020-12-29 14:24:00.000
+11,"genomes, genome, netherlands, leaves, papers author",16,2020-12-29 14:24:00.000
+12,"mml, gravitational, binary, mass, mml mml",16,2020-12-29 14:24:00.000
+13,"advertising, marketing, tourism, leadership, destination",17,2020-12-29 14:24:00.000
+14,"disorders, mental, mental health, health, depression",17,2020-12-29 14:24:00.000
+15,"batteries, battery, electrolyte, ion, ion batteries",10,2020-12-29 14:24:00.000
+16,"diabetes, mmol, glucose, type diabetes, kidney",4,2020-12-29 14:24:00.000
+17,"flexible, sensor, materials, microstructure, mxene",12,2020-12-29 14:24:00.000
+18,"farm, rural, methane, financial, emissions",9,2020-12-29 14:24:00.000
+19,"cortex, brain, cortical, disease, medial",11,2020-12-29 14:24:00.000
+20,"mml, mml mml, mrow mml, mml mrow mml, mml mrow",12,2020-12-29 14:24:00.000
+21,"algorithm, optimization, problems, shapley, proposed",8,2020-12-29 14:24:00.000
+22,"indigenous, peoples, indigenous peoples, global south, global north",13,2020-12-29 14:24:00.000
+23,"wound, bone, tissue, healing, printing",11,2020-12-29 14:24:00.000
+24,"supply, supply chain, chain, firms, digital transformation",9,2020-12-29 14:24:00.000
+25,"google scholar, crossref, scholar, google, scopus google scholar",5,2020-12-29 14:24:00.000
+26,"food, protein, meat, camel, proteins",7,2020-12-29 14:24:00.000
+27,"intubation, allergy, bronchiectasis, eaaci, patients",4,2020-12-29 14:24:00.000
+28,"soil, biochar, nitrate, soil erosion, microbial",7,2020-12-29 14:24:00.000
+29,"pain, criteria, knee, hypersensitivity, clinical",7,2020-12-29 14:24:00.000
+30,"perovskite, solar, oxide, solar cells, perovskites",8,2020-12-29 14:24:00.000
+31,"copd, microbiota, gut, gut microbiota, dietary",5,2020-12-29 14:24:00.000
+32,"cdr, policy, energy, emission, energy consumption",2,2020-12-29 14:24:00.000
+33,"plastic, plastics, microplastics, additives, marine",6,2020-12-29 14:24:00.000
+34,"motivation, autonomy, autonomy supportive, sdt, supportive",6,2020-12-29 14:24:00.000
+35,"evs, derived evs, milk, extracellular vesicles, derived",2,2020-12-29 14:24:00.000
+36,"optical, dual channel, equalization, operate, channel",1,2020-12-29 14:24:00.000
+37,"trading, cryptocurrency, price, liquidity, market",2,2020-12-29 14:24:00.000
+38,"wear, alloys, solution, metal, produced",4,2020-12-29 14:24:00.000
+39,"evaporation, solar, energy, steam, desalination",6,2020-12-29 14:24:00.000
+40,"eye, bursts, vision, health, eeg",6,2020-12-29 14:24:00.000
+41,"tourism, protected, protected area, businesses, area",1,2020-12-29 14:24:00.000
+42,"fetal, skin, atopic, immune, cells",2,2020-12-29 14:24:00.000
+43,"fires, fragmentation, species, australia, severity",5,2020-12-29 14:24:00.000
+44,"sleep, osa, stress, night, sleep deprivation",4,2020-12-29 14:24:00.000
+45,"mitochondrial, ink, aging, cell, tissue",2,2020-12-29 14:24:00.000
+46,"climate, gender, mental, visits, eco",5,2020-12-29 14:24:00.000
+47,"figurative, cave, pig, earliest, years ago",1,2020-12-29 14:24:00.000
+48,"waste, recycling, waste recycling, process, battery recycling",3,2020-12-29 14:24:00.000
+49,"processors, aquatic, atmospheric, coastal, correction",1,2020-12-29 14:24:00.000
+50,"media, covid, conspiracy, misinformation, social media",9,2020-12-29 14:24:00.000
+52,"carbonate, isotope, interlaboratory, reference materials, standards",2,2020-12-29 14:24:00.000
+53,"shale, wettability, hydrogen, contact angle, angle",2,2020-12-29 14:24:00.000
+54,"liver, fibrosis, nafld, cut, liver disease",2,2020-12-29 14:24:00.000
+55,"urban, nature, cities, urban nature, health",2,2020-12-29 14:24:00.000
+56,"crystal, visualization, program, calculate, intermolecular interactions",1,2020-12-29 14:24:00.000
+57,"fetal, placental, maternal, sga, weight",2,2020-12-29 14:24:00.000
+58,"entrepreneurs, entrepreneurship, smes, crisis, entrepreneurial",5,2020-12-29 14:24:00.000
+-1,"health, low, countries, global, human",96,2021-06-29 09:36:00.000
+0,"covid, vaccine, sars, cov, sars cov",47,2021-06-29 09:36:00.000
+1,"iot, smart, learning, systems, privacy",18,2021-06-29 09:36:00.000
+2,"learning, deep, deep learning, model, cnn",17,2021-06-29 09:36:00.000
+3,"catalysts, reaction, catalyst, oer, active",16,2021-06-29 09:36:00.000
+4,"marine, corals, coastal, ecosystems, species",15,2021-06-29 09:36:00.000
+5,"cancer, patients, plus, cell, immune",16,2021-06-29 09:36:00.000
+6,"species, root, traits, plant, conservation",16,2021-06-29 09:36:00.000
+7,"reviews, scoping, reporting, prisma, rural",10,2021-06-29 09:36:00.000
+8,"cheating, contract, students, teaching, education",4,2021-06-29 09:36:00.000
+9,"stroke, countries, income, hypertension, sarcopenia",10,2021-06-29 09:36:00.000
+10,"athletes, training, physical, physical activity, exercise",6,2021-06-29 09:36:00.000
+11,"genomes, nov, gen, leaves, genome",13,2021-06-29 09:36:00.000
+12,"mml, mml mml, mrow, mml mml mml, gravitational",8,2021-06-29 09:36:00.000
+13,"tourism, hospitality, emotion, destination, hospitality tourism",10,2021-06-29 09:36:00.000
+14,"asd, autism, mental, disorders, children",12,2021-06-29 09:36:00.000
+15,"electrolyte, batteries, ion, ion batteries, cathode",9,2021-06-29 09:36:00.000
+16,"equations, kidney, creatinine, blacks, race",7,2021-06-29 09:36:00.000
+17,"flexible, films, mxene, conductive, thermal",6,2021-06-29 09:36:00.000
+18,"livestock, meat, farmers, emissions, agricultural",10,2021-06-29 09:36:00.000
+19,"tau, parkinson, parkinson disease, disease, brain",8,2021-06-29 09:36:00.000
+20,"decadal, edition, tropical pacific, time scales, pacific",2,2021-06-29 09:36:00.000
+21,"optimization, algorithm, problems, algorithms, proposed",9,2021-06-29 09:36:00.000
+22,"indigenous, racism, peoples, communities, indigenous peoples",6,2021-06-29 09:36:00.000
+23,"diabetic, wound, healing, fabrication, notch",5,2021-06-29 09:36:00.000
+24,"innovation, supply, industry, esg, supply chain",9,2021-06-29 09:36:00.000
+25,"breeding, plant, crop, google scholar, scopus google scholar",6,2021-06-29 09:36:00.000
+26,"proteins, extraction, digestibility, compounds, processing",12,2021-06-29 09:36:00.000
+27,"sepsis, guidelines, shock, septic shock, septic",6,2021-06-29 09:36:00.000
+28,"soil, biochar, soils, microbial, biochars",5,2021-06-29 09:36:00.000
+29,"pain, cannabis, msp, evidence, suffering",6,2021-06-29 09:36:00.000
+30,"dots, carbon dots, quantum dots, carbon, synthesis",4,2021-06-29 09:36:00.000
+31,"gut, microbiota, fish, broiler, gut health",6,2021-06-29 09:36:00.000
+32,"energy transition, energy, net zero, transition, zero",4,2021-06-29 09:36:00.000
+33,"plastic, plastics, evolutionary ecological, evolutionary, plastic pollution",2,2021-06-29 09:36:00.000
+34,"motivation, achievement, students, emotions, enjoyment",6,2021-06-29 09:36:00.000
+35,"evs, nanoparticles, lipid, delivery, vesicles",4,2021-06-29 09:36:00.000
+36,"optical, quantum, photonic, hilbert, integrated",3,2021-06-29 09:36:00.000
+37,"inflation, forward, expectations, cryptocurrency, prices",1,2021-06-29 09:36:00.000
+38,"machining, amed, titanium, alloys, manifold",2,2021-06-29 09:36:00.000
+39,"evaporation, solar, water, thermal, desalination",3,2021-06-29 09:36:00.000
+40,"svs, myopia, axial, children, treatment",1,2021-06-29 09:36:00.000
+41,"tourism, food drink, drink, food, tourism future",1,2021-06-29 09:36:00.000
+42,"cell, intestinal, cells, anatomical regions, intestinal tract",1,2021-06-29 09:36:00.000
+43,"wildfire, fires, regimes, species, climate",5,2021-06-29 09:36:00.000
+44,"sleep, stress, osa, sleep duration, night",3,2021-06-29 09:36:00.000
+45,"aging, anti, nicotinamide, safety concerns, supplementation",1,2021-06-29 09:36:00.000
+46,"climate, eco, anxiety, climate change, action",3,2021-06-29 09:36:00.000
+47,"islands, horses, insular, island, modern",2,2021-06-29 09:36:00.000
+48,"waste, recycling, concrete, material, based concrete",5,2021-06-29 09:36:00.000
+49,"fruit, machine vision, tree, sampling strategies, load",1,2021-06-29 09:36:00.000
+50,"twitter, public health, public, illnesses, messages",1,2021-06-29 09:36:00.000
+51,"fuel, hydrogen, engines, using hydrogen, ignition",1,2021-06-29 09:36:00.000
+52,"crust, bounds, kilometers, thickness, lunar",3,2021-06-29 09:36:00.000
+53,"storage, formations, hydrogen, geological, wettability",5,2021-06-29 09:36:00.000
+54,"hcc, liver, patients hcc, patients, liver disease",3,2021-06-29 09:36:00.000
+55,"cities, greenspace, qualities, urban, inequality",2,2021-06-29 09:36:00.000
+56,"chem, suite, software, novel variants, major release",1,2021-06-29 09:36:00.000
+57,"fetal, social support, low social support, low social, bpd",3,2021-06-29 09:36:00.000
+-1,"climate, health, global, change, evidence",95,2021-12-28 04:48:00.000
+0,"covid, sars, cov, vaccine, sars cov",21,2021-12-28 04:48:00.000
+1,"iot, learning, smart, network, things",26,2021-12-28 04:48:00.000
+2,"learning, model, deep, deep learning, transformer",27,2021-12-28 04:48:00.000
+3,"reaction, catalysts, hydrogen, sites, oxygen",24,2021-12-28 04:48:00.000
+4,"carbon, coral, marine, coastal, ocean",16,2021-12-28 04:48:00.000
+5,"cancer, patients, survival, melanoma, months",16,2021-12-28 04:48:00.000
+6,"species, biodiversity, tree, decay, genetic",12,2021-12-28 04:48:00.000
+7,"reviews, scoping, scoping reviews, care, reporting",15,2021-12-28 04:48:00.000
+8,"education, learning, educational, students, higher education",11,2021-12-28 04:48:00.000
+9,"stroke, risk, cardiovascular, patients, sarcopenia",19,2021-12-28 04:48:00.000
+10,"sport, physical activity, guidelines, acl, physical",10,2021-12-28 04:48:00.000
+11,"read, soil, args, defence, biome",10,2021-12-28 04:48:00.000
+12,"mml, mml mml, mrow, mml mrow mml, mml mrow",4,2021-12-28 04:48:00.000
+13,"consumers, tourism, tourist, customer, influencers",10,2021-12-28 04:48:00.000
+14,"disorders, mental, face, disorder, telehealth",4,2021-12-28 04:48:00.000
+15,"battery, batteries, electrolyte, anodes, anode",6,2021-12-28 04:48:00.000
+16,"diabetes, kidney, glucose, gdm, ckd",10,2021-12-28 04:48:00.000
+17,"materials, flame, electrospinning, flexible, microstructures",8,2021-12-28 04:48:00.000
+18,"food, farming, mechanized, entrepreneurship, adoption",8,2021-12-28 04:48:00.000
+19,"brain, migraine, disease, cortical, tms",9,2021-12-28 04:48:00.000
+20,"ice, ocean, arctic, climate, sea",6,2021-12-28 04:48:00.000
+21,"algorithm, optimization, algorithms, problems, feature",12,2021-12-28 04:48:00.000
+22,"indigenous, peoples, sovereignty, indigenous peoples, rights",3,2021-12-28 04:48:00.000
+23,"wound, tissue, bone, printing, collagen",5,2021-12-28 04:48:00.000
+24,"supply, sustainability, supply chain, sustainable, innovation",14,2021-12-28 04:48:00.000
+25,"plant, plants, breeding, crop, stress",9,2021-12-28 04:48:00.000
+26,"extraction, eos, protein, proteins, food",5,2021-12-28 04:48:00.000
+27,"therapy, oxygen, conventional, proteins, hypoxemic",4,2021-12-28 04:48:00.000
+28,"soil, soils, biochar, sequestration, organic",4,2021-12-28 04:48:00.000
+29,"pain, opioid, lbp, labels, cannabinoids",4,2021-12-28 04:48:00.000
+30,"nio, perovskite, cds, hole, solar",4,2021-12-28 04:48:00.000
+31,"probiotics, gut, microbiota, gut microbiota, drying",4,2021-12-28 04:48:00.000
+32,"energy, emissions, renewable energy, renewable, carbon",7,2021-12-28 04:48:00.000
+33,"plastic, microplastics, mps, plastics, plastic debris",5,2021-12-28 04:48:00.000
+34,"pbc, intention, behavior, moderation, health behavior",1,2021-12-28 04:48:00.000
+35,"dex, diseases, nanoparticles, afterglow, review provides",3,2021-12-28 04:48:00.000
+36,"magnonics, computing, spin, sections, phenomena",1,2021-12-28 04:48:00.000
+37,"retailers, cryptocurrency, cryptocurrencies, economy, adopt",3,2021-12-28 04:48:00.000
+38,"parts, reconstruction, parent, alloys, variant analysis",2,2021-12-28 04:48:00.000
+39,"photovoltaic, solar, thermal, evaporation, energy",2,2021-12-28 04:48:00.000
+40,"epilepsy, syndromes, erg, syndrome, eeg",5,2021-12-28 04:48:00.000
+41,"tourism, antarctic, impacts, antarctica, environmental impacts",1,2021-12-28 04:48:00.000
+42,"tlr, cell, cells, genome, human",5,2021-12-28 04:48:00.000
+43,"prey, predator, fires, severity, predation",3,2021-12-28 04:48:00.000
+45,"mitochondrial, nlrp, drp, nlrp inflammasome, inflammasome",5,2021-12-28 04:48:00.000
+46,"gender, medical, medical research, female, gap",1,2021-12-28 04:48:00.000
+47,"cambrian, bace, ediacaran, boundary, dating",3,2021-12-28 04:48:00.000
+48,"waste, legislation, recycling, worth, billion",2,2021-12-28 04:48:00.000
+49,"water, water quality, maize, lai, water environment",5,2021-12-28 04:48:00.000
+51,"hydrogen, combustion, fuel, energy, aviation",5,2021-12-28 04:48:00.000
+52,"waves, explosion, ground, atmospheric, produced",1,2021-12-28 04:48:00.000
+53,"storage, sealing, hydrogen, bet, wettability",4,2021-12-28 04:48:00.000
+55,"urban, cities, transport, urban design, indicators",7,2021-12-28 04:48:00.000
+56,"dft, scientists, informally, individual contributions, bibliography",1,2021-12-28 04:48:00.000
+57,"fetal, normal, scan, trimester, ultrasound",2,2021-12-28 04:48:00.000
+58,"agility, entrepreneurs, wellbeing, adversity, planning",1,2021-12-28 04:48:00.000
+-1,"health, eating, models, energy, control",63,2022-06-28 00:00:00.000
+0,"covid, cov, sars cov, sars, tuberculosis",12,2022-06-28 00:00:00.000
+1,"iot, blockchain, smart, devices, cities",11,2022-06-28 00:00:00.000
+2,"monkeypox, proposed, proposed approach, learning, images",7,2022-06-28 00:00:00.000
+3,"urea, catalysts, reaction, sites, catalyst",10,2022-06-28 00:00:00.000
+4,"mangrove, coral, marine, coastal, restoration",11,2022-06-28 00:00:00.000
+5,"patients, cell, cancer, plus, tumour",10,2022-06-28 00:00:00.000
+6,"ecosystem, species, dung, restoration, biodiversity",12,2022-06-28 00:00:00.000
+7,"items, reporting, jbi, checklist, scoping",7,2022-06-28 00:00:00.000
+8,"students, ethical, creativity, education, learning",3,2022-06-28 00:00:00.000
+9,"sarcopenia, stroke, mortality, enoxaparin, countries",7,2022-06-28 00:00:00.000
+10,"strength, activity, physical, muscle, sports",5,2022-06-28 00:00:00.000
+11,"database, species, bacterial, args, communities",9,2022-06-28 00:00:00.000
+12,"mml, mml mml, black, mass, mrow",16,2022-06-28 00:00:00.000
+13,"hospitality, message, marketing, smart, employee",7,2022-06-28 00:00:00.000
+14,"autism, language, crossref, scopus google scholar, scopus google",5,2022-06-28 00:00:00.000
+15,"aqueous, electrolyte, ion, batteries, anodes",4,2022-06-28 00:00:00.000
+16,"diabetes, hba, glucose, glycemic, target",10,2022-06-28 00:00:00.000
+17,"materials, high temperature, mxene, piezoelectric, dielectric",5,2022-06-28 00:00:00.000
+18,"household, ict, rural, ict adoption, welfare",4,2022-06-28 00:00:00.000
+19,"tau, brain, parkinson disease, parkinson, points",8,2022-06-28 00:00:00.000
+20,"dust, global, climate, ice, ocean",3,2022-06-28 00:00:00.000
+21,"optimization, algorithm, algorithms, problems, proposed",5,2022-06-28 00:00:00.000
+22,"nations, nations australians, australians, african, black",3,2022-06-28 00:00:00.000
+23,"wound, healing, wound healing, hydrogels, bone",5,2022-06-28 00:00:00.000
+24,"industry, sustainability, sustainable development, sustainable, reporting",3,2022-06-28 00:00:00.000
+25,"plant, plants, breeding, stress, salinity",9,2022-06-28 00:00:00.000
+26,"protein, digestibility, keratin, antioxidant, wool",4,2022-06-28 00:00:00.000
+27,"ibd, stage, hospitalization, pylori, hospital",3,2022-06-28 00:00:00.000
+28,"soil, biochar, microbial, organic pollutants, soc",3,2022-06-28 00:00:00.000
+29,"pain, randomized, group, weeks, sham",1,2022-06-28 00:00:00.000
+30,"exciton, charge, diffusion, energy transfer, oscs",1,2022-06-28 00:00:00.000
+31,"tlr, signalling, tlr tlr, immunomodulatory, gut",1,2022-06-28 00:00:00.000
+32,"emissions, energy, ict, geothermal, emissions greenhouse gas",4,2022-06-28 00:00:00.000
+33,"gal, plastic, endemic, species, anthropogenic stressors",1,2022-06-28 00:00:00.000
+34,"emotions, achievement, taxonomy, sdt, self",2,2022-06-28 00:00:00.000
+35,"mir, exosomes, ultracentrifugation, apoptosis, rat",2,2022-06-28 00:00:00.000
+36,"optical, chiral, states, nonlinear, quantum",4,2022-06-28 00:00:00.000
+37,"markets, stock, commodities, stock markets, cryptocurrencies",3,2022-06-28 00:00:00.000
+38,"thermal, corrosion, materials, gives overview, thermal cycling",1,2022-06-28 00:00:00.000
+39,"evaporation, heat, pump, high temperature, temperature",2,2022-06-28 00:00:00.000
+42,"cell type, cell, propeller, type, proportions",1,2022-06-28 00:00:00.000
+44,"sleep, categorisation, osa, devices, garmin",2,2022-06-28 00:00:00.000
+45,"mitochondrial, senescence, dysfunction, ageing, aging",3,2022-06-28 00:00:00.000
+46,"climate, youth, anxiety, climate change, gender",2,2022-06-28 00:00:00.000
+47,"neolithic, island, years ago, ago, earliest",3,2022-06-28 00:00:00.000
+49,"uncertainty, bnns, uncertainty estimate, lakes, sentinel",1,2022-06-28 00:00:00.000
+53,"storage, geological, wettability, storage capacity, hydrogen",1,2022-06-28 00:00:00.000
+57,"birth, prevalence, hics, births, perinatal",1,2022-06-28 00:00:00.000
+58,"smes, business, threats opportunities, opportunity, high tech",1,2022-06-28 00:00:00.000
+-1,"care, health, climate, literature, language",88,2022-12-26 19:12:00.000
+0,"vaccine, covid, vaccination, infection, bias",8,2022-12-26 19:12:00.000
+1,"smart, iot, technologies, smart cities, learning",16,2022-12-26 19:12:00.000
+2,"learning, model, models, machine, machine learning",20,2022-12-26 19:12:00.000
+3,"reaction, oxygen, photocatalytic, cofs, stability",10,2022-12-26 19:12:00.000
+4,"coral, reef, reefs, species, carbon",18,2022-12-26 19:12:00.000
+5,"cancer, patients, cell, survival, months",8,2022-12-26 19:12:00.000
+6,"species, forests, conservation, forest, nature",9,2022-12-26 19:12:00.000
+7,"reviews, par, reporting, systematic, patient",12,2022-12-26 19:12:00.000
+8,"chatgpt, education, learning, students, generative",19,2022-12-26 19:12:00.000
+9,"fractures, hip, cardiovascular, osteoporosis, stroke",8,2022-12-26 19:12:00.000
+10,"physical, physical activity, athletes, exercise, activity",11,2022-12-26 19:12:00.000
+11,"arg, fixing, eukaryotes, copy, gene",3,2022-12-26 19:12:00.000
+12,"mrow, mrow mrow, math, mtext, mml",7,2022-12-26 19:12:00.000
+13,"mhealth, utaut, acceptance, kong, hong kong",2,2022-12-26 19:12:00.000
+14,"cyp, meditation, chatbot, mindfulness, serotonin",4,2022-12-26 19:12:00.000
+15,"batteries, electrolyte, ion, anode, ion batteries",10,2022-12-26 19:12:00.000
+16,"foot, diabetes, ckd, guideline, recommendations",2,2022-12-26 19:12:00.000
+17,"materials, flexible, applications, energy harvesting, harvesting",5,2022-12-26 19:12:00.000
+18,"rice, farmers, food, farming, caps",6,2022-12-26 19:12:00.000
+20,"ice, extremes, climate, summer, radiation",4,2022-12-26 19:12:00.000
+21,"optimization, problems, algorithm, pso, algorithms",4,2022-12-26 19:12:00.000
+22,"settlement, refugee, culture, cultural, foods",1,2022-12-26 19:12:00.000
+23,"pla, biocomposites, printing, biopolymers, tissue",5,2022-12-26 19:12:00.000
+24,"agility, supply, industry, supply chain, innovation",4,2022-12-26 19:12:00.000
+25,"crop, abiotic, plant, stress, pangenome",4,2022-12-26 19:12:00.000
+26,"compounds, tea, phenolic, scg, oil",7,2022-12-26 19:12:00.000
+27,"allergy, cross, cross reactivity, reactivity, allergens",6,2022-12-26 19:12:00.000
+28,"biochar, soil, tillage, soils, microbial",8,2022-12-26 19:12:00.000
+29,"pain, rotator, cuff, acl, medicines",5,2022-12-26 19:12:00.000
+30,"cds, synthesis, applications, properties, cnps",4,2022-12-26 19:12:00.000
+31,"pathogens, poultry, respiratory pathogens, respiratory, avian",1,2022-12-26 19:12:00.000
+32,"environmental degradation, economic growth, degradation, economic, growth",1,2022-12-26 19:12:00.000
+33,"plastic, plastics, microplastics, pollution, chemicals",4,2022-12-26 19:12:00.000
+34,"teachers, wellbeing, sdt, behaviors, motivation",3,2022-12-26 19:12:00.000
+35,"breast, nanoparticles, breast cancer, oscillations, light",2,2022-12-26 19:12:00.000
+36,"optics, optical, nonlinear, wave, applications",2,2022-12-26 19:12:00.000
+38,"melt, pool, process, remote, alloys",2,2022-12-26 19:12:00.000
+39,"solar, evaporation, pyramid, energy, water",4,2022-12-26 19:12:00.000
+41,"tourism, climate, content, impacts, assessments",1,2022-12-26 19:12:00.000
+42,"maturation, involves complex, long term impacts, play decisive, cytoplasm",1,2022-12-26 19:12:00.000
+43,"regeneration, severity, high severity, climate, seed",1,2022-12-26 19:12:00.000
+44,"sleep, stress, hrv, caffeine, heart rate",4,2022-12-26 19:12:00.000
+45,"aging, taurine, mitochondrial, epigenetic, muscle",3,2022-12-26 19:12:00.000
+47,"tpl, sapiens, kyr, asia, dating",1,2022-12-26 19:12:00.000
+48,"waste, logistics, reverse, concrete, leachate",3,2022-12-26 19:12:00.000
+49,"irrigation, water quality, water, hco, svm",2,2022-12-26 19:12:00.000
+51,"fuel, hydrogen, combustion, ammonia, ppo",7,2022-12-26 19:12:00.000
+53,"gas, storage, hydrogen, reservoirs, depleted",2,2022-12-26 19:12:00.000
+54,"hepatitis, liver, liver disease, google scholar, google",2,2022-12-26 19:12:00.000
+55,"urban, green, urban areas, density, green spaces",1,2022-12-26 19:12:00.000
+56,"suite, programs, graphical, interfaces, software",1,2022-12-26 19:12:00.000
+58,"interdisciplinary, game, entrepreneurs, dialogue, ideas",1,2022-12-26 19:12:00.000
+-1,"evidence, concise, health, succession, development",53,2023-06-26 14:24:00.000
+0,"hla, surveillance, cov, disease, incidence",6,2023-06-26 14:24:00.000
+1,"industry, smart, privacy, food industry, security",5,2023-06-26 14:24:00.000
+2,"learning, cnn, deep, models, medical",6,2023-06-26 14:24:00.000
+3,"oxygen, reaction, seawater, catalysts, nonradical",5,2023-06-26 14:24:00.000
+4,"carbon, ocean, ecosystems, groundwater, coastal",8,2023-06-26 14:24:00.000
+5,"cancer, pam, cancer survivors, survivors, signaling",3,2023-06-26 14:24:00.000
+6,"diversity, species, beta, beta diversity, assemblage",6,2023-06-26 14:24:00.000
+7,"moral, reporting, ethical, factorial, courage",5,2023-06-26 14:24:00.000
+8,"chatgpt, education, students, learning, student",10,2023-06-26 14:24:00.000
+9,"blood pressure, blood, aro, pressure, frailty",5,2023-06-26 14:24:00.000
+10,"menstrual, phases, performance, articles, ebsco",4,2023-06-26 14:24:00.000
+11,"dead, gen, nov, soil, leaves",1,2023-06-26 14:24:00.000
+12,"mml, mml mml, mml mml mml, mrow, mml mrow",7,2023-06-26 14:24:00.000
+13,"tourists, intentions, destination, marketing, digital marketing",4,2023-06-26 14:24:00.000
+14,"substance use, substance, peer influence, effect, treatment",4,2023-06-26 14:24:00.000
+15,"batteries, ion, ion batteries, energy, safety",2,2023-06-26 14:24:00.000
+16,"aki, fgf, consensus, consensus reached, creatinine",3,2023-06-26 14:24:00.000
+17,"mxene, foam, emi, aerogels, nanocomposites",2,2023-06-26 14:24:00.000
+18,"rural, agricultural, farmers, farm, financial",5,2023-06-26 14:24:00.000
+19,"proteins, tau, pathology, years onset, plaques",1,2023-06-26 14:24:00.000
+20,"ice, methane, sea, atmospheric, sea ice",4,2023-06-26 14:24:00.000
+21,"gwo, multiobjective, feature selection, goa, feature",3,2023-06-26 14:24:00.000
+22,"futures, indigenous, indigenous peoples, peoples, thinking",2,2023-06-26 14:24:00.000
+23,"fibre, resin, composites, printing, elevated temperatures",2,2023-06-26 14:24:00.000
+24,"sustainable manufacturing, sustainable, industry, manufacturing, strategic",1,2023-06-26 14:24:00.000
+25,"tre, stress, stress tolerance, tolerance, plant",2,2023-06-26 14:24:00.000
+26,"polyphenols, bioavailability, conjugation, milk, proteins",2,2023-06-26 14:24:00.000
+27,"penicillin, remission, allergy, oral, asthma",3,2023-06-26 14:24:00.000
+28,"soc, biochar, sequestration, soil, arid",3,2023-06-26 14:24:00.000
+29,"pain, knee, cannabis, grade, cannabinoids",3,2023-06-26 14:24:00.000
+32,"energy, renewable, renewable energy, energy consumption, consumption",3,2023-06-26 14:24:00.000
+33,"mps, plastic, plastics, exposure risk, microplastics",3,2023-06-26 14:24:00.000
+35,"therapeutic, lipid, nanoparticles, therapeutic potential, nanomaterials",1,2023-06-26 14:24:00.000
+37,"spillovers, commodities, volatility, markets, argentina",1,2023-06-26 14:24:00.000
+38,"alloys, surface engineering, surface, mechanical, properties",3,2023-06-26 14:24:00.000
+39,"solar, energy, solar energy, evaporation, storage",1,2023-06-26 14:24:00.000
+43,"weather events, contaminants, weather, extreme weather events, climate change",1,2023-06-26 14:24:00.000
+44,"sleep, hypoxia, sleep health, wearable, health",3,2023-06-26 14:24:00.000
+45,"mitochondrial, mitochondria, mammalian, senescence, methylation",2,2023-06-26 14:24:00.000
+46,"female, candidates, male, jobs, gender",1,2023-06-26 14:24:00.000
+48,"tyres, waste, pyrolysis, char, surface area",1,2023-06-26 14:24:00.000
+49,"random forest, city planning, city, algorithms, schemes",1,2023-06-26 14:24:00.000
+51,"biodiesel, combustion, fuel, hydrogen, diesel",2,2023-06-26 14:24:00.000
+52,"currents, submerged, eruptions, volcanic, seafloor",1,2023-06-26 14:24:00.000
+-1,"gai, llms, health, mml, healthcare",52,2023-12-25 09:36:00.000
+0,"long covid, covid, long, clinical placement, students",4,2023-12-25 09:36:00.000
+1,"iot, smart, security, smart cities, cities",8,2023-12-25 09:36:00.000
+2,"cnn, hpo, model, transformer, diagnostic imaging",4,2023-12-25 09:36:00.000
+3,"cuo, oxidation, oxygen, electrocatalytic, reaction",3,2023-12-25 09:36:00.000
+4,"carbon, coral, mangroves, coastal, ecosystems",16,2023-12-25 09:36:00.000
+5,"white, tme, melanoma, tumour, cancer",5,2023-12-25 09:36:00.000
+6,"damage, species, costs, invasive species, damage costs",5,2023-12-25 09:36:00.000
+7,"consensus, checklist, reporting, accord, bias assessment",3,2023-12-25 09:36:00.000
+8,"education, learning, chatgpt, higher education, students",19,2023-12-25 09:36:00.000
+9,"risk, cvd, cvd risk, stroke, sarcopenia",9,2023-12-25 09:36:00.000
+10,"burnout, coping, athlete, compendium, players",6,2023-12-25 09:36:00.000
+11,"antarctic, bacterial, ethane, prokaryotes, tree",6,2023-12-25 09:36:00.000
+12,"mml, mml mml, mission, binary, mml mml mml",5,2023-12-25 09:36:00.000
+13,"brand, mindfulness, consumer, tourist, consumers",4,2023-12-25 09:36:00.000
+14,"mind, pluralist approach, pluralist, philosophy, embodied",1,2023-12-25 09:36:00.000
+15,"anodes, lithium, ions, cut, voltages",1,2023-12-25 09:36:00.000
+16,"ultra processed, ratio, class, low, ultra",2,2023-12-25 09:36:00.000
+17,"implantable, biosensors, underwater, wearable, materials",2,2023-12-25 09:36:00.000
+18,"csa, farmers, income, adoption, farm",8,2023-12-25 09:36:00.000
+19,"pasc, brain, cat, amp, months",2,2023-12-25 09:36:00.000
+20,"anthropogenic, sources, emissions, methane, anthropogenic sources",2,2023-12-25 09:36:00.000
+21,"optimization, algorithm, problems, algorithms, functions",7,2023-12-25 09:36:00.000
+22,"cultural, food security, food, community, refugee",3,2023-12-25 09:36:00.000
+23,"tpms, anisotropy, orientations, elastic, optimised",2,2023-12-25 09:36:00.000
+24,"innovation, international business, business, international, analytical",3,2023-12-25 09:36:00.000
+25,"plant, pathogens, vocs, produced, pathogen",1,2023-12-25 09:36:00.000
+26,"liking, sensory, nutritional, liked, proteins",2,2023-12-25 09:36:00.000
+27,"fluid, resuscitation, iqr, septic shock, septic",2,2023-12-25 09:36:00.000
+28,"soil, mps, biopolymer, contaminant, water quality",4,2023-12-25 09:36:00.000
+29,"pain, japanese, low pain, weeks, weeks weeks",3,2023-12-25 09:36:00.000
+30,"efficiency stability, enhancing efficiency, band gap, solar cells, perovskite",1,2023-12-25 09:36:00.000
+32,"energy, renewable energy, renewable, emissions, governance",7,2023-12-25 09:36:00.000
+33,"plastic, microplastics, microplastic, particles, plastics",3,2023-12-25 09:36:00.000
+34,"habit, behaviour, cognitive load, motivation, load",3,2023-12-25 09:36:00.000
+35,"evs, extracellular, extracellular vesicles, vesicles, document",1,2023-12-25 09:36:00.000
+38,"alloys, titanium, metallic, biomedical, materials",1,2023-12-25 09:36:00.000
+39,"solar, evaporation, water, energy, generation",3,2023-12-25 09:36:00.000
+40,"eeg, functional, functional connectivity, impaired, connectivity",2,2023-12-25 09:36:00.000
+43,"regimes, regime, wildfire, fires, change",2,2023-12-25 09:36:00.000
+45,"mitochondrial, trigonelline, mitochondria, muscle, dysfunction",2,2023-12-25 09:36:00.000
+46,"beliefs, climate, effortful, policy support, tree planting",1,2023-12-25 09:36:00.000
+47,"primate, kinship, million years, years ago, archaeological",2,2023-12-25 09:36:00.000
+48,"developing countries, mining, waste, developing, urban",1,2023-12-25 09:36:00.000
+49,"fruit, maturity, destructive, non destructive, mineral",2,2023-12-25 09:36:00.000
+50,"deception, policymakers, systems including, systems, policymakers researchers",1,2023-12-25 09:36:00.000
+51,"hydrogen, fuel, combustion, engines, energy",3,2023-12-25 09:36:00.000
+52,"understood using, ensemble approach, year history, iron oxide, habitability",1,2023-12-25 09:36:00.000
+54,"fibrosis, nash, placebo, liver, group",1,2023-12-25 09:36:00.000
+56,"molecular interactions, published paper, famous, condensed matter, bears",1,2023-12-25 09:36:00.000
+-1,"soil, psychedelics, land, soil microbiome, false",10,2024-06-24 04:48:00.000
+2,"mse, potato, xgboost, models, gradient boosting",1,2024-06-24 04:48:00.000
+3,"methods key, innovative methods, surface enhanced, pioneers, review comprehensively",1,2024-06-24 04:48:00.000
+4,"estuarine, mangrove, marine, mangroves, coral",3,2024-06-24 04:48:00.000
+5,"cancer, hdi, cancer cases, projected, deaths",1,2024-06-24 04:48:00.000
+6,"wood, wood density, density, forest, forest carbon",1,2024-06-24 04:48:00.000
+7,"search results, highest mean, qualitative, guide, mean",2,2024-06-24 04:48:00.000
+8,"formative, chatgpt, assessment, learning, education",4,2024-06-24 04:48:00.000
+9,"cardiovascular, stroke, dalys, age standardized, mortality",2,2024-06-24 04:48:00.000
+10,"physical, physical activity, activity, insufficient physical, insufficient physical activity",5,2024-06-24 04:48:00.000
+11,"fungi, lineages, termite, phylogenetic, fungal",2,2024-06-24 04:48:00.000
+13,"consumer, shopping, retailers, behavior, virtual",1,2024-06-24 04:48:00.000
+19,"sex, sex gender, gender, resilience, cognitive",1,2024-06-24 04:48:00.000
+21,"moco, multi objective, objective, algorithm, problems",1,2024-06-24 04:48:00.000
+22,"transformations, relational, relational approaches, approaches, indigenous",1,2024-06-24 04:48:00.000
+24,"biodiversity, firms, firm, firm performance, risk",1,2024-06-24 04:48:00.000
+29,"cannabis, cannabis use, pain, recreational, medical",1,2024-06-24 04:48:00.000
+33,"microplastic, harm, plastic, microplastics, considered international",1,2024-06-24 04:48:00.000
+43,"areas, wildfire, frequent, fires, effects plants",1,2024-06-24 04:48:00.000
+46,"anxiety, eco, climate, symptoms, worry",1,2024-06-24 04:48:00.000
+47,"neanderthals, trilobites, cambrian, late, anatomy",4,2024-06-24 04:48:00.000

@@ -1,5 +1,0 @@
-2025-10-01 12:03:56,906 - __main__ - INFO - Analysis started at: 2025-10-01 12:03:56.906090
-2025-10-01 12:03:56,906 - __main__ - INFO - Log file: logs/full_analysis_20251001_120356.log
-2025-10-01 12:03:56,908 - __main__ - ERROR - 
-
-Fatal error: cannot import name 'OPENALEX_EMAIL' from 'config.settings' (C:\Users\param\Desktop\Smart-Research-insights-1\config\settings.py)

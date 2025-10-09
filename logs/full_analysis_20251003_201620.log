@@ -1,5 +1,0 @@
-2025-10-03 20:16:20,032 - __main__ - INFO - Analysis started at: 2025-10-03 20:16:20.032424
-2025-10-03 20:16:20,032 - __main__ - INFO - Log file: logs/full_analysis_20251003_201620.log
-2025-10-03 20:16:20,053 - __main__ - ERROR - 
-
-Fatal error: cannot import name 'MIN_RELEVANCE_SCORE' from 'config.settings' (C:\Users\param\Desktop\Smart-Research-insights-1\config\settings.py)

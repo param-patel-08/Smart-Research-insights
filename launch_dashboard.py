@@ -38,7 +38,7 @@ def main():
 
     missing = check_data_exists()
     if missing:
-        print("❌ Analysis data not found!\n")
+        print("  Analysis data not found!\n")
         print("Missing files:")
         for f in missing:
             print(f"  - {f}")
@@ -60,15 +60,15 @@ def main():
     try:
         subprocess.run([
             sys.executable, "-m", "streamlit", "run",
-            "dashboard/app_enhanced.py",
+            "dashboard/app.py",
             "--server.headless", "false",
         ])
     except KeyboardInterrupt:
         print("\n\nDashboard stopped.")
     except Exception as e:
-        print(f"\n❌ Error launching dashboard: {e}")
+        print(f"\n  Error launching dashboard: {e}")
         print("\nTry running manually:")
-        print("  streamlit run dashboard/app_enhanced.py")
+        print("  streamlit run dashboard/app.py")
 
 
 if __name__ == "__main__":

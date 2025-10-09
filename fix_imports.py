@@ -26,35 +26,35 @@ for file in init_files:
     os.makedirs(os.path.dirname(file), exist_ok=True)
     with open(file, 'w') as f:
         f.write('# Auto-generated\n')
-    print(f"   ✓ Created {file}")
+    print(f"     Created {file}")
 
 print("\n2. Testing imports...")
 
 # Test config imports
 try:
     from config import settings
-    print("   ✓ config.settings imported")
+    print("     config.settings imported")
 except Exception as e:
-    print(f"   ✗ config.settings failed: {e}")
+    print(f"     config.settings failed: {e}")
 
 try:
     from config import themes
-    print("   ✓ config.themes imported")
+    print("     config.themes imported")
 except Exception as e:
-    print(f"   ✗ config.themes failed: {e}")
+    print(f"     config.themes failed: {e}")
 
 # Test src imports
 try:
     from src import openalex_collector
-    print("   ✓ src.openalex_collector imported")
+    print("     src.openalex_collector imported")
 except Exception as e:
-    print(f"   ✗ src.openalex_collector failed: {e}")
+    print(f"     src.openalex_collector failed: {e}")
 
 try:
     from src import preprocessor
-    print("   ✓ src.preprocessor imported")
+    print("     src.preprocessor imported")
 except Exception as e:
-    print(f"   ✗ src.preprocessor failed: {e}")
+    print(f"     src.preprocessor failed: {e}")
 
 print("\n3. Checking file existence...")
 
@@ -72,7 +72,7 @@ required_files = [
 all_exist = True
 for file in required_files:
     exists = os.path.exists(file)
-    status = "✓" if exists else "✗"
+    status = " " if exists else " "
     print(f"   {status} {file}")
     if not exists:
         all_exist = False
@@ -80,11 +80,11 @@ for file in required_files:
 print("\n" + "="*80)
 
 if all_exist:
-    print("✓ ALL FILES EXIST")
+    print("  ALL FILES EXIST")
     print("\nYou can now run:")
     print("  python run_full_analysis.py")
 else:
-    print("✗ SOME FILES ARE MISSING")
+    print("  SOME FILES ARE MISSING")
     print("\nPlease ensure all files are in place.")
 
 print("="*80)

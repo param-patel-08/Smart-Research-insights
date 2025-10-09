@@ -1,44 +1,526 @@
 {
   "theme_trends": {
     "Defense_Security": {
-      "total_papers": 116,
-      "growth_rate": -0.11887445887445887,
+      "total_papers": 96,
+      "growth_rate": 0.2254901960784314,
       "quarterly_counts": {
-        "2020Q1": 21,
-        "2020Q2": 18,
-        "2020Q3": 15,
-        "2020Q4": 12,
-        "2021Q1": 11,
-        "2021Q2": 6,
-        "2021Q3": 5,
-        "2021Q4": 7,
-        "2022Q1": 5,
-        "2022Q2": 3,
-        "2022Q3": 5,
-        "2022Q4": 4,
-        "2023Q1": 1,
-        "2023Q2": 1,
+        "2020Q1": 5,
+        "2020Q2": 20,
+        "2020Q3": 12,
+        "2020Q4": 6,
+        "2021Q1": 3,
+        "2021Q2": 8,
+        "2021Q3": 6,
+        "2021Q4": 6,
+        "2022Q1": 10,
+        "2022Q2": 5,
+        "2022Q3": 2,
+        "2022Q4": 1,
+        "2023Q1": 2,
+        "2023Q2": 4,
         "2023Q3": 1,
-        "2024Q1": 1
+        "2024Q1": 2,
+        "2024Q2": 2,
+        "2024Q4": 1
       },
       "top_topics": {
-        "1": 95,
-        "0": 21
+        "24": 57,
+        "41": 24,
+        "56": 15
       },
       "universities": {
-        "University of Melbourne": 116
+        "University of Canterbury": 11,
+        "Edith Cowan University": 10,
+        "Auckland University of Technology": 8,
+        "Central Queensland University": 7,
+        "Massey University": 5
+      }
+    },
+    "Autonomous_Systems": {
+      "total_papers": 107,
+      "growth_rate": 0.05899590605472957,
+      "quarterly_counts": {
+        "2020Q1": 13,
+        "2020Q2": 4,
+        "2020Q3": 3,
+        "2020Q4": 6,
+        "2021Q1": 9,
+        "2021Q2": 6,
+        "2021Q3": 7,
+        "2021Q4": 10,
+        "2022Q1": 9,
+        "2022Q2": 12,
+        "2022Q3": 3,
+        "2022Q4": 3,
+        "2023Q1": 6,
+        "2023Q2": 2,
+        "2023Q3": 3,
+        "2024Q1": 5,
+        "2024Q2": 5,
+        "2024Q3": 1
+      },
+      "top_topics": {
+        "21": 59,
+        "34": 32,
+        "55": 16
+      },
+      "universities": {
+        "Torrens University Australia": 34,
+        "Australian Catholic University": 18,
+        "Victoria University of Wellington": 12,
+        "Curtin University": 6,
+        "Auckland University of Technology": 5
+      }
+    },
+    "Cybersecurity": {
+      "total_papers": 0,
+      "growth_rate": 0.0,
+      "quarterly_counts": {},
+      "top_topics": {},
+      "universities": {}
+    },
+    "Energy_Sustainability": {
+      "total_papers": 544,
+      "growth_rate": -0.04801165549025028,
+      "quarterly_counts": {
+        "2020Q1": 71,
+        "2020Q2": 49,
+        "2020Q3": 40,
+        "2020Q4": 35,
+        "2021Q1": 54,
+        "2021Q2": 30,
+        "2021Q3": 28,
+        "2021Q4": 32,
+        "2022Q1": 43,
+        "2022Q2": 30,
+        "2022Q3": 22,
+        "2022Q4": 13,
+        "2023Q1": 27,
+        "2023Q2": 23,
+        "2023Q3": 12,
+        "2023Q4": 7,
+        "2024Q1": 17,
+        "2024Q2": 9,
+        "2024Q4": 2
+      },
+      "top_topics": {
+        "3": 167,
+        "5": 134,
+        "15": 76,
+        "28": 48,
+        "32": 34
+      },
+      "universities": {
+        "University of Wollongong": 53,
+        "University of Adelaide": 41,
+        "University of South Australia": 26,
+        "University of Melbourne": 23,
+        "Curtin University": 23
+      }
+    },
+    "Advanced_Manufacturing": {
+      "total_papers": 151,
+      "growth_rate": 0.014788342873381197,
+      "quarterly_counts": {
+        "2020Q1": 23,
+        "2020Q2": 14,
+        "2020Q3": 12,
+        "2020Q4": 10,
+        "2021Q1": 17,
+        "2021Q2": 10,
+        "2021Q3": 10,
+        "2021Q4": 7,
+        "2022Q1": 9,
+        "2022Q2": 7,
+        "2022Q3": 2,
+        "2022Q4": 5,
+        "2023Q1": 8,
+        "2023Q2": 6,
+        "2023Q3": 4,
+        "2023Q4": 3,
+        "2024Q1": 4
+      },
+      "top_topics": {
+        "17": 66,
+        "30": 38,
+        "38": 26,
+        "48": 21
+      },
+      "universities": {
+        "University of Southern Queensland": 24,
+        "Deakin University": 10,
+        "Edith Cowan University": 10,
+        "University of Wollongong": 9,
+        "Victoria University of Wellington": 8
+      }
+    },
+    "AI_Machine_Learning": {
+      "total_papers": 340,
+      "growth_rate": 0.2838567843405304,
+      "quarterly_counts": {
+        "2020Q1": 33,
+        "2020Q2": 48,
+        "2020Q3": 12,
+        "2020Q4": 19,
+        "2021Q1": 34,
+        "2021Q2": 22,
+        "2021Q3": 12,
+        "2021Q4": 11,
+        "2022Q1": 24,
+        "2022Q2": 24,
+        "2022Q3": 2,
+        "2022Q4": 9,
+        "2023Q1": 26,
+        "2023Q2": 16,
+        "2023Q3": 9,
+        "2023Q4": 7,
+        "2024Q1": 14,
+        "2024Q2": 13,
+        "2024Q3": 5
+      },
+      "top_topics": {
+        "2": 183,
+        "8": 112,
+        "40": 25,
+        "49": 20
+      },
+      "universities": {
+        "University of Sydney": 21,
+        "Central Queensland University": 21,
+        "Charles Darwin University": 19,
+        "Australian National University": 18,
+        "University of Technology Sydney": 17
+      }
+    },
+    "Marine_Naval": {
+      "total_papers": 256,
+      "growth_rate": 0.0876403238635474,
+      "quarterly_counts": {
+        "2020Q1": 25,
+        "2020Q2": 17,
+        "2020Q3": 23,
+        "2020Q4": 18,
+        "2021Q1": 29,
+        "2021Q2": 17,
+        "2021Q3": 15,
+        "2021Q4": 4,
+        "2022Q1": 14,
+        "2022Q2": 13,
+        "2022Q3": 11,
+        "2022Q4": 5,
+        "2023Q1": 16,
+        "2023Q2": 9,
+        "2023Q3": 8,
+        "2023Q4": 7,
+        "2024Q1": 12,
+        "2024Q2": 10,
+        "2024Q3": 2,
+        "2024Q4": 1
+      },
+      "top_topics": {
+        "4": 162,
+        "20": 60,
+        "33": 34
+      },
+      "universities": {
+        "Southern Cross University": 36,
+        "James Cook University": 32,
+        "University of Tasmania": 23,
+        "Victoria University of Wellington": 20,
+        "University of Canterbury": 14
+      }
+    },
+    "Space_Aerospace": {
+      "total_papers": 58,
+      "growth_rate": 0.21955782312925168,
+      "quarterly_counts": {
+        "2020Q1": 7,
+        "2020Q2": 6,
+        "2020Q3": 5,
+        "2020Q4": 5,
+        "2021Q1": 5,
+        "2021Q2": 6,
+        "2021Q3": 4,
+        "2021Q4": 1,
+        "2022Q2": 5,
+        "2022Q3": 3,
+        "2022Q4": 2,
+        "2023Q1": 4,
+        "2023Q2": 2,
+        "2023Q4": 1,
+        "2024Q1": 2
+      },
+      "top_topics": {
+        "23": 58
+      },
+      "universities": {
+        "University of Otago": 8,
+        "Queensland University of Technology": 7,
+        "Auckland University of Technology": 4,
+        "Deakin University": 4,
+        "University of South Australia": 4
+      }
+    },
+    "Digital_Transformation": {
+      "total_papers": 205,
+      "growth_rate": 0.29193423079113867,
+      "quarterly_counts": {
+        "2020Q1": 32,
+        "2020Q2": 16,
+        "2020Q3": 21,
+        "2020Q4": 16,
+        "2021Q1": 26,
+        "2021Q2": 10,
+        "2021Q3": 11,
+        "2021Q4": 7,
+        "2022Q1": 19,
+        "2022Q2": 7,
+        "2022Q3": 8,
+        "2022Q4": 3,
+        "2023Q1": 12,
+        "2023Q2": 4,
+        "2023Q3": 3,
+        "2023Q4": 2,
+        "2024Q1": 8
+      },
+      "top_topics": {
+        "1": 205
+      },
+      "universities": {
+        "Charles Darwin University": 38,
+        "University of Technology Sydney": 15,
+        "Swinburne University of Technology": 13,
+        "Central Queensland University": 11,
+        "Queensland University of Technology": 11
       }
     }
   },
-  "emerging_topics": [],
+  "emerging_topics": [
+    {
+      "topic_id": 12,
+      "theme": "Other",
+      "growth_rate": 4.0,
+      "keywords": [
+        "mml",
+        "mml mml",
+        "mrow",
+        "mml mml mml",
+        "mml mrow",
+        "mml mrow mml",
+        "mrow mml",
+        "gravitational",
+        "black",
+        "binary"
+      ],
+      "recent_count": 5,
+      "previous_count": 1
+    },
+    {
+      "topic_id": 1,
+      "theme": "Digital_Transformation",
+      "growth_rate": 3.0,
+      "keywords": [
+        "iot",
+        "smart",
+        "security",
+        "learning",
+        "blockchain",
+        "network",
+        "detection",
+        "privacy",
+        "internet",
+        "applications"
+      ],
+      "recent_count": 8,
+      "previous_count": 2
+    },
+    {
+      "topic_id": 39,
+      "theme": "Energy_Sustainability",
+      "growth_rate": 2.0,
+      "keywords": [
+        "evaporation",
+        "solar",
+        "energy",
+        "water",
+        "photothermal",
+        "heat",
+        "desalination",
+        "steam",
+        "thermal",
+        "solar evaporation"
+      ],
+      "recent_count": 3,
+      "previous_count": 1
+    },
+    {
+      "topic_id": 51,
+      "theme": "Energy_Sustainability",
+      "growth_rate": 2.0,
+      "keywords": [
+        "hydrogen",
+        "fuel",
+        "combustion",
+        "biodiesel",
+        "energy",
+        "engines",
+        "diesel",
+        "emissions",
+        "ammonia",
+        "ppo"
+      ],
+      "recent_count": 3,
+      "previous_count": 1
+    },
+    {
+      "topic_id": 27,
+      "theme": "Other",
+      "growth_rate": 1.0,
+      "keywords": [
+        "allergy",
+        "cross",
+        "sepsis",
+        "patients",
+        "allergens",
+        "cross reactivity",
+        "reactivity",
+        "cross reactive",
+        "guidelines",
+        "epitopes"
+      ],
+      "recent_count": 2,
+      "previous_count": 1
+    },
+    {
+      "topic_id": 23,
+      "theme": "Space_Aerospace",
+      "growth_rate": 1.0,
+      "keywords": [
+        "wound",
+        "tissue",
+        "healing",
+        "bone",
+        "printing",
+        "properties",
+        "hydrogels",
+        "wound healing",
+        "tissue engineering",
+        "applications"
+      ],
+      "recent_count": 2,
+      "previous_count": 1
+    },
+    {
+      "topic_id": 34,
+      "theme": "Autonomous_Systems",
+      "growth_rate": 1.0,
+      "keywords": [
+        "motivation",
+        "achievement",
+        "emotions",
+        "autonomy",
+        "self",
+        "wellbeing",
+        "students",
+        "sdt",
+        "theory",
+        "habit"
+      ],
+      "recent_count": 2,
+      "previous_count": 1
+    },
+    {
+      "topic_id": 49,
+      "theme": "AI_Machine_Learning",
+      "growth_rate": 1.0,
+      "keywords": [
+        "water",
+        "machine",
+        "sentinel",
+        "fruit",
+        "model",
+        "water quality",
+        "machine learning",
+        "models",
+        "quality",
+        "estimation"
+      ],
+      "recent_count": 2,
+      "previous_count": 1
+    }
+  ],
   "strategic_priorities": [
     {
+      "theme": "AI_Machine_Learning",
+      "priority_score": 0.5705521365244661,
+      "category": "MEDIUM",
+      "growth_rate": 0.2838567843405304,
+      "total_papers": 340,
+      "babcock_priority": "HIGH"
+    },
+    {
       "theme": "Defense_Security",
+      "priority_score": 0.3707058823529412,
+      "category": "MEDIUM",
+      "growth_rate": 0.2254901960784314,
+      "total_papers": 96,
+      "babcock_priority": "HIGH"
+    },
+    {
+      "theme": "Digital_Transformation",
+      "priority_score": 0.3517807481033221,
+      "category": "MEDIUM",
+      "growth_rate": 0.29193423079113867,
+      "total_papers": 205,
+      "babcock_priority": "MEDIUM"
+    },
+    {
+      "theme": "Space_Aerospace",
+      "priority_score": 0.2322921768707483,
+      "category": "LOW",
+      "growth_rate": 0.21955782312925168,
+      "total_papers": 58,
+      "babcock_priority": "MEDIUM"
+    },
+    {
+      "theme": "Marine_Naval",
+      "priority_score": 0.1651143701589233,
+      "category": "LOW",
+      "growth_rate": 0.0876403238635474,
+      "total_papers": 256,
+      "babcock_priority": "HIGH"
+    },
+    {
+      "theme": "Autonomous_Systems",
+      "priority_score": 0.09796270200387845,
+      "category": "LOW",
+      "growth_rate": 0.05899590605472957,
+      "total_papers": 107,
+      "babcock_priority": "HIGH"
+    },
+    {
+      "theme": "Advanced_Manufacturing",
+      "priority_score": 0.017021382647261756,
+      "category": "LOW",
+      "growth_rate": 0.014788342873381197,
+      "total_papers": 151,
+      "babcock_priority": "MEDIUM"
+    },
+    {
+      "theme": "Cybersecurity",
       "priority_score": 0.0,
       "category": "LOW",
-      "growth_rate": -0.11887445887445887,
-      "total_papers": 116,
+      "growth_rate": 0.0,
+      "total_papers": 0,
       "babcock_priority": "HIGH"
+    },
+    {
+      "theme": "Energy_Sustainability",
+      "priority_score": 0.0,
+      "category": "LOW",
+      "growth_rate": -0.04801165549025028,
+      "total_papers": 544,
+      "babcock_priority": "MEDIUM"
     }
   ]
 }

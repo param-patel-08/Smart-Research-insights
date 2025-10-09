@@ -1,389 +1,407 @@
-"""
-OpenAlex Data Collector for Babcock Research Trends
-Fetches research papers from Australasian universities
-"""
+"""OpenAlex Data Collector for Babcock Research Trends."""
 
-import requests
-import pandas as pd
-from datetime import datetime
-from typing import List, Dict, Optional
-import time
-import logging
-from tqdm import tqdm
+from __future__ import annotations
+
 import json
+import logging
+import time
+from dataclasses import dataclass
+from datetime import datetime
+from typing import Dict, Iterable, List, Optional
 
-# Setup logging
-logging.basicConfig(level=logging.INFO)
+import pandas as pd
+import requests
+from tqdm import tqdm
+
 logger = logging.getLogger(__name__)
 
 
+@dataclass
+class InstitutionInfo:
+    resolved_id: Optional[str]
+    fallback_name: str
+
+    def as_tuple(self) -> Tuple[Optional[str], str]:
+        """Return legacy tuple representation (resolved_id, fallback_name)."""
+        return self.resolved_id, self.fallback_name
+
+    def __iter__(self):  # type: ignore[override]
+        """Support unpacking for backwards compatibility."""
+        yield self.resolved_id
+        yield self.fallback_name
+
+
 class OpenAlexCollector:
-    """
-    Collect research papers from OpenAlex API
-    """
-    
-    def __init__(self, email: str, start_date: datetime, end_date: datetime):
-        """
-        Initialize collector
-        
-        Args:
-            email: Email for polite pool access
-            start_date: Start date for paper collection
-            end_date: End date for paper collection
-        """
+    """Collect research papers from the OpenAlex API with resiliency."""
+
+    BASE_URL = "https://api.openalex.org/works"
+    INSTITUTIONS_URL = "https://api.openalex.org/institutions"
+
+    def __init__(self, email: str, start_date: datetime, end_date: datetime) -> None:
         self.email = email
         self.start_date = start_date
         self.end_date = end_date
-        self.base_url = "https://api.openalex.org/works"
-        self.papers = []
-        
-        logger.info(f"OpenAlex Collector initialized")
-        logger.info(f"Date range: {start_date.date()} to {end_date.date()}")
-        logger.info(f"Using email: {email}")
-    
-    def fetch_papers_for_institution(self, 
-                                     institution_name: str,
-                                     institution_id: str,
-                                     per_page: int = 200,
-                                     max_results: int = None) -> List[Dict]:
-        """
-        Fetch papers from a specific institution
-        
-        Args:
-            institution_name: Name of university
-            institution_id: OpenAlex institution ID
-            per_page: Results per page (max 200)
-            max_results: Maximum papers to fetch (None = all)
-            
-        Returns:
-            List of paper dictionaries
-        """
-        logger.info(f"\nFetching papers from: {institution_name}")
-        
-        papers = []
-        page = 1
-        total_fetched = 0
-        
-        # Format dates for OpenAlex API
+        self._institution_cache: Dict[str, InstitutionInfo] = {}
+
+        logger.info("OpenAlex Collector initialized")
+        logger.info("Date range: %s to %s", start_date.date(), end_date.date())
+        logger.info("Using email: %s", email)
+
+    # ------------------------------------------------------------------
+    # Institution resolution helpers
+    # ------------------------------------------------------------------
+    def resolve_institution(
+        self, institution_name: str, institution_id: Optional[str]
+    ) -> InstitutionInfo:
+        """Resolve institution metadata (ID + best display name)."""
+
+        if institution_name in self._institution_cache:
+            return self._institution_cache[institution_name]
+
+        resolved_id: Optional[str] = None
+        fallback_name: str = institution_name
+
+        if institution_id:
+            validated = self._validate_institution_id(institution_id, institution_name)
+            if validated.resolved_id:
+                resolved_id = validated.resolved_id
+            fallback_name = validated.fallback_name
+
+        if not resolved_id:
+            search_match = self._search_institution(institution_name)
+            if search_match:
+                resolved_id = search_match.get("id")
+                fallback_name = search_match.get("display_name", fallback_name)
+
+        if not resolved_id:
+            logger.error("Unable to resolve institution id for %s", institution_name)
+
+        info = InstitutionInfo(resolved_id=resolved_id, fallback_name=fallback_name)
+        self._institution_cache[institution_name] = info
+        return info
+
+    def _validate_institution_id(self, institution_id: str, name: str) -> InstitutionInfo:
+        try:
+            resp = requests.get(
+                f"{self.INSTITUTIONS_URL}/{institution_id}",
+                params={"mailto": self.email},
+                timeout=20,
+            )
+            if resp.status_code == 200:
+                data = resp.json()
+                resolved = data.get("id", "").split("/")[-1]
+                display = data.get("display_name", name)
+                if resolved:
+                    return InstitutionInfo(resolved_id=resolved, fallback_name=display)
+        except requests.exceptions.RequestException as exc:
+            logger.warning("Failed validating institution %s (%s): %s", institution_id, name, exc)
+        return InstitutionInfo(resolved_id=None, fallback_name=name)
+
+    def _search_institution(self, name: str) -> Optional[Dict[str, str]]:
+        for variant in self._generate_name_variants(name):
+            try:
+                resp = requests.get(
+                    self.INSTITUTIONS_URL,
+                    params={"search": variant, "per-page": 1, "mailto": self.email},
+                    timeout=20,
+                )
+                if resp.status_code == 200:
+                    results = resp.json().get("results", [])
+                    if results:
+                        item = results[0]
+                        return {
+                            "id": item.get("id", "").split("/")[-1],
+                            "display_name": item.get("display_name", variant),
+                        }
+            except requests.exceptions.RequestException as exc:
+                logger.warning("Institution search failed for %s: %s", variant, exc)
+        return None
+
+    def _generate_name_variants(self, name: str) -> Iterable[str]:
+        name = name.strip()
+        variants = {name}
+
+        if not name.lower().startswith("the "):
+            variants.add(f"The {name}")
+
+        if name.lower().startswith("university of "):
+            remainder = name[13:]
+            variants.add(remainder)
+            variants.add(f"The University of {remainder}")
+
+        variants.add(name.replace("University", "Uni"))
+        variants.add(name.replace(" of ", " "))
+
+        return [v for v in variants if v]
+
+    # ------------------------------------------------------------------
+    # Collection entry points
+    # ------------------------------------------------------------------
+    def fetch_papers_for_institution(
+        self,
+        institution_name: str,
+        institution_id: Optional[str],
+        per_page: int = 200,
+        max_results: Optional[int] = None,
+    ) -> List[Dict]:
+        """Fetch papers for a specific institution with fallback logic."""
+
+        logger.info("\nFetching papers from: %s", institution_name)
+
+        info = self.resolve_institution(institution_name, institution_id)
+
+        if not info.resolved_id:
+            logger.warning("Skipping %s: unresolved institution id", institution_name)
+            # Still attempt fallback by display name
+            tried_fallback = True
+        else:
+            tried_fallback = False
+
         start_str = self.start_date.strftime("%Y-%m-%d")
         end_str = self.end_date.strftime("%Y-%m-%d")
-        
+
+        papers: List[Dict] = []
+        total_fetched = 0
+        page = 1
+        cursor: Optional[str] = "*"
+
         while True:
-            # Build API query
+            filter_expr = self._build_filter(info, start_str, end_str, tried_fallback)
             params = {
-                'filter': f'institutions.id:{institution_id},from_publication_date:{start_str},to_publication_date:{end_str}',
-                'per-page': per_page,
-                'page': page,
-                'mailto': self.email,
-                'select': 'id,doi,title,publication_date,abstract_inverted_index,authorships,primary_location,concepts,cited_by_count'
+                "filter": filter_expr,
+                "per-page": per_page,
+                "mailto": self.email,
+                "select": "id,doi,title,publication_date,abstract_inverted_index,authorships,primary_location,concepts,cited_by_count",
+                "sort": "publication_date:desc",
             }
-            
-            try:
-                response = requests.get(self.base_url, params=params, timeout=30)
-                response.raise_for_status()
-                
-                data = response.json()
-                results = data.get('results', [])
-                
-                if not results:
-                    logger.info(f"  No more results at page {page}")
-                    break
-                
-                # Process each paper
-                for work in results:
-                    paper = self._parse_paper(work, institution_name)
-                    if paper:
-                        papers.append(paper)
-                        total_fetched += 1
-                
-                logger.info(f"  Page {page}: Fetched {len(results)} papers (Total: {total_fetched})")
-                
-                # Check if we've reached max results
-                if max_results and total_fetched >= max_results:
-                    logger.info(f"  Reached max results limit: {max_results}")
-                    break
-                
-                # Check if there are more pages
-                meta = data.get('meta', {})
-                if page >= meta.get('count', 0) // per_page:
-                    break
-                
-                page += 1
-                
-                # Rate limiting - be polite!
-                time.sleep(0.1)  # 100ms delay between requests
-                
-            except requests.exceptions.RequestException as e:
-                logger.error(f"  Error fetching page {page}: {e}")
+            if cursor:
+                params["cursor"] = cursor
+
+            data = self._request_with_retry(params)
+            if data is None:
                 break
-            except Exception as e:
-                logger.error(f"  Unexpected error on page {page}: {e}")
+
+            results = data.get("results", [])
+            if not results:
+                if not tried_fallback:
+                    logger.info("  No results with institutions.id. Trying display_name fallback")
+                    tried_fallback = True
+                    cursor = "*"
+                    page = 1
+                    continue
+                logger.info("  No more results at page %s", page)
                 break
-        
-        logger.info(f"[OK] Collected {len(papers)} papers from {institution_name}")
+
+            for work in results:
+                paper = self._parse_paper(work, institution_name)
+                if paper:
+                    papers.append(paper)
+                    total_fetched += 1
+
+            logger.info("  Page %s: fetched %s papers (total %s)", page, len(results), total_fetched)
+
+            if max_results and total_fetched >= max_results:
+                logger.info("  Reached max results limit: %s", max_results)
+                break
+
+            meta = data.get("meta", {})
+            cursor = meta.get("next_cursor")
+            if not cursor:
+                if not tried_fallback:
+                    logger.info("  Exhausted id query. Switching to display_name fallback")
+                    tried_fallback = True
+                    cursor = "*"
+                    page = 1
+                    continue
+                break
+
+            page += 1
+            time.sleep(0.1)
+
+        logger.info("[OK] Collected %s papers from %s", len(papers), institution_name)
         return papers
-    
+
+    def fetch_all_universities(
+        self, universities: Dict[str, str], max_per_uni: Optional[int] = None
+    ) -> pd.DataFrame:
+        logger.info("\n%s", "=" * 80)
+        logger.info("COLLECTING PAPERS FROM %s UNIVERSITIES", len(universities))
+        logger.info("%s\n", "=" * 80)
+
+        all_papers: List[Dict] = []
+        for name, openalex_id in tqdm(universities.items(), desc="Universities"):
+            papers = self.fetch_papers_for_institution(name, openalex_id, max_results=max_per_uni)
+            all_papers.extend(papers)
+            time.sleep(0.5)
+
+        df = pd.DataFrame(all_papers)
+        if not df.empty:
+            logger.info("Total papers collected: %s", len(df))
+            logger.info("Date range: %s to %s", df["date"].min(), df["date"].max())
+            logger.info("Universities: %s", df["university"].nunique())
+            logger.info(
+                "Papers with abstracts: %s (%.1f%%)",
+                df["abstract"].notna().sum(),
+                df["abstract"].notna().mean() * 100,
+            )
+        else:
+            logger.warning("No papers collected. Check filters and network connectivity.")
+
+        return df
+
+    # ------------------------------------------------------------------
+    # Networking helpers
+    # ------------------------------------------------------------------
+    def _build_filter(
+        self,
+        info: InstitutionInfo,
+        start: str,
+        end: str,
+        use_fallback: bool,
+    ) -> str:
+        if not use_fallback and info.resolved_id:
+            return f"institutions.id:{info.resolved_id},from_publication_date:{start},to_publication_date:{end}"
+        fallback_name = info.fallback_name or ""
+        return f"institutions.display_name.search:{fallback_name},from_publication_date:{start},to_publication_date:{end}"
+
+    def _request_with_retry(self, params: Dict[str, str], max_attempts: int = 3) -> Optional[Dict]:
+        attempt = 0
+        backoff = 5
+        while attempt < max_attempts:
+            attempt += 1
+            try:
+                resp = requests.get(self.BASE_URL, params=params, timeout=30)
+                if resp.status_code == 403:
+                    logger.warning("  Received 403 from OpenAlex. Sleeping %ss (attempt %s/%s)", backoff, attempt, max_attempts)
+                    time.sleep(backoff)
+                    backoff *= 2
+                    continue
+                resp.raise_for_status()
+                return resp.json()
+            except requests.exceptions.RequestException as exc:
+                logger.warning("  Request error (attempt %s/%s): %s", attempt, max_attempts, exc)
+                time.sleep(backoff)
+                backoff *= 2
+        logger.error("  Failed to fetch data after %s attempts", max_attempts)
+        return None
+
+    # ------------------------------------------------------------------
+    # Parsing helpers
+    # ------------------------------------------------------------------
     def _parse_paper(self, work: Dict, institution_name: str) -> Optional[Dict]:
-        """
-        Parse OpenAlex work object into paper dictionary
-        
-        Args:
-            work: OpenAlex work object
-            institution_name: Name of university
-            
-        Returns:
-            Paper dictionary or None if parsing fails
-        """
         try:
-            # Extract title
-            title = work.get('title', '').strip()
+            title = work.get("title", "").strip()
             if not title:
                 return None
-            
-            # Extract abstract from inverted index
-            abstract = self._reconstruct_abstract(work.get('abstract_inverted_index'))
-            
-            # Extract authors
+
+            abstract = self._reconstruct_abstract(work.get("abstract_inverted_index"))
+
             authors = []
-            for authorship in work.get('authorships', []):
-                author = authorship.get('author', {})
-                display_name = author.get('display_name')
-                if display_name:
-                    authors.append(display_name)
-            
-            # Extract publication date
-            pub_date = work.get('publication_date')
+            for authorship in work.get("authorships", []):
+                author = authorship.get("author", {})
+                name = author.get("display_name")
+                if name:
+                    authors.append(name)
+
+            pub_date = work.get("publication_date")
+            date_value: Optional[datetime] = None
             if pub_date:
                 try:
-                    date = datetime.strptime(pub_date, "%Y-%m-%d")
-                except:
-                    date = None
-            else:
-                date = None
-            
-            # Extract URL
-            url = work.get('id', '')  # OpenAlex ID
-            doi = work.get('doi', '')
-            
-            # Extract keywords from concepts
-            keywords = []
-            for concept in work.get('concepts', [])[:10]:  # Top 10 concepts
-                if concept.get('score', 0) > 0.3:  # Only high-confidence concepts
-                    keywords.append(concept.get('display_name', ''))
-            
-            # Extract journal/venue
-            primary_location = work.get('primary_location', {})
-            source = primary_location.get('source', {})
-            journal = source.get('display_name', '')
-            
-            # Citation count
-            citations = work.get('cited_by_count', 0)
-            
+                    date_value = datetime.strptime(pub_date, "%Y-%m-%d")
+                except ValueError:
+                    date_value = None
+
+            primary_location = work.get("primary_location", {})
+            journal = primary_location.get("source", {}).get("display_name", "")
+
             return {
-                'title': title,
-                'abstract': abstract,
-                'authors': authors,
-                'date': date,
-                'university': institution_name,
-                'url': url,
-                'doi': doi,
-                'keywords': keywords,
-                'journal': journal,
-                'citations': citations,
-                'openalex_id': work.get('id', '')
+                "title": title,
+                "abstract": abstract,
+                "authors": authors,
+                "date": date_value,
+                "university": institution_name,
+                "url": work.get("id", ""),
+                "doi": work.get("doi", ""),
+                "keywords": [c.get("display_name", "") for c in work.get("concepts", [])[:10]],
+                "journal": journal,
+                "citations": work.get("cited_by_count", 0),
+                "openalex_id": work.get("id", ""),
             }
-            
-        except Exception as e:
-            logger.debug(f"Error parsing paper: {e}")
+        except Exception as exc:  # defensive parsing
+            logger.debug("Error parsing paper for %s: %s", institution_name, exc)
             return None
-    
+
     def _reconstruct_abstract(self, inverted_index: Optional[Dict]) -> str:
-        """
-        Reconstruct abstract from OpenAlex inverted index format
-        
-        Args:
-            inverted_index: Dictionary mapping words to position indices
-            
-        Returns:
-            Reconstructed abstract text
-        """
         if not inverted_index:
             return ""
-        
         try:
-            # Create list of (position, word) tuples
-            words_positions = []
-            for word, positions in inverted_index.items():
-                for pos in positions:
-                    words_positions.append((pos, word))
-            
-            # Sort by position and join
-            words_positions.sort(key=lambda x: x[0])
-            abstract = ' '.join([word for pos, word in words_positions])
-            
-            return abstract
-            
-        except Exception as e:
-            logger.debug(f"Error reconstructing abstract: {e}")
+            words_positions = [
+                (pos, word)
+                for word, positions in inverted_index.items()
+                for pos in positions
+            ]
+            words_positions.sort(key=lambda item: item[0])
+            return " ".join(word for _, word in words_positions)
+        except Exception as exc:
+            logger.debug("Failed to reconstruct abstract: %s", exc)
             return ""
-    
-    def fetch_all_universities(self, 
-                              universities: Dict[str, str],
-                              max_per_uni: int = None) -> pd.DataFrame:
-        """
-        Fetch papers from all specified universities
-        
-        Args:
-            universities: Dict mapping university names to OpenAlex IDs
-            max_per_uni: Max papers per university (None = all)
-            
-        Returns:
-            DataFrame with all collected papers
-        """
-        logger.info(f"\n{'='*80}")
-        logger.info(f"COLLECTING PAPERS FROM {len(universities)} UNIVERSITIES")
-        logger.info(f"{'='*80}\n")
-        
-        all_papers = []
-        
-        for uni_name, uni_id in tqdm(universities.items(), desc="Universities"):
-            papers = self.fetch_papers_for_institution(
-                uni_name, 
-                uni_id,
-                max_results=max_per_uni
-            )
-            all_papers.extend(papers)
-            
-            # Small delay between universities
-            time.sleep(0.5)
-        
-        # Convert to DataFrame
-        df = pd.DataFrame(all_papers)
-        
-        logger.info(f"\n{'='*80}")
-        logger.info(f"COLLECTION COMPLETE")
-        logger.info(f"{'='*80}")
-        logger.info(f"Total papers collected: {len(df)}")
-        logger.info(f"Date range: {df['date'].min()} to {df['date'].max()}")
-        logger.info(f"Universities: {df['university'].nunique()}")
-        logger.info(f"Papers with abstracts: {df['abstract'].notna().sum()} ({df['abstract'].notna().sum()/len(df)*100:.1f}%)")
-        
-        return df
-    
+
+    # ------------------------------------------------------------------
+    # Utility helpers
+    # ------------------------------------------------------------------
     def deduplicate_papers(self, df: pd.DataFrame) -> pd.DataFrame:
-        """
-        Remove duplicate papers
-        
-        Args:
-            df: DataFrame with papers
-            
-        Returns:
-            Deduplicated DataFrame
-        """
         original_count = len(df)
-        
-        # Remove by DOI first (most reliable)
-        df = df[df['doi'].notna()]  # Keep only papers with DOIs
-        df = df.drop_duplicates(subset=['doi'], keep='first')
-        
-        # Also check title similarity (case-insensitive)
-        df['title_lower'] = df['title'].str.lower().str.strip()
-        df = df.drop_duplicates(subset=['title_lower'], keep='first')
-        df = df.drop(columns=['title_lower'])
-        
-        duplicates_removed = original_count - len(df)
-        
-        logger.info(f"\nDeduplication: Removed {duplicates_removed} duplicates ({duplicates_removed/original_count*100:.1f}%)")
-        logger.info(f"Papers remaining: {len(df)}")
-        
+
+        df = df[df["doi"].notna()]
+        df = df.drop_duplicates(subset=["doi"], keep="first")
+
+        df["title_lower"] = df["title"].str.lower().str.strip()
+        df = df.drop_duplicates(subset=["title_lower"], keep="first")
+        df = df.drop(columns=["title_lower"])
+
+        logger.info("Deduplication removed %s duplicates (%.1f%%)", original_count - len(df), (original_count - len(df)) / max(original_count, 1) * 100)
+        logger.info("Papers remaining: %s", len(df))
         return df
-    
+
     def save_to_csv(self, df: pd.DataFrame, filepath: str) -> None:
-        """
-        Save collected papers to CSV
-        
-        Args:
-            df: DataFrame with papers
-            filepath: Output file path
-        """
-        # Convert lists to JSON strings for CSV storage
         df_copy = df.copy()
-        df_copy['authors'] = df_copy['authors'].apply(json.dumps)
-        df_copy['keywords'] = df_copy['keywords'].apply(json.dumps)
-        
+        df_copy["authors"] = df_copy["authors"].apply(json.dumps)
+        df_copy["keywords"] = df_copy["keywords"].apply(json.dumps)
         df_copy.to_csv(filepath, index=False)
-        logger.info(f"\n[OK] Saved {len(df)} papers to: {filepath}")
-    
+        logger.info("[OK] Saved %s papers to %s", len(df_copy), filepath)
+
     def get_summary_stats(self, df: pd.DataFrame) -> Dict:
-        """
-        Get summary statistics of collected papers
-        
-        Args:
-            df: DataFrame with papers
-            
-        Returns:
-            Dictionary with statistics
-        """
-        stats = {
-            'total_papers': len(df),
-            'date_range': f"{df['date'].min()} to {df['date'].max()}",
-            'universities_count': df['university'].nunique(),
-            'papers_with_abstract': df['abstract'].notna().sum(),
-            'abstract_percentage': df['abstract'].notna().sum() / len(df) * 100,
-            'papers_per_university': df['university'].value_counts().to_dict(),
-            'papers_per_year': df['date'].dt.year.value_counts().sort_index().to_dict(),
-            'avg_citations': df['citations'].mean(),
-            'total_unique_authors': len(set([author for authors in df['authors'] for author in authors]))
+        return {
+            "total_papers": len(df),
+            "date_range": f"{df['date'].min()} to {df['date'].max()}" if not df.empty else "N/A",
+            "universities_count": df["university"].nunique() if not df.empty else 0,
+            "papers_with_abstract": df["abstract"].notna().sum() if not df.empty else 0,
+            "abstract_percentage": df["abstract"].notna().mean() * 100 if not df.empty else 0,
+            "papers_per_university": df["university"].value_counts().to_dict() if not df.empty else {},
+            "papers_per_year": df["date"].dt.year.value_counts().sort_index().to_dict() if not df.empty else {},
+            "avg_citations": df["citations"].mean() if not df.empty else 0,
+            "total_unique_authors": len({author for authors in df.get("authors", []) for author in authors}) if not df.empty else 0,
         }
-        
-        return stats
 
 
-# ==================== USAGE EXAMPLE ====================
-
-def main():
-    """
-    Example usage of OpenAlexCollector
-    """
+def main() -> None:
     from config.settings import (
-        OPENALEX_EMAIL, 
-        ANALYSIS_START_DATE, 
         ANALYSIS_END_DATE,
+        ANALYSIS_START_DATE,
         ALL_UNIVERSITIES,
-        RAW_PAPERS_CSV
+        OPENALEX_EMAIL,
+        RAW_PAPERS_CSV,
     )
-    
-    # Initialize collector
-    collector = OpenAlexCollector(
-        email=OPENALEX_EMAIL,
-        start_date=ANALYSIS_START_DATE,
-        end_date=ANALYSIS_END_DATE
-    )
-    
-    # For testing, fetch from just 3 universities first
-    test_universities = dict(list(ALL_UNIVERSITIES.items())[:3])
-    
-    # Fetch papers (limit to 100 per university for testing)
-    df = collector.fetch_all_universities(
-        universities=test_universities,
-        max_per_uni=100  # Remove this limit for full collection
-    )
-    
-    # Deduplicate
+
+    collector = OpenAlexCollector(OPENALEX_EMAIL, ANALYSIS_START_DATE, ANALYSIS_END_DATE)
+    sample_universities = dict(list(ALL_UNIVERSITIES.items())[:3])
+    df = collector.fetch_all_universities(sample_universities, max_per_uni=20)
     df = collector.deduplicate_papers(df)
-    
-    # Save to CSV
     collector.save_to_csv(df, RAW_PAPERS_CSV)
-    
-    # Print summary
     stats = collector.get_summary_stats(df)
-    print("\n" + "="*80)
-    print("COLLECTION SUMMARY")
-    print("="*80)
-    for key, value in stats.items():
-        if key not in ['papers_per_university', 'papers_per_year']:
-            print(f"{key}: {value}")
+    logger.info("Summary: %s", stats)
 
 
 if __name__ == "__main__":
+    logging.basicConfig(level=logging.INFO)
     main()

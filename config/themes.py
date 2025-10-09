@@ -5,16 +5,25 @@ Babcock's 9 Strategic Themes with keywords for filtering and mapping
 BABCOCK_THEMES = {
     "Defense_Security": {
         "keywords": [
-            "defense", "military", "surveillance", "threat detection", 
-            "security systems", "radar", "sonar", "command control",
-            "tactical systems", "weapons systems", "defense technology",
-            "situational awareness", "force protection", "intelligence systems",
-            "defense capability", "military technology", "combat systems"
+            "defense", "defence", "military", "armed forces", "surveillance",
+            "threat detection", "security systems", "radar", "sonar",
+            "command control", "command and control", "tactical systems",
+            "weapons systems", "weapon", "missile", "defense technology",
+            "defence technology", "situational awareness", "force protection",
+            "intelligence systems", "intelligence", "national security",
+            "security policy", "military operations", "warfighting",
+            "combat systems", "combat capability", "defense industry",
+            "defence industry", "maritime security", "naval warfare",
+            "navy", "air force", "army", "joint operations",
+            "c4isr", "electronic warfare", "countermeasure", "battlefield",
+            "strategic deterrence", "homeland security", "coastal defence",
+            "border security", "anti-submarine", "ship defence",
+            "sea control", "mission planning"
         ],
         "strategic_priority": "HIGH",
         "description": "Defense and security systems for military applications"
     },
-    
+
     "Autonomous_Systems": {
         "keywords": [
             "autonomous", "robot", "robotics", "UAV", "AUV", "UGV",

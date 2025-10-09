@@ -105,12 +105,23 @@ class BabcockTopicAnalyzer:
         if self.topic_model is None:
             self.create_bertopic_model()
         
-        # Check if embeddings already exist
+        # Check if embeddings already exist and match current documents
         embeddings = None
         if embeddings_path and os.path.exists(embeddings_path):
-            logger.info(f"\n[OK] Loading cached embeddings from {embeddings_path}")
-            embeddings = np.load(embeddings_path)
-        else:
+            try:
+                logger.info(f"\n[OK] Loading cached embeddings from {embeddings_path}")
+                cached = np.load(embeddings_path)
+                if isinstance(cached, np.ndarray) and cached.ndim == 2 and cached.shape[0] == len(documents):
+                    embeddings = cached
+                    logger.info(f"[OK] Using cached embeddings with shape {cached.shape}")
+                else:
+                    logger.warning(
+                        f"[WARN] Ignoring stale embeddings cache. Expected ({len(documents)}, vector_dim) "
+                        f"but got {getattr(cached, 'shape', None)}"
+                    )
+            except Exception as e:
+                logger.warning(f"[WARN] Failed to load embeddings cache ({e}); will recompute.")
+        if embeddings is None:
             logger.info("\nGenerating embeddings (this may take 1-2 minutes)...")
         
         # Fit model
@@ -121,12 +132,20 @@ class BabcockTopicAnalyzer:
         topics, probs = self.topic_model.fit_transform(documents, embeddings)
         elapsed = (datetime.now() - start_time).total_seconds()
         
-        # Save embeddings for future use
-        if embeddings_path and embeddings is None:
-            # Get embeddings from the fitted model
-            embeddings = self.topic_model.embedding_model.embed_documents(documents)
-            np.save(embeddings_path, embeddings)
-            logger.info(f"[OK] Saved embeddings to {embeddings_path}")
+        # Save embeddings for future use (save only when we generated fresh)
+        if embeddings_path and (not os.path.exists(embeddings_path) or embeddings is None):
+            try:
+                # SentenceTransformer provides .encode
+                emb_model = self.topic_model.embedding_model
+                if hasattr(emb_model, 'encode'):
+                    fresh_emb = emb_model.encode(documents, show_progress_bar=False, normalize_embeddings=False)
+                else:
+                    # Fallback to call that some wrappers expose
+                    fresh_emb = emb_model.embed_documents(documents)
+                np.save(embeddings_path, fresh_emb)
+                logger.info(f"[OK] Saved embeddings to {embeddings_path} with shape {np.array(fresh_emb).shape}")
+            except Exception as e:
+                logger.warning(f"[WARN] Could not save embeddings cache: {e}")
         
         # Log results
         unique_topics = len(set(topics)) - 1  # Exclude -1 (outliers)

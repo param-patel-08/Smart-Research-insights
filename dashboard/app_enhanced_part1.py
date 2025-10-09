@@ -27,7 +27,7 @@ from config.settings import (
 
 st.set_page_config(
     page_title="Babcock Research Trends",
-    page_icon="🔬",
+    page_icon=" ",
     layout="wide",
     initial_sidebar_state="expanded"
 )
@@ -130,14 +130,14 @@ def load_data():
 def add_export_section(filtered_data, page_name):
     """Add CSV export capabilities"""
     st.markdown("---")
-    st.markdown("## 📤 Export Options")
+    st.markdown("##   Export Options")
     
     col1, col2 = st.columns(2)
     
     with col1:
         csv_data = filtered_data.to_csv(index=False)
         st.download_button(
-            label="📊 Download CSV",
+            label="  Download CSV",
             data=csv_data,
             file_name=f"babcock_{page_name}_{datetime.now().strftime('%Y%m%d_%H%M')}.csv",
             mime="text/csv",
@@ -165,7 +165,7 @@ def add_export_section(filtered_data, page_name):
             
             excel_data = output.getvalue()
             st.download_button(
-                label="📈 Download Excel",
+                label="  Download Excel",
                 data=excel_data,
                 file_name=f"babcock_{page_name}_{datetime.now().strftime('%Y%m%d_%H%M')}.xlsx",
                 mime="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
@@ -177,7 +177,7 @@ def add_export_section(filtered_data, page_name):
 try:
     papers_df, trends, mapping = load_data()
 except FileNotFoundError as e:
-    st.error(f"⚠️ Data files not found! Please run: `python run_full_analysis.py`\nMissing: {e}")
+    st.error(f"   Data files not found! Please run: `python run_full_analysis.py`\nMissing: {e}")
     st.stop()
 
 # Derive helper columns

@@ -283,7 +283,7 @@ class PaperPreprocessor:
         df_save['tokens'] = df_save['tokens'].apply(lambda x: '|'.join(x) if x else '')
         
         df_save.to_csv(filepath, index=False)
-        logger.info(f"✓ Saved processed data to: {filepath}")
+        logger.info(f"  Saved processed data to: {filepath}")
 
 
 # ==================== USAGE EXAMPLE ====================
