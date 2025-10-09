@@ -6,24 +6,22 @@ All code is complete! Here's what's built:
 
 ### Core Modules (Ready to Run)
 
--   **OpenAlex Data Collector** - Fetches papers from 24 universities
 -   **Preprocessor** - Cleans and filters papers
 -   **BERTopic Analyzer** - Discovers research topics
 -   **Theme Mapper** - Maps topics to 9 Babcock themes
 -   **Trend Analyzer** - Identifies growth patterns
 
-### Scripts
-
--   **run_full_analysis.py** - One command runs everything!
--   **exploration/view_results.py** - Quick text summary of results
--   **tests/test_setup.py** - Verify installation
-
-### Configuration
+  ### Scripts
+ 
+  -   **run_full_analysis.py** - One command runs everything!
+  -   **view_results.py** - Quick text summary of results
+  -   **tests/test_setup.py** - Verify installation
+ 
+  ### Configuration
 
 -   **config/themes.py** - 9 Babcock strategic themes defined
 -   **config/settings.py** - All settings configured
 -   **requirements.txt** - All dependencies listed
-
 ---
 
 ##   3-Step Setup (5 Minutes)
