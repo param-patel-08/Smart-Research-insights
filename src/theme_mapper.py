@@ -18,7 +18,17 @@ logger = logging.getLogger(__name__)
 
 
 DEFAULT_THEME_THRESHOLDS: Dict[str, float] = {
-    "Defense_Security": 0.005,
+    # Higher threshold to prevent over-assignment into Defense/Security
+    "Defense_Security": 0.03,
+    # Reasonable minimums for other themes to balance coverage
+    "Cybersecurity": 0.02,
+    "Autonomous_Systems": 0.02,
+    "Marine_Naval": 0.02,
+    "AI_Machine_Learning": 0.02,
+    "Advanced_Manufacturing": 0.015,
+    "Energy_Sustainability": 0.015,
+    "Space_Aerospace": 0.015,
+    "Digital_Transformation": 0.015,
 }
 
 
@@ -42,7 +52,8 @@ class ThemeMapper:
         self.min_similarity = min_similarity
         self.theme_thresholds = {**DEFAULT_THEME_THRESHOLDS, **(theme_thresholds or {})}
         self.topic_theme_mapping: Dict[str, Dict] = {}
-        self._vectorizer = TfidfVectorizer()
+        # Use bigrams and English stopwords for stronger semantic matching
+        self._vectorizer = TfidfVectorizer(ngram_range=(1, 2), stop_words="english")
         logger.info(
             "Theme Mapper initialized with %d themes (default threshold=%.3f)",
             len(babcock_themes),
