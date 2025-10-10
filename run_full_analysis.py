@@ -137,6 +137,7 @@ def main():
         )
         
         df = collector.deduplicate_papers(df)
+        df = collector.filter_by_cited_by_count(df, min_citations=1)
         collector.save_to_csv(df, RAW_PAPERS_CSV)
         
         return df

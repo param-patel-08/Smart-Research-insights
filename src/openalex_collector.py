@@ -349,6 +349,13 @@ class OpenAlexCollector:
     # ------------------------------------------------------------------
     # Utility helpers
     # ------------------------------------------------------------------
+    def filter_by_cited_by_count(self, df: pd.DataFrame, min_citations: int) -> pd.DataFrame:
+        original_count = len(df)
+        df = df[df["citations"] >= min_citations]
+        logger.info("Filtered papers with < %s citations: removed %s (%.1f%%)", min_citations, original_count - len(df), (original_count - len(df)) / max(original_count, 1) * 100)
+        logger.info("Papers remaining: %s", len(df))
+        return df
+    
     def deduplicate_papers(self, df: pd.DataFrame) -> pd.DataFrame:
         original_count = len(df)
 
@@ -397,6 +404,7 @@ def main() -> None:
     sample_universities = dict(list(ALL_UNIVERSITIES.items())[:3])
     df = collector.fetch_all_universities(sample_universities, max_per_uni=20)
     df = collector.deduplicate_papers(df)
+    df = collector.filter_by_cited_by_count(df, min_citations=1)
     collector.save_to_csv(df, RAW_PAPERS_CSV)
     stats = collector.get_summary_stats(df)
     logger.info("Summary: %s", stats)
