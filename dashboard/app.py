@@ -296,10 +296,13 @@ end_date = cd2.date_input("To", value=st.session_state["filters"]["end"], min_va
 
 all_themes = sorted(list(BABCOCK_THEMES.keys()))
 sel_themes = st.sidebar.multiselect(" Themes", options=all_themes, default=all_themes, key="flt_themes")
+
+# Fix: Convert university column to string and remove NaN values
+unique_unis = papers_df["university"].dropna().astype(str).unique()
 sel_unis = st.sidebar.multiselect(
     "Universities",
-    options=sorted(papers_df["university"].unique()),
-    default=sorted(papers_df["university"].unique())[:10],
+    options=sorted(unique_unis),
+    default=sorted(unique_unis)[:10] if len(unique_unis) > 10 else sorted(unique_unis),
     key="flt_unis",
 )
 min_conf = st.sidebar.slider("Min Confidence (%)", 0, 100, st.session_state["filters"]["min_conf"], 5, key="flt_conf")

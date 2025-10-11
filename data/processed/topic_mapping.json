@@ -1,684 +1,12 @@
 {
   "0": {
-    "theme": "Other",
-    "confidence": 0.0,
-    "all_scores": {
-      "Defense_Security": 0.0,
-      "Autonomous_Systems": 0.0,
-      "Cybersecurity": 0.0,
-      "Energy_Sustainability": 0.0,
-      "Advanced_Manufacturing": 0.0,
-      "AI_Machine_Learning": 0.0,
-      "Marine_Naval": 0.0,
-      "Space_Aerospace": 0.0,
-      "Digital_Transformation": 0.0
-    },
-    "keywords": [
-      "math",
-      "mrow",
-      "star",
-      "galaxy",
-      "mass",
-      "mml",
-      "xmlns",
-      "math xmlns",
-      "display inline",
-      "inline"
-    ],
-    "count": 30
-  },
-  "1": {
-    "theme": "Other",
-    "confidence": 0.0,
-    "all_scores": {
-      "Defense_Security": 0.0,
-      "Autonomous_Systems": 0.0,
-      "Cybersecurity": 0.0,
-      "Energy_Sustainability": 0.0,
-      "Advanced_Manufacturing": 0.0,
-      "AI_Machine_Learning": 0.0,
-      "Marine_Naval": 0.0,
-      "Space_Aerospace": 0.0,
-      "Digital_Transformation": 0.0
-    },
-    "keywords": [
-      "gold",
-      "mantle",
-      "earth",
-      "deposit",
-      "magma",
-      "mineralization",
-      "fluids",
-      "deposits",
-      "margin",
-      "rock"
-    ],
-    "count": 32
-  },
-  "2": {
-    "theme": "Defense_Security",
-    "confidence": 0.02461188704366801,
-    "all_scores": {
-      "Defense_Security": 0.02461188704366801,
-      "Autonomous_Systems": 0.0,
-      "Cybersecurity": 0.0,
-      "Energy_Sustainability": 0.0,
-      "Advanced_Manufacturing": 0.0,
-      "AI_Machine_Learning": 0.0,
-      "Marine_Naval": 0.022659478435638834,
-      "Space_Aerospace": 0.0,
-      "Digital_Transformation": 0.0
-    },
-    "keywords": [
-      "strength",
-      "rock",
-      "design",
-      "cone",
-      "method",
-      "properties",
-      "wearable",
-      "friction",
-      "force",
-      "strain"
-    ],
-    "count": 46
-  },
-  "3": {
-    "theme": "Advanced_Manufacturing",
-    "confidence": 0.020767952604547658,
-    "all_scores": {
-      "Defense_Security": 0.0,
-      "Autonomous_Systems": 0.0,
-      "Cybersecurity": 0.0,
-      "Energy_Sustainability": 0.0,
-      "Advanced_Manufacturing": 0.020767952604547658,
-      "AI_Machine_Learning": 0.0,
-      "Marine_Naval": 0.0,
-      "Space_Aerospace": 0.0,
-      "Digital_Transformation": 0.0
-    },
-    "keywords": [
-      "samples",
-      "properties",
-      "strength",
-      "mechanical",
-      "flexural",
-      "coal",
-      "layer",
-      "printing",
-      "bonding",
-      "thermal"
-    ],
-    "count": 22
-  },
-  "4": {
-    "theme": "Advanced_Manufacturing",
-    "confidence": 0.14649351182365034,
-    "all_scores": {
-      "Defense_Security": 0.0,
-      "Autonomous_Systems": 0.0,
-      "Cybersecurity": 0.0,
-      "Energy_Sustainability": 0.02110839868237618,
-      "Advanced_Manufacturing": 0.14649351182365034,
-      "AI_Machine_Learning": 0.0,
-      "Marine_Naval": 0.0,
-      "Space_Aerospace": 0.0,
-      "Digital_Transformation": 0.0
-    },
-    "keywords": [
-      "phase",
-      "materials",
-      "light",
-      "perovskite",
-      "solar",
-      "applications",
-      "electron",
-      "quantum",
-      "structure",
-      "properties"
-    ],
-    "count": 91
-  },
-  "5": {
-    "theme": "Energy_Sustainability",
-    "confidence": 0.18057760562687086,
-    "all_scores": {
-      "Defense_Security": 0.0,
-      "Autonomous_Systems": 0.0,
-      "Cybersecurity": 0.0,
-      "Energy_Sustainability": 0.18057760562687086,
-      "Advanced_Manufacturing": 0.0,
-      "AI_Machine_Learning": 0.0,
-      "Marine_Naval": 0.0,
-      "Space_Aerospace": 0.0,
-      "Digital_Transformation": 0.0
-    },
-    "keywords": [
-      "batteries",
-      "ion",
-      "cathode",
-      "electrolyte",
-      "energy",
-      "capacity",
-      "sulfur",
-      "lithium",
-      "cycling",
-      "storage"
-    ],
-    "count": 28
-  },
-  "6": {
-    "theme": "Advanced_Manufacturing",
-    "confidence": 0.020767952604547654,
-    "all_scores": {
-      "Defense_Security": 0.0,
-      "Autonomous_Systems": 0.0,
-      "Cybersecurity": 0.0,
-      "Energy_Sustainability": 0.0,
-      "Advanced_Manufacturing": 0.020767952604547654,
-      "AI_Machine_Learning": 0.0,
-      "Marine_Naval": 0.0,
-      "Space_Aerospace": 0.0,
-      "Digital_Transformation": 0.0
-    },
-    "keywords": [
-      "oxygen",
-      "catalysts",
-      "seawater",
-      "catalytic",
-      "activity",
-      "reaction",
-      "catalyst",
-      "metal",
-      "water",
-      "reduction"
-    ],
-    "count": 34
-  },
-  "7": {
-    "theme": "Other",
-    "confidence": 0.0,
-    "all_scores": {
-      "Defense_Security": 0.0,
-      "Autonomous_Systems": 0.0,
-      "Cybersecurity": 0.0,
-      "Energy_Sustainability": 0.0,
-      "Advanced_Manufacturing": 0.0,
-      "AI_Machine_Learning": 0.0,
-      "Marine_Naval": 0.0,
-      "Space_Aerospace": 0.0,
-      "Digital_Transformation": 0.0
-    },
-    "keywords": [
-      "asthma",
-      "milk",
-      "allergic",
-      "microbiota",
-      "inhaler",
-      "melatonin",
-      "infant",
-      "maternal",
-      "colitis",
-      "microbiome"
-    ],
-    "count": 18
-  },
-  "8": {
-    "theme": "Other",
-    "confidence": 0.0,
-    "all_scores": {
-      "Defense_Security": 0.0,
-      "Autonomous_Systems": 0.0,
-      "Cybersecurity": 0.0,
-      "Energy_Sustainability": 0.0,
-      "Advanced_Manufacturing": 0.0,
-      "AI_Machine_Learning": 0.0,
-      "Marine_Naval": 0.0,
-      "Space_Aerospace": 0.0,
-      "Digital_Transformation": 0.0
-    },
-    "keywords": [
-      "muscle",
-      "ageing",
-      "anorexia",
-      "exercise",
-      "crm",
-      "age",
-      "perioperative",
-      "intake",
-      "training",
-      "mass"
-    ],
-    "count": 30
-  },
-  "9": {
-    "theme": "Other",
-    "confidence": 0.0,
-    "all_scores": {
-      "Defense_Security": 0.0,
-      "Autonomous_Systems": 0.0,
-      "Cybersecurity": 0.0,
-      "Energy_Sustainability": 0.0,
-      "Advanced_Manufacturing": 0.0,
-      "AI_Machine_Learning": 0.0,
-      "Marine_Naval": 0.0,
-      "Space_Aerospace": 0.0,
-      "Digital_Transformation": 0.0
-    },
-    "keywords": [
-      "sleep",
-      "exercise",
-      "physical",
-      "physical activity",
-      "pulse",
-      "dental",
-      "max",
-      "activity",
-      "sleep quality",
-      "triage"
-    ],
-    "count": 19
-  },
-  "10": {
-    "theme": "AI_Machine_Learning",
-    "confidence": 0.24047558323740756,
-    "all_scores": {
-      "Defense_Security": 0.012255064617124285,
-      "Autonomous_Systems": 0.0,
-      "Cybersecurity": 0.06861024832206948,
-      "Energy_Sustainability": 0.0,
-      "Advanced_Manufacturing": 0.0,
-      "AI_Machine_Learning": 0.24047558323740756,
-      "Marine_Naval": 0.0,
-      "Space_Aerospace": 0.0,
-      "Digital_Transformation": 0.024339961667727356
-    },
-    "keywords": [
-      "data",
-      "learning",
-      "accuracy",
-      "proposed",
-      "performance",
-      "based",
-      "detection",
-      "network",
-      "real",
-      "machine"
-    ],
-    "count": 129
-  },
-  "11": {
-    "theme": "Other",
-    "confidence": 0.0,
-    "all_scores": {
-      "Defense_Security": 0.0,
-      "Autonomous_Systems": 0.0,
-      "Cybersecurity": 0.0,
-      "Energy_Sustainability": 0.0,
-      "Advanced_Manufacturing": 0.0,
-      "AI_Machine_Learning": 0.0,
-      "Marine_Naval": 0.0,
-      "Space_Aerospace": 0.0,
-      "Digital_Transformation": 0.0
-    },
-    "keywords": [
-      "protein",
-      "residues",
-      "amino",
-      "proteins",
-      "binding",
-      "drug",
-      "enzymes",
-      "parameter",
-      "sequences",
-      "peptides"
-    ],
-    "count": 19
-  },
-  "12": {
-    "theme": "Defense_Security",
-    "confidence": 0.009920706349580167,
-    "all_scores": {
-      "Defense_Security": 0.009920706349580167,
-      "Autonomous_Systems": 0.0,
-      "Cybersecurity": 0.0,
-      "Energy_Sustainability": 0.0,
-      "Advanced_Manufacturing": 0.0,
-      "AI_Machine_Learning": 0.0,
-      "Marine_Naval": 0.0,
-      "Space_Aerospace": 0.0,
-      "Digital_Transformation": 0.0
-    },
-    "keywords": [
-      "wolbachia",
-      "jev",
-      "surveillance",
-      "covid",
-      "dengue",
-      "vaccine",
-      "australia",
-      "cov",
-      "sars",
-      "sars cov"
-    ],
-    "count": 32
-  },
-  "13": {
-    "theme": "Other",
-    "confidence": 0.0,
-    "all_scores": {
-      "Defense_Security": 0.0,
-      "Autonomous_Systems": 0.0,
-      "Cybersecurity": 0.0,
-      "Energy_Sustainability": 0.0,
-      "Advanced_Manufacturing": 0.0,
-      "AI_Machine_Learning": 0.0,
-      "Marine_Naval": 0.0,
-      "Space_Aerospace": 0.0,
-      "Digital_Transformation": 0.0
-    },
-    "keywords": [
-      "plant",
-      "soil",
-      "plants",
-      "leaf",
-      "root",
-      "species",
-      "crop",
-      "stress",
-      "yield",
-      "growth"
-    ],
-    "count": 80
-  },
-  "14": {
-    "theme": "Other",
-    "confidence": 0.0,
-    "all_scores": {
-      "Defense_Security": 0.0,
-      "Autonomous_Systems": 0.0,
-      "Cybersecurity": 0.0,
-      "Energy_Sustainability": 0.0,
-      "Advanced_Manufacturing": 0.0,
-      "AI_Machine_Learning": 0.0,
-      "Marine_Naval": 0.0,
-      "Space_Aerospace": 0.0,
-      "Digital_Transformation": 0.0
-    },
-    "keywords": [
-      "introgression",
-      "selection",
-      "drive",
-      "animals",
-      "asexual",
-      "sperm",
-      "svs",
-      "females",
-      "character",
-      "populations"
-    ],
-    "count": 15
-  },
-  "15": {
-    "theme": "Marine_Naval",
-    "confidence": 0.12875453529760575,
-    "all_scores": {
-      "Defense_Security": 0.0,
-      "Autonomous_Systems": 0.0,
-      "Cybersecurity": 0.0,
-      "Energy_Sustainability": 0.0,
-      "Advanced_Manufacturing": 0.0,
-      "AI_Machine_Learning": 0.0,
-      "Marine_Naval": 0.12875453529760575,
-      "Space_Aerospace": 0.0,
-      "Digital_Transformation": 0.0
-    },
-    "keywords": [
-      "species",
-      "coral",
-      "reef",
-      "ecosystem",
-      "habitat",
-      "reefs",
-      "marine",
-      "biodiversity",
-      "ecosystems",
-      "fisheries"
-    ],
-    "count": 64
-  },
-  "16": {
-    "theme": "Advanced_Manufacturing",
-    "confidence": 0.020767952604547654,
-    "all_scores": {
-      "Defense_Security": 0.0,
-      "Autonomous_Systems": 0.0,
-      "Cybersecurity": 0.0,
-      "Energy_Sustainability": 0.0,
-      "Advanced_Manufacturing": 0.020767952604547654,
-      "AI_Machine_Learning": 0.0,
-      "Marine_Naval": 0.0,
-      "Space_Aerospace": 0.0,
-      "Digital_Transformation": 0.0
-    },
-    "keywords": [
-      "resistance",
-      "resistant",
-      "tuberculosis",
-      "antimicrobial",
-      "antibiotic",
-      "amr",
-      "infection",
-      "coli",
-      "isolates",
-      "activity"
-    ],
-    "count": 55
-  },
-  "17": {
-    "theme": "Other",
-    "confidence": 0.0,
-    "all_scores": {
-      "Defense_Security": 0.0,
-      "Autonomous_Systems": 0.0,
-      "Cybersecurity": 0.0,
-      "Energy_Sustainability": 0.0,
-      "Advanced_Manufacturing": 0.0,
-      "AI_Machine_Learning": 0.0,
-      "Marine_Naval": 0.0,
-      "Space_Aerospace": 0.0,
-      "Digital_Transformation": 0.0
-    },
-    "keywords": [
-      "species",
-      "microbial",
-      "italic",
-      "genome",
-      "sequencing",
-      "genomes",
-      "gene",
-      "abundance",
-      "protein",
-      "microbiome"
-    ],
-    "count": 66
-  },
-  "18": {
-    "theme": "Energy_Sustainability",
-    "confidence": 0.02110839868237618,
-    "all_scores": {
-      "Defense_Security": 0.0,
-      "Autonomous_Systems": 0.0,
-      "Cybersecurity": 0.0,
-      "Energy_Sustainability": 0.02110839868237618,
-      "Advanced_Manufacturing": 0.0,
-      "AI_Machine_Learning": 0.0,
-      "Marine_Naval": 0.0,
-      "Space_Aerospace": 0.0,
-      "Digital_Transformation": 0.0
-    },
-    "keywords": [
-      "bone",
-      "delivery",
-      "cells",
-      "cell",
-      "drug",
-      "properties",
-      "paw",
-      "cancer",
-      "therapeutic",
-      "nanoparticles"
-    ],
-    "count": 30
-  },
-  "19": {
-    "theme": "Other",
-    "confidence": 0.0,
-    "all_scores": {
-      "Defense_Security": 0.0,
-      "Autonomous_Systems": 0.0,
-      "Cybersecurity": 0.0,
-      "Energy_Sustainability": 0.0,
-      "Advanced_Manufacturing": 0.0,
-      "AI_Machine_Learning": 0.0,
-      "Marine_Naval": 0.0,
-      "Space_Aerospace": 0.0,
-      "Digital_Transformation": 0.0
-    },
-    "keywords": [
-      "retinal",
-      "visual",
-      "eyes",
-      "macular",
-      "iop",
-      "vegf",
-      "intraocular",
-      "diabetic",
-      "perfusion",
-      "eye"
-    ],
-    "count": 28
-  },
-  "20": {
-    "theme": "Energy_Sustainability",
-    "confidence": 0.017087647546558442,
-    "all_scores": {
-      "Defense_Security": 0.0,
-      "Autonomous_Systems": 0.0,
-      "Cybersecurity": 0.0,
-      "Energy_Sustainability": 0.017087647546558442,
-      "Advanced_Manufacturing": 0.0,
-      "AI_Machine_Learning": 0.0,
-      "Marine_Naval": 0.0,
-      "Space_Aerospace": 0.0,
-      "Digital_Transformation": 0.0
-    },
-    "keywords": [
-      "cancer",
-      "tumor",
-      "prostate",
-      "tumors",
-      "prostate cancer",
-      "expression",
-      "cells",
-      "cell",
-      "patients",
-      "metastasis"
-    ],
-    "count": 44
-  },
-  "21": {
-    "theme": "Other",
-    "confidence": 0.0,
-    "all_scores": {
-      "Defense_Security": 0.0,
-      "Autonomous_Systems": 0.0,
-      "Cybersecurity": 0.0,
-      "Energy_Sustainability": 0.0,
-      "Advanced_Manufacturing": 0.0,
-      "AI_Machine_Learning": 0.0,
-      "Marine_Naval": 0.0,
-      "Space_Aerospace": 0.0,
-      "Digital_Transformation": 0.0
-    },
-    "keywords": [
-      "patients",
-      "hcc",
-      "survival",
-      "auto",
-      "cancer",
-      "pfs",
-      "median",
-      "response",
-      "recurrence",
-      "liver"
-    ],
-    "count": 30
-  },
-  "22": {
-    "theme": "Other",
-    "confidence": 0.0,
-    "all_scores": {
-      "Defense_Security": 0.0,
-      "Autonomous_Systems": 0.0,
-      "Cybersecurity": 0.0,
-      "Energy_Sustainability": 0.0,
-      "Advanced_Manufacturing": 0.0,
-      "AI_Machine_Learning": 0.0,
-      "Marine_Naval": 0.0,
-      "Space_Aerospace": 0.0,
-      "Digital_Transformation": 0.0
-    },
-    "keywords": [
-      "pregnancy",
-      "birth",
-      "women",
-      "pregnancies",
-      "fetal",
-      "live birth",
-      "live",
-      "risk",
-      "maternal",
-      "placental"
-    ],
-    "count": 40
-  },
-  "23": {
-    "theme": "Other",
-    "confidence": 0.0,
-    "all_scores": {
-      "Defense_Security": 0.0,
-      "Autonomous_Systems": 0.0,
-      "Cybersecurity": 0.0,
-      "Energy_Sustainability": 0.0,
-      "Advanced_Manufacturing": 0.0,
-      "AI_Machine_Learning": 0.0,
-      "Marine_Naval": 0.0,
-      "Space_Aerospace": 0.0,
-      "Digital_Transformation": 0.0
-    },
-    "keywords": [
-      "eating",
-      "dietary",
-      "nutrition",
-      "disordered",
-      "food",
-      "treatment",
-      "weight",
-      "disorder",
-      "feeding",
-      "child"
-    ],
-    "count": 50
-  },
-  "24": {
     "theme": "Digital_Transformation",
     "confidence": 0.04949209269694995,
     "all_scores": {
-      "Defense_Security": 0.012255064617124285,
+      "Defense_Security": 0.0,
       "Autonomous_Systems": 0.0,
       "Cybersecurity": 0.0,
-      "Energy_Sustainability": 0.02110839868237618,
+      "Energy_Sustainability": 0.0,
       "Advanced_Manufacturing": 0.0,
       "AI_Machine_Learning": 0.0,
       "Marine_Naval": 0.0,
@@ -686,165 +14,81 @@
       "Digital_Transformation": 0.04949209269694995
     },
     "keywords": [
-      "social",
       "health",
-      "climate",
-      "green",
-      "urban",
-      "digital",
-      "policy",
-      "paper",
-      "findings",
-      "change"
-    ],
-    "count": 208
-  },
-  "25": {
-    "theme": "Other",
-    "confidence": 0.0,
-    "all_scores": {
-      "Defense_Security": 0.0,
-      "Autonomous_Systems": 0.0,
-      "Cybersecurity": 0.0,
-      "Energy_Sustainability": 0.0,
-      "Advanced_Manufacturing": 0.0,
-      "AI_Machine_Learning": 0.0,
-      "Marine_Naval": 0.0,
-      "Space_Aerospace": 0.0,
-      "Digital_Transformation": 0.0
-    },
-    "keywords": [
-      "indigenous",
-      "peoples",
-      "aboriginal",
-      "children",
-      "students",
-      "aboriginal torres",
-      "aboriginal torres strait",
-      "islander",
-      "strait islander",
-      "torres strait islander"
-    ],
-    "count": 45
-  },
-  "26": {
-    "theme": "Cybersecurity",
-    "confidence": 0.017377258665796945,
-    "all_scores": {
-      "Defense_Security": 0.0,
-      "Autonomous_Systems": 0.0,
-      "Cybersecurity": 0.017377258665796945,
-      "Energy_Sustainability": 0.0,
-      "Advanced_Manufacturing": 0.0,
-      "AI_Machine_Learning": 0.015609704103181797,
-      "Marine_Naval": 0.0,
-      "Space_Aerospace": 0.0,
-      "Digital_Transformation": 0.0
-    },
-    "keywords": [
+      "covid",
       "care",
-      "health",
-      "mental",
-      "support",
-      "autistic",
-      "interventions",
-      "anxiety",
-      "data",
-      "social",
-      "mental health"
+      "digital",
+      "patients",
+      "medical",
+      "healthcare",
+      "access",
+      "clinical",
+      "patient"
     ],
-    "count": 228
+    "count": 88
   },
-  "27": {
-    "theme": "Other",
-    "confidence": 0.0,
+  "1": {
+    "theme": "Cybersecurity",
+    "confidence": 0.26245669136809274,
     "all_scores": {
-      "Defense_Security": 0.0,
+      "Defense_Security": 0.175396523205612,
       "Autonomous_Systems": 0.0,
-      "Cybersecurity": 0.0,
+      "Cybersecurity": 0.26245669136809274,
       "Energy_Sustainability": 0.0,
       "Advanced_Manufacturing": 0.0,
       "AI_Machine_Learning": 0.0,
       "Marine_Naval": 0.0,
-      "Space_Aerospace": 0.0,
+      "Space_Aerospace": 0.20753287066498147,
       "Digital_Transformation": 0.0
     },
     "keywords": [
-      "brain",
-      "cognitive",
-      "cortical",
-      "alzheimer",
-      "eeg",
-      "alzheimer disease",
-      "motor",
-      "amyloid",
-      "fmri",
-      "disease"
-    ],
-    "count": 37
-  },
-  "28": {
-    "theme": "Other",
-    "confidence": 0.0,
-    "all_scores": {
-      "Defense_Security": 0.0,
-      "Autonomous_Systems": 0.0,
-      "Cybersecurity": 0.0,
-      "Energy_Sustainability": 0.0,
-      "Advanced_Manufacturing": 0.0,
-      "AI_Machine_Learning": 0.0,
-      "Marine_Naval": 0.0,
-      "Space_Aerospace": 0.0,
-      "Digital_Transformation": 0.0
-    },
-    "keywords": [
-      "syn",
-      "neurons",
-      "als",
-      "brain",
-      "synaptic",
-      "neurodegenerative",
-      "motor",
-      "negr",
-      "msa",
-      "diseases"
+      "security",
+      "cyber",
+      "satellite",
+      "attack",
+      "monitor",
+      "cybersecurity",
+      "vehicles",
+      "operations",
+      "attacks",
+      "space systems"
     ],
     "count": 23
   },
-  "29": {
-    "theme": "Other",
-    "confidence": 0.0,
+  "2": {
+    "theme": "Cybersecurity",
+    "confidence": 0.3533376777669352,
     "all_scores": {
-      "Defense_Security": 0.0,
+      "Defense_Security": 0.07734781234369076,
       "Autonomous_Systems": 0.0,
-      "Cybersecurity": 0.0,
+      "Cybersecurity": 0.3533376777669352,
       "Energy_Sustainability": 0.0,
       "Advanced_Manufacturing": 0.0,
       "AI_Machine_Learning": 0.0,
       "Marine_Naval": 0.0,
       "Space_Aerospace": 0.0,
-      "Digital_Transformation": 0.0
+      "Digital_Transformation": 0.04949209269694995
     },
     "keywords": [
-      "kidney",
-      "ckd",
-      "krt",
-      "transplant",
-      "transplantation",
-      "cesarean",
-      "organ",
-      "kidney disease",
-      "epi",
-      "patients"
+      "security",
+      "attacks",
+      "cyber",
+      "attack",
+      "adversarial",
+      "cybersecurity",
+      "iot",
+      "vulnerabilities",
+      "key",
+      "information"
     ],
-    "count": 28
+    "count": 41
   },
-  "30": {
-    "theme": "Other",
-    "confidence": 0.0,
+  "3": {
+    "theme": "Autonomous_Systems",
+    "confidence": 0.07850031981204608,
     "all_scores": {
       "Defense_Security": 0.0,
-      "Autonomous_Systems": 0.0,
+      "Autonomous_Systems": 0.07850031981204608,
       "Cybersecurity": 0.0,
       "Energy_Sustainability": 0.0,
       "Advanced_Manufacturing": 0.0,
@@ -854,17 +98,101 @@
       "Digital_Transformation": 0.0
     },
     "keywords": [
-      "stroke",
-      "patients",
-      "diabetes",
-      "risk",
-      "hypertension",
-      "cvd",
-      "cardiovascular",
-      "years",
-      "severe",
-      "blood"
+      "robotic",
+      "magnetic",
+      "spine",
+      "robot",
+      "bone",
+      "surgical",
+      "spinal",
+      "surgery",
+      "mri",
+      "imaging"
     ],
-    "count": 87
+    "count": 27
+  },
+  "4": {
+    "theme": "Energy_Sustainability",
+    "confidence": 0.14984429932333004,
+    "all_scores": {
+      "Defense_Security": 0.0,
+      "Autonomous_Systems": 0.051424517881632006,
+      "Cybersecurity": 0.0,
+      "Energy_Sustainability": 0.14984429932333004,
+      "Advanced_Manufacturing": 0.0,
+      "AI_Machine_Learning": 0.05949127614550777,
+      "Marine_Naval": 0.0,
+      "Space_Aerospace": 0.0,
+      "Digital_Transformation": 0.0
+    },
+    "keywords": [
+      "energy",
+      "self",
+      "slam",
+      "assembly",
+      "neural",
+      "transitions",
+      "locomotor",
+      "inference",
+      "active",
+      "complex"
+    ],
+    "count": 22
+  },
+  "5": {
+    "theme": "Autonomous_Systems",
+    "confidence": 0.13789074994362904,
+    "all_scores": {
+      "Defense_Security": 0.0,
+      "Autonomous_Systems": 0.13789074994362904,
+      "Cybersecurity": 0.0,
+      "Energy_Sustainability": 0.0,
+      "Advanced_Manufacturing": 0.0,
+      "AI_Machine_Learning": 0.0,
+      "Marine_Naval": 0.0,
+      "Space_Aerospace": 0.0,
+      "Digital_Transformation": 0.0
+    },
+    "keywords": [
+      "robot",
+      "robots",
+      "task",
+      "surgical",
+      "camera",
+      "navigation",
+      "robotic",
+      "feedback",
+      "motion",
+      "user"
+    ],
+    "count": 39
+  },
+  "6": {
+    "theme": "Autonomous_Systems",
+    "confidence": 0.07850031981204608,
+    "all_scores": {
+      "Defense_Security": 0.0,
+      "Autonomous_Systems": 0.07850031981204608,
+      "Cybersecurity": 0.0,
+      "Energy_Sustainability": 0.0,
+      "Advanced_Manufacturing": 0.0,
+      "AI_Machine_Learning": 0.0,
+      "Marine_Naval": 0.0,
+      "Space_Aerospace": 0.0,
+      "Digital_Transformation": 0.0
+    },
+    "keywords": [
+      "tool",
+      "robotic",
+      "retinal",
+      "surgery",
+      "surgical",
+      "robot",
+      "needle",
+      "tissue",
+      "insertion",
+      "depth"
+    ],
+    "count": 21
   }
 }

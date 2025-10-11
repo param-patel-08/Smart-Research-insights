@@ -90,6 +90,8 @@ def main():
     logger.info(f"Date range: {ANALYSIS_START_DATE.date()} to {ANALYSIS_END_DATE.date()}")
     logger.info(f"Universities: {len(ALL_UNIVERSITIES)}")
     logger.info(f"Themes: {len(BABCOCK_THEMES)}")
+    logger.info(f"Theme-based filtering: ENABLED (with relevance scoring)")
+    logger.info(f"Minimum relevance threshold: 0.2 (20% Babcock-specific)")
     
     # Ask user for data collection scope
     print("\n" + "="*80)
@@ -123,23 +125,38 @@ def main():
     # ==================== STEP 1: DATA COLLECTION ====================
     
     def step1_collect():
-        from src.openalex_collector import OpenAlexCollector
+        from src.theme_based_collector import ThemeBasedCollector
         
-        collector = OpenAlexCollector(
+        collector = ThemeBasedCollector(
             email=OPENALEX_EMAIL,
             start_date=ANALYSIS_START_DATE,
             end_date=ANALYSIS_END_DATE
         )
         
-        df = collector.fetch_all_universities(
+        # Map collection scope to theme parameters
+        if choice == "1":  # Quick test
+            max_per_theme = 50
+            priority_only = True  # Only HIGH priority themes
+        elif choice == "2":  # Medium test
+            max_per_theme = 100
+            priority_only = True
+        else:  # Full collection
+            max_per_theme = 500
+            priority_only = False  # All 9 themes
+        
+        # Fetch theme-filtered papers with relevance scoring
+        logger.info(f"Fetching papers with theme-based filtering (priority_only={priority_only})")
+        df = collector.fetch_all_themes(
             universities=test_universities,
-            max_per_uni=max_per_uni
+            max_per_theme=max_per_theme,
+            priority_only=priority_only,
+            min_relevance=0.5  # Only Babcock-relevant papers (50% threshold)
         )
         
         df = collector.deduplicate_papers(df)
-        df = collector.filter_by_cited_by_count(df, min_citations=1)
         collector.save_to_csv(df, RAW_PAPERS_CSV)
         
+        logger.info(f"Collected {len(df)} Babcock-relevant papers across themes")
         return df
     
     df_raw, success = run_step("1. DATA COLLECTION", step1_collect)

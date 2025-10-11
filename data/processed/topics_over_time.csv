@@ -1,275 +1,74 @@
 Topic,Words,Frequency,Timestamp
--1,"discharge, hours, lowest, icu, patients",8,2024-10-19 22:16:19.200
-3,"bonding, fiber, mew, layer, properties",2,2024-10-19 22:16:19.200
-4,"sub, small area, blend, devices, produce",2,2024-10-19 22:16:19.200
-5,"cathode, cycling, structure, ion, stability",1,2024-10-19 22:16:19.200
-6,"catalysts, oxygen, damage, acidic, nanotubes",2,2024-10-19 22:16:19.200
-7,"inhaler, device, inhaler technique, inhalers, adherence",1,2024-10-19 22:16:19.200
-8,"muscle, training, sarcomere, athletes, fascicle",2,2024-10-19 22:16:19.200
-9,"enjoyment, exercise, mental fatigue, tug, physical",1,2024-10-19 22:16:19.200
-10,"drought, characteristics, forecasting, fuel, driving",4,2024-10-19 22:16:19.200
-11,"measurement error, parameter, error model, error, measurement",1,2024-10-19 22:16:19.200
-15,"ocean, accounts, accounting, oceans, sustainability",1,2024-10-19 22:16:19.200
-16,"alleles, bla, mutations, variants, pneumoniae",1,2024-10-19 22:16:19.200
-17,"gut, microbiome, gut microbiome, microbiome composition, beneficial",1,2024-10-19 22:16:19.200
-18,"bone, mineralization, medium, composition, biomimetic",1,2024-10-19 22:16:19.200
-19,"input parameters, accommodating, myopia, eye, angle",1,2024-10-19 22:16:19.200
-24,"theories, technology, transfer, socio, technical",4,2024-10-19 22:16:19.200
-25,"teachers, belonging, school, writing, educators",3,2024-10-19 22:16:19.200
-26,"spb, care, proxy, suicide, hospital",6,2024-10-19 22:16:19.200
-29,"donation, death, organ, brain function, working group",1,2024-10-19 22:16:19.200
--1,"oxford, google scholar, scholar, works, google",7,2024-10-27 04:48:00.000
-2,"rubber, wash, coal, mixtures, materials",1,2024-10-27 04:48:00.000
-3,"spacer, properties, fabrics, thermal, stretchability",1,2024-10-27 04:48:00.000
-4,"solar, perovskite, panels, dust, optical",6,2024-10-27 04:48:00.000
-5,"aqueous, batteries, freezing, electrolyte, temperature",1,2024-10-27 04:48:00.000
-6,"oxygen, catalyst, single atom, atom, catalysts",2,2024-10-27 04:48:00.000
-8,"muscle, fda, sports, type, ageing",2,2024-10-27 04:48:00.000
-10,"algorithm, proposed, real, data, uav",5,2024-10-27 04:48:00.000
-13,"psi, electrons, photosynthesis, metabolic, redox",1,2024-10-27 04:48:00.000
-15,"rubble, trapping, traps, species, live",2,2024-10-27 04:48:00.000
-17,"pathway, genes, adaptation, warming, pathway genes",2,2024-10-27 04:48:00.000
-19,"drug delivery, microneedle, ocular, drug, delivery",1,2024-10-27 04:48:00.000
-20,"combination, pca, inhibitor, cancer, dot",2,2024-10-27 04:48:00.000
-21,"therapy response, bias, response, reported, pet",1,2024-10-27 04:48:00.000
-22,"response covid, costs economic, telehealth integrated, ongoing use, high low risk",1,2024-10-27 04:48:00.000
-24,"circular, fashion, social, parties, consumer",8,2024-10-27 04:48:00.000
-25,"bullying, learning, learning practice, teacher, school",2,2024-10-27 04:48:00.000
-26,"care, failure, supportive care, supportive, nurse",7,2024-10-27 04:48:00.000
-27,"predictability, reading, processing, prediction, language",1,2024-10-27 04:48:00.000
-28,"neurodegenerative diseases, neurodegenerative, ros, diseases, nervous",1,2024-10-27 04:48:00.000
--1,"cancer, prostate cancer, prostate, care, risk",7,2024-11-03 09:36:00.000
-2,"slag, strength, mpa, replacement, mechanical",1,2024-11-03 09:36:00.000
-3,"ash, solid liquid, solid liquid ratio, liquid ratio, ceramic",2,2024-11-03 09:36:00.000
-4,"thermoelectric, formula text, formula, defect, defect engineering",2,2024-11-03 09:36:00.000
-5,"high entropy, energy storage, entropy, storage, zinc",2,2024-11-03 09:36:00.000
-8,"sports, participation, injuries, nutrition, promoting development",1,2024-11-03 09:36:00.000
-9,"moderate high, longitudinal, likelihood, supplement, declined",1,2024-11-03 09:36:00.000
-10,"mew, quantum, loop, melt electrowriting, electrowriting",2,2024-11-03 09:36:00.000
-12,"circulating, sequencing, amplicon, typing, pcr",2,2024-11-03 09:36:00.000
-13,"oil, seed, fatty, fatty acid, acid",1,2024-11-03 09:36:00.000
-15,"ecosystem, package, ecosystem services, conservation, services",2,2024-11-03 09:36:00.000
-16,"microbiome, treatment decisions, recent, treatment, decisions",1,2024-11-03 09:36:00.000
-17,"cfps, protein expression, protein, expression, procedures",1,2024-11-03 09:36:00.000
-18,"bone, scientists, surgeons, autologous, defect",1,2024-11-03 09:36:00.000
-20,"cancer, glucocorticoid, psa, prostate, prostate cancer",3,2024-11-03 09:36:00.000
-21,"hcc, palliative care, palliative, liver, stage disease",1,2024-11-03 09:36:00.000
-22,"pregnant women, pregnant, utilization, review meta, review meta analysis",1,2024-11-03 09:36:00.000
-24,"urban, planning, spaces, social, policy",11,2024-11-03 09:36:00.000
-25,"belonging, students, interactions, peer, educator",1,2024-11-03 09:36:00.000
-26,"care, graduate, programmes, professional, officers",10,2024-11-03 09:36:00.000
-27,"amp, amp amp, retina, amp amp amp, hippocampus",1,2024-11-03 09:36:00.000
-29,"donors, healthy donor, selection bias, previous reports, arises",1,2024-11-03 09:36:00.000
-30,"anticoagulation, bridging, postpartum, pathways, diabetes",3,2024-11-03 09:36:00.000
--1,"skin, patients, mscs, risk, tnts",25,2024-11-10 14:24:00.000
-0,"mrow, math, display inline, inline, math xmlns",4,2024-11-10 14:24:00.000
-1,"mantle, mml, gold, magma, melt",5,2024-11-10 14:24:00.000
-2,"wave, nonlinear, harmonics, offshore, loading",1,2024-11-10 14:24:00.000
-3,"rice, lignin, properties, oil, temperature",3,2024-11-10 14:24:00.000
-4,"chiral, silicon, doping, carrier, light",9,2024-11-10 14:24:00.000
-5,"electrolyte, sulfur, ion, electrode, batteries",1,2024-11-10 14:24:00.000
-6,"evaporation, seawater, water, pure water, solar",2,2024-11-10 14:24:00.000
-7,"inhaler, inhalers, environmental impact, environmental, asthma",2,2024-11-10 14:24:00.000
-8,"training, muscle, constipation, age, muscle volume",4,2024-11-10 14:24:00.000
-9,"max, physical, exercise, physical exercise, cancer",2,2024-11-10 14:24:00.000
-10,"mml, mml mml, mml mml mml, privacy, private",7,2024-11-10 14:24:00.000
-11,"bind, target, sequence, sequences, proteins",1,2024-11-10 14:24:00.000
-12,"covid, transmission, showed evidence, impact covid, studies showed",1,2024-11-10 14:24:00.000
-13,"soc, soil, plants, microbial, gene",9,2024-11-10 14:24:00.000
-14,"drive, character, displacement, gene drive, invasive",2,2024-11-10 14:24:00.000
-15,"fisheries, species, reef, micronutrients, coral",8,2024-11-10 14:24:00.000
-16,"resistant, caspase, vulnerabilities, inflammasome, resistance",3,2024-11-10 14:24:00.000
-17,"clade, insertion, gene, resistance, proteins",2,2024-11-10 14:24:00.000
-19,"eyes, monotherapy, switch, retinal, macular",2,2024-11-10 14:24:00.000
-20,"evs, endometriosis, invasion, tumor, tissue",2,2024-11-10 14:24:00.000
-21,"weeks, progression free survival, progression free, free survival, response",1,2024-11-10 14:24:00.000
-22,"testosterone, quantification, lower limit, linearity, immunoassay",2,2024-11-10 14:24:00.000
-23,"disordered, eating, pressures, athletes, elite",2,2024-11-10 14:24:00.000
-24,"food, leadership, green, reforms, policy",18,2024-11-10 14:24:00.000
-25,"indigenous, peoples, aboriginal, children, aboriginal torres strait",10,2024-11-10 14:24:00.000
-26,"care, health, spiritual, sexual, data",18,2024-11-10 14:24:00.000
-27,"tone, infants, perception, language, attunement",1,2024-11-10 14:24:00.000
-30,"stroke, severe, diabetes, patients, case",4,2024-11-10 14:24:00.000
--1,"participants, treatment, clinical, higher, nerve",27,2024-11-17 19:12:00.000
-0,"math, msub, display inline, inline, math xmlns",4,2024-11-17 19:12:00.000
-1,"oxygenation, rocks, inclusions, seawater, ages",3,2024-11-17 19:12:00.000
-2,"exoskeleton, wearable, strength, design, machines",8,2024-11-17 19:12:00.000
-3,"samples, scba, properties, lignin, materials",3,2024-11-17 19:12:00.000
-4,"phase, films, defects, photonic, surface",11,2024-11-17 19:12:00.000
-6,"seawater, catalysts, oxygen, active, evolution",3,2024-11-17 19:12:00.000
-8,"leg, muscle, exercise, phosphorylation, old",2,2024-11-17 19:12:00.000
-10,"radiation, upright, noise, radiation therapy, data",11,2024-11-17 19:12:00.000
-11,"protein, gpt, drug, graph, fine tuning",2,2024-11-17 19:12:00.000
-13,"plant, soil, leaf, wheat, plants",11,2024-11-17 19:12:00.000
-14,"sperm, competition, allocation, male, multiply",1,2024-11-17 19:12:00.000
-15,"wild, cumulative, song, marine, coral",5,2024-11-17 19:12:00.000
-16,"spray, phage, pneumoniae, horses, dried",5,2024-11-17 19:12:00.000
-17,"microbial, species, genome, genomes, sequencing",13,2024-11-17 19:12:00.000
-18,"vera, modules, fragments, drug, growth",4,2024-11-17 19:12:00.000
-19,"functional, visual, retinal, diabetic, tear",5,2024-11-17 19:12:00.000
-20,"pten, loss, pca, phenotypic plasticity, prostate",1,2024-11-17 19:12:00.000
-21,"cccs, recurrence, melanoma, patients, therapies",4,2024-11-17 19:12:00.000
-22,"pigs, metabolite, supplementation, heart, autologous",3,2024-11-17 19:12:00.000
-23,"eating, feeding, warning, labels, disorder",7,2024-11-17 19:12:00.000
-24,"digital, green, social, energy, economy",22,2024-11-17 19:12:00.000
-25,"aboriginal, nations, ethical, service, elders",1,2024-11-17 19:12:00.000
-26,"care, autistic, parents, anxiety, children",16,2024-11-17 19:12:00.000
-27,"chapter, chapters, auditory, book, brain",3,2024-11-17 19:12:00.000
-29,"cesarean, transplant, krt, kidney, sections",2,2024-11-17 19:12:00.000
-30,"nutrition, oral, patients, icu, hypertension",5,2024-11-17 19:12:00.000
--1,"nitrate, patients, rcts, patient, outcomes",37,2024-11-25 00:00:00.000
-0,"mml, mml mml, galaxy, star, mass",7,2024-11-25 00:00:00.000
-1,"gold, mineralization, deposits, mantle, fluids",6,2024-11-25 00:00:00.000
-2,"rock, bulge, oscillations, tube, river",6,2024-11-25 00:00:00.000
-3,"plastic, samples, flexural, strength, compressive",1,2024-11-25 00:00:00.000
-4,"ell, materials, janus, carrier, photon",9,2024-11-25 00:00:00.000
-5,"batteries, ion, storage, cation, performance",2,2024-11-25 00:00:00.000
-6,"ldh, anode, alkaline, seawater, activity",3,2024-11-25 00:00:00.000
-7,"lung function, asthma, lung, function, later",2,2024-11-25 00:00:00.000
-8,"oxidized, albumin, muscle, days, days post",2,2024-11-25 00:00:00.000
-9,"physical, physical activity, sleep, activity, aerobic",3,2024-11-25 00:00:00.000
-10,"data, grid, learning, graph, streaming",14,2024-11-25 00:00:00.000
-12,"picts, pvs, eliminated, surveillance, cov",2,2024-11-25 00:00:00.000
-13,"soil, plant, pollen, root, traits",7,2024-11-25 00:00:00.000
-14,"art, bacteria, occurrence, sperm, selection",3,2024-11-25 00:00:00.000
-15,"species, ecosystem, coral, marine, ecosystems",13,2024-11-25 00:00:00.000
-16,"bag, resistant, lung, antibacterial, antibiotics",4,2024-11-25 00:00:00.000
-17,"species, effector, meal, infection, fed",8,2024-11-25 00:00:00.000
-18,"bone, delivery, loaded, scaffolds, drug",5,2024-11-25 00:00:00.000
-20,"tumor, rna, cancer, cell, seq",4,2024-11-25 00:00:00.000
-21,"auto, patients, hcc, pfs, recurrence",3,2024-11-25 00:00:00.000
-22,"ovarian, acupuncture, therapies, anxiety depression, depression",2,2024-11-25 00:00:00.000
-23,"prevalence, underweight, overweight, child, mother",1,2024-11-25 00:00:00.000
-24,"policy, paper, scientists, social, environmental",22,2024-11-25 00:00:00.000
-25,"students, school, psa, accounting, speaking",3,2024-11-25 00:00:00.000
-26,"care, health, alcohol, pain, adolescents",17,2024-11-25 00:00:00.000
-27,"extinction, acquisition, unpaired, presentations, arousal",2,2024-11-25 00:00:00.000
-28,"loaded, formulation, brain, function, cognitive",2,2024-11-25 00:00:00.000
-29,"kidney, typing, hla, donor, allele",3,2024-11-25 00:00:00.000
-30,"diabetes, patients, stroke, pgs, risk",10,2024-11-25 00:00:00.000
--1,"patients, data, treatment, cell, figure",46,2024-12-02 04:48:00.000
-0,"mathrm, des, dark, photo, lambda",2,2024-12-02 04:48:00.000
-1,"calcite, basin, magma, melt, mantle",3,2024-12-02 04:48:00.000
-2,"piece, cone, angles, helix, seismic",5,2024-12-02 04:48:00.000
-3,"fibers, flexural, fiber, reinforcing, reinforced",2,2024-12-02 04:48:00.000
-4,"phase, doping, polymers, perovskite, mos",11,2024-12-02 04:48:00.000
-5,"electrochemical, ion, electrolyte, batteries, cathode",4,2024-12-02 04:48:00.000
-6,"ncs, zif, catalysts, electrochemical, hydrogen",3,2024-12-02 04:48:00.000
-7,"asthma, colitis, winter, ulcerative colitis, ulcerative",3,2024-12-02 04:48:00.000
-8,"speed, men, rpe, lsm, bla",3,2024-12-02 04:48:00.000
-10,"data, accuracy, attacks, learning, network",21,2024-12-02 04:48:00.000
-11,"fluorescence, residues, binding, protein, model systems",3,2024-12-02 04:48:00.000
-12,"jev, surveillance, australia, outbreak, transmission",5,2024-12-02 04:48:00.000
-13,"soil, crops, plant, root, crop",9,2024-12-02 04:48:00.000
-14,"introgression, contact zones, contact, divergence, zones",1,2024-12-02 04:48:00.000
-15,"reef, coral, species, habitat, biodiversity",10,2024-12-02 04:48:00.000
-16,"resistance, antibiotic, coli, resistant, isolates",12,2024-12-02 04:48:00.000
-17,"italic, species, sequencing, abundance, australia",12,2024-12-02 04:48:00.000
-18,"die, der, nanoparticles, den, peptide",5,2024-12-02 04:48:00.000
-19,"arteries, lines, sutures, nerves, bones",3,2024-12-02 04:48:00.000
-20,"expression, omics, mpn, cancer, mutations",3,2024-12-02 04:48:00.000
-21,"median, response, patients, intense, months",3,2024-12-02 04:48:00.000
-22,"birth, pregnancy, preterm, pregnancies, preterm birth",6,2024-12-02 04:48:00.000
-23,"eating, athletes, obesity, diet, eating disorder",8,2024-12-02 04:48:00.000
-24,"paper, urban, social, legal, cities",24,2024-12-02 04:48:00.000
-25,"students, mathematics, instructional, decolonising, conceptual",3,2024-12-02 04:48:00.000
-26,"care, nurses, health, support, practices",25,2024-12-02 04:48:00.000
-28,"omics, spatial, multi, multi omics, brain",2,2024-12-02 04:48:00.000
-29,"kidney, ckd, als, care, survival",3,2024-12-02 04:48:00.000
-30,"malnutrition, patients, risk, cvd, vitamin",8,2024-12-02 04:48:00.000
--1,"jama, patients, disease, cancer, treatment",84,2024-12-09 09:36:00.000
-0,"star, massive, forming, space, masses",1,2024-12-09 09:36:00.000
-1,"margin, arctic, mantle, deposit, earth",6,2024-12-09 09:36:00.000
-2,"friction, force, cementitious, array, strength",8,2024-12-09 09:36:00.000
-3,"edl, bonding, deposition, kcl, defects",2,2024-12-09 09:36:00.000
-4,"perovskite, storage, thermal, silicon, structure",10,2024-12-09 09:36:00.000
-5,"cathode, hydrogels, carbon, batteries, interfacial",4,2024-12-09 09:36:00.000
-6,"oxygen, metal, transition metal, oxidation, transition",5,2024-12-09 09:36:00.000
-7,"allergy, toxicity, life threatening, peanut, threatening",2,2024-12-09 09:36:00.000
-8,"leg, pressure, fasting, bmi, muscle",3,2024-12-09 09:36:00.000
-9,"sleep, pulse, triage, nurses, oximetry",6,2024-12-09 09:36:00.000
-10,"data, rainfall, learning, accuracy, based",30,2024-12-09 09:36:00.000
-11,"amino, code, amino acids, drug, metabolic",5,2024-12-09 09:36:00.000
-12,"wolbachia, dengue, mosquitoes, africa, mosquito",8,2024-12-09 09:36:00.000
-13,"soil, species, leaf, plants, plant",12,2024-12-09 09:36:00.000
-14,"temperatures, prenatal, temperature, thermal, incubation",3,2024-12-09 09:36:00.000
-15,"species, coral, habitat, avian, land",13,2024-12-09 09:36:00.000
-16,"antimicrobial, resistance, infection, vitro, ntm",7,2024-12-09 09:36:00.000
-17,"viruses, gut, species, genome, stress",7,2024-12-09 09:36:00.000
-18,"delivery, cells, vivo, bbb, like cells",6,2024-12-09 09:36:00.000
-19,"retinal, visual, intraocular, intraocular pressure, clinic",5,2024-12-09 09:36:00.000
-20,"cancer, tumor, mir, cells, prostate",12,2024-12-09 09:36:00.000
-21,"radiotherapy, plus, months, patients, car",3,2024-12-09 09:36:00.000
-22,"pregnancy, lithium, fetal, postpartum, women",10,2024-12-09 09:36:00.000
-23,"weight, nutrition, eating, food, dietary",10,2024-12-09 09:36:00.000
-24,"health, climate, social, emissions, strategy",35,2024-12-09 09:36:00.000
-25,"indigenous, teachers, learning, students, school",11,2024-12-09 09:36:00.000
-26,"health, autistic, mental, care, self",42,2024-12-09 09:36:00.000
-27,"cortical, motor, tdcs, brain, connectivity",7,2024-12-09 09:36:00.000
-28,"neurons, syn, negr, gad, brain",6,2024-12-09 09:36:00.000
-29,"kidney, transplantation, saline, ckd, hyperkalemia",5,2024-12-09 09:36:00.000
-30,"hypertension, stroke, mmhg, risk, patients",22,2024-12-09 09:36:00.000
--1,"patients, health, clinical, genetic, care",125,2024-12-16 14:24:00.000
-0,"star, math, clumps, icon, locked icon",8,2024-12-16 14:24:00.000
-1,"mantle, earth, isotope, depleted, belt",7,2024-12-16 14:24:00.000
-2,"plane, cone, strain, softening, porosity",7,2024-12-16 14:24:00.000
-3,"gases, combustion, organic, oil, astm",1,2024-12-16 14:24:00.000
-4,"solar, cds, electron, perovskite, state",17,2024-12-16 14:24:00.000
-5,"batteries, sulfur, ion, capacity, lithium",10,2024-12-16 14:24:00.000
-6,"seawater, catalysts, oxygen, catalytic, reaction",6,2024-12-16 14:24:00.000
-7,"intestinal, microbiota, intestinal microbiota, medicinal, serving",1,2024-12-16 14:24:00.000
-8,"muscle, exercise, ageing, biomarkers, performance",7,2024-12-16 14:24:00.000
-9,"exercise, mortality, ahr, causes, sleep",2,2024-12-16 14:24:00.000
-10,"learning, data, lstm, privacy, problem",17,2024-12-16 14:24:00.000
-11,"coil, protein, peptides, enzymes, proteins",6,2024-12-16 14:24:00.000
-12,"covid, cov, infection, sars cov, sars",9,2024-12-16 14:24:00.000
-13,"plant, soil, plants, root, species",17,2024-12-16 14:24:00.000
-14,"asexual, svs, populations, telomeres, telomere",3,2024-12-16 14:24:00.000
-15,"birds, predatory, rodent, exposure, fisheries",3,2024-12-16 14:24:00.000
-16,"tuberculosis, resistant, placebo, septic, resistance",12,2024-12-16 14:24:00.000
-17,"microbial, denv, replication, sequencing, genomes",12,2024-12-16 14:24:00.000
-18,"paw, cell, cells, delivery, bone",6,2024-12-16 14:24:00.000
-19,"retinal, iop, endothelial, vegf, surgeons",8,2024-12-16 14:24:00.000
-20,"tumor, cancer, tumors, cell, tryptophan",10,2024-12-16 14:24:00.000
-21,"hcc, patients, microbiota, incidence, cancer",7,2024-12-16 14:24:00.000
-22,"pregnancy, birth, starting, dose, live birth",7,2024-12-16 14:24:00.000
-23,"eating, dietary, treatment, people, dispensed",17,2024-12-16 14:24:00.000
-24,"digital, climate, social, findings, framework",38,2024-12-16 14:24:00.000
-25,"children, futures, rights, education, students",5,2024-12-16 14:24:00.000
-26,"health, care, social, anxiety, mml",55,2024-12-16 14:24:00.000
-27,"fmri, stimuli, brain, eoad, contralateral",8,2024-12-16 14:24:00.000
-28,"probes, npc, nuclear, als, neurodegenerative",4,2024-12-16 14:24:00.000
-29,"ckd, kidney, epi, egfr, patients",8,2024-12-16 14:24:00.000
-30,"patients, diabetes, stroke, cardiometabolic, cvd",22,2024-12-16 14:24:00.000
--1,"patients, health, treatment, data, clinical",84,2024-12-23 19:12:00.000
-0,"stars, atmospheric, observations, mass, miri",4,2024-12-23 19:12:00.000
-1,"tracks, track, southern, northern, traces",2,2024-12-23 19:12:00.000
-2,"strength, cpb, impact, rock, petrographic",9,2024-12-23 19:12:00.000
-3,"coal, adsorption, methane, printing, samples",5,2024-12-23 19:12:00.000
-4,"light, electron, spin, ncs, polymers",14,2024-12-23 19:12:00.000
-5,"ion, energy, batteries, storage, electrolyte",3,2024-12-23 19:12:00.000
-6,"catalytic, topological, catalysts, oxygen, catalyst",8,2024-12-23 19:12:00.000
-7,"asthma, milk, allergic, melatonin, infant",7,2024-12-23 19:12:00.000
-8,"anorexia, crm, ageing, perioperative, muscle",4,2024-12-23 19:12:00.000
-9,"sleep, dental, medicine, sleep quality, schools",4,2024-12-23 19:12:00.000
-10,"proposed, learning, data, accuracy, network",18,2024-12-23 19:12:00.000
-11,"residues, screen, catalytic, enzyme, enzymes",1,2024-12-23 19:12:00.000
-12,"vaccine, crm, doses, control, following",5,2024-12-23 19:12:00.000
-13,"plants, plant, soil, root, grass",13,2024-12-23 19:12:00.000
-14,"organisms, determination, adaptive, sex, reproduction",2,2024-12-23 19:12:00.000
-15,"ecosystem, marine, habitat, ecosystem services, species",7,2024-12-23 19:12:00.000
-16,"amr, tuberculosis, resistance, tae, tpt",10,2024-12-23 19:12:00.000
-17,"csm, species, genome, broilers, microbial",8,2024-12-23 19:12:00.000
-18,"mechanical properties, mechanical, nps, properties, nanomaterials",2,2024-12-23 19:12:00.000
-19,"retinal, perfusion, eyes, practitioners, letters",3,2024-12-23 19:12:00.000
-20,"tumors, cancer, prostate, tumor, metastasis",7,2024-12-23 19:12:00.000
-21,"cancer, survival, patients, car, metastases",7,2024-12-23 19:12:00.000
-22,"pregnancy, women, fetal, tau, antagonist",8,2024-12-23 19:12:00.000
-23,"maternal, child, eating, treatment, nutrition",5,2024-12-23 19:12:00.000
-24,"green, health, urban, rural, space",26,2024-12-23 19:12:00.000
-25,"teachers, teaching, students, learning, indigenous",6,2024-12-23 19:12:00.000
-26,"health, care, interventions, harm, mental",32,2024-12-23 19:12:00.000
-27,"cognitive, alzheimer, eeg, alzheimer disease, brain",14,2024-12-23 19:12:00.000
-28,"syn, als, msa, motor, synaptic",8,2024-12-23 19:12:00.000
-29,"kidney, organ, ckd, renal, transplantation",5,2024-12-23 19:12:00.000
-30,"risk, ldl, patients, diabetes, stroke",13,2024-12-23 19:12:00.000
+-1,"materials, material, energy, mechanical, printing",8,2019-12-30 04:40:48
+0,"health, covid, care, patients, digital",15,2019-12-30 04:40:48
+2,"security, attacks, cyber, information, vulnerabilities",6,2019-12-30 04:40:48
+3,"spine, ray, robotic, correction, detector",3,2019-12-30 04:40:48
+4,"transitions, locomotor, energy, entry, control systems",5,2019-12-30 04:40:48
+5,"assistance, task, robot, motor, children",2,2019-12-30 04:40:48
+6,"tool, retinal, needle, robotic, tissue",4,2019-12-30 04:40:48
+-1,"surface, appearance, une, energy, renewable energy",4,2020-06-29 12:00:00
+0,"health, supply, supply chain, chain, covid",8,2020-06-29 12:00:00
+1,"security, satellite, monitor, attacks, cyber",5,2020-06-29 12:00:00
+2,"security, adversarial, attacks, iot, metric",4,2020-06-29 12:00:00
+3,"body mounted, mounted, robot, body, robotic",2,2020-06-29 12:00:00
+4,"self, energy, right, template, phase",1,2020-06-29 12:00:00
+5,"robot, engineering, robots, robotics, surgical",7,2020-06-29 12:00:00
+6,"tool, measurements, insertion, depth, tip",1,2020-06-29 12:00:00
+-1,"function, set, transfer, soft, mechanical",7,2020-12-27 00:00:00
+0,"health, room, covid, air, digital",6,2020-12-27 00:00:00
+1,"strategic, algorithm, currently, aircraft, faa",1,2020-12-27 00:00:00
+2,"attacks, adversarial, box, defenses, white",1,2020-12-27 00:00:00
+3,"robotic, spine, robot, surgery, mri",3,2020-12-27 00:00:00
+4,"locomotor, neural, transitions, self, energy",6,2020-12-27 00:00:00
+5,"robot, viewpoint, object detection, robots, object",3,2020-12-27 00:00:00
+6,"tool, robot, robotic, servoing, visual servoing",2,2020-12-27 00:00:00
+-1,"homer, image processing, muscle, spacecraft, energy",3,2021-06-25 12:00:00
+0,"health, diagnostics, care, access, covid",12,2021-06-25 12:00:00
+1,"security, monitor, aerial, guidance, safety",5,2021-06-25 12:00:00
+2,"cybersecurity, cyber, autonomic, security, strategy",4,2021-06-25 12:00:00
+3,"magnetic, robot, bone, surgical, robotic",5,2021-06-25 12:00:00
+4,"slam, sensors, biological, energy, free energy",3,2021-06-25 12:00:00
+5,"teleoperation, servicing, object, operators, detection",3,2021-06-25 12:00:00
+6,"image based, image, surgical, registration, tumor",2,2021-06-25 12:00:00
+-1,"energy, soft, materials, prostate, prostate cancer",9,2021-12-23 00:00:00
+0,"health, mortality, text, digital, scholar",9,2021-12-23 00:00:00
+1,"encryption, security, security measures, cyber, teleoperation",1,2021-12-23 00:00:00
+2,"security, cities, attacks, cyber, attack",7,2021-12-23 00:00:00
+3,"robotic, mri, bone, measurements, spinal",4,2021-12-23 00:00:00
+4,"neural, navigation, unsupervised, weight, orientation",1,2021-12-23 00:00:00
+5,"robot, feedback, haptic, robots, chair",7,2021-12-23 00:00:00
+6,"surgery, surgical, robotic, mode, tissue",4,2021-12-23 00:00:00
+-1,"catalysts, single, reaction, labour, energy",2,2022-06-21 12:00:00
+0,"health, patients, care, digital, participants",9,2022-06-21 12:00:00
+1,"satellite, port, attack, protection, cyber",4,2022-06-21 12:00:00
+2,"adversarial, attack, attacks, cyber, security",5,2022-06-21 12:00:00
+3,"magnetic, robotic, spine, mean, surgical",4,2022-06-21 12:00:00
+4,"slam, assembly, energy, self, inference",5,2022-06-21 12:00:00
+5,"robot, camera, bimanual, robots, task",4,2022-06-21 12:00:00
+-1,"wind, earth, energy, solar, spacecraft",7,2022-12-19 00:00:00
+0,"digital, studies, wound, health, patients",10,2022-12-19 00:00:00
+1,"aerodynamic, optimization, communications, adversaries, uav",4,2022-12-19 00:00:00
+2,"iot, security, attack, attacks, cyber",7,2022-12-19 00:00:00
+3,"traction, robotic, weight, magnetic, device",4,2022-12-19 00:00:00
+5,"feedback, steering, angle, delays, haptic",3,2022-12-19 00:00:00
+6,"robotic, retinal, injection, navigation, estimation",3,2022-12-19 00:00:00
+-1,"engineering, water, university, capture, treatment",5,2023-06-17 12:00:00
+0,"health, digital, care, access, patients",7,2023-06-17 12:00:00
+1,"access, cybersecurity, increasing, afterthought, rapidly increasing",1,2023-06-17 12:00:00
+2,"detection, cyber, cybersecurity, autonomic, attacks",2,2023-06-17 12:00:00
+5,"camera, motion, math, inline formula, inline",5,2023-06-17 12:00:00
+6,"suture, suturing, single arm, robot, arm",3,2023-06-17 12:00:00
+-1,"smart, properties, mission, analysis, defense",5,2023-12-15 00:00:00
+0,"health, llms, clinical, pilot, technologies",6,2023-12-15 00:00:00
+1,"simulator, operations, security, ics, marine",1,2023-12-15 00:00:00
+2,"students, security, cybersecurity, power, courses",4,2023-12-15 00:00:00
+3,"intervention, motion, robotic, certain extent, surgery robotic",1,2023-12-15 00:00:00
+4,"kinetic, assembly, self, yield, binding",1,2023-12-15 00:00:00
+5,"precision, high precision, teleoperation, surgical, vehicles",3,2023-12-15 00:00:00
+6,"precise, needle, injection, workflow, retinal",2,2023-12-15 00:00:00
+-1,"wind, energy, standardization, vessels, turbines",1,2024-06-12 12:00:00
+0,"health, medical, care, digital, healthcare",6,2024-06-12 12:00:00
+1,"gps, drone, cyber, uavs, drones",1,2024-06-12 12:00:00
+2,"transportation, computing, intelligent, edge, security privacy protection",1,2024-06-12 12:00:00
+3,"spinal, robotic, literature, accuracy, accuracy reduce",1,2024-06-12 12:00:00
+5,"affective, driving, robot, touch, autonomous driving",2,2024-06-12 12:00:00
