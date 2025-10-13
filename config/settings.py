@@ -12,8 +12,8 @@ load_dotenv()
 # OpenAlex API Configuration
 OPENALEX_EMAIL = os.getenv('OPENALEX_EMAIL', 'param.pat01@gmail.com')
 
-# Analysis Date Range
-ANALYSIS_START_DATE = datetime(2020, 1, 1)
+# Analysis Date Range for Papers
+START_DATE = datetime(2018, 1, 1)  # Expanded from 2020 for more papers
 ANALYSIS_END_DATE = datetime(2024, 12, 31)
 
 # Institution name variants for better OpenAlex resolution
@@ -91,7 +91,7 @@ DASHBOARD_DATA_JSON = "data/exports/dashboard_data.json"
 MIN_ABSTRACT_LENGTH = 50
 MAX_PAPERS_PER_UNIVERSITY = 1000
 NR_TIME_BINS = 10
-MIN_RELEVANCE_SCORE = 0  # 0-100 threshold for filtering by relevance; pipeline default not filtering
+MIN_RELEVANCE_SCORE = 5  # 5% minimum relevance (was 0); allows more papers while filtering noise
 TOPIC_MODEL_PARAMS = {
     'min_topic_size': 5,  # Reduced from 10 for smaller dataset (133 papers)
     'min_cluster_size': 5,  # Reduced from 15

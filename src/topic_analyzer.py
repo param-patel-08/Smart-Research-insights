@@ -68,10 +68,11 @@ class BabcockTopicAnalyzer:
         )
         
         # CountVectorizer for topic representation
+        # Adjusted for smaller datasets (< 200 documents)
         vectorizer_model = CountVectorizer(
-            ngram_range=(1, 3),
+            ngram_range=(1, 2),  # Reduced from (1,3) for smaller dataset
             stop_words='english',
-            min_df=2,
+            min_df=1,  # Reduced from 2 for smaller dataset
             max_df=0.95
         )
         

@@ -1,49 +1,21 @@
 Topic,Words,Frequency,Timestamp
--1,"material, printing, hybrid, sustainable, manufacturing",6,2019-12-30 04:40:48
-0,"health, covid, care, patients, digital",15,2019-12-30 04:40:48
-1,"security, cyber, attacks, vulnerabilities, threats",6,2019-12-30 04:40:48
-2,"transitions, locomotor, terrain, cargo, swarm",4,2019-12-30 04:40:48
-3,"robot, spine, tool, ray, surgical",12,2019-12-30 04:40:48
--1,"une, renewable, renewable energy, ground surface, gas",3,2020-06-29 12:00:00
-0,"health, supply, covid, supply chain, chain",8,2020-06-29 12:00:00
-1,"security, attacks, cyber, adversarial, attack",9,2020-06-29 12:00:00
-2,"right, template, motions, barrier, animal",1,2020-06-29 12:00:00
-3,"robot, surgical, robots, surgery, tool",11,2020-06-29 12:00:00
--1,"soft, set, mixed, convex, candidates",4,2020-12-27 00:00:00
-0,"health, room, covid, air, digital",6,2020-12-27 00:00:00
-1,"attacks, adversarial, strategic, attack, box",2,2020-12-27 00:00:00
-2,"locomotor, transitions, flight, inference, robots",6,2020-12-27 00:00:00
-3,"robot, surgical, surgery, robots, robotic systems",11,2020-12-27 00:00:00
--1,"image processing, spacecraft, image, device, functionality",2,2021-06-25 12:00:00
-0,"health, diagnostics, care, access, covid",13,2021-06-25 12:00:00
-1,"cybersecurity, security, cyber, attack, autonomic",9,2021-06-25 12:00:00
-2,"slam, biological, cognition, free energy, navigation",3,2021-06-25 12:00:00
-3,"robot, surgical, magnetic, tracking, surgery",10,2021-06-25 12:00:00
--1,"soft, wind, prostate, prostate cancer, cancer",8,2021-12-23 00:00:00
-0,"health, mortality, digital, text, scholar",9,2021-12-23 00:00:00
-1,"security, cyber, attacks, attack, cities",9,2021-12-23 00:00:00
-2,"navigation, unsupervised, weight, orientation, robotic systems",1,2021-12-23 00:00:00
-3,"robot, surgical, surgery, navigation, robots",15,2021-12-23 00:00:00
--1,"catalysts, reaction, transition, metal, stability",1,2022-06-21 12:00:00
-0,"health, patients, care, digital, participants",9,2022-06-21 12:00:00
-1,"attack, cyber, adversarial, satellite, attacks",9,2022-06-21 12:00:00
-2,"slam, cells, inference, theory, navigation",4,2022-06-21 12:00:00
-3,"robot, magnetic, surgical, navigation, robots",9,2022-06-21 12:00:00
--1,"earth, wind, solar, spacecraft, quantify",4,2022-12-19 00:00:00
-0,"digital, wound, health, patients, clinical",10,2022-12-19 00:00:00
-1,"security, attack, cyber, iot, attacks",11,2022-12-19 00:00:00
-2,"brain, memory, cell, ultimately, interfaces",1,2022-12-19 00:00:00
-3,"surgical, traction, robot, navigation, force",12,2022-12-19 00:00:00
--1,"water, university, treatment, civil, received",3,2023-06-17 12:00:00
-0,"health, digital, care, access, patients",7,2023-06-17 12:00:00
-1,"detection, cybersecurity, cyber, attacks, autonomic",3,2023-06-17 12:00:00
-3,"surgical, robot, camera, force, surgery",10,2023-06-17 12:00:00
--1,"smart, mission, investigations, kinetic, soft",5,2023-12-15 00:00:00
-0,"health, llms, clinical, pilot, care",5,2023-12-15 00:00:00
-1,"students, security, cybersecurity, attacks, courses",6,2023-12-15 00:00:00
-2,"kinetic, assembly, yield, binding, timescales",1,2023-12-15 00:00:00
-3,"precision, surgical, surgery, teleoperation, robot",6,2023-12-15 00:00:00
--1,"wind, standardization, vessels, turbines, sector",1,2024-06-12 12:00:00
-0,"health, medical, care, digital, healthcare",6,2024-06-12 12:00:00
-1,"transportation, intelligent, edge, cyber, gps",2,2024-06-12 12:00:00
-3,"affective, driving, robot, touch, spinal",3,2024-06-12 12:00:00
+0,"photovoltaic, acceptor, donor, charge, opv",3,2019-12-30 04:36:28.800
+1,"attacks, driving, self driving, cars, iot",7,2019-12-30 04:36:28.800
+0,"demand response, recovery, electricity, pricing, renewable",6,2020-06-29 19:12:00.000
+1,"iot, iot devices, data science, cybersecurity data, attacks",2,2020-06-29 19:12:00.000
+0,"electricity, future energy, configurations, energy sources, emission",3,2020-12-27 14:24:00.000
+1,"iot, deep learning, aes, federated, attacks",7,2020-12-27 14:24:00.000
+0,"hydrogen, gas, renewable, electricity, energy storage",3,2021-06-26 09:36:00.000
+1,"machine tools, tools, additive manufacturing, additive, detection",4,2021-06-26 09:36:00.000
+0,"ess, optimal algorithm, ess applications, cited articles, algorithm ess",1,2021-12-24 04:48:00.000
+1,"android, malware, uav, uavs, android malware",12,2021-12-24 04:48:00.000
+0,"electric, meengs, energy management, heliostat, electricity",4,2022-06-23 00:00:00.000
+1,"attacks, healthcare, metaverse, iot, deduplication",10,2022-06-23 00:00:00.000
+0,"renewable, renewable energy, hydrocarbon, microgrid, green energy",5,2022-12-20 19:12:00.000
+1,"iot, attacks, healthcare, deep learning, threats",16,2022-12-20 19:12:00.000
+0,"energy storage, renewable, microgrid, fesss, renewable energy",7,2023-06-19 14:24:00.000
+1,"llms, healthcare, health, blockchain, privacy",17,2023-06-19 14:24:00.000
+0,"renewable, renewable energy, microgrid, micro grid, wind",8,2023-12-17 09:36:00.000
+1,"medical, privacy, healthcare, health, documents",17,2023-12-17 09:36:00.000
+0,"new zealand, zealand, role customer, viewed, systemic",1,2024-06-15 04:48:00.000
+1,"mllms, educational, education, mllms educational, language",1,2024-06-15 04:48:00.000

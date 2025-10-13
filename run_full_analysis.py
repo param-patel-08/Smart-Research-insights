@@ -67,7 +67,7 @@ def main():
     from config.settings import (
         OPENALEX_EMAIL,
         ALL_UNIVERSITIES,
-        ANALYSIS_START_DATE,
+        START_DATE,
         ANALYSIS_END_DATE,
         RAW_PAPERS_CSV,
         METADATA_CSV,
@@ -87,7 +87,7 @@ def main():
     logger.info("\n" + "="*80)
     logger.info("CONFIGURATION")
     logger.info(f"Email: {OPENALEX_EMAIL}")
-    logger.info(f"Date range: {ANALYSIS_START_DATE.date()} to {ANALYSIS_END_DATE.date()}")
+    logger.info(f"Date range: {START_DATE} to {ANALYSIS_END_DATE.date()}")
     logger.info(f"Universities: {len(ALL_UNIVERSITIES)}")
     logger.info(f"Themes: {len(BABCOCK_THEMES)}")
     logger.info(f"Theme-based filtering: ENABLED (with relevance scoring)")
@@ -129,7 +129,7 @@ def main():
         
         collector = ThemeBasedCollector(
             email=OPENALEX_EMAIL,
-            start_date=ANALYSIS_START_DATE,
+            start_date=START_DATE,
             end_date=ANALYSIS_END_DATE
         )
         
@@ -141,7 +141,7 @@ def main():
             max_per_theme = 100
             priority_only = True
         else:  # Full collection
-            max_per_theme = None  # Unlimited per theme
+            max_per_theme = 100  # 100 papers per theme (was None/unlimited)
             priority_only = False  # All 9 themes
         
         # Fetch theme-filtered papers with relevance scoring
@@ -150,7 +150,7 @@ def main():
             universities=test_universities,
             max_per_theme=max_per_theme,
             priority_only=priority_only,
-            min_relevance=0.1  # Filter out completely irrelevant papers (was 0.0)
+            min_relevance=0.05  # 5% minimum relevance (was 0.1) - more papers
         )
 
         # University filtering already done by collector - no need to re-filter
@@ -160,7 +160,7 @@ def main():
         # Filter out papers with very low relevance (misclassified papers)
         if not df.empty and 'relevance_score' in df.columns:
             before_filter = len(df)
-            df = df[df['relevance_score'] >= 0.1]  # Remove papers with <10% relevance
+            df = df[df['relevance_score'] >= 0.05]  # Remove papers with <5% relevance
             removed = before_filter - len(df)
             if removed > 0:
                 logger.info(f"Filtered out {removed} papers with relevance < 0.1 (misclassified)")

@@ -1,114 +1,58 @@
 {
   "0": {
-    "theme": "Digital_Transformation",
-    "confidence": 0.04949209269694995,
+    "theme": "Energy_Sustainability",
+    "confidence": 0.5731072728549206,
     "all_scores": {
       "Defense_Security": 0.0,
       "Autonomous_Systems": 0.0,
       "Cybersecurity": 0.0,
-      "Energy_Sustainability": 0.0,
+      "Energy_Sustainability": 0.5731072728549206,
       "Advanced_Manufacturing": 0.0,
       "AI_Machine_Learning": 0.0,
       "Marine_Naval": 0.0,
       "Space_Aerospace": 0.0,
-      "Digital_Transformation": 0.04949209269694995
+      "Digital_Transformation": 0.0
     },
     "keywords": [
-      "health",
-      "covid",
-      "care",
-      "digital",
-      "patients",
-      "medical",
-      "healthcare",
-      "patient",
-      "clinical",
-      "access"
+      "renewable",
+      "renewable energy",
+      "electricity",
+      "microgrid",
+      "electric",
+      "energy storage",
+      "hydrogen",
+      "photovoltaic",
+      "wind",
+      "energy management"
     ],
-    "count": 88
+    "count": 41
   },
   "1": {
-    "theme": "Cybersecurity",
-    "confidence": 0.3179488115012027,
+    "theme": "AI_Machine_Learning",
+    "confidence": 0.12375927006863231,
     "all_scores": {
-      "Defense_Security": 0.09281942698731536,
+      "Defense_Security": 0.011657256235118412,
       "Autonomous_Systems": 0.0,
-      "Cybersecurity": 0.3179488115012027,
+      "Cybersecurity": 0.02041902560090386,
       "Energy_Sustainability": 0.0,
       "Advanced_Manufacturing": 0.0,
-      "AI_Machine_Learning": 0.0,
+      "AI_Machine_Learning": 0.12375927006863231,
       "Marine_Naval": 0.0,
       "Space_Aerospace": 0.0,
-      "Digital_Transformation": 0.04949209269694995
+      "Digital_Transformation": 0.07274609683752645
     },
     "keywords": [
-      "security",
-      "cyber",
-      "attacks",
-      "attack",
-      "cybersecurity",
-      "adversarial",
       "iot",
-      "threats",
+      "attacks",
+      "healthcare",
+      "privacy",
+      "deep learning",
+      "internet",
+      "health",
       "detection",
-      "vulnerabilities"
+      "medical",
+      "threats"
     ],
-    "count": 66
-  },
-  "2": {
-    "theme": "Energy_Sustainability",
-    "confidence": 0.14253481700480242,
-    "all_scores": {
-      "Defense_Security": 0.0,
-      "Autonomous_Systems": 0.0744771023475787,
-      "Cybersecurity": 0.0,
-      "Energy_Sustainability": 0.14253481700480242,
-      "Advanced_Manufacturing": 0.0,
-      "AI_Machine_Learning": 0.0,
-      "Marine_Naval": 0.0,
-      "Space_Aerospace": 0.0,
-      "Digital_Transformation": 0.0
-    },
-    "keywords": [
-      "slam",
-      "locomotor",
-      "transitions",
-      "inference",
-      "cognition",
-      "assembly",
-      "free energy",
-      "navigation",
-      "kinetic",
-      "biological"
-    ],
-    "count": 21
-  },
-  "3": {
-    "theme": "Autonomous_Systems",
-    "confidence": 0.10658510262542636,
-    "all_scores": {
-      "Defense_Security": 0.0,
-      "Autonomous_Systems": 0.10658510262542636,
-      "Cybersecurity": 0.0,
-      "Energy_Sustainability": 0.0,
-      "Advanced_Manufacturing": 0.0,
-      "AI_Machine_Learning": 0.019282692753704825,
-      "Marine_Naval": 0.0,
-      "Space_Aerospace": 0.0,
-      "Digital_Transformation": 0.0
-    },
-    "keywords": [
-      "robot",
-      "surgical",
-      "surgery",
-      "navigation",
-      "robots",
-      "magnetic",
-      "image",
-      "spine",
-      "tool",
-      "camera"
-    ],
-    "count": 99
+    "count": 93
   }
 }

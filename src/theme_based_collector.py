@@ -677,21 +677,30 @@ class ThemeBasedCollector:
             return pd.DataFrame()
     
     def deduplicate_papers(self, df: pd.DataFrame) -> pd.DataFrame:
-        """Remove duplicate papers using DOI > OpenAlex ID > normalized title."""
+        """Remove duplicate papers - LESS AGGRESSIVE: only exact DOI/ID matches."""
         if df.empty:
             return df
         before = len(df)
-        # 1) If DOI exists, dedup by DOI first
+        
+        # 1) Dedup by DOI (exact matches only)
         if 'doi' in df.columns:
-            df = df.sort_values(['doi', 'citations'], ascending=[True, False])
-            df = df.drop_duplicates(subset=['doi'], keep='first')
-        # 2) Dedup by OpenAlex ID
+            # Keep papers with non-empty DOIs, remove exact DOI duplicates
+            df_with_doi = df[df['doi'].notna() & (df['doi'] != '')]
+            df_without_doi = df[df['doi'].isna() | (df['doi'] == '')]
+            
+            if not df_with_doi.empty:
+                df_with_doi = df_with_doi.sort_values(['doi', 'citations'], ascending=[True, False])
+                df_with_doi = df_with_doi.drop_duplicates(subset=['doi'], keep='first')
+            
+            df = pd.concat([df_with_doi, df_without_doi], ignore_index=True)
+        
+        # 2) Dedup by OpenAlex ID (exact matches only)
         if 'openalex_id' in df.columns:
             df = df.drop_duplicates(subset=['openalex_id'], keep='first')
-        # 3) Dedup by normalized title
-        if 'title' in df.columns:
-            df['__title_norm'] = df['title'].fillna('').str.lower().str.strip()
-            df = df.drop_duplicates(subset=['__title_norm'], keep='first').drop(columns=['__title_norm'])
+        
+        # 3) REMOVED: No longer dedup by normalized title (too aggressive)
+        #    Keep papers with similar titles as they may be different works
+        
         removed = before - len(df)
         if removed > 0:
             logger.info(f"Deduplication: removed {removed} duplicates ({(removed/max(before,1)*100):.1f}%)")
