@@ -258,8 +258,12 @@ def main():
         metadata = pd.read_csv(METADATA_CSV)
         timestamps = pd.to_datetime(metadata['date']).tolist()
         
-        # Train model
-        analyzer = BabcockTopicAnalyzer(min_topic_size=15, nr_topics=60)
+        # Train model (use config params for smaller datasets)
+        from config.settings import TOPIC_MODEL_PARAMS
+        analyzer = BabcockTopicAnalyzer(
+            min_topic_size=TOPIC_MODEL_PARAMS['min_topic_size'],
+            nr_topics=30  # Reduced from 60 for smaller dataset (133 papers)
+        )
         topics, probs = analyzer.fit_transform(documents, embeddings_path=EMBEDDINGS_PATH)
         
         # Temporal analysis

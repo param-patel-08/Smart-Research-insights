@@ -93,9 +93,9 @@ MAX_PAPERS_PER_UNIVERSITY = 1000
 NR_TIME_BINS = 10
 MIN_RELEVANCE_SCORE = 0  # 0-100 threshold for filtering by relevance; pipeline default not filtering
 TOPIC_MODEL_PARAMS = {
-    'min_topic_size': 10,
-    'min_cluster_size': 15,
-    'min_samples': 5,
+    'min_topic_size': 5,  # Reduced from 10 for smaller dataset (133 papers)
+    'min_cluster_size': 5,  # Reduced from 15
+    'min_samples': 3,  # Reduced from 5
     'metric': 'euclidean',
     'cluster_selection_method': 'eom'
 }
