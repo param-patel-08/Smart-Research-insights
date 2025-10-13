@@ -20,6 +20,13 @@ BABCOCK_THEMES = {
             "border security", "anti-submarine", "ship defence",
             "sea control", "mission planning"
         ],
+        "concept_names": [
+            "National security",
+            "Military science",
+            "Surveillance",
+            "Radar",
+            "Electronic warfare"
+        ],
         "strategic_priority": "HIGH",
         "description": "Defense and security systems for military applications"
     },
@@ -31,6 +38,13 @@ BABCOCK_THEMES = {
             "SLAM", "path planning", "navigation", "obstacle avoidance",
             "multi-agent", "swarm", "mobile robot", "manipulation",
             "autonomous navigation", "robotic system", "unmanned system"
+        ],
+        "concept_names": [
+            "Robotics",
+            "Autonomous vehicle",
+            "Unmanned aerial vehicle",
+            "Path planning",
+            "Control theory"
         ],
         "strategic_priority": "HIGH",
         "description": "Autonomous systems and robotics for various domains"
@@ -45,6 +59,12 @@ BABCOCK_THEMES = {
             "cyber attack", "cyber defense", "security protocol",
             "information assurance", "data protection"
         ],
+        "concept_names": [
+            "Cybersecurity",
+            "Information security",
+            "Network security",
+            "Cryptography"
+        ],
         "strategic_priority": "HIGH",
         "description": "Cybersecurity and information assurance"
     },
@@ -56,6 +76,14 @@ BABCOCK_THEMES = {
             "carbon", "emission", "green energy", "photovoltaic",
             "energy efficiency", "microgrid", "smart grid", "clean energy",
             "energy transition", "decarbonization"
+        ],
+        "concept_names": [
+            "Renewable energy",
+            "Energy efficiency",
+            "Battery",
+            "Hydrogen",
+            "Fuel cell",
+            "Microgrid"
         ],
         "strategic_priority": "MEDIUM",
         "description": "Energy systems and sustainability technologies"
@@ -70,6 +98,12 @@ BABCOCK_THEMES = {
             "corrosion resistance", "structural materials", "metal alloy",
             "advanced composites"
         ],
+        "concept_names": [
+            "Additive manufacturing",
+            "Composite material",
+            "Manufacturing engineering",
+            "Materials science"
+        ],
         "strategic_priority": "MEDIUM",
         "description": "Advanced manufacturing and materials technologies"
     },
@@ -83,6 +117,13 @@ BABCOCK_THEMES = {
             "explainable AI", "federated learning", "transfer learning",
             "convolutional neural network", "recurrent neural network"
         ],
+        "concept_names": [
+            "Artificial intelligence",
+            "Machine learning",
+            "Computer vision",
+            "Natural language processing",
+            "Deep learning"
+        ],
         "strategic_priority": "HIGH",
         "description": "AI and machine learning applications"
     },
@@ -94,6 +135,12 @@ BABCOCK_THEMES = {
             "offshore", "subsea", "acoustic", "marine robotics",
             "ship design", "marine structures", "oceanography",
             "marine technology", "naval architecture", "underwater vehicle"
+        ],
+        "concept_names": [
+            "Naval architecture",
+            "Marine engineering",
+            "Ocean engineering",
+            "Underwater acoustics"
         ],
         "strategic_priority": "HIGH",
         "description": "Marine and naval technologies"
@@ -107,6 +154,12 @@ BABCOCK_THEMES = {
             "propulsion", "aerodynamic", "flight control",
             "space technology", "satellite system", "aerospace engineering"
         ],
+        "concept_names": [
+            "Aerospace engineering",
+            "Satellite",
+            "Remote sensing",
+            "Propulsion"
+        ],
         "strategic_priority": "MEDIUM",
         "description": "Space and aerospace systems"
     },
@@ -118,6 +171,12 @@ BABCOCK_THEMES = {
             "digital transformation", "sensor network", "wireless sensor",
             "industrial IoT", "smart manufacturing", "connectivity",
             "digitalization", "smart system"
+        ],
+        "concept_names": [
+            "Internet of things",
+            "Digital twin",
+            "Industry 4.0",
+            "Edge computing"
         ],
         "strategic_priority": "MEDIUM",
         "description": "Digital transformation and IoT technologies"

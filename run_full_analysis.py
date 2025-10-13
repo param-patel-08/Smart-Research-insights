@@ -27,7 +27,7 @@ logger = logging.getLogger(__name__)
 def print_banner(text):
     """Print a nice banner"""
     print("\n" + "="*80)
-    print(f"  {text}")
+    print("  RESEARCH TREND ANALYZER - FULL ANALYSIS")
     print("="*80 + "\n")
 
 
@@ -91,7 +91,7 @@ def main():
     logger.info(f"Universities: {len(ALL_UNIVERSITIES)}")
     logger.info(f"Themes: {len(BABCOCK_THEMES)}")
     logger.info(f"Theme-based filtering: ENABLED (with relevance scoring)")
-    logger.info(f"Minimum relevance threshold: 0.2 (20% Babcock-specific)")
+    logger.info(f"Minimum relevance threshold: 0.2 (20% theme-specific)")
     
     # Ask user for data collection scope
     print("\n" + "="*80)
@@ -100,7 +100,7 @@ def main():
     print("\nOptions:")
     print("  1. Quick test (3 universities, 100 papers each) - 5 minutes")
     print("  2. Medium test (10 universities, 500 papers each) - 15 minutes")
-    print("  3. Full collection (all 24 universities, no limit) - 30-60 minutes")
+    print("  3. Full collection (all 44 universities, no limit) - 30-60 minutes")
     
     # Check for command line argument
     if len(sys.argv) > 1:
@@ -141,7 +141,7 @@ def main():
             max_per_theme = 100
             priority_only = True
         else:  # Full collection
-            max_per_theme = 500
+            max_per_theme = None  # Unlimited per theme
             priority_only = False  # All 9 themes
         
         # Fetch theme-filtered papers with relevance scoring
@@ -150,13 +150,59 @@ def main():
             universities=test_universities,
             max_per_theme=max_per_theme,
             priority_only=priority_only,
-            min_relevance=0.5  # Only Babcock-relevant papers (50% threshold)
+            min_relevance=0.1  # Filter out completely irrelevant papers (was 0.0)
         )
+
+        # University filtering already done by collector - no need to re-filter
+        # The collector only fetches from the specified universities
+        logger.info(f"\nPapers collected from {df['university'].nunique()} universities")
         
-        df = collector.deduplicate_papers(df)
+        # Filter out papers with very low relevance (misclassified papers)
+        if not df.empty and 'relevance_score' in df.columns:
+            before_filter = len(df)
+            df = df[df['relevance_score'] >= 0.1]  # Remove papers with <10% relevance
+            removed = before_filter - len(df)
+            if removed > 0:
+                logger.info(f"Filtered out {removed} papers with relevance < 0.1 (misclassified)")
+        
+        # Include all publication types (journals, conferences, preprints, working papers)
+        # Confidence scores assigned based on type + citations
+        # No type filtering - let confidence scores handle quality weighting
+        
+        # Option A: Remove citation filter for maximum recall
+        # df = collector.filter_by_citations(df, min_citations=1)
+        
+        # Remove duplicates
+        if not df.empty:
+            df = collector.deduplicate_papers(df)
+
+        # Early guard: stop pipeline if nothing to preprocess
+        if df.empty:
+            logger.error("No papers collected after AU+NZ filters. Check institution resolution or expand date range.")
+            raise RuntimeError("No papers collected to preprocess")
+        
+        # Log confidence score distribution
+        if 'confidence_score' in df.columns:
+            logger.info("\nConfidence Score Distribution:")
+            logger.info(f"  High (1.0):        {(df['confidence_score'] == 1.0).sum()} papers ({(df['confidence_score'] == 1.0).sum() / len(df) * 100:.1f}%)")
+            logger.info(f"  Medium-High (0.8): {(df['confidence_score'] == 0.8).sum()} papers ({(df['confidence_score'] == 0.8).sum() / len(df) * 100:.1f}%)")
+            logger.info(f"  Medium (0.6):      {(df['confidence_score'] == 0.6).sum()} papers ({(df['confidence_score'] == 0.6).sum() / len(df) * 100:.1f}%)")
+            logger.info(f"  Medium-Low (0.4):  {(df['confidence_score'] == 0.4).sum()} papers ({(df['confidence_score'] == 0.4).sum() / len(df) * 100:.1f}%)")
+            logger.info(f"  Low (0.2):         {(df['confidence_score'] == 0.2).sum()} papers ({(df['confidence_score'] == 0.2).sum() / len(df) * 100:.1f}%)")
+            logger.info(f"  Mean confidence: {df['confidence_score'].mean():.2f}")
+        
+        # Log publication type distribution
+        if 'type' in df.columns:
+            logger.info("\nPublication Type Distribution:")
+            type_counts = df['type'].value_counts()
+            for pub_type, count in type_counts.items():
+                logger.info(f"  {pub_type}: {count} papers ({count / len(df) * 100:.1f}%)")
+        
+        # Save raw collection snapshot
         collector.save_to_csv(df, RAW_PAPERS_CSV)
         
-        logger.info(f"Collected {len(df)} Babcock-relevant papers across themes")
+        logger.info(f"\nCollected {len(df)} papers across all publication types (AU+NZ only)")
+        logger.info(f"Date range: {df['date'].min()} to {df['date'].max()}")
         return df
     
     df_raw, success = run_step("1. DATA COLLECTION", step1_collect)

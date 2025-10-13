@@ -1,74 +1,49 @@
 Topic,Words,Frequency,Timestamp
--1,"materials, material, energy, mechanical, printing",8,2019-12-30 04:40:48
+-1,"material, printing, hybrid, sustainable, manufacturing",6,2019-12-30 04:40:48
 0,"health, covid, care, patients, digital",15,2019-12-30 04:40:48
-2,"security, attacks, cyber, information, vulnerabilities",6,2019-12-30 04:40:48
-3,"spine, ray, robotic, correction, detector",3,2019-12-30 04:40:48
-4,"transitions, locomotor, energy, entry, control systems",5,2019-12-30 04:40:48
-5,"assistance, task, robot, motor, children",2,2019-12-30 04:40:48
-6,"tool, retinal, needle, robotic, tissue",4,2019-12-30 04:40:48
--1,"surface, appearance, une, energy, renewable energy",4,2020-06-29 12:00:00
-0,"health, supply, supply chain, chain, covid",8,2020-06-29 12:00:00
-1,"security, satellite, monitor, attacks, cyber",5,2020-06-29 12:00:00
-2,"security, adversarial, attacks, iot, metric",4,2020-06-29 12:00:00
-3,"body mounted, mounted, robot, body, robotic",2,2020-06-29 12:00:00
-4,"self, energy, right, template, phase",1,2020-06-29 12:00:00
-5,"robot, engineering, robots, robotics, surgical",7,2020-06-29 12:00:00
-6,"tool, measurements, insertion, depth, tip",1,2020-06-29 12:00:00
--1,"function, set, transfer, soft, mechanical",7,2020-12-27 00:00:00
+1,"security, cyber, attacks, vulnerabilities, threats",6,2019-12-30 04:40:48
+2,"transitions, locomotor, terrain, cargo, swarm",4,2019-12-30 04:40:48
+3,"robot, spine, tool, ray, surgical",12,2019-12-30 04:40:48
+-1,"une, renewable, renewable energy, ground surface, gas",3,2020-06-29 12:00:00
+0,"health, supply, covid, supply chain, chain",8,2020-06-29 12:00:00
+1,"security, attacks, cyber, adversarial, attack",9,2020-06-29 12:00:00
+2,"right, template, motions, barrier, animal",1,2020-06-29 12:00:00
+3,"robot, surgical, robots, surgery, tool",11,2020-06-29 12:00:00
+-1,"soft, set, mixed, convex, candidates",4,2020-12-27 00:00:00
 0,"health, room, covid, air, digital",6,2020-12-27 00:00:00
-1,"strategic, algorithm, currently, aircraft, faa",1,2020-12-27 00:00:00
-2,"attacks, adversarial, box, defenses, white",1,2020-12-27 00:00:00
-3,"robotic, spine, robot, surgery, mri",3,2020-12-27 00:00:00
-4,"locomotor, neural, transitions, self, energy",6,2020-12-27 00:00:00
-5,"robot, viewpoint, object detection, robots, object",3,2020-12-27 00:00:00
-6,"tool, robot, robotic, servoing, visual servoing",2,2020-12-27 00:00:00
--1,"homer, image processing, muscle, spacecraft, energy",3,2021-06-25 12:00:00
-0,"health, diagnostics, care, access, covid",12,2021-06-25 12:00:00
-1,"security, monitor, aerial, guidance, safety",5,2021-06-25 12:00:00
-2,"cybersecurity, cyber, autonomic, security, strategy",4,2021-06-25 12:00:00
-3,"magnetic, robot, bone, surgical, robotic",5,2021-06-25 12:00:00
-4,"slam, sensors, biological, energy, free energy",3,2021-06-25 12:00:00
-5,"teleoperation, servicing, object, operators, detection",3,2021-06-25 12:00:00
-6,"image based, image, surgical, registration, tumor",2,2021-06-25 12:00:00
--1,"energy, soft, materials, prostate, prostate cancer",9,2021-12-23 00:00:00
-0,"health, mortality, text, digital, scholar",9,2021-12-23 00:00:00
-1,"encryption, security, security measures, cyber, teleoperation",1,2021-12-23 00:00:00
-2,"security, cities, attacks, cyber, attack",7,2021-12-23 00:00:00
-3,"robotic, mri, bone, measurements, spinal",4,2021-12-23 00:00:00
-4,"neural, navigation, unsupervised, weight, orientation",1,2021-12-23 00:00:00
-5,"robot, feedback, haptic, robots, chair",7,2021-12-23 00:00:00
-6,"surgery, surgical, robotic, mode, tissue",4,2021-12-23 00:00:00
--1,"catalysts, single, reaction, labour, energy",2,2022-06-21 12:00:00
+1,"attacks, adversarial, strategic, attack, box",2,2020-12-27 00:00:00
+2,"locomotor, transitions, flight, inference, robots",6,2020-12-27 00:00:00
+3,"robot, surgical, surgery, robots, robotic systems",11,2020-12-27 00:00:00
+-1,"image processing, spacecraft, image, device, functionality",2,2021-06-25 12:00:00
+0,"health, diagnostics, care, access, covid",13,2021-06-25 12:00:00
+1,"cybersecurity, security, cyber, attack, autonomic",9,2021-06-25 12:00:00
+2,"slam, biological, cognition, free energy, navigation",3,2021-06-25 12:00:00
+3,"robot, surgical, magnetic, tracking, surgery",10,2021-06-25 12:00:00
+-1,"soft, wind, prostate, prostate cancer, cancer",8,2021-12-23 00:00:00
+0,"health, mortality, digital, text, scholar",9,2021-12-23 00:00:00
+1,"security, cyber, attacks, attack, cities",9,2021-12-23 00:00:00
+2,"navigation, unsupervised, weight, orientation, robotic systems",1,2021-12-23 00:00:00
+3,"robot, surgical, surgery, navigation, robots",15,2021-12-23 00:00:00
+-1,"catalysts, reaction, transition, metal, stability",1,2022-06-21 12:00:00
 0,"health, patients, care, digital, participants",9,2022-06-21 12:00:00
-1,"satellite, port, attack, protection, cyber",4,2022-06-21 12:00:00
-2,"adversarial, attack, attacks, cyber, security",5,2022-06-21 12:00:00
-3,"magnetic, robotic, spine, mean, surgical",4,2022-06-21 12:00:00
-4,"slam, assembly, energy, self, inference",5,2022-06-21 12:00:00
-5,"robot, camera, bimanual, robots, task",4,2022-06-21 12:00:00
--1,"wind, earth, energy, solar, spacecraft",7,2022-12-19 00:00:00
-0,"digital, studies, wound, health, patients",10,2022-12-19 00:00:00
-1,"aerodynamic, optimization, communications, adversaries, uav",4,2022-12-19 00:00:00
-2,"iot, security, attack, attacks, cyber",7,2022-12-19 00:00:00
-3,"traction, robotic, weight, magnetic, device",4,2022-12-19 00:00:00
-5,"feedback, steering, angle, delays, haptic",3,2022-12-19 00:00:00
-6,"robotic, retinal, injection, navigation, estimation",3,2022-12-19 00:00:00
--1,"engineering, water, university, capture, treatment",5,2023-06-17 12:00:00
+1,"attack, cyber, adversarial, satellite, attacks",9,2022-06-21 12:00:00
+2,"slam, cells, inference, theory, navigation",4,2022-06-21 12:00:00
+3,"robot, magnetic, surgical, navigation, robots",9,2022-06-21 12:00:00
+-1,"earth, wind, solar, spacecraft, quantify",4,2022-12-19 00:00:00
+0,"digital, wound, health, patients, clinical",10,2022-12-19 00:00:00
+1,"security, attack, cyber, iot, attacks",11,2022-12-19 00:00:00
+2,"brain, memory, cell, ultimately, interfaces",1,2022-12-19 00:00:00
+3,"surgical, traction, robot, navigation, force",12,2022-12-19 00:00:00
+-1,"water, university, treatment, civil, received",3,2023-06-17 12:00:00
 0,"health, digital, care, access, patients",7,2023-06-17 12:00:00
-1,"access, cybersecurity, increasing, afterthought, rapidly increasing",1,2023-06-17 12:00:00
-2,"detection, cyber, cybersecurity, autonomic, attacks",2,2023-06-17 12:00:00
-5,"camera, motion, math, inline formula, inline",5,2023-06-17 12:00:00
-6,"suture, suturing, single arm, robot, arm",3,2023-06-17 12:00:00
--1,"smart, properties, mission, analysis, defense",5,2023-12-15 00:00:00
-0,"health, llms, clinical, pilot, technologies",6,2023-12-15 00:00:00
-1,"simulator, operations, security, ics, marine",1,2023-12-15 00:00:00
-2,"students, security, cybersecurity, power, courses",4,2023-12-15 00:00:00
-3,"intervention, motion, robotic, certain extent, surgery robotic",1,2023-12-15 00:00:00
-4,"kinetic, assembly, self, yield, binding",1,2023-12-15 00:00:00
-5,"precision, high precision, teleoperation, surgical, vehicles",3,2023-12-15 00:00:00
-6,"precise, needle, injection, workflow, retinal",2,2023-12-15 00:00:00
--1,"wind, energy, standardization, vessels, turbines",1,2024-06-12 12:00:00
+1,"detection, cybersecurity, cyber, attacks, autonomic",3,2023-06-17 12:00:00
+3,"surgical, robot, camera, force, surgery",10,2023-06-17 12:00:00
+-1,"smart, mission, investigations, kinetic, soft",5,2023-12-15 00:00:00
+0,"health, llms, clinical, pilot, care",5,2023-12-15 00:00:00
+1,"students, security, cybersecurity, attacks, courses",6,2023-12-15 00:00:00
+2,"kinetic, assembly, yield, binding, timescales",1,2023-12-15 00:00:00
+3,"precision, surgical, surgery, teleoperation, robot",6,2023-12-15 00:00:00
+-1,"wind, standardization, vessels, turbines, sector",1,2024-06-12 12:00:00
 0,"health, medical, care, digital, healthcare",6,2024-06-12 12:00:00
-1,"gps, drone, cyber, uavs, drones",1,2024-06-12 12:00:00
-2,"transportation, computing, intelligent, edge, security privacy protection",1,2024-06-12 12:00:00
-3,"spinal, robotic, literature, accuracy, accuracy reduce",1,2024-06-12 12:00:00
-5,"affective, driving, robot, touch, autonomous driving",2,2024-06-12 12:00:00
+1,"transportation, intelligent, edge, cyber, gps",2,2024-06-12 12:00:00
+3,"affective, driving, robot, touch, spinal",3,2024-06-12 12:00:00

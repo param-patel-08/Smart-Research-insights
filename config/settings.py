@@ -16,7 +16,18 @@ OPENALEX_EMAIL = os.getenv('OPENALEX_EMAIL', 'param.pat01@gmail.com')
 ANALYSIS_START_DATE = datetime(2020, 1, 1)
 ANALYSIS_END_DATE = datetime(2024, 12, 31)
 
+# Institution name variants for better OpenAlex resolution
+INSTITUTION_SYNONYMS = {
+    "University of Melbourne": ["The University of Melbourne", "Melbourne University", "UniMelb"],
+    "University of Sydney": ["The University of Sydney", "Sydney University", "USYD"],
+    "University of Queensland": ["The University of Queensland", "UQ"],
+    "University of New South Wales": ["UNSW Sydney", "UNSW", "The University of New South Wales"],
+    "Australian National University": ["ANU", "The Australian National University"],
+    "RMIT University": ["RMIT", "Royal Melbourne Institute of Technology"],
+}
+
 # Australasian Universities and their OpenAlex IDs
+# Note: IDs are placeholders - collector resolves actual IDs dynamically from OpenAlex API
 ALL_UNIVERSITIES = {
     "University of Melbourne": "I145311948",
     "University of Sydney": "I145311949", 
@@ -26,6 +37,7 @@ ALL_UNIVERSITIES = {
     "Australian National University": "I145311953",
     "University of Western Australia": "I145311954",
     "University of Adelaide": "I145311955",
+    "RMIT University": "I145311992",
     "University of Technology Sydney": "I145311956",
     "Queensland University of Technology": "I145311957",
     "University of Auckland": "I145311958",
@@ -89,5 +101,5 @@ TOPIC_MODEL_PARAMS = {
 }
 
 # Dashboard Configuration
-DASHBOARD_TITLE = "Babcock Research Trends Dashboard"
+DASHBOARD_TITLE = "Research Trend Analyzer"
 DASHBOARD_DESCRIPTION = "Analysis of research trends across Australasian universities"

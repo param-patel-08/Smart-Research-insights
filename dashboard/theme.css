@@ -1,0 +1,15 @@
+:root{--primary:#22c55e;--accent:#0ea5e9;--text:#0b0f19;--muted:#64748b;--bg:#ffffff;--card:#ffffff;--border:#e5e7eb;--sidebar-bg:#f8fafc;--sidebar-text:#0b0f19}
+section[data-testid="stSidebar"]{background:var(--sidebar-bg)!important}
+section[data-testid="stSidebar"] *{color:var(--sidebar-text)!important}
+/* Sidebar navigation links */
+[data-testid="stSidebarNav"] a{color:var(--sidebar-text)!important;border-radius:8px}
+[data-testid="stSidebarNav"] a[aria-current="page"]{background:#e2f7ea!important;color:var(--text)!important}
+.main-header{font-size:28px;font-weight:700;color:var(--text);margin:8px 0 12px}
+.sub-header{font-size:18px;font-weight:600;color:var(--text);margin:8px 0}
+.badge{display:inline-block;background:#e2e8f0;color:var(--text);font-weight:600;border-radius:999px;padding:4px 10px;margin-right:6px}
+.card{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:18px;box-shadow:0 1px 2px rgba(0,0,0,.04)}
+.card-alt{background:var(--card);border:1px solid var(--border);border-radius:10px;padding:10px 14px}
+.kpi .label{color:var(--muted);font-size:12px}
+.kpi .value{color:var(--text);font-size:18px;font-weight:700}
+.divider{border-top:1px solid var(--border);margin:16px 0}
+button[kind="secondary"]{border-color:var(--border)}

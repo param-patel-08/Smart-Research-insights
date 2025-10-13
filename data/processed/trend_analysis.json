@@ -8,45 +8,43 @@
       "universities": {}
     },
     "Autonomous_Systems": {
-      "total_papers": 87,
-      "growth_rate": 0.14103535353535354,
+      "total_papers": 99,
+      "growth_rate": 0.0946969696969697,
       "quarterly_counts": {
-        "2020Q1": 4,
-        "2020Q2": 5,
-        "2020Q3": 4,
+        "2020Q1": 6,
+        "2020Q2": 6,
+        "2020Q3": 5,
         "2020Q4": 6,
-        "2021Q1": 3,
-        "2021Q2": 5,
+        "2021Q1": 5,
+        "2021Q2": 6,
         "2021Q3": 4,
         "2021Q4": 6,
         "2022Q1": 5,
         "2022Q2": 11,
-        "2022Q3": 4,
+        "2022Q3": 5,
         "2022Q4": 3,
         "2023Q1": 8,
-        "2023Q2": 3,
+        "2023Q2": 6,
         "2023Q3": 3,
-        "2023Q4": 4,
+        "2023Q4": 5,
         "2024Q1": 4,
         "2024Q2": 2,
         "2024Q3": 3
       },
       "top_topics": {
-        "5": 39,
-        "3": 27,
-        "6": 21
+        "3": 99
       },
       "universities": {
-        "Johns Hopkins University": 49,
-        "Johns Hopkins Medicine": 4,
+        "Johns Hopkins University": 56,
+        "Johns Hopkins Medicine": 5,
         "Politecnico di Milano": 3,
-        "University of Maryland, College Park": 2,
-        "Johns Hopkins University Applied Physics Laboratory": 2
+        "Purdue University West Lafayette": 2,
+        "University of Maryland, College Park": 2
       }
     },
     "Cybersecurity": {
-      "total_papers": 64,
-      "growth_rate": 0.12685185185185185,
+      "total_papers": 66,
+      "growth_rate": 0.1630952380952381,
       "quarterly_counts": {
         "2020Q1": 4,
         "2020Q2": 3,
@@ -56,7 +54,7 @@
         "2021Q2": 2,
         "2021Q3": 4,
         "2021Q4": 4,
-        "2022Q1": 6,
+        "2022Q1": 7,
         "2022Q2": 2,
         "2022Q3": 3,
         "2022Q4": 6,
@@ -64,27 +62,26 @@
         "2023Q2": 6,
         "2023Q3": 2,
         "2023Q4": 2,
-        "2024Q1": 4,
+        "2024Q1": 5,
         "2024Q2": 1,
         "2024Q4": 1
       },
       "top_topics": {
-        "2": 41,
-        "1": 23
+        "1": 66
       },
       "universities": {
         "Johns Hopkins University": 27,
         "Johns Hopkins University Applied Physics Laboratory": 5,
+        "Morgan State University": 2,
         "Johns Hopkins Center for Health Security": 2,
-        "Fudan University": 2,
-        "Morgan State University": 2
+        "Fudan University": 2
       }
     },
     "Energy_Sustainability": {
-      "total_papers": 22,
-      "growth_rate": 0.5277777777777778,
+      "total_papers": 21,
+      "growth_rate": 0.45,
       "quarterly_counts": {
-        "2020Q1": 4,
+        "2020Q1": 3,
         "2020Q2": 1,
         "2020Q3": 1,
         "2021Q2": 6,
@@ -92,18 +89,19 @@
         "2021Q4": 2,
         "2022Q1": 1,
         "2022Q3": 2,
-        "2022Q4": 3,
+        "2022Q4": 2,
+        "2023Q1": 1,
         "2024Q2": 1
       },
       "top_topics": {
-        "4": 22
+        "2": 21
       },
       "universities": {
-        "Johns Hopkins University": 10,
+        "Johns Hopkins University": 11,
         "Indiana University Bloomington": 2,
-        "University of Chicago": 2,
         "Johns Hopkins Medicine": 1,
-        "Airbus (Germany)": 1
+        "Airbus (Germany)": 1,
+        "Tsinghua University": 1
       }
     },
     "Advanced_Manufacturing": {
@@ -136,7 +134,7 @@
     },
     "Digital_Transformation": {
       "total_papers": 88,
-      "growth_rate": 0.4715538847117794,
+      "growth_rate": 0.46578947368421053,
       "quarterly_counts": {
         "2020Q1": 8,
         "2020Q2": 7,
@@ -145,7 +143,7 @@
         "2021Q1": 4,
         "2021Q2": 2,
         "2021Q3": 6,
-        "2021Q4": 6,
+        "2021Q4": 7,
         "2022Q1": 6,
         "2022Q2": 3,
         "2022Q3": 3,
@@ -153,7 +151,7 @@
         "2023Q1": 1,
         "2023Q2": 7,
         "2023Q3": 3,
-        "2023Q4": 5,
+        "2023Q4": 4,
         "2024Q1": 4,
         "2024Q2": 1,
         "2024Q3": 4,
@@ -164,65 +162,45 @@
       },
       "universities": {
         "Johns Hopkins University": 30,
-        "Johns Hopkins Medicine": 4,
-        "University of Michigan": 2,
-        "Johns Hopkins Hospital": 2,
+        "Johns Hopkins Medicine": 3,
+        "University of Iowa": 2,
+        "University of Cape Town": 2,
         "Imperial College London": 2
       }
     }
   },
-  "emerging_topics": [
-    {
-      "topic_id": 5,
-      "theme": "Autonomous_Systems",
-      "growth_rate": 1.0,
-      "keywords": [
-        "robot",
-        "robots",
-        "task",
-        "surgical",
-        "camera",
-        "navigation",
-        "robotic",
-        "feedback",
-        "motion",
-        "user"
-      ],
-      "recent_count": 2,
-      "previous_count": 1
-    }
-  ],
+  "emerging_topics": [],
   "strategic_priorities": [
     {
-      "theme": "Energy_Sustainability",
-      "priority_score": 0.5393888888888889,
-      "category": "MEDIUM",
-      "growth_rate": 0.5277777777777778,
-      "total_papers": 22,
-      "babcock_priority": "MEDIUM"
-    },
-    {
       "theme": "Digital_Transformation",
-      "priority_score": 0.513050626566416,
+      "priority_score": 0.5067789473684211,
       "category": "MEDIUM",
-      "growth_rate": 0.4715538847117794,
+      "growth_rate": 0.46578947368421053,
       "total_papers": 88,
       "babcock_priority": "MEDIUM"
     },
     {
-      "theme": "Autonomous_Systems",
-      "priority_score": 0.22995814393939393,
-      "category": "LOW",
-      "growth_rate": 0.14103535353535354,
-      "total_papers": 87,
-      "babcock_priority": "HIGH"
+      "theme": "Energy_Sustainability",
+      "priority_score": 0.45944999999999997,
+      "category": "MEDIUM",
+      "growth_rate": 0.45,
+      "total_papers": 21,
+      "babcock_priority": "MEDIUM"
     },
     {
       "theme": "Cybersecurity",
-      "priority_score": 0.20245555555555556,
+      "priority_score": 0.2607892857142857,
       "category": "LOW",
-      "growth_rate": 0.12685185185185185,
-      "total_papers": 64,
+      "growth_rate": 0.1630952380952381,
+      "total_papers": 66,
+      "babcock_priority": "HIGH"
+    },
+    {
+      "theme": "Autonomous_Systems",
+      "priority_score": 0.15610795454545454,
+      "category": "LOW",
+      "growth_rate": 0.0946969696969697,
+      "total_papers": 99,
       "babcock_priority": "HIGH"
     },
     {

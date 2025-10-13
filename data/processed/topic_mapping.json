@@ -21,47 +21,19 @@
       "patients",
       "medical",
       "healthcare",
-      "access",
+      "patient",
       "clinical",
-      "patient"
+      "access"
     ],
     "count": 88
   },
   "1": {
     "theme": "Cybersecurity",
-    "confidence": 0.26245669136809274,
+    "confidence": 0.3179488115012027,
     "all_scores": {
-      "Defense_Security": 0.175396523205612,
+      "Defense_Security": 0.09281942698731536,
       "Autonomous_Systems": 0.0,
-      "Cybersecurity": 0.26245669136809274,
-      "Energy_Sustainability": 0.0,
-      "Advanced_Manufacturing": 0.0,
-      "AI_Machine_Learning": 0.0,
-      "Marine_Naval": 0.0,
-      "Space_Aerospace": 0.20753287066498147,
-      "Digital_Transformation": 0.0
-    },
-    "keywords": [
-      "security",
-      "cyber",
-      "satellite",
-      "attack",
-      "monitor",
-      "cybersecurity",
-      "vehicles",
-      "operations",
-      "attacks",
-      "space systems"
-    ],
-    "count": 23
-  },
-  "2": {
-    "theme": "Cybersecurity",
-    "confidence": 0.3533376777669352,
-    "all_scores": {
-      "Defense_Security": 0.07734781234369076,
-      "Autonomous_Systems": 0.0,
-      "Cybersecurity": 0.3533376777669352,
+      "Cybersecurity": 0.3179488115012027,
       "Energy_Sustainability": 0.0,
       "Advanced_Manufacturing": 0.0,
       "AI_Machine_Learning": 0.0,
@@ -71,128 +43,72 @@
     },
     "keywords": [
       "security",
-      "attacks",
       "cyber",
+      "attacks",
       "attack",
-      "adversarial",
       "cybersecurity",
+      "adversarial",
       "iot",
-      "vulnerabilities",
-      "key",
-      "information"
+      "threats",
+      "detection",
+      "vulnerabilities"
     ],
-    "count": 41
+    "count": 66
+  },
+  "2": {
+    "theme": "Energy_Sustainability",
+    "confidence": 0.14253481700480242,
+    "all_scores": {
+      "Defense_Security": 0.0,
+      "Autonomous_Systems": 0.0744771023475787,
+      "Cybersecurity": 0.0,
+      "Energy_Sustainability": 0.14253481700480242,
+      "Advanced_Manufacturing": 0.0,
+      "AI_Machine_Learning": 0.0,
+      "Marine_Naval": 0.0,
+      "Space_Aerospace": 0.0,
+      "Digital_Transformation": 0.0
+    },
+    "keywords": [
+      "slam",
+      "locomotor",
+      "transitions",
+      "inference",
+      "cognition",
+      "assembly",
+      "free energy",
+      "navigation",
+      "kinetic",
+      "biological"
+    ],
+    "count": 21
   },
   "3": {
     "theme": "Autonomous_Systems",
-    "confidence": 0.07850031981204608,
+    "confidence": 0.10658510262542636,
     "all_scores": {
       "Defense_Security": 0.0,
-      "Autonomous_Systems": 0.07850031981204608,
+      "Autonomous_Systems": 0.10658510262542636,
       "Cybersecurity": 0.0,
       "Energy_Sustainability": 0.0,
       "Advanced_Manufacturing": 0.0,
-      "AI_Machine_Learning": 0.0,
+      "AI_Machine_Learning": 0.019282692753704825,
       "Marine_Naval": 0.0,
       "Space_Aerospace": 0.0,
       "Digital_Transformation": 0.0
     },
     "keywords": [
-      "robotic",
-      "magnetic",
-      "spine",
       "robot",
-      "bone",
       "surgical",
-      "spinal",
       "surgery",
-      "mri",
-      "imaging"
-    ],
-    "count": 27
-  },
-  "4": {
-    "theme": "Energy_Sustainability",
-    "confidence": 0.14984429932333004,
-    "all_scores": {
-      "Defense_Security": 0.0,
-      "Autonomous_Systems": 0.051424517881632006,
-      "Cybersecurity": 0.0,
-      "Energy_Sustainability": 0.14984429932333004,
-      "Advanced_Manufacturing": 0.0,
-      "AI_Machine_Learning": 0.05949127614550777,
-      "Marine_Naval": 0.0,
-      "Space_Aerospace": 0.0,
-      "Digital_Transformation": 0.0
-    },
-    "keywords": [
-      "energy",
-      "self",
-      "slam",
-      "assembly",
-      "neural",
-      "transitions",
-      "locomotor",
-      "inference",
-      "active",
-      "complex"
-    ],
-    "count": 22
-  },
-  "5": {
-    "theme": "Autonomous_Systems",
-    "confidence": 0.13789074994362904,
-    "all_scores": {
-      "Defense_Security": 0.0,
-      "Autonomous_Systems": 0.13789074994362904,
-      "Cybersecurity": 0.0,
-      "Energy_Sustainability": 0.0,
-      "Advanced_Manufacturing": 0.0,
-      "AI_Machine_Learning": 0.0,
-      "Marine_Naval": 0.0,
-      "Space_Aerospace": 0.0,
-      "Digital_Transformation": 0.0
-    },
-    "keywords": [
-      "robot",
-      "robots",
-      "task",
-      "surgical",
-      "camera",
       "navigation",
-      "robotic",
-      "feedback",
-      "motion",
-      "user"
-    ],
-    "count": 39
-  },
-  "6": {
-    "theme": "Autonomous_Systems",
-    "confidence": 0.07850031981204608,
-    "all_scores": {
-      "Defense_Security": 0.0,
-      "Autonomous_Systems": 0.07850031981204608,
-      "Cybersecurity": 0.0,
-      "Energy_Sustainability": 0.0,
-      "Advanced_Manufacturing": 0.0,
-      "AI_Machine_Learning": 0.0,
-      "Marine_Naval": 0.0,
-      "Space_Aerospace": 0.0,
-      "Digital_Transformation": 0.0
-    },
-    "keywords": [
+      "robots",
+      "magnetic",
+      "image",
+      "spine",
       "tool",
-      "robotic",
-      "retinal",
-      "surgery",
-      "surgical",
-      "robot",
-      "needle",
-      "tissue",
-      "insertion",
-      "depth"
+      "camera"
     ],
-    "count": 21
+    "count": 99
   }
 }
