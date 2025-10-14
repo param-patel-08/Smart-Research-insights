@@ -98,9 +98,9 @@ def main():
     print("DATA COLLECTION SCOPE")
     print("="*80)
     print("\nOptions:")
-    print("  1. Quick test (3 universities, 100 papers each) - 5 minutes")
-    print("  2. Medium test (10 universities, 500 papers each) - 15 minutes")
-    print("  3. Full collection (all 24 universities, no limit) - 30-60 minutes")
+    print("  1. Quick test (3 universities, ~1000-1500 papers) - 8-10 minutes")
+    print("  2. Medium test (10 universities, ~4000-6000 papers) - 20-25 minutes")
+    print("  3. Full collection (43 universities, ~15000-25000 papers) - 60-120 minutes")
     
     # Check for command line argument
     if len(sys.argv) > 1:
@@ -134,30 +134,45 @@ def main():
         )
         
         # Map collection scope to theme parameters
+        # Lower thresholds since OpenAlex concepts already provide good filtering
         if choice == "1":  # Quick test
-            max_per_theme = 50
-            priority_only = True  # Only HIGH priority themes
-        elif choice == "2":  # Medium test
-            max_per_theme = 100
-            priority_only = True
-        else:  # Full collection
             max_per_theme = 500
+            priority_only = False  # All 9 themes (changed from True to collect all themes)
+            min_relevance = 0.15  # Lower threshold for more papers
+        elif choice == "2":  # Medium test
+            max_per_theme = 2000
+            priority_only = False  # All 9 themes (changed from True to collect all themes)
+            min_relevance = 0.15  # Lower threshold for more papers
+        else:  # Full collection
+            max_per_theme = 10000
             priority_only = False  # All 9 themes
+            min_relevance = 0.15  # Lower threshold for more papers
         
         # Fetch theme-filtered papers with relevance scoring
         logger.info(f"Fetching papers with theme-based filtering (priority_only={priority_only})")
+        logger.info(f"Collection params: max_per_theme={max_per_theme}, min_relevance={min_relevance}")
         df = collector.fetch_all_themes(
             universities=test_universities,
             max_per_theme=max_per_theme,
             priority_only=priority_only,
-            min_relevance=0.5  # Only Babcock-relevant papers (50% threshold)
+            min_relevance=min_relevance
         )
         
         df = collector.deduplicate_papers(df)
-        collector.save_to_csv(df, RAW_PAPERS_CSV)
         
-        logger.info(f"Collected {len(df)} Babcock-relevant papers across themes")
-        return df
+        # Filter to keep only papers from major AU/NZ universities
+        # Papers from other AU/NZ institutions (research labs, small colleges) are excluded
+        initial_count = len(df)
+        major_unis = set(ALL_UNIVERSITIES.keys())
+        df_filtered = df[df['university'].isin(major_unis)].copy()
+        other_aus_papers = initial_count - len(df_filtered)
+        
+        logger.info(f"Filtered to major universities: {len(df_filtered)} papers (removed {other_aus_papers} from other AU/NZ institutions)")
+        
+        collector.save_to_csv(df_filtered, RAW_PAPERS_CSV)
+        
+        logger.info(f"Collected {len(df_filtered)} Babcock-relevant papers from {len(df_filtered['university'].unique())} major AU/NZ universities")
+        return df_filtered
     
     df_raw, success = run_step("1. DATA COLLECTION", step1_collect)
     if not success:
@@ -180,7 +195,8 @@ def main():
         
         # Prepare documents and metadata for BERTopic
         documents = df['processed_text'].tolist()
-        metadata = df[['title', 'university', 'date', 'authors', 'journal', 'citations']].copy()
+        # IMPORTANT: Preserve the 'theme' column from collection for strategic priority tracking
+        metadata = df[['title', 'university', 'date', 'authors', 'journal', 'citations', 'theme']].copy()
         
         # Save
         metadata.to_csv(METADATA_CSV, index=False)

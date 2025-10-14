@@ -27,3 +27,10 @@ logs/
 # Processed data (large files)
 data/processed/embeddings.npy
 data/processed/documents.txt
+data/processed/metadata.csv
+data/processed/papers_processed.csv
+data/processed/topics_over_time.csv
+data/raw/papers_raw.csv
+models/bertopic_model.pkl
+data/processed/topics_over_time.csv
+data/processed/papers_processed.csv

@@ -69,10 +69,14 @@ class TrendAnalyzer:
         logger.info("ANALYZING TRENDS PER THEME")
         logger.info("="*80)
         
-        # Add theme to papers
-        papers_df['theme'] = papers_df['topic_id'].astype(str).map(
-            lambda tid: self.topic_theme_mapping.get(tid, {}).get('theme', 'Uncategorized')
-        )
+        # Use the original theme from collection if available, otherwise fall back to topic mapping
+        if 'theme' not in papers_df.columns:
+            logger.info("Using topic-based theme mapping (no original theme column)")
+            papers_df['theme'] = papers_df['topic_id'].astype(str).map(
+                lambda tid: self.topic_theme_mapping.get(tid, {}).get('theme', 'Uncategorized')
+            )
+        else:
+            logger.info("Using original theme from collection (concept-based)")
         
         # Group by theme and quarter
         papers_df['quarter'] = pd.to_datetime(papers_df['date']).dt.to_period('Q')
@@ -129,10 +133,11 @@ class TrendAnalyzer:
         """
         logger.info("\nIdentifying emerging topics...")
         
-        # Add theme info
-        papers_df['theme'] = papers_df['topic_id'].astype(str).map(
-            lambda tid: self.topic_theme_mapping.get(tid, {}).get('theme', 'Unknown')
-        )
+        # Use original theme if available, otherwise map from topics
+        if 'theme' not in papers_df.columns:
+            papers_df['theme'] = papers_df['topic_id'].astype(str).map(
+                lambda tid: self.topic_theme_mapping.get(tid, {}).get('theme', 'Unknown')
+            )
         
         # Group by topic and quarter
         papers_df['quarter'] = pd.to_datetime(papers_df['date']).dt.to_period('Q')

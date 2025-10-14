@@ -16,6 +16,7 @@ import time
 import logging
 
 from config.themes import BABCOCK_THEMES
+from config.settings import ALL_UNIVERSITIES
 
 logger = logging.getLogger(__name__)
 
@@ -47,39 +48,25 @@ class ThemeBasedCollector:
         logger.info(f"Date range: {start_date.date()} to {end_date.date()}")
         logger.info(f"Using email: {email}")
     
-    def build_theme_query(self, theme_name: str, top_n_keywords: int = 15) -> str:
+    def build_theme_query(self, theme_name: str, top_n_keywords: int = 30) -> str:
         """
         Build OpenAlex search query from theme keywords
-        Combined with domain context to ensure Babcock relevance
         
         Args:
             theme_name: Name of the Babcock theme
-            top_n_keywords: Number of top keywords to use (too many = slow)
+            top_n_keywords: Number of top keywords to use (expanded for better coverage)
             
         Returns:
-            Search query string ensuring technical/engineering context
+            Search query string for theme keywords
         """
         theme_data = BABCOCK_THEMES[theme_name]
         theme_keywords = theme_data['keywords'][:top_n_keywords]
         
-        # Babcock domain context - ensures technical/engineering focus
-        # These terms filter out irrelevant academic areas (history, biology, social sciences)
-        domain_context = [
-            "engineering", "technology", "system", "design", "development",
-            "application", "implementation", "analysis", "control", "detection",
-            "sensor", "hardware", "software", "platform", "infrastructure",
-            "architecture", "integration", "deployment", "operational"
-        ]
-        
-        # Build query: (theme keywords) AND (domain context)
-        # This ensures papers are about technical/engineering applications
+        # Build query with just theme keywords
+        # Relevance filtering will handle quality control after collection
         theme_query = ' OR '.join(theme_keywords)
-        domain_query = ' OR '.join(domain_context[:8])  # Use subset to keep query manageable
         
-        # Combined query ensures papers match theme AND are technical
-        query = f"({theme_query}) AND ({domain_query})"
-        
-        return query
+        return theme_query
     
     def fetch_papers_for_theme(
         self,
@@ -104,10 +91,6 @@ class ThemeBasedCollector:
         logger.info(f"FETCHING PAPERS FOR THEME: {theme_name}")
         logger.info(f"{'='*80}")
         
-        # Build query
-        keyword_query = self.build_theme_query(theme_name)
-        logger.info(f"Keywords: {keyword_query[:100]}...")
-        
         # Build filters
         filters = []
         
@@ -115,21 +98,39 @@ class ThemeBasedCollector:
         filters.append(f"from_publication_date:{self.start_date.date().isoformat()}")
         filters.append(f"to_publication_date:{self.end_date.date().isoformat()}")
         
-        # Universities (institution filter)
-        institution_ids = '|'.join(universities.values())
-        filters.append(f"institutions.id:{institution_ids}")
+        # COUNTRY-BASED FILTER: All Australian and New Zealand institutions
+        # This is more reliable than specific institution IDs because:
+        # 1. OpenAlex provides accurate institution names automatically
+        # 2. Captures all AU/NZ research institutions
+        # 3. Simpler and more maintainable
+        # Post-processing will filter to major universities only
+        filters.append(f"institutions.country_code:AU|NZ")
         
-        # Keyword search with domain context (ensures technical relevance)
-        filters.append(f"title_and_abstract.search:{keyword_query}")
+        # USE ONLY OPENALEX CONCEPTS - NO KEYWORD SEARCH
+        # Concepts are more reliable and accurately categorized by OpenAlex
+        # NOTE: Use specific concepts to minimize overlap while ensuring coverage
+        concept_mapping = {
+            'AI_Machine_Learning': 'C154945302|C119857082',  # AI | ML 
+            'Defense_Security': 'C2780653162|C149923435',  # Security engineering | National security
+            'Autonomous_Systems': 'C50522688|C154945302',  # Robotics | Autonomous agents
+            'Cybersecurity': 'C2778793908|C554061246|C199360897|C17744445',  # Computer security | Cybersecurity | Information security | Cryptography
+            'Energy_Sustainability': 'C2778407487|C39432304',  # Renewable energy | Environmental science
+            'Advanced_Manufacturing': 'C2778455934|C175444787|C74650414',  # Manufacturing | Additive manufacturing | Industrial engineering
+            'Marine_Naval': 'C153294291|C205649164',  # Ocean engineering | Marine engineering  
+            'Space_Aerospace': 'C152322641|C145342643|C166957645',  # Aerospace engineering | Astronautics | Space exploration
+            'Digital_Transformation': 'C41008148|C2777956493|C138885662'  # Computer Science | Business | Information systems
+        }
         
-        # OPTIONAL: Filter by OpenAlex concepts to ensure technical papers
-        # Exclude purely social sciences, arts, humanities, medicine (non-engineering)
-        # OpenAlex concept IDs for Engineering/Computer Science/Physics
-        # This is commented out but you can enable for stricter filtering:
-        # engineering_concepts = "C127413603|C41008148|C121332964"  # Engineering, Computer Science, Physics
-        # filters.append(f"concepts.id:{engineering_concepts}")
+        # Add concept filter - REQUIRED for all themes
+        if theme_name not in concept_mapping:
+            logger.warning(f"No concept mapping for theme: {theme_name}")
+            return pd.DataFrame()
+        
+        filters.append(f"concepts.id:{concept_mapping[theme_name]}")
+        logger.info(f"Using concept-based filtering (no keyword search)")
         
         # Build request params
+        # NO search parameter - we rely on concepts + relevance scoring instead
         params = {
             'filter': ','.join(filters),
             'per-page': per_page,
@@ -218,12 +219,30 @@ class ThemeBasedCollector:
                 if name:
                     authors.append(name)
             
-            # University
+            # University - Extract AU/NZ institution from authorships
+            # Papers are filtered by country code (AU|NZ), so every paper has AU/NZ author
+            # OpenAlex provides institution name directly in authorship data
+            from config.settings import ALL_UNIVERSITIES
+            
             university = None
-            if authorships:
+            
+            # Search through ALL authorships for AU/NZ institution (country code AU or NZ)
+            for authorship in authorships:
+                institutions = authorship.get('institutions', [])
+                for inst in institutions:
+                    country = inst.get('country_code', '')
+                    if country in ['AU', 'NZ']:
+                        # Found AU/NZ institution - use OpenAlex display name
+                        university = inst.get('display_name', '')
+                        break
+                if university:
+                    break
+            
+            # Fallback: use first author's first institution if no AU/NZ found
+            if not university and authorships:
                 institutions = authorships[0].get('institutions', [])
                 if institutions:
-                    university = institutions[0].get('display_name')
+                    university = institutions[0].get('display_name', 'Unknown')
             
             # Journal
             journal = None
@@ -374,16 +393,24 @@ class ThemeBasedCollector:
         """
         all_papers = []
         
-        themes_to_fetch = BABCOCK_THEMES.keys()
+        themes_to_fetch = list(BABCOCK_THEMES.keys())
         if priority_only:
             themes_to_fetch = [
                 name for name, data in BABCOCK_THEMES.items()
                 if data['strategic_priority'] == 'HIGH'
             ]
         
+        # IMPORTANT: Fetch AI/ML first to avoid it being captured by other themes
+        # AI/ML papers often overlap with Autonomous, Defense, Cybersecurity
+        # By fetching AI/ML first, we ensure proper categorization
+        if 'AI_Machine_Learning' in themes_to_fetch:
+            themes_to_fetch.remove('AI_Machine_Learning')
+            themes_to_fetch.insert(0, 'AI_Machine_Learning')
+        
         logger.info(f"\n{'='*80}")
         logger.info(f"FETCHING PAPERS FOR {len(themes_to_fetch)} THEMES")
         logger.info(f"{'='*80}\n")
+        logger.info(f"Fetch order: {', '.join(themes_to_fetch)}\n")
         
         for theme_name in themes_to_fetch:
             df_theme = self.fetch_papers_for_theme(

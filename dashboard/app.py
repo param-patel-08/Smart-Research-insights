@@ -19,6 +19,7 @@ from config.settings import (  # type: ignore
     PROCESSED_PAPERS_CSV,
     TREND_ANALYSIS_PATH,
     TOPIC_MAPPING_PATH,
+    ALL_UNIVERSITIES,
 )
 from config.themes import BABCOCK_THEMES  # type: ignore
 
@@ -60,8 +61,12 @@ def load_data():
     trends = _load_json(TREND_ANALYSIS_PATH)
     mapping = _load_json(TOPIC_MAPPING_PATH)
 
-    # Theme + confidence from mapping
-    df["theme"] = df["topic_id"].astype(str).map(lambda t: mapping.get(str(t), {}).get("theme", "Other"))
+    # PRESERVE original theme from CSV (assigned during collection)
+    # BERTopic mapping is only used for confidence scores and topic details
+    # If CSV doesn't have theme column, fall back to BERTopic mapping
+    if "theme" not in df.columns:
+        df["theme"] = df["topic_id"].astype(str).map(lambda t: mapping.get(str(t), {}).get("theme", "Other"))
+    
     df["confidence"] = df["topic_id"].astype(str).map(lambda t: mapping.get(str(t), {}).get("confidence", 0))
 
     # Reinstate Cybersecurity assignments when similarity score is strong but original mapping fell back to another theme.
@@ -121,7 +126,13 @@ end_date = cd2.date_input("To", value=max_date, min_value=min_date, max_value=ma
 
 all_themes = sorted(list(BABCOCK_THEMES.keys()))
 sel_themes = st.sidebar.multiselect(" Themes", options=all_themes, default=all_themes, key="themes")
-all_unis = sorted(papers_df["university"].unique())
+
+# Filter universities to only show AU/NZ institutions
+# Papers may list co-author institutions, but we only want to show AU/NZ in dashboard
+australasian_uni_names = set(ALL_UNIVERSITIES.keys())
+all_unis_in_data = papers_df["university"].unique()
+all_unis = sorted([u for u in all_unis_in_data if u in australasian_uni_names])
+
 select_all_unis = st.sidebar.checkbox("All universities", value=True, key="all_unis_flag")
 if select_all_unis:
     sel_unis = all_unis
@@ -210,11 +221,11 @@ st.markdown('<p class="main-header">Babcock Research Trends Dashboard</p>', unsa
 tab_overview, tab_theme, tab_unis, tab_trends, tab_quality = st.tabs(["Overview", "Theme Analysis", "Universities", "Trends", "Data Quality"])
 
 with tab_overview:
-    # KPIs Row
+    # KPIs Row - Show total dataset metrics, not filtered
     k1, k2, k3, k4 = st.columns(4)
-    k1.metric("Papers", f"{len(filtered):,}")
+    k1.metric("Papers", f"{len(papers_df):,}")
     k2.metric("Topics", len(mapping))
-    k3.metric("Universities", filtered["university"].nunique())
+    k3.metric("Universities", papers_df["university"].nunique())
     try:
         avg_growth = sum(p.get("growth_rate", 0) for p in trends.get("strategic_priorities", [])) / max(1, len(trends.get("strategic_priorities", [])))
         k4.metric("Average Growth", f"{avg_growth*100:+.1f}%")
@@ -247,7 +258,7 @@ with tab_overview:
 
     # Papers per Theme Distribution
     st.markdown('<p class="sub-header">Papers per Strategic Theme</p>', unsafe_allow_html=True)
-    theme_counts = filtered.groupby("theme").size()
+    theme_counts = papers_df.groupby("theme").size()
     theme_counts = theme_counts.reindex(list(BABCOCK_THEMES.keys()), fill_value=0)
     fig = px.bar(
         x=theme_counts.values,
@@ -262,9 +273,9 @@ with tab_overview:
 
     st.markdown("<div class='divider'></div>", unsafe_allow_html=True)
 
-    # Overall Output Over Time (filtered)
+    # Overall Output Over Time
     st.markdown('<p class="sub-header">Overall Research Activity</p>', unsafe_allow_html=True)
-    qa = filtered.groupby("quarter").size().reset_index(name="count")
+    qa = papers_df.groupby("quarter").size().reset_index(name="count")
     if not qa.empty:
         qa["quarter"] = qa["quarter"].astype(str)
         fig_overall = go.Figure()
@@ -273,24 +284,24 @@ with tab_overview:
         fig_overall.update_layout(title="Overall Research Output", xaxis_title="Quarter", yaxis_title="Papers")
         st.plotly_chart(fig_overall, use_container_width=True)
     else:
-        st.info("No trend data for current filters")
+        st.info("No trend data available")
 
     st.markdown("<div class='divider'></div>", unsafe_allow_html=True)
 
-    # Top Universities (Filtered)
-    st.markdown('<p class="sub-header">Top Universities (Filtered)</p>', unsafe_allow_html=True)
-    if not filtered.empty:
-        uc = filtered["university"].value_counts().reset_index()
+    # Top Universities
+    st.markdown('<p class="sub-header">Top Universities</p>', unsafe_allow_html=True)
+    if not papers_df.empty:
+        uc = papers_df["university"].value_counts().reset_index()
         uc.columns = ["University", "Papers"]
         st.dataframe(uc.head(15), use_container_width=True, hide_index=True)
     else:
-        st.info("No data available for current filters")
+        st.info("No data available")
 
     st.markdown("<div class='divider'></div>", unsafe_allow_html=True)
 
     # Recent Papers List
     st.markdown('<p class="sub-header">Top Recent Papers</p>', unsafe_allow_html=True)
-    recent = filtered.sort_values(["relevance_score", "date"], ascending=[False, False]).head(10)
+    recent = papers_df.sort_values(["relevance_score", "date"], ascending=[False, False]).head(10)
     for _, r in recent.iterrows():
         st.markdown(
             f"<div class='card'><div class='kpi'><div class='label'>{r.get('university','')} | "
@@ -304,14 +315,14 @@ with tab_theme:
     theme_order = list(BABCOCK_THEMES.keys())
     theme_names = [t.replace('_', ' ').title() for t in theme_order]
 
-    # Theme overview summary for current filters, always showing all themes
+    # Theme overview summary for all papers
     summary = (
-        filtered.groupby("theme").agg(
+        papers_df.groupby("theme").agg(
             papers=("title", "count"),
             universities=("university", pd.Series.nunique),
             topics=("topic_id", pd.Series.nunique),
         )
-        if not filtered.empty
+        if not papers_df.empty
         else pd.DataFrame(columns=["papers", "universities", "topics"])
     )
     summary = summary.reindex(theme_order, fill_value=0).reset_index().rename(columns={"theme": "Theme Key"})
@@ -332,7 +343,7 @@ with tab_theme:
             "topics",
         ]
     ].rename(columns={
-        "papers": "Papers (Filtered)",
+        "papers": "Total Papers",
         "universities": "Universities",
         "topics": "Topics",
     })
@@ -341,10 +352,10 @@ with tab_theme:
     st.dataframe(summary, use_container_width=True, hide_index=True)
 
     # Multi-theme trend chart to highlight coverage per theme
-    if not filtered.empty:
-        quarters = sorted(filtered["quarter"].unique())
+    if not papers_df.empty:
+        quarters = sorted(papers_df["quarter"].unique())
         idx = pd.MultiIndex.from_product([quarters, theme_order], names=["quarter", "theme"])
-        theme_trend = filtered.groupby(["quarter", "theme"]).size().reindex(idx, fill_value=0).reset_index(name="count")
+        theme_trend = papers_df.groupby(["quarter", "theme"]).size().reindex(idx, fill_value=0).reset_index(name="count")
         theme_trend["quarter"] = theme_trend["quarter"].astype(str)
         theme_trend["theme"] = theme_trend["theme"].str.replace("_", " ").str.title()
         fig_theme_trend = px.line(
@@ -360,13 +371,13 @@ with tab_theme:
 
     default_index = 0
     for idx, row in summary.iterrows():
-        if row["Papers (Filtered)"] > 0:
+        if row["Total Papers"] > 0:
             default_index = idx
             break
 
     selected_theme_display = st.selectbox("Select Theme", theme_names, index=default_index)
     selected_theme = selected_theme_display.replace(" ", "_")
-    theme_papers = filtered[filtered["theme"] == selected_theme]
+    theme_papers = papers_df[papers_df["theme"] == selected_theme]
     if theme_papers.empty:
         st.warning(f"No papers found for {selected_theme_display}")
     else:
@@ -402,7 +413,7 @@ with tab_theme:
                         adjacent[other_theme] = adjacent.get(other_theme, 0) + overlap
             return dict(sorted(adjacent.items(), key=lambda x: x[1], reverse=True))
 
-        adj = find_adjacent_themes(filtered, selected_theme, mapping)
+        adj = find_adjacent_themes(papers_df, selected_theme, mapping)
         if adj:
             adj_df = pd.DataFrame({"Theme": [t.replace("_", " ").title() for t in list(adj.keys())[:5]], "Connections": list(adj.values())[:5]})
             fig_adj = px.bar(adj_df, x="Connections", y="Theme", orientation="h", color="Connections", color_continuous_scale="Greens", title=f"Top Adjacent Themes to {selected_theme_display}")
@@ -413,14 +424,14 @@ with tab_theme:
 
 with tab_unis:
     st.markdown('<p class="sub-header">Overall Research Output Rankings</p>', unsafe_allow_html=True)
-    uc = filtered["university"].value_counts()
+    uc = papers_df["university"].value_counts()
     fig = px.bar(x=uc.head(15).values, y=uc.head(15).index, orientation="h", color=uc.head(15).values, color_continuous_scale="Greens", title="Top 15 Universities by Total Papers")
     fig = apply_fig_theme(fig, height=380)
     st.plotly_chart(fig, use_container_width=True)
 
     st.markdown('<p class="sub-header">University Deep Dive</p>', unsafe_allow_html=True)
-    sel_uni = st.selectbox("Select University", sorted(filtered["university"].unique()))
-    uni_p = filtered[filtered["university"] == sel_uni]
+    sel_uni = st.selectbox("Select University", sorted(papers_df["university"].unique()))
+    uni_p = papers_df[papers_df["university"] == sel_uni]
 
     c1, c2, c3, c4 = st.columns(4)
     c1.metric("Total Papers", f"{len(uni_p):,}")
@@ -449,7 +460,7 @@ with tab_unis:
 
 with tab_trends:
     st.markdown('<p class="sub-header">Temporal Trends Analysis</p>', unsafe_allow_html=True)
-    qa = filtered.groupby("quarter").size().reset_index(name="count"); qa["quarter"] = qa["quarter"].astype(str)
+    qa = papers_df.groupby("quarter").size().reset_index(name="count"); qa["quarter"] = qa["quarter"].astype(str)
     fig = go.Figure()
     fig.add_trace(go.Scatter(x=qa["quarter"], y=qa["count"], mode="lines+markers", name="All Themes"))
     fig = apply_fig_theme(fig, height=380)
@@ -460,8 +471,8 @@ with tab_trends:
     picks = st.multiselect("Select Themes to Compare", names, default=names)
     if picks:
         raw = [t.replace(" ", "_") for t in picks]
-        f = filtered[filtered["theme"].isin(raw)]
-        quarters = sorted(filtered["quarter"].unique())
+        f = papers_df[papers_df["theme"].isin(raw)]
+        quarters = sorted(papers_df["quarter"].unique())
         base = pd.MultiIndex.from_product([quarters, raw], names=["quarter", "theme"]) 
         qt = f.groupby(["quarter", "theme"]).size().reindex(base, fill_value=0).reset_index(name="count")
         qt["quarter"], qt["theme"] = qt["quarter"].astype(str), qt["theme"].str.replace("_", " ").str.title()
@@ -473,25 +484,25 @@ with tab_trends:
 with tab_quality:
     st.markdown('<p class="sub-header">Data Quality</p>', unsafe_allow_html=True)
     c1, c2, c3 = st.columns(3)
-    missing_abs = filtered['abstract'].isna().sum() if 'abstract' in filtered.columns else 0
+    missing_abs = papers_df['abstract'].isna().sum() if 'abstract' in papers_df.columns else 0
     c1.metric("Missing Abstracts", f"{missing_abs:,}")
-    c2.metric("Avg Confidence", f"{filtered['confidence'].mean():.0f}%" if 'confidence' in filtered.columns else 'N/A')
-    c3.metric("Has Citations", f"{filtered['citations'].notna().mean()*100:.0f}%" if 'citations' in filtered.columns else 'N/A')
+    c2.metric("Avg Confidence", f"{papers_df['confidence'].mean():.0f}%" if 'confidence' in papers_df.columns else 'N/A')
+    c3.metric("Has Citations", f"{papers_df['citations'].notna().mean()*100:.0f}%" if 'citations' in papers_df.columns else 'N/A')
 
     st.markdown("---")
     colA, colB = st.columns(2)
     with colA:
         st.markdown('<p class="sub-header">Confidence Distribution</p>', unsafe_allow_html=True)
-        if 'confidence' in filtered.columns:
-            fig = px.histogram(filtered, x='confidence', nbins=20, title='Confidence (%)')
+        if 'confidence' in papers_df.columns:
+            fig = px.histogram(papers_df, x='confidence', nbins=20, title='Confidence (%)')
             fig = apply_fig_theme(fig, height=320)
             st.plotly_chart(fig, use_container_width=True)
         else:
             st.info("No confidence field available")
     with colB:
         st.markdown('<p class="sub-header">Citations Distribution</p>', unsafe_allow_html=True)
-        if 'citations' in filtered.columns:
-            fig = px.histogram(filtered, x='citations', nbins=20, title='Citations')
+        if 'citations' in papers_df.columns:
+            fig = px.histogram(papers_df, x='citations', nbins=20, title='Citations')
             fig = apply_fig_theme(fig, height=320)
             st.plotly_chart(fig, use_container_width=True)
         else:

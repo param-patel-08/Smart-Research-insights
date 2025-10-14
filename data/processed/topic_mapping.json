@@ -1,150 +1,150 @@
 {
   "0": {
-    "theme": "Digital_Transformation",
-    "confidence": 0.04949209269694995,
+    "theme": "Energy_Sustainability",
+    "confidence": 0.2878811307124477,
     "all_scores": {
-      "Defense_Security": 0.0,
+      "Defense_Security": 0.03717650504980924,
       "Autonomous_Systems": 0.0,
-      "Cybersecurity": 0.0,
-      "Energy_Sustainability": 0.0,
-      "Advanced_Manufacturing": 0.0,
-      "AI_Machine_Learning": 0.0,
+      "Cybersecurity": 0.008770159784213088,
+      "Energy_Sustainability": 0.2878811307124477,
+      "Advanced_Manufacturing": 0.02594227825819317,
+      "AI_Machine_Learning": 0.008473187247405886,
       "Marine_Naval": 0.0,
-      "Space_Aerospace": 0.0,
-      "Digital_Transformation": 0.04949209269694995
+      "Space_Aerospace": 0.02579849659846657,
+      "Digital_Transformation": 0.0
     },
     "keywords": [
-      "health",
-      "covid",
-      "care",
-      "digital",
-      "patients",
-      "medical",
-      "healthcare",
-      "access",
-      "clinical",
-      "patient"
+      "control",
+      "optimization",
+      "proposed",
+      "energy",
+      "algorithm",
+      "grid",
+      "electricity",
+      "power",
+      "pso",
+      "inertia"
     ],
-    "count": 88
+    "count": 47
   },
   "1": {
-    "theme": "Cybersecurity",
-    "confidence": 0.26245669136809274,
+    "theme": "AI_Machine_Learning",
+    "confidence": 0.2815468605059522,
     "all_scores": {
-      "Defense_Security": 0.175396523205612,
+      "Defense_Security": 0.00814775195895078,
       "Autonomous_Systems": 0.0,
-      "Cybersecurity": 0.26245669136809274,
+      "Cybersecurity": 0.011806178648312142,
       "Energy_Sustainability": 0.0,
       "Advanced_Manufacturing": 0.0,
-      "AI_Machine_Learning": 0.0,
+      "AI_Machine_Learning": 0.2815468605059522,
       "Marine_Naval": 0.0,
-      "Space_Aerospace": 0.20753287066498147,
-      "Digital_Transformation": 0.0
+      "Space_Aerospace": 0.0,
+      "Digital_Transformation": 0.05021598209484726
     },
     "keywords": [
-      "security",
-      "cyber",
-      "satellite",
-      "attack",
-      "monitor",
-      "cybersecurity",
-      "vehicles",
-      "operations",
-      "attacks",
-      "space systems"
+      "learning",
+      "deep",
+      "network",
+      "deep learning",
+      "detection",
+      "machine",
+      "machine learning",
+      "iot",
+      "networks",
+      "applications"
     ],
-    "count": 23
+    "count": 200
   },
   "2": {
-    "theme": "Cybersecurity",
-    "confidence": 0.3533376777669352,
-    "all_scores": {
-      "Defense_Security": 0.07734781234369076,
-      "Autonomous_Systems": 0.0,
-      "Cybersecurity": 0.3533376777669352,
-      "Energy_Sustainability": 0.0,
-      "Advanced_Manufacturing": 0.0,
-      "AI_Machine_Learning": 0.0,
-      "Marine_Naval": 0.0,
-      "Space_Aerospace": 0.0,
-      "Digital_Transformation": 0.04949209269694995
-    },
-    "keywords": [
-      "security",
-      "attacks",
-      "cyber",
-      "attack",
-      "adversarial",
-      "cybersecurity",
-      "iot",
-      "vulnerabilities",
-      "key",
-      "information"
-    ],
-    "count": 41
-  },
-  "3": {
-    "theme": "Autonomous_Systems",
-    "confidence": 0.07850031981204608,
+    "theme": "Other",
+    "confidence": 0.008473187247405886,
     "all_scores": {
       "Defense_Security": 0.0,
-      "Autonomous_Systems": 0.07850031981204608,
+      "Autonomous_Systems": 0.0,
       "Cybersecurity": 0.0,
       "Energy_Sustainability": 0.0,
       "Advanced_Manufacturing": 0.0,
-      "AI_Machine_Learning": 0.0,
+      "AI_Machine_Learning": 0.008473187247405886,
       "Marine_Naval": 0.0,
       "Space_Aerospace": 0.0,
       "Digital_Transformation": 0.0
     },
     "keywords": [
-      "robotic",
-      "magnetic",
-      "spine",
-      "robot",
-      "bone",
-      "surgical",
-      "spinal",
-      "surgery",
-      "mri",
-      "imaging"
+      "mml",
+      "optical",
+      "black",
+      "quantum",
+      "waves",
+      "physics",
+      "program",
+      "mass",
+      "theory",
+      "binary"
     ],
-    "count": 27
+    "count": 33
   },
-  "4": {
+  "3": {
     "theme": "Energy_Sustainability",
-    "confidence": 0.14984429932333004,
+    "confidence": 0.29510074218472787,
     "all_scores": {
       "Defense_Security": 0.0,
-      "Autonomous_Systems": 0.051424517881632006,
+      "Autonomous_Systems": 0.0,
       "Cybersecurity": 0.0,
-      "Energy_Sustainability": 0.14984429932333004,
-      "Advanced_Manufacturing": 0.0,
-      "AI_Machine_Learning": 0.05949127614550777,
+      "Energy_Sustainability": 0.29510074218472787,
+      "Advanced_Manufacturing": 0.09582930898457248,
+      "AI_Machine_Learning": 0.0,
       "Marine_Naval": 0.0,
       "Space_Aerospace": 0.0,
       "Digital_Transformation": 0.0
     },
     "keywords": [
       "energy",
-      "self",
-      "slam",
-      "assembly",
-      "neural",
-      "transitions",
-      "locomotor",
-      "inference",
-      "active",
-      "complex"
+      "storage",
+      "cost",
+      "solar",
+      "batteries",
+      "materials",
+      "renewable",
+      "applications",
+      "environmental",
+      "carbon"
     ],
-    "count": 22
+    "count": 77
+  },
+  "4": {
+    "theme": "AI_Machine_Learning",
+    "confidence": 0.10318009900772293,
+    "all_scores": {
+      "Defense_Security": 0.0,
+      "Autonomous_Systems": 0.0,
+      "Cybersecurity": 0.0,
+      "Energy_Sustainability": 0.0,
+      "Advanced_Manufacturing": 0.012611377770455498,
+      "AI_Machine_Learning": 0.10318009900772293,
+      "Marine_Naval": 0.0,
+      "Space_Aerospace": 0.0,
+      "Digital_Transformation": 0.04949209269694995
+    },
+    "keywords": [
+      "education",
+      "learning",
+      "students",
+      "teaching",
+      "chatgpt",
+      "educational",
+      "language",
+      "online",
+      "digital",
+      "generative"
+    ],
+    "count": 53
   },
   "5": {
-    "theme": "Autonomous_Systems",
-    "confidence": 0.13789074994362904,
+    "theme": "Other",
+    "confidence": 0.0,
     "all_scores": {
       "Defense_Security": 0.0,
-      "Autonomous_Systems": 0.13789074994362904,
+      "Autonomous_Systems": 0.0,
       "Cybersecurity": 0.0,
       "Energy_Sustainability": 0.0,
       "Advanced_Manufacturing": 0.0,
@@ -154,25 +154,109 @@
       "Digital_Transformation": 0.0
     },
     "keywords": [
-      "robot",
-      "robots",
-      "task",
-      "surgical",
-      "camera",
-      "navigation",
-      "robotic",
-      "feedback",
-      "motion",
-      "user"
+      "climate",
+      "global",
+      "ice",
+      "plant",
+      "soil",
+      "change",
+      "events",
+      "temperature",
+      "traits",
+      "climate change"
     ],
-    "count": 39
+    "count": 41
   },
   "6": {
-    "theme": "Autonomous_Systems",
-    "confidence": 0.07850031981204608,
+    "theme": "Energy_Sustainability",
+    "confidence": 0.012133925850190463,
     "all_scores": {
       "Defense_Security": 0.0,
-      "Autonomous_Systems": 0.07850031981204608,
+      "Autonomous_Systems": 0.0,
+      "Cybersecurity": 0.0,
+      "Energy_Sustainability": 0.012133925850190463,
+      "Advanced_Manufacturing": 0.00671744531768892,
+      "AI_Machine_Learning": 0.0,
+      "Marine_Naval": 0.0,
+      "Space_Aerospace": 0.0,
+      "Digital_Transformation": 0.0
+    },
+    "keywords": [
+      "species",
+      "carbon",
+      "ecosystem",
+      "global",
+      "google",
+      "conservation",
+      "google scholar",
+      "scholar",
+      "scopus google scholar",
+      "scopus google"
+    ],
+    "count": 81
+  },
+  "7": {
+    "theme": "Digital_Transformation",
+    "confidence": 0.16868220683189628,
+    "all_scores": {
+      "Defense_Security": 0.0,
+      "Autonomous_Systems": 0.0,
+      "Cybersecurity": 0.0,
+      "Energy_Sustainability": 0.016692530823779354,
+      "Advanced_Manufacturing": 0.027840245504418288,
+      "AI_Machine_Learning": 0.0,
+      "Marine_Naval": 0.0,
+      "Space_Aerospace": 0.0,
+      "Digital_Transformation": 0.16868220683189628
+    },
+    "keywords": [
+      "smart",
+      "urban",
+      "cities",
+      "city",
+      "social",
+      "smart city",
+      "smart cities",
+      "technologies",
+      "platforms",
+      "platform"
+    ],
+    "count": 28
+  },
+  "8": {
+    "theme": "Cybersecurity",
+    "confidence": 0.24155746165914344,
+    "all_scores": {
+      "Defense_Security": 0.10658510262542636,
+      "Autonomous_Systems": 0.0,
+      "Cybersecurity": 0.24155746165914344,
+      "Energy_Sustainability": 0.0,
+      "Advanced_Manufacturing": 0.01684304674734093,
+      "AI_Machine_Learning": 0.0,
+      "Marine_Naval": 0.0,
+      "Space_Aerospace": 0.0,
+      "Digital_Transformation": 0.0
+    },
+    "keywords": [
+      "food",
+      "income",
+      "food security",
+      "farm",
+      "production",
+      "seafood",
+      "security",
+      "food insecurity",
+      "insecurity",
+      "consumption"
+    ],
+    "count": 32
+  },
+  "9": {
+    "theme": "Other",
+    "confidence": 0.0,
+    "all_scores": {
+      "Defense_Security": 0.0,
+      "Autonomous_Systems": 0.0,
       "Cybersecurity": 0.0,
       "Energy_Sustainability": 0.0,
       "Advanced_Manufacturing": 0.0,
@@ -182,17 +266,157 @@
       "Digital_Transformation": 0.0
     },
     "keywords": [
-      "tool",
-      "robotic",
-      "retinal",
-      "surgery",
-      "surgical",
-      "robot",
-      "needle",
-      "tissue",
-      "insertion",
-      "depth"
+      "water",
+      "planetary",
+      "google",
+      "urban",
+      "google scholar",
+      "scholar",
+      "boundaries",
+      "environmental",
+      "earth",
+      "emissions"
     ],
-    "count": 21
+    "count": 51
+  },
+  "10": {
+    "theme": "Other",
+    "confidence": 0.007099610045017604,
+    "all_scores": {
+      "Defense_Security": 0.0,
+      "Autonomous_Systems": 0.0,
+      "Cybersecurity": 0.007099610045017604,
+      "Energy_Sustainability": 0.0,
+      "Advanced_Manufacturing": 0.0,
+      "AI_Machine_Learning": 0.0,
+      "Marine_Naval": 0.0,
+      "Space_Aerospace": 0.0,
+      "Digital_Transformation": 0.0
+    },
+    "keywords": [
+      "covid",
+      "health",
+      "people",
+      "care",
+      "social",
+      "mental",
+      "pandemic",
+      "risk",
+      "mental health",
+      "depression"
+    ],
+    "count": 70
+  },
+  "11": {
+    "theme": "Other",
+    "confidence": 0.0,
+    "all_scores": {
+      "Defense_Security": 0.0,
+      "Autonomous_Systems": 0.0,
+      "Cybersecurity": 0.0,
+      "Energy_Sustainability": 0.0,
+      "Advanced_Manufacturing": 0.0,
+      "AI_Machine_Learning": 0.0,
+      "Marine_Naval": 0.0,
+      "Space_Aerospace": 0.0,
+      "Digital_Transformation": 0.0
+    },
+    "keywords": [
+      "reviews",
+      "reporting",
+      "prisma",
+      "scoping",
+      "statement",
+      "checklist",
+      "items",
+      "guidance",
+      "prisma statement",
+      "scoping reviews"
+    ],
+    "count": 29
+  },
+  "12": {
+    "theme": "Advanced_Manufacturing",
+    "confidence": 0.012611377770455498,
+    "all_scores": {
+      "Defense_Security": 0.0,
+      "Autonomous_Systems": 0.0,
+      "Cybersecurity": 0.0,
+      "Energy_Sustainability": 0.007561564503094809,
+      "Advanced_Manufacturing": 0.012611377770455498,
+      "AI_Machine_Learning": 0.008473187247405886,
+      "Marine_Naval": 0.0,
+      "Space_Aerospace": 0.0,
+      "Digital_Transformation": 0.0
+    },
+    "keywords": [
+      "eye",
+      "health",
+      "stroke",
+      "vision",
+      "burden",
+      "age",
+      "care",
+      "quality",
+      "cancer",
+      "million"
+    ],
+    "count": 24
+  },
+  "13": {
+    "theme": "Other",
+    "confidence": 0.0,
+    "all_scores": {
+      "Defense_Security": 0.0,
+      "Autonomous_Systems": 0.0,
+      "Cybersecurity": 0.0,
+      "Energy_Sustainability": 0.0,
+      "Advanced_Manufacturing": 0.0,
+      "AI_Machine_Learning": 0.0,
+      "Marine_Naval": 0.0,
+      "Space_Aerospace": 0.0,
+      "Digital_Transformation": 0.0
+    },
+    "keywords": [
+      "service",
+      "sem",
+      "perceived",
+      "pls",
+      "consumption",
+      "fsqca",
+      "consumer",
+      "findings",
+      "intention",
+      "customer"
+    ],
+    "count": 19
+  },
+  "14": {
+    "theme": "Defense_Security",
+    "confidence": 0.02461188704366801,
+    "all_scores": {
+      "Defense_Security": 0.02461188704366801,
+      "Autonomous_Systems": 0.0,
+      "Cybersecurity": 0.0,
+      "Energy_Sustainability": 0.015540010211075187,
+      "Advanced_Manufacturing": 0.0,
+      "AI_Machine_Learning": 0.0,
+      "Marine_Naval": 0.0,
+      "Space_Aerospace": 0.0,
+      "Digital_Transformation": 0.024339961667727356
+    },
+    "keywords": [
+      "firms",
+      "innovation",
+      "green",
+      "firm",
+      "performance",
+      "corporate",
+      "industry",
+      "business",
+      "sustainable",
+      "findings"
+    ],
+    "count": 38
   }
 }

@@ -297,6 +297,25 @@ class OpenAlexCollector:
             abstract = self._reconstruct_abstract(work.get("abstract_inverted_index"))
 
             authors = []
+            # Check if queried institution is AU/NZ, if so use it directly
+            # since OpenAlex already filtered to papers with this institution as co-author
+            from config.settings import ALL_UNIVERSITIES
+            australasian_unis = set(ALL_UNIVERSITIES.keys())
+            
+            # If we queried an AU/NZ institution, use it directly
+            # Otherwise, try to find an AU/NZ institution in authorships
+            if institution_name in australasian_unis:
+                final_university = institution_name
+            else:
+                # For non-AU/NZ queries, look for AU/NZ co-authors
+                paper_aus_unis = []
+                for authorship in work.get("authorships", []):
+                    for inst in authorship.get("institutions", []):
+                        inst_name = inst.get("display_name", "")
+                        if inst_name in australasian_unis:
+                            paper_aus_unis.append(inst_name)
+                final_university = paper_aus_unis[0] if paper_aus_unis else institution_name
+            
             for authorship in work.get("authorships", []):
                 author = authorship.get("author", {})
                 name = author.get("display_name")
@@ -319,7 +338,7 @@ class OpenAlexCollector:
                 "abstract": abstract,
                 "authors": authors,
                 "date": date_value,
-                "university": institution_name,
+                "university": final_university,
                 "url": work.get("id", ""),
                 "doi": work.get("doi", ""),
                 "keywords": [c.get("display_name", "") for c in work.get("concepts", [])[:10]],
