@@ -39,3 +39,4 @@ data/processed/topic_mapping.csv
 data/processed/topic_mapping.json
 data/processed/trend_analysis.json
 data/processed/trend_analysis.csv
+data/processed/papers_with_themes.csv
