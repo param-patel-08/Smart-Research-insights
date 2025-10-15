@@ -31,6 +31,11 @@ data/processed/metadata.csv
 data/processed/papers_processed.csv
 data/processed/topics_over_time.csv
 data/raw/papers_raw.csv
+data/raw/papers_theme_filtered.csv
 models/bertopic_model.pkl
 data/processed/topics_over_time.csv
 data/processed/papers_processed.csv
+data/processed/topic_mapping.csv
+data/processed/topic_mapping.json
+data/processed/trend_analysis.json
+data/processed/trend_analysis.csv
