@@ -98,12 +98,49 @@ class ThemeMapper:
             return "Other", best_score, scores
         return best_theme, best_score, scores
 
-    def create_theme_mapping(self, topic_model) -> Dict[str, Dict]:
+    def map_topic_to_sub_theme(
+        self,
+        topic_keywords: List[Tuple[str, float]],
+        parent_theme: str,
+        hierarchical_themes: Dict,
+    ) -> Tuple[str, float]:
+        """
+        Map a topic to a sub-theme within a parent theme.
+        Returns (sub_theme_name, confidence_score)
+        """
+        if parent_theme not in hierarchical_themes:
+            return None, 0.0
+        
+        sub_themes = hierarchical_themes[parent_theme].get('sub_themes', {})
+        if not sub_themes:
+            return None, 0.0
+        
+        scores = {}
+        for sub_theme_name, sub_theme_keywords in sub_themes.items():
+            score = self.calculate_keyword_similarity(topic_keywords, sub_theme_keywords)
+            scores[sub_theme_name] = score
+        
+        if not scores:
+            return None, 0.0
+        
+        best_sub_theme = max(scores, key=scores.get)
+        best_score = scores[best_sub_theme]
+        
+        return best_sub_theme, float(best_score)
+
+    def create_theme_mapping(self, topic_model, hierarchical_themes: Optional[Dict] = None) -> Dict[str, Dict]:
         """
         Build mapping from BERTopic model to Babcock themes.
+        
+        Args:
+            topic_model: BERTopic model
+            hierarchical_themes: Optional dict of hierarchical themes with sub-themes
+                                If provided, will also map topics to sub-themes
         """
         logger.info("=" * 80)
         logger.info("MAPPING TOPICS TO BABCOCK THEMES")
+        if hierarchical_themes:
+            logger.info("Using HIERARCHICAL mapping (parent + sub-themes)")
         logger.info("=" * 80)
 
         topic_info = topic_model.get_topic_info()
@@ -117,22 +154,44 @@ class ThemeMapper:
             keywords = topic_model.get_topic(topic_id)
             theme, confidence, all_scores = self.map_topic_to_theme(topic_id, keywords)
 
-            mapping[str(topic_id)] = {
+            topic_data = {
                 "theme": theme,
                 "confidence": float(confidence),
                 "all_scores": {k: float(v) for k, v in all_scores.items()},
                 "keywords": [word for word, _ in keywords[:10]],
                 "count": int(row.get("Count", 0)),
             }
+            
+            # Add sub-theme mapping if hierarchical themes provided
+            if hierarchical_themes and theme != "Other":
+                sub_theme, sub_confidence = self.map_topic_to_sub_theme(
+                    keywords, theme, hierarchical_themes
+                )
+                if sub_theme:
+                    topic_data["sub_theme"] = sub_theme
+                    topic_data["sub_theme_confidence"] = float(sub_confidence)
+                    logger.debug("Topic %s -> %s > %s (sub-conf %.3f)", 
+                               topic_id, theme, sub_theme, sub_confidence)
+                else:
+                    topic_data["sub_theme"] = None
+                    topic_data["sub_theme_confidence"] = 0.0
+            else:
+                topic_data["sub_theme"] = None
+                topic_data["sub_theme_confidence"] = 0.0
 
+            mapping[str(topic_id)] = topic_data
             logger.debug("Topic %s -> %s (confidence %.3f)", topic_id, theme, confidence)
 
         self.topic_theme_mapping = mapping
-        self._log_mapping_summary()
+        self._log_mapping_summary(hierarchical_themes is not None)
         return mapping
 
-    def _log_mapping_summary(self) -> None:
-        """Log summary statistics of the mapping."""
+    def _log_mapping_summary(self, is_hierarchical: bool = False) -> None:
+        """Log summary statistics of the mapping.
+        
+        Args:
+            is_hierarchical: Whether hierarchical mapping was used
+        """
         if not self.topic_theme_mapping:
             logger.warning("No topics were mapped to themes.")
             return
@@ -152,6 +211,23 @@ class ThemeMapper:
                 float(np.max(confidences)),
             )
         logger.info("Topics per theme: %s", theme_counts)
+        
+        # TEMPORARY: Log sub-theme distribution if hierarchical mapping was used
+        if is_hierarchical:
+            sub_theme_counts = {}
+            sub_confidences = []
+            for data in self.topic_theme_mapping.values():
+                sub_theme = data.get("sub_theme")
+                if sub_theme:
+                    sub_theme_counts[sub_theme] = sub_theme_counts.get(sub_theme, 0) + 1
+                    sub_confidences.append(data.get("sub_theme_confidence", 0))
+            
+            if sub_theme_counts:
+                avg_sub_confidence = float(np.mean(sub_confidences)) if sub_confidences else 0.0
+                top_sub_themes = dict(sorted(sub_theme_counts.items(), key=lambda x: x[1], reverse=True)[:10])
+                logger.info("Sub-themes detected: %d unique sub-themes", len(sub_theme_counts))
+                logger.info("Average sub-theme confidence: %.3f", avg_sub_confidence)
+                logger.info("Topics per sub-theme (top 10): %s", top_sub_themes)
 
     def identify_cross_theme_topics(self, threshold: float = 0.6) -> List[Dict]:
         """
@@ -206,5 +282,60 @@ def main():
     logger.info("Theme mapping complete.")
 
 
+# TEMPORARY: Test hierarchical theme mapping
+def _test_hierarchical_mapping():
+    """Test that sub-theme detection works with hierarchical themes"""
+    import sys
+    import os
+    sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+    
+    from bertopic import BERTopic
+    from config.themes import BABCOCK_THEMES, BABCOCK_THEMES_HIERARCHICAL
+    from config.settings import BERTOPIC_MODEL_PATH, TOPIC_MAPPING_PATH
+    import json
+    
+    logger.info("=" * 80)
+    logger.info("TESTING HIERARCHICAL THEME MAPPING")
+    logger.info("=" * 80)
+    
+    # Check if model exists
+    if not os.path.exists(BERTOPIC_MODEL_PATH):
+        logger.error(f"BERTopic model not found at {BERTOPIC_MODEL_PATH}")
+        logger.info("Please run the full analysis first to generate the model")
+        return
+    
+    # Load BERTopic model
+    logger.info("Loading BERTopic model...")
+    topic_model = BERTopic.load(BERTOPIC_MODEL_PATH)
+    
+    # Create mapper and generate hierarchical mapping
+    logger.info("Creating hierarchical theme mapping...")
+    mapper = ThemeMapper(BABCOCK_THEMES)
+    mapping = mapper.create_theme_mapping(topic_model, hierarchical_themes=BABCOCK_THEMES_HIERARCHICAL)
+    
+    # Display sample mappings
+    logger.info("\nSample topic mappings with sub-themes:")
+    count = 0
+    for topic_id, data in mapping.items():
+        if count >= 5:  # Show first 5
+            break
+        logger.info(f"\nTopic {topic_id}:")
+        logger.info(f"  Parent Theme: {data['theme']} (conf: {data['confidence']:.3f})")
+        if data.get('sub_theme'):
+            logger.info(f"  Sub-Theme: {data['sub_theme']} (conf: {data['sub_theme_confidence']:.3f})")
+        logger.info(f"  Keywords: {', '.join(data['keywords'][:5])}")
+        count += 1
+    
+    # Count statistics
+    with_subtheme = sum(1 for d in mapping.values() if d.get('sub_theme'))
+    logger.info(f"\nTopics with sub-theme assignments: {with_subtheme}/{len(mapping)}")
+    
+    logger.info("=" * 80)
+
+
 if __name__ == "__main__":
-    main()
+    import sys
+    if len(sys.argv) > 1 and sys.argv[1] == "test":
+        _test_hierarchical_mapping()
+    else:
+        main()

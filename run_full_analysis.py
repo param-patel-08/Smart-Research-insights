@@ -258,11 +258,13 @@ def main():
     def step4_theme_mapping():
         from src.theme_mapper import ThemeMapper
         from bertopic import BERTopic
+        from config.themes import BABCOCK_THEMES_HIERARCHICAL
         
         topic_model = BERTopic.load(BERTOPIC_MODEL_PATH)
         
         mapper = ThemeMapper(BABCOCK_THEMES)
-        mapping = mapper.create_theme_mapping(topic_model)
+        # Use hierarchical themes for sub-theme detection
+        mapping = mapper.create_theme_mapping(topic_model, hierarchical_themes=BABCOCK_THEMES_HIERARCHICAL)
         mapper.identify_cross_theme_topics(threshold=0.6)
         mapper.save_mapping(TOPIC_MAPPING_PATH)
         
