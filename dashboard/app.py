@@ -257,20 +257,20 @@ def create_sunburst_chart(df, mapping):
     values = []
     colors = []
     
-    # Use a better color palette for dark theme - vibrant blues and purples
-    color_palette = [
-        '#3b82f6',  # Blue
-        '#8b5cf6',  # Purple
-        '#06b6d4',  # Cyan
-        '#2563eb',  # Dark Blue
-        '#a78bfa',  # Light Purple
-        '#0ea5e9',  # Sky Blue
+    # Blue shades palette for themes (1st outer ring) - all blue shades matching theme
+    blue_shades = [
+        '#1e40af',  # Deep Blue
+        '#2563eb',  # Royal Blue
+        '#3b82f6',  # Bright Blue
         '#60a5fa',  # Light Blue
-        '#c084fc',  # Medium Purple
-        '#0284c7',  # Darker Cyan
-        '#7c3aed',  # Violet
-        '#38bdf8',  # Lighter Cyan
-        '#6366f1',  # Indigo
+        '#0ea5e9',  # Sky Blue
+        '#06b6d4',  # Cyan Blue
+        '#0891b2',  # Teal Blue
+        '#0284c7',  # Ocean Blue
+        '#1d4ed8',  # Medium Blue
+        '#1e3a8a',  # Dark Navy Blue
+        '#2dd4bf',  # Turquoise
+        '#0e7490',  # Deep Teal
     ]
     
     theme_colors = {}
@@ -281,28 +281,56 @@ def create_sunburst_chart(df, mapping):
     values.append(len(df))
     colors.append('#1e293b')  # Dark background for root
     
-    # Add ALL themes (parent level)
+    # Add ALL themes (parent level) - 1st outer ring with blue shades
     for i, (_, row) in enumerate(theme_counts.iterrows()):
         theme_name = row['parent_theme'].replace('_', ' ').title()
         labels.append(theme_name)
         parents.append('All Research')
         values.append(row['count'])
-        theme_color = color_palette[i % len(color_palette)]
+        theme_color = blue_shades[i % len(blue_shades)]
         colors.append(theme_color)
         theme_colors[row['parent_theme']] = theme_color
     
-    # Add ALL sub-themes (middle level) - ensure all are included
-    for _, row in subtheme_counts.iterrows():
-        sub_name = row['sub_theme'].replace('_', ' ').title()
-        parent_name = row['parent_theme'].replace('_', ' ').title()
-        # Create unique label to avoid duplicates across themes
-        unique_sub_label = f"{sub_name} ({parent_name})"
-        labels.append(unique_sub_label)
-        parents.append(parent_name)
-        values.append(row['count'])
-        # Use lighter shade of parent theme color for sub-themes
-        base_color = theme_colors.get(row['parent_theme'], color_palette[0])
-        colors.append(base_color + '99')  # Add transparency for lighter shade
+    # Add ALL sub-themes (middle level) - 2nd outer ring with gradients from dark to light
+    # Group by parent theme to apply gradient within each theme
+    for parent_theme in subtheme_counts['parent_theme'].unique():
+        # Get all sub-themes for this parent theme
+        theme_subthemes = subtheme_counts[subtheme_counts['parent_theme'] == parent_theme].copy()
+        # Sort by count descending (most papers to least)
+        theme_subthemes = theme_subthemes.sort_values('count', ascending=False)
+        
+        # Get the base color for this theme
+        base_color = theme_colors.get(parent_theme, blue_shades[0])
+        
+        # Create gradient from dark to light based on paper count
+        num_subthemes = len(theme_subthemes)
+        
+        for idx, (_, row) in enumerate(theme_subthemes.iterrows()):
+            sub_name = row['sub_theme'].replace('_', ' ').title()
+            parent_name = row['parent_theme'].replace('_', ' ').title()
+            # Just use sub-theme name without parent theme in brackets
+            labels.append(sub_name)
+            parents.append(parent_name)
+            values.append(row['count'])
+            
+            # Create gradient: darkest for most papers, lightest for least papers
+            # Calculate opacity/brightness from 100% (dark) to 40% (light)
+            if num_subthemes > 1:
+                brightness_factor = 1.0 - (idx / (num_subthemes - 1)) * 0.6  # 1.0 to 0.4
+            else:
+                brightness_factor = 1.0
+            
+            # Convert hex to RGB, adjust brightness, convert back
+            hex_color = base_color.lstrip('#')
+            r, g, b = int(hex_color[0:2], 16), int(hex_color[2:4], 16), int(hex_color[4:6], 16)
+            
+            # Adjust brightness (darker = more papers, lighter = fewer papers)
+            r = int(r * brightness_factor + 255 * (1 - brightness_factor))
+            g = int(g * brightness_factor + 255 * (1 - brightness_factor))
+            b = int(b * brightness_factor + 255 * (1 - brightness_factor))
+            
+            gradient_color = f'#{r:02x}{g:02x}{b:02x}'
+            colors.append(gradient_color)
     
     # DO NOT add topics - only show themes and sub-themes (2 levels)
     
@@ -316,11 +344,12 @@ def create_sunburst_chart(df, mapping):
             line=dict(color='#0f172a', width=2)  # Dark borders between segments
         ),
         hovertemplate='<b>%{label}</b><br>Papers: %{value}<br>%{percentParent} of parent<extra></extra>',
-        maxdepth=2  # Only show 2 levels: themes and sub-themes
+        maxdepth=2,  # Only show 2 levels: themes and sub-themes
+        textfont=dict(color='#ffffff', size=11)  # White font for contrast
     ))
     
     fig.update_layout(
-        title="Research Hierarchy: Themes → Sub-Themes → Topics",
+        title=" ",
         height=650,
         font=dict(size=11, color='#f1f5f9'),
         margin=dict(t=50, l=0, r=0, b=0),
@@ -1184,7 +1213,8 @@ with tab_overview:
         orientation="h",
         color=theme_counts_sorted.values,
         color_continuous_scale="Blues",
-        title="Papers per Theme (All Research Themes)"
+        title=" ",
+        labels={"x": "Papers", "y": "Strategic Theme", "color": "Papers"}
     )
     fig = apply_fig_theme(fig, height=380)
     st.plotly_chart(fig, use_container_width=True)
@@ -1209,7 +1239,7 @@ with tab_overview:
             orientation="h",
             color="avg_confidence",
             color_continuous_scale="Blues",
-            title="Top 15 Sub-Themes Across All Themes",
+            title=" ",
             labels={"papers": "Papers", "sub_theme": "Sub-Theme", "avg_confidence": "Avg Confidence (%)"}
         )
         fig_sub_overview = apply_fig_theme(fig_sub_overview, height=420)
@@ -1233,7 +1263,7 @@ with tab_overview:
         fig_overall = go.Figure()
         fig_overall.add_trace(go.Scatter(x=qa["quarter"], y=qa["count"], mode="lines+markers", name="All Themes"))
         fig_overall = apply_fig_theme(fig_overall, height=360)
-        fig_overall.update_layout(title="Overall Research Output", xaxis_title="Quarter", yaxis_title="Papers")
+        fig_overall.update_layout(title="", xaxis_title="Quarter", yaxis_title="Papers")
         st.plotly_chart(fig_overall, use_container_width=True)
     else:
         st.info("No trend data available")
@@ -1717,7 +1747,7 @@ with tab_trends:
     fig = go.Figure()
     fig.add_trace(go.Scatter(x=qa["quarter"], y=qa["count"], mode="lines+markers", name="All Themes"))
     fig = apply_fig_theme(fig, height=380)
-    fig.update_layout(title="Overall Research Output", xaxis_title="Quarter", yaxis_title="Papers")
+    fig.update_layout(title="", xaxis_title="Quarter", yaxis_title="Papers")
     st.plotly_chart(fig, use_container_width=True)
 
     names = [t.replace("_", " ").title() for t in BABCOCK_THEMES.keys()]
