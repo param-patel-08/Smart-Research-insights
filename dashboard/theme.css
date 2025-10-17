@@ -606,3 +606,76 @@ header {
 .text-center {
     text-align: center;
 }
+
+/* ========== POPOVER & CALENDAR DARK THEME ========== */
+/* GLOBAL MULTISELECT DROPDOWN */
+div[data-baseweb="popover"] ul[role="listbox"],
+ul[role="listbox"] {
+    background-color: #1e293b !important;
+    border: 1px solid #334155 !important;
+}
+
+div[data-baseweb="popover"] li[role="option"],
+li[role="option"] {
+    background-color: #1e293b !important;
+    color: #cbd5e1 !important;
+}
+
+div[data-baseweb="popover"] li[role="option"]:hover,
+li[role="option"]:hover {
+    background-color: #334155 !important;
+}
+
+/* Popover container */
+div[data-baseweb="popover"] {
+    background-color: #1e293b !important;
+    border: none !important;
+}
+
+div[data-baseweb="popover"] > div {
+    background-color: #1e293b !important;
+    border: none !important;
+    box-shadow: none !important;
+}
+
+div[data-baseweb="popover"] > div > div,
+div[data-baseweb="popover"] > div > div > div {
+    border: none !important;
+    background-color: #1e293b !important;
+}
+
+/* CALENDAR - ALL ELEMENTS DARK FIRST */
+div[data-baseweb="calendar"],
+div[data-baseweb="calendar"] *:not([aria-selected="true"]):not([aria-selected="true"] *),
+div[data-baseweb="calendar"]::before,
+div[data-baseweb="calendar"]::after {
+    background-color: #1e293b !important;
+    background: #1e293b !important;
+    color: white !important;
+    border: none !important;
+}
+
+/* Calendar hover */
+div[data-baseweb="calendar"] button:hover:not([aria-selected="true"]) {
+    background-color: rgba(59, 130, 246, 0.3) !important;
+    background: rgba(59, 130, 246, 0.3) !important;
+}
+
+/* Calendar selected date - BLUE HIGHLIGHT - HIGH SPECIFICITY */
+div[data-baseweb="calendar"] button[aria-selected="true"][aria-selected="true"],
+div[data-baseweb="calendar"] button[aria-selected="true"][aria-selected="true"]::before,
+div[data-baseweb="calendar"] button[aria-selected="true"][aria-selected="true"]::after {
+    background-color: #3b82f6 !important;
+    background: #3b82f6 !important;
+    color: white !important;
+    border-radius: 50% !important;
+}
+
+div[data-baseweb="calendar"] button[aria-selected="true"][aria-selected="true"] *,
+div[data-baseweb="calendar"] button[aria-selected="true"][aria-selected="true"] > div,
+div[data-baseweb="calendar"] button[aria-selected="true"][aria-selected="true"] span,
+div[data-baseweb="calendar"] button[aria-selected="true"][aria-selected="true"] div {
+    background-color: #3b82f6 !important;
+    background: #3b82f6 !important;
+    color: white !important;
+}
