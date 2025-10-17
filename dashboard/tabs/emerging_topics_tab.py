@@ -5,6 +5,7 @@ import streamlit as st
 import plotly.express as px
 
 from dashboard.utils.insights import create_emerging_topics_bubble
+from dashboard.utils.visualizations import create_impact_bubble_chart
 from dashboard.utils.styling import apply_fig_theme
 
 
@@ -66,6 +67,49 @@ def render_emerging_topics_tab(filtered, mapping, start_date, end_date, papers_d
     try:
         bubble_fig, emerging_df = create_emerging_topics_bubble(emerging_data, mapping, top_n=top_n)
         st.plotly_chart(bubble_fig, use_container_width=True)
+        
+        st.markdown("<div class='divider'></div>", unsafe_allow_html=True)
+        
+        # ========== SUB-THEME IMPACT ANALYSIS ==========
+        st.markdown('<p class="sub-header">Sub-Theme Impact Analysis</p>', unsafe_allow_html=True)
+        st.markdown("*Analyze growth vs citations to identify high-impact research areas. Theme names shown in bubbles.*")
+        
+        try:
+            bubble_fig = create_impact_bubble_chart(emerging_data, mapping)
+            st.plotly_chart(bubble_fig, use_container_width=True)
+            
+            # Interpretation guide
+            cols = st.columns(4)
+            cols[0].markdown(
+                '<div style="padding: 0.5rem; background: #064e3b; border-radius: 0.5rem; text-align: center;">'
+                '<strong style="color: #6ee7b7;">⭐ Stars</strong><br>'
+                '<span style="color: #d1fae5; font-size: 0.85rem;">High Growth<br>High Citations</span>'
+                '</div>',
+                unsafe_allow_html=True
+            )
+            cols[1].markdown(
+                '<div style="padding: 0.5rem; background: #1e3a8a; border-radius: 0.5rem; text-align: center;">'
+                '<strong style="color: #93c5fd;">💎 Gems</strong><br>'
+                '<span style="color: #bfdbfe; font-size: 0.85rem;">Low Growth<br>High Citations</span>'
+                '</div>',
+                unsafe_allow_html=True
+            )
+            cols[2].markdown(
+                '<div style="padding: 0.5rem; background: #78350f; border-radius: 0.5rem; text-align: center;">'
+                '<strong style="color: #fcd34d;">📈 Rising</strong><br>'
+                '<span style="color: #fef3c7; font-size: 0.85rem;">High Growth<br>Low Citations</span>'
+                '</div>',
+                unsafe_allow_html=True
+            )
+            cols[3].markdown(
+                '<div style="padding: 0.5rem; background: #334155; border-radius: 0.5rem; text-align: center;">'
+                '<strong style="color: #cbd5e1;">👀 Watch</strong><br>'
+                '<span style="color: #e2e8f0; font-size: 0.85rem;">Low Growth<br>Low Citations</span>'
+                '</div>',
+                unsafe_allow_html=True
+            )
+        except Exception as e:
+            st.warning(f"Impact bubble chart could not be generated: {e}")
         
         st.markdown("<div class='divider'></div>", unsafe_allow_html=True)
         

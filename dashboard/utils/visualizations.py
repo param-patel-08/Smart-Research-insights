@@ -269,11 +269,21 @@ def create_growth_heatmap(df):
         z=heatmap_data.values,
         x=heatmap_data.columns,
         y=heatmap_data.index,
-        colorscale='Viridis',
+        colorscale=[
+            [0, '#0c4a6e'],      # Dark blue (low activity)
+            [0.25, '#0284c7'],   # Sky blue
+            [0.5, '#06b6d4'],    # Cyan
+            [0.75, '#fbbf24'],   # Amber
+            [1, '#f59e0b']       # Orange (high activity)
+        ],
         text=heatmap_data.values,
         texttemplate='%{text}',
-        textfont={"size": 8},
-        hovertemplate='<b>%{y}</b><br>%{x}<br>Papers: %{z}<extra></extra>'
+        textfont={"size": 9, "color": "#ffffff"},  # White text for better visibility
+        hovertemplate='<b>%{y}</b><br>%{x}<br>Papers: %{z}<extra></extra>',
+        colorbar=dict(
+            tickfont=dict(color='#e2e8f0', size=10),
+            outlinewidth=0
+        )
     ))
     
     fig.update_layout(
@@ -281,7 +291,17 @@ def create_growth_heatmap(df):
         xaxis_title="Quarter",
         yaxis_title="Sub-Theme",
         height=500,
-        font=dict(size=10)
+        font=dict(size=10, color='#e2e8f0'),
+        paper_bgcolor='#0f172a',
+        plot_bgcolor='#0f172a',
+        xaxis=dict(
+            gridcolor='#334155',
+            tickfont=dict(color='#e2e8f0')
+        ),
+        yaxis=dict(
+            gridcolor='#334155',
+            tickfont=dict(color='#e2e8f0')
+        )
     )
     
     return fig
@@ -330,16 +350,56 @@ def create_impact_bubble_chart(df, mapping):
             'parent_theme': 'Theme'
         },
         title=" ",
-        color_discrete_sequence=px.colors.qualitative.Set2
+        text='parent_theme',  # Show theme names on bubbles
+        size_max=12  # Normal, standard bubble size
     )
     
-    fig.update_traces(marker=dict(line=dict(width=1, color='white')))
-    fig.update_layout(height=550, showlegend=True)
+    # Update traces for dark theme with normal-sized bubbles
+    fig.update_traces(
+        marker=dict(
+            line=dict(width=0.5, color='#1e293b'),  # Very thin border
+            sizemode='diameter',
+            sizeref=2.5,  # Normal bubble sizing to prevent overlap
+            opacity=0.75  # Transparency to see overlaps
+        ),
+        textposition='middle center',
+        textfont=dict(
+            size=8,
+            color='#ffffff',  # White text for visibility
+            family='Inter, sans-serif'
+        )
+    )
+    
+    fig.update_layout(
+        height=550,
+        showlegend=True,
+        paper_bgcolor='#0f172a',
+        plot_bgcolor='#0f172a',
+        font=dict(color='#e2e8f0', size=12),
+        xaxis=dict(
+            gridcolor='#334155',
+            zerolinecolor='#475569',
+            tickfont=dict(color='#e2e8f0'),
+            title_font=dict(color='#e2e8f0')
+        ),
+        yaxis=dict(
+            gridcolor='#334155',
+            zerolinecolor='#475569',
+            tickfont=dict(color='#e2e8f0'),
+            title_font=dict(color='#e2e8f0')
+        ),
+        legend=dict(
+            bgcolor='rgba(15, 23, 42, 0.8)',
+            bordercolor='#334155',
+            borderwidth=1,
+            font=dict(color='#e2e8f0')
+        )
+    )
     
     median_growth = metrics_df['growth_rate'].median()
     median_citations = metrics_df['avg_citations'].median()
-    fig.add_hline(y=median_citations, line_dash="dash", line_color="gray", opacity=0.5)
-    fig.add_vline(x=median_growth, line_dash="dash", line_color="gray", opacity=0.5)
+    fig.add_hline(y=median_citations, line_dash="dash", line_color="#64748b", opacity=0.6)
+    fig.add_vline(x=median_growth, line_dash="dash", line_color="#64748b", opacity=0.6)
     
     return fig
 
