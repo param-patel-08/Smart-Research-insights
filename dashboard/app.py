@@ -18,7 +18,6 @@ from dashboard.tabs.theme_analysis_tab import render_theme_analysis_tab
 from dashboard.tabs.universities_tab import render_universities_tab
 from dashboard.tabs.trends_tab import render_trends_tab
 from dashboard.tabs.emerging_topics_tab import render_emerging_topics_tab
-from dashboard.tabs.data_quality_tab import render_data_quality_tab
 
 # Import config
 from config.themes import BABCOCK_THEMES
@@ -68,8 +67,8 @@ st.markdown(
 )
 
 # Tabs
-tab_overview, tab_theme, tab_unis, tab_trends, tab_emerging, tab_quality = st.tabs([
-    "Overview", "Theme Analysis", "Universities", "Trends", "Emerging Topics", "Data Quality"
+tab_overview, tab_theme, tab_unis, tab_trends, tab_emerging = st.tabs([
+    "Overview", "Theme Analysis", "Universities", "Trends", "Emerging Topics"
 ])
 
 # Create filter summary HTML (reusable in all tabs)
@@ -103,7 +102,3 @@ with tab_trends:
 with tab_emerging:
     st.markdown(filter_summary_html, unsafe_allow_html=True)
     render_emerging_topics_tab(filtered, mapping, start_date, end_date, papers_df)
-
-with tab_quality:
-    st.markdown(filter_summary_html, unsafe_allow_html=True)
-    render_data_quality_tab(filtered, papers_df)
