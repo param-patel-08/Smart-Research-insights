@@ -1,0 +1,28 @@
+[
+  {
+    "topic_id": 47,
+    "emergingness_score": 0.5113675773775216,
+    "recency_score": 0.17841894344380385,
+    "growth_score": 1,
+    "volume_score": 0.2,
+    "paper_count": 31,
+    "avg_citations": 83.0,
+    "latest_date": "2024-08-23",
+    "growth_rate": 150.0,
+    "theme": "Digital_Transformation",
+    "sub_theme": "Digital_Twin",
+    "keywords": [
+      "digital",
+      "twins",
+      "digital twins",
+      "digital twin",
+      "twin",
+      "healthcare",
+      "technologies",
+      "monitoring",
+      "smart",
+      "dts"
+    ],
+    "topic_label": "Digital Twin Technologies for Healthcare Monitoring"
+  }
+]

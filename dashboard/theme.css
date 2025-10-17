@@ -68,8 +68,15 @@ body {
     line-height: 1.1;
 }
 
-.sub-header{
-    color: var(--text-secondary);
+.sub-header {
+    font-size: 1.5rem;
+    font-weight: bold;
+    font-weight: 700;
+    color: var(--text-primary);
+    margin: 2rem 0 1rem 0;
+    padding-bottom: 0.5rem;
+    border-bottom: 2px solid var(--border);
+    letter-spacing: -0.01em;
 }
 
 .subtitle {
@@ -173,6 +180,32 @@ body {
     background-color: transparent !important;
 }
 
+/* Ensure all markdown text is visible */
+.stMarkdown p,
+.stMarkdown em,
+.stMarkdown i,
+.stMarkdown ul,
+.stMarkdown ol,
+.stMarkdown li {
+    color: var(--text-secondary) !important;
+}
+
+.stMarkdown strong,
+.stMarkdown b,
+.stMarkdown h1,
+.stMarkdown h2,
+.stMarkdown h3,
+.stMarkdown h4,
+.stMarkdown h5,
+.stMarkdown h6 {
+    color: var(--text-primary) !important;
+}
+
+/* Quadrant and annotation text */
+.stMarkdown div {
+    color: var(--text-secondary) !important;
+}
+
 /* ========== TABS ========== */
 .stTabs {
     background-color: transparent;
@@ -259,6 +292,11 @@ body {
 }
 
 /* ========== INPUTS ========== */
+/* Ensure all labels are visible */
+label {
+    color: var(--text-primary) !important;
+}
+
 .stSelectbox > div > div,
 .stMultiSelect > div > div,
 .stTextInput > div > div,
@@ -482,6 +520,12 @@ header {
 }
 
 /* ========== CUSTOM UTILITY CLASSES ========== */
+.info-text {
+    color: var(--text-secondary) !important;
+    font-size: 0.9rem;
+    font-style: italic;
+}
+
 .gradient-text {
     background: linear-gradient(135deg, var(--primary) 0%, var(--accent) 100%);
     -webkit-background-clip: text;
