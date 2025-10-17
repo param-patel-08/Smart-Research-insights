@@ -320,6 +320,21 @@ label {
     background-color: var(--primary) !important;
 }
 
+/* Slider labels (min/max values) - white text, no highlight */
+.stSlider [data-baseweb="slider"] > div:first-child > div,
+.stSlider [data-baseweb="slider"] > div:last-child > div,
+.stSlider div[data-testid="stTickBar"] > div {
+    color: #cbd5e1 !important;
+    background-color: transparent !important;
+}
+
+/* Remove highlight from slider tick values */
+.stSlider div[data-testid="stTickBarMin"],
+.stSlider div[data-testid="stTickBarMax"] {
+    background-color: transparent !important;
+    color: #cbd5e1 !important;
+}
+
 .stCheckbox > label {
     font-weight: 500 !important;
     color: var(--text-secondary) !important;

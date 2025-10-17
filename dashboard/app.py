@@ -60,7 +60,7 @@ filtered, start_date, end_date, sel_themes, sel_sub_themes, sel_unis = render_fi
 
 # Header
 st.markdown(
-    "<div style='text-align: center; padding: 3rem 0 2rem 0;'>"
+    "<div style='text-align: center; padding: 0rem 0 1rem 0;'>"
     "<h1 style='font-size: 3.5rem; font-weight: 800;'>Smarter Research Insights</h1>"
     "<p style='font-size: 1.1rem;'>AI-Powered Research Intelligence Dashboard</p>"
     "</div>",
@@ -72,33 +72,38 @@ tab_overview, tab_theme, tab_unis, tab_trends, tab_emerging, tab_quality = st.ta
     "Overview", "Theme Analysis", "Universities", "Trends", "Emerging Topics", "Data Quality"
 ])
 
-# Filter summary
+# Create filter summary HTML (reusable in all tabs)
 sub_theme_text = f"<span class='badge'>Sub-Themes</span> {len(sel_sub_themes)}" if sel_sub_themes else ""
-st.markdown(
-    f"<div class='card-alt' style='display:flex;gap:1rem;align-items:center'>"
+filter_summary_html = (
+    f"<div class='card-alt' style='display:flex;gap:1rem;align-items:center;margin-bottom:1.5rem'>"
     f"<span class='badge'>Date</span> <b>{start_date}</b>  <b>{end_date}</b>"
     f"<span class='badge'>Themes</span> {len(sel_themes) if sel_themes else 0}"
     f"{sub_theme_text}"
     f"<span class='badge'>Universities</span> {len(sel_unis) if sel_unis else 0}"
-    f"</div>",
-    unsafe_allow_html=True
+    f"</div>"
 )
 
 # Render Tabs
 with tab_overview:
+    st.markdown(filter_summary_html, unsafe_allow_html=True)
     render_overview_tab(filtered, papers_df, trends, mapping)
 
 with tab_theme:
+    st.markdown(filter_summary_html, unsafe_allow_html=True)
     render_theme_analysis_tab(filtered, papers_df, trends, mapping, BABCOCK_THEMES)
 
 with tab_unis:
+    st.markdown(filter_summary_html, unsafe_allow_html=True)
     render_universities_tab(filtered, papers_df)
 
 with tab_trends:
+    st.markdown(filter_summary_html, unsafe_allow_html=True)
     render_trends_tab(filtered, papers_df, trends)
 
 with tab_emerging:
+    st.markdown(filter_summary_html, unsafe_allow_html=True)
     render_emerging_topics_tab(filtered, mapping, start_date, end_date, papers_df)
 
 with tab_quality:
+    st.markdown(filter_summary_html, unsafe_allow_html=True)
     render_data_quality_tab(filtered, papers_df)

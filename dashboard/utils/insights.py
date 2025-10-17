@@ -6,6 +6,43 @@ import numpy as np
 import plotly.express as px
 import plotly.graph_objects as go
 import streamlit as st
+import json
+import os
+import hashlib
+
+
+# Cache file for storing GPT-generated topic labels
+CACHE_FILE = "data/topic_labels_cache.json"
+
+
+def load_topic_labels_cache():
+    """Load cached topic labels from file"""
+    if os.path.exists(CACHE_FILE):
+        try:
+            with open(CACHE_FILE, 'r', encoding='utf-8') as f:
+                return json.load(f)
+        except Exception as e:
+            print(f"Error loading cache: {e}")
+            return {}
+    return {}
+
+
+def save_topic_labels_cache(cache):
+    """Save topic labels cache to file"""
+    try:
+        os.makedirs(os.path.dirname(CACHE_FILE), exist_ok=True)
+        with open(CACHE_FILE, 'w', encoding='utf-8') as f:
+            json.dump(cache, f, indent=2, ensure_ascii=False)
+    except Exception as e:
+        print(f"Error saving cache: {e}")
+
+
+def generate_topic_cache_key(keywords, theme, sub_theme, paper_count, growth_rate):
+    """Generate a unique cache key for a topic"""
+    # Create a stable string representation
+    key_string = f"{theme}|{sub_theme}|{','.join(sorted(keywords[:10]))}|{paper_count//10}|{int(growth_rate)}"
+    # Hash it for compact storage
+    return hashlib.md5(key_string.encode()).hexdigest()
 
 
 def generate_insights(df, trends, mapping):
@@ -127,17 +164,33 @@ def filter_noisy_keywords(keywords):
 
 
 def generate_topic_label_gpt(keywords, theme, sub_theme, paper_count, growth_rate):
-    """Generate meaningful topic label using GPT"""
+    """Generate meaningful topic label using GPT with caching"""
     import openai
     import os
+    
+    # Load cache
+    cache = load_topic_labels_cache()
+    
+    # Generate cache key
+    cache_key = generate_topic_cache_key(keywords, theme, sub_theme, paper_count, growth_rate)
+    
+    # Check if we have a cached label
+    if cache_key in cache:
+        return cache[cache_key]
     
     api_key = os.getenv('OPENAI_API_KEY')
     if not api_key:
         # Fallback to cleaned keywords
         clean_kw = filter_noisy_keywords(keywords)
         if len(clean_kw) >= 2:
-            return f"{theme.replace('_', ' ')}: {' & '.join(clean_kw[:2])}"
-        return f"Topic in {theme.replace('_', ' ')}"
+            label = f"{theme.replace('_', ' ')}: {' & '.join(clean_kw[:2])}"
+        else:
+            label = f"Topic in {theme.replace('_', ' ')}"
+        
+        # Cache the fallback label
+        cache[cache_key] = label
+        save_topic_labels_cache(cache)
+        return label
     
     try:
         openai.api_key = api_key
@@ -187,14 +240,27 @@ Generate ONLY the label (2-4 words MAX), no quotes."""
             if label.startswith(prefix):
                 label = label[len(prefix):].strip()
         
-        return label if len(label.split()) >= 3 else f"{domain}: {' & '.join(clean_keywords[:2])}"
+        final_label = label if len(label.split()) >= 3 else f"{domain}: {' & '.join(clean_keywords[:2])}"
+        
+        # Cache the generated label
+        cache[cache_key] = final_label
+        save_topic_labels_cache(cache)
+        
+        return final_label
         
     except Exception as e:
         # Fallback
         clean_kw = filter_noisy_keywords(keywords)
         if len(clean_kw) >= 2:
-            return f"{theme.replace('_', ' ')}: {' & '.join(clean_kw[:2])}"
-        return f"Topic in {theme.replace('_', ' ')}"
+            label = f"{theme.replace('_', ' ')}: {' & '.join(clean_kw[:2])}"
+        else:
+            label = f"Topic in {theme.replace('_', ' ')}"
+        
+        # Cache the fallback label
+        cache[cache_key] = label
+        save_topic_labels_cache(cache)
+        
+        return label
 
 
 def create_emerging_topics_bubble(df, mapping, top_n=20):
@@ -270,10 +336,28 @@ def create_emerging_topics_bubble(df, mapping, top_n=20):
     
     emerging_df = emerging_df.nlargest(top_n, 'emergingness')
     
-    # Generate GPT labels for top topics
-    with st.spinner('Generating AI-powered topic labels...'):
+    # Generate GPT labels for top topics (with caching)
+    cache = load_topic_labels_cache()
+    cached_count = 0
+    new_count = 0
+    
+    with st.spinner('Generating topic labels (using cached where available)...'):
         labels = []
         for _, row in emerging_df.iterrows():
+            cache_key = generate_topic_cache_key(
+                keywords=row['keywords_list'],
+                theme=row['theme'],
+                sub_theme=row['sub_theme'],
+                paper_count=row['paper_count'],
+                growth_rate=row['growth_rate']
+            )
+            
+            # Check if cached
+            if cache_key in cache:
+                cached_count += 1
+            else:
+                new_count += 1
+            
             label = generate_topic_label_gpt(
                 keywords=row['keywords_list'],
                 theme=row['theme'],
@@ -284,7 +368,11 @@ def create_emerging_topics_bubble(df, mapping, top_n=20):
             labels.append(label)
         emerging_df['topic_label'] = labels
     
-    # Create bubble chart
+    # Show cache statistics
+    if cached_count > 0 or new_count > 0:
+        st.success(f"✅ Topic labels ready: {cached_count} from cache, {new_count} newly generated")
+    
+    # Create bubble chart with smaller, more visible bubbles
     fig = px.scatter(
         emerging_df,
         x='recency_score',
@@ -300,24 +388,36 @@ def create_emerging_topics_bubble(df, mapping, top_n=20):
             'theme': False,
             'keywords': True
         },
-        title=f"Top {top_n} Emerging Research Topics",
+        title=f" ",
         labels={
             'recency_score': 'Recency Score (% papers in last 12 months)',
             'growth_rate': 'Growth Rate (%)',
             'paper_count': 'Papers',
             'theme': 'Theme'
         },
-        color_discrete_sequence=px.colors.qualitative.Set2
+        color_discrete_sequence=['#60a5fa', '#34d399', '#fbbf24', '#f87171', '#a78bfa', '#fb923c', '#22d3ee', '#facc15']
     )
     
-    # Add quadrant lines
+    # Update marker size and visibility
+    fig.update_traces(
+        marker=dict(
+            size=emerging_df['paper_count'],
+            sizemode='diameter',
+            sizeref=5,  # Smaller bubbles
+            sizemin=4,
+            opacity=0.8,  # More visible
+            line=dict(width=1.5, color='#1e293b')  # Border for better definition
+        )
+    )
+    
+    # Add quadrant lines with better visibility
     median_recency = emerging_df['recency_score'].median()
     median_growth = emerging_df['growth_rate'].median()
     
-    fig.add_hline(y=median_growth, line_dash="dash", line_color="gray", opacity=0.5)
-    fig.add_vline(x=median_recency, line_dash="dash", line_color="gray", opacity=0.5)
+    fig.add_hline(y=median_growth, line_dash="dash", line_color="#64748b", opacity=0.6, line_width=1.5)
+    fig.add_vline(x=median_recency, line_dash="dash", line_color="#64748b", opacity=0.6, line_width=1.5)
     
-    # Add annotations for quadrants
+    # Add annotations for quadrants with bright colors for dark theme
     max_recency = emerging_df['recency_score'].max()
     max_growth = emerging_df['growth_rate'].max()
     min_growth = emerging_df['growth_rate'].min()
@@ -327,8 +427,8 @@ def create_emerging_topics_bubble(df, mapping, top_n=20):
         y=max_growth * 0.85,
         text="Hot Topics<br>(Recent + Growing)",
         showarrow=False,
-        font=dict(size=10, color="#3b82f6"),
-        opacity=0.7
+        font=dict(size=11, color="#60a5fa"),
+        opacity=0.9
     )
     
     fig.add_annotation(
@@ -336,14 +436,33 @@ def create_emerging_topics_bubble(df, mapping, top_n=20):
         y=max_growth * 0.85,
         text="Momentum<br>(Growing Fast)",
         showarrow=False,
-        font=dict(size=10, color="blue"),
-        opacity=0.7
+        font=dict(size=11, color="#34d399"),
+        opacity=0.9
     )
     
+    # Apply dark theme
     fig.update_layout(
         height=600,
         showlegend=True,
-        hovermode='closest'
+        hovermode='closest',
+        plot_bgcolor='#0f172a',
+        paper_bgcolor='#0f172a',
+        font=dict(color='#cbd5e1'),
+        xaxis=dict(
+            gridcolor='#1e293b',
+            zerolinecolor='#334155',
+            color='#cbd5e1'
+        ),
+        yaxis=dict(
+            gridcolor='#1e293b',
+            zerolinecolor='#334155',
+            color='#cbd5e1'
+        ),
+        legend=dict(
+            bgcolor='#1e293b',
+            bordercolor='#334155',
+            font=dict(color='#cbd5e1')
+        )
     )
     
     return fig, emerging_df
