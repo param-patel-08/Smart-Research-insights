@@ -26,39 +26,39 @@ def find_adjacent_themes(papers: pd.DataFrame, theme_key: str, mapping_obj: dict
 
 
 def get_growth_color_style_theme(growth_rate):
-    """Generate darker, solid color gradients based on growth rate for dark theme"""
+    """Generate super dark color gradients based on growth rate for dark theme"""
     growth_pct = growth_rate * 100
     
     if growth_pct >= 50:
         return {
-            "bg": "linear-gradient(135deg, #065f46 0%, #047857 100%)",
+            "bg": "linear-gradient(135deg, #052e16 0%, #064e3b 100%)",  # Super dark green
             "border": "#10b981",
             "icon": "▲▲",
             "label": f"+{growth_pct:.0f}%",
             "color": "#ffffff",
-            "icon_color": "#6ee7b7"
+            "icon_color": "#34d399"
         }
     elif growth_pct >= 20:
         return {
-            "bg": "linear-gradient(135deg, #047857 0%, #059669 100%)",
+            "bg": "linear-gradient(135deg, #064e3b 0%, #065f46 100%)",  # Super dark green
             "border": "#34d399",
+            "icon": "▲",
+            "label": f"+{growth_pct:.0f}%",
+            "color": "#ffffff",
+            "icon_color": "#6ee7b7"
+        }
+    elif growth_pct >= 5:
+        return {
+            "bg": "linear-gradient(135deg, #065f46 0%, #047857 100%)",  # Dark green
+            "border": "#6ee7b7",
             "icon": "▲",
             "label": f"+{growth_pct:.0f}%",
             "color": "#ffffff",
             "icon_color": "#a7f3d0"
         }
-    elif growth_pct >= 5:
-        return {
-            "bg": "linear-gradient(135deg, #059669 0%, #10b981 100%)",
-            "border": "#6ee7b7",
-            "icon": "▲",
-            "label": f"+{growth_pct:.0f}%",
-            "color": "#ffffff",
-            "icon_color": "#d1fae5"
-        }
     elif growth_pct >= 0:
         return {
-            "bg": "linear-gradient(135deg, #10b981 0%, #34d399 100%)",
+            "bg": "linear-gradient(135deg, #047857 0%, #059669 100%)",  # Dark green
             "border": "#a7f3d0",
             "icon": "→",
             "label": f"+{growth_pct:.1f}%",
@@ -67,30 +67,30 @@ def get_growth_color_style_theme(growth_rate):
         }
     elif growth_pct >= -5:
         return {
-            "bg": "linear-gradient(135deg, #dc2626 0%, #ef4444 100%)",
+            "bg": "linear-gradient(135deg, #7f1d1d 0%, #991b1b 100%)",  # Super dark red
             "border": "#fca5a5",
             "icon": "→",
             "label": f"{growth_pct:.1f}%",
             "color": "#ffffff",
-            "icon_color": "#fecaca"
+            "icon_color": "#fca5a5"
         }
     elif growth_pct >= -20:
         return {
-            "bg": "linear-gradient(135deg, #b91c1c 0%, #dc2626 100%)",
+            "bg": "linear-gradient(135deg, #450a0a 0%, #7f1d1d 100%)",  # Super dark red
             "border": "#f87171",
             "icon": "▼",
             "label": f"{growth_pct:.0f}%",
             "color": "#ffffff",
-            "icon_color": "#fca5a5"
+            "icon_color": "#f87171"
         }
     else:
         return {
-            "bg": "linear-gradient(135deg, #991b1b 0%, #b91c1c 100%)",
+            "bg": "linear-gradient(135deg, #1a0000 0%, #450a0a 100%)",  # Extremely dark red
             "border": "#ef4444",
             "icon": "▼▼",
             "label": f"{growth_pct:.0f}%",
             "color": "#ffffff",
-            "icon_color": "#f87171"
+            "icon_color": "#ef4444"
         }
 
 
@@ -125,7 +125,7 @@ def render_theme_analysis_tab(filtered, papers_df, trends, mapping, babcock_them
                 f"""
                 <div class='card' style='
                     background: {style["bg"]};
-                    border: 2px solid {style["border"]};
+                    border: 1px solid {style["border"]};
                     color: {style["color"]};
                     padding: 1rem;
                     border-radius: 10px;

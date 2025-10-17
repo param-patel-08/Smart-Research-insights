@@ -325,6 +325,37 @@ label {
     color: var(--text-secondary) !important;
 }
 
+/* Multiselect selected items (tags) - Blue accent theme */
+.stMultiSelect span[data-baseweb="tag"] {
+    background-color: rgba(59, 130, 246, 0.2) !important;
+    border: 1px solid var(--primary) !important;
+    color: var(--primary-light) !important;
+}
+
+.stMultiSelect span[data-baseweb="tag"] span {
+    color: var(--primary-light) !important;
+}
+
+/* Close button on tags */
+.stMultiSelect span[data-baseweb="tag"] svg {
+    fill: var(--primary-light) !important;
+}
+
+/* Dropdown menu items */
+.stMultiSelect [role="listbox"] {
+    background-color: var(--bg-secondary) !important;
+    border: 1px solid var(--border) !important;
+}
+
+.stMultiSelect [role="option"] {
+    background-color: var(--bg-secondary) !important;
+    color: var(--text-primary) !important;
+}
+
+.stMultiSelect [role="option"]:hover {
+    background-color: rgba(59, 130, 246, 0.1) !important;
+}
+
 /* ========== DATAFRAMES ========== */
 /* Streamlit dataframe styling */
 [data-testid="stDataFrame"] {

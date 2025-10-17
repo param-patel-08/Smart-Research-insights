@@ -19,7 +19,7 @@ def render_universities_tab(filtered, papers_df):
     st.markdown('<p class="sub-header">Overall Research Output Rankings</p>', unsafe_allow_html=True)
     uc = papers_df["university"].value_counts()
     uc_top15 = uc.head(15).sort_values(ascending=True)  # Sort ascending for correct order
-    fig = px.bar(x=uc_top15.values, y=uc_top15.index, orientation="h", color=uc_top15.values, color_continuous_scale="Blues", title="Top 15 Universities by Total Papers")
+    fig = px.bar(x=uc_top15.values, y=uc_top15.index, orientation="h", color=uc_top15.values, color_continuous_scale="Blues", title=" ", labels={"x": "Number of Papers", "y": "University"})
     fig = apply_fig_theme(fig, height=380)
     st.plotly_chart(fig, use_container_width=True)
 
@@ -48,7 +48,7 @@ def render_universities_tab(filtered, papers_df):
     with colB:
         st.markdown('<p class="sub-header">Output Over Time</p>', unsafe_allow_html=True)
         q = uni_p.groupby("quarter").size().reset_index(name="count"); q["quarter"] = q["quarter"].astype(str)
-        fig = px.line(q, x="quarter", y="count", markers=True, title=f"{sel_uni} - Quarterly Output")
+        fig = px.line(q, x="quarter", y="count", markers=True, title=f"{sel_uni} - Quarterly Output", labels={"quarter": "Quarter", "count": "Number of Papers"})
         fig = apply_fig_theme(fig, height=350)
         st.plotly_chart(fig, use_container_width=True)
     
@@ -72,7 +72,12 @@ def render_universities_tab(filtered, papers_df):
             radar_fig = create_university_radar(filtered, selected_unis)
             if radar_fig:
                 st.plotly_chart(radar_fig, use_container_width=True)
-                st.info("**Strategic Insight**: Larger area = stronger focus. Compare shapes to identify complementary strengths for potential collaborations.")
+                st.markdown(
+                    '<div style="padding: 1rem; background: #1e3a5f; border-left: 4px solid #3b82f6; border-radius: 0.5rem; color: #f1f5f9;">'
+                    '<strong style="color: #60a5fa;">Strategic Insight:</strong> Larger area = stronger focus. Compare shapes to identify complementary strengths for potential collaborations.'
+                    '</div>',
+                    unsafe_allow_html=True
+                )
             else:
                 st.info("Unable to generate radar chart with current data.")
         except Exception as e:

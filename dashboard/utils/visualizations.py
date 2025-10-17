@@ -196,7 +196,7 @@ def create_sankey_flow(df):
     )])
     
     fig.update_layout(
-        title="Research Flow: Themes → Sub-Themes → Top Universities",
+        title=" ",
         height=700,
         font=dict(size=10, color='#f1f5f9'),
         paper_bgcolor='#1e293b',
@@ -225,7 +225,7 @@ def create_trend_timeline(df):
         x='year_month',
         y='count',
         color='theme',
-        title="Research Publication Trends Over Time",
+        title=" ",
         labels={'year_month': 'Date', 'count': 'Papers Published', 'theme': 'Theme'},
         color_discrete_sequence=blue_palette
     )
@@ -277,7 +277,7 @@ def create_growth_heatmap(df):
     ))
     
     fig.update_layout(
-        title="Sub-Theme Activity Over Time (Quarterly)",
+        title=" ",
         xaxis_title="Quarter",
         yaxis_title="Sub-Theme",
         height=500,
@@ -329,7 +329,7 @@ def create_impact_bubble_chart(df, mapping):
             'paper_count': 'Papers',
             'parent_theme': 'Theme'
         },
-        title="Sub-Theme Impact Analysis: Growth vs Citations",
+        title=" ",
         color_discrete_sequence=px.colors.qualitative.Set2
     )
     
@@ -367,10 +367,32 @@ def create_university_radar(df, selected_unis):
         ))
     
     fig.update_layout(
-        polar=dict(radialaxis=dict(visible=True)),
+        polar=dict(
+            radialaxis=dict(
+                visible=True,
+                gridcolor='#334155',
+                linecolor='#475569',
+                tickfont=dict(color='#e2e8f0', size=11)
+            ),
+            angularaxis=dict(
+                gridcolor='#334155',
+                linecolor='#475569',
+                tickfont=dict(color='#e2e8f0', size=11)
+            ),
+            bgcolor='#0f172a'
+        ),
         showlegend=True,
-        title="University Research Profile Comparison",
-        height=500
+        title=" ",
+        height=500,
+        paper_bgcolor='#0f172a',
+        plot_bgcolor='#0f172a',
+        font=dict(color='#e2e8f0', size=12),
+        legend=dict(
+            bgcolor='rgba(15, 23, 42, 0.8)',
+            bordercolor='#334155',
+            borderwidth=1,
+            font=dict(color='#e2e8f0')
+        )
     )
     
     return fig
