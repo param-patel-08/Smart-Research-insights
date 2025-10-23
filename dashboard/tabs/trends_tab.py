@@ -8,7 +8,7 @@ import plotly.graph_objects as go
 
 from dashboard.utils.visualizations import create_growth_heatmap
 from dashboard.utils.styling import apply_fig_theme
-from config.themes import BABCOCK_THEMES
+from config.themes import STRATEGIC_THEMES
 
 
 def render_trends_tab(filtered, papers_df, trends):
@@ -24,7 +24,7 @@ def render_trends_tab(filtered, papers_df, trends):
     st.markdown('<p class="sub-header">Research Output Trends</p>', unsafe_allow_html=True)
     st.markdown("*Compare research output trajectories across themes over time.*")
     
-    names = [t.replace("_", " ").title() for t in BABCOCK_THEMES.keys()]
+    names = [t.replace("_", " ").title() for t in STRATEGIC_THEMES.keys()]
     picks = st.multiselect("Select Themes to Compare", names, default=names[:3])
     
     if picks:

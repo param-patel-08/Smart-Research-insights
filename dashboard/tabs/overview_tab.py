@@ -8,7 +8,7 @@ import plotly.graph_objects as go
 from dashboard.utils.visualizations import create_sunburst_chart
 from dashboard.utils.styling import create_section_header, apply_fig_theme
 from dashboard.utils.insights import generate_insights
-from config.themes import BABCOCK_THEMES
+from config.themes import STRATEGIC_THEMES
 
 
 def render_overview_tab(filtered, papers_df, trends, mapping):
@@ -120,7 +120,7 @@ def render_overview_tab(filtered, papers_df, trends, mapping):
     # Papers per Theme Distribution
     st.markdown('<p class="sub-header">Papers per Strategic Theme</p>', unsafe_allow_html=True)
     theme_counts = papers_df.groupby("theme").size()
-    theme_counts = theme_counts.reindex(list(BABCOCK_THEMES.keys()), fill_value=0)
+    theme_counts = theme_counts.reindex(list(STRATEGIC_THEMES.keys()), fill_value=0)
     # Sort ascending so top is at top
     theme_counts_sorted = theme_counts.sort_values(ascending=True)
     fig = px.bar(

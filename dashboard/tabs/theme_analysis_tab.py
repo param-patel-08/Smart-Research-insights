@@ -94,7 +94,7 @@ def get_growth_color_style_theme(growth_rate):
         }
 
 
-def render_theme_analysis_tab(filtered, papers_df, trends, mapping, babcock_themes):
+def render_theme_analysis_tab(filtered, papers_df, trends, mapping, strategic_themes):
     """
     Render the Theme Analysis tab content.
     
@@ -103,7 +103,7 @@ def render_theme_analysis_tab(filtered, papers_df, trends, mapping, babcock_them
         papers_df: Full papers dataframe
         trends: Trends data
         mapping: Topic mapping data
-        babcock_themes: Dictionary of Babcock themes
+    strategic_themes: Dictionary of strategic themes
     """
     # Strategic Theme Priorities - Color-coded by growth rate
     st.markdown('<p class="sub-header">Strategic Theme Priorities</p>', unsafe_allow_html=True)
@@ -180,7 +180,7 @@ def render_theme_analysis_tab(filtered, papers_df, trends, mapping, babcock_them
 
     st.markdown("<div class='divider'></div>", unsafe_allow_html=True)
     
-    theme_order = list(babcock_themes.keys())
+    theme_order = list(strategic_themes.keys())
     theme_names = [t.replace('_', ' ').title() for t in theme_order]
 
     # Theme overview summary for all papers

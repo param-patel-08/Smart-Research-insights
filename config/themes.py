@@ -1,5 +1,5 @@
 """
-Babcock's 9 Strategic Themes with Hierarchical Sub-themes
+Strategic Themes with Hierarchical Sub-themes
 Enhanced structure for better emerging topic detection and trend analysis
 
 Structure:
@@ -9,7 +9,7 @@ Structure:
 """
 
 # Hierarchical theme structure with sub-themes
-BABCOCK_THEMES_HIERARCHICAL = {
+STRATEGIC_THEMES_HIERARCHICAL = {
     "AI_Machine_Learning": {
         "sub_themes": {
             "Computer_Vision": [
@@ -250,8 +250,8 @@ BABCOCK_THEMES_HIERARCHICAL = {
     }
 }
 
-# Legacy flat structure for backward compatibility
-BABCOCK_THEMES = {
+# Flat structure (keywords only) for initial filtering
+STRATEGIC_THEMES = {
     "Defense_Security": {
         "keywords": [
             "defense", "defence", "military", "armed forces", "surveillance",
@@ -440,7 +440,7 @@ BABCOCK_THEMES = {
 def get_all_keywords():
     """Get flattened list of all keywords across themes"""
     all_keywords = []
-    for theme_data in BABCOCK_THEMES.values():
+    for theme_data in STRATEGIC_THEMES.values():
         all_keywords.extend(theme_data['keywords'])
     return list(set(all_keywords))
 
@@ -448,7 +448,7 @@ def get_all_keywords():
 def get_themes_by_priority(priority):
     """Get list of theme names with specific priority level"""
     return [
-        theme_name for theme_name, data in BABCOCK_THEMES.items() 
+        theme_name for theme_name, data in STRATEGIC_THEMES.items() 
         if data['strategic_priority'] == priority
     ]
 
@@ -457,7 +457,7 @@ def get_themes_by_priority(priority):
 def get_all_sub_themes():
     """Get flat dictionary mapping sub-theme names to their keywords"""
     sub_themes = {}
-    for parent_theme, theme_data in BABCOCK_THEMES_HIERARCHICAL.items():
+    for parent_theme, theme_data in STRATEGIC_THEMES_HIERARCHICAL.items():
         for sub_theme_name, keywords in theme_data['sub_themes'].items():
             sub_themes[sub_theme_name] = {
                 'parent_theme': parent_theme,
@@ -468,13 +468,13 @@ def get_all_sub_themes():
 
 def get_sub_themes_for_parent(parent_theme):
     """Get list of sub-theme names for a given parent theme"""
-    if parent_theme in BABCOCK_THEMES_HIERARCHICAL:
-        return list(BABCOCK_THEMES_HIERARCHICAL[parent_theme]['sub_themes'].keys())
+    if parent_theme in STRATEGIC_THEMES_HIERARCHICAL:
+        return list(STRATEGIC_THEMES_HIERARCHICAL[parent_theme]['sub_themes'].keys())
     return []
 
 def get_parent_theme(sub_theme):
     """Get parent theme name for a given sub-theme"""
-    for parent, theme_data in BABCOCK_THEMES_HIERARCHICAL.items():
+    for parent, theme_data in STRATEGIC_THEMES_HIERARCHICAL.items():
         if sub_theme in theme_data['sub_themes']:
             return parent
     return None
@@ -482,15 +482,15 @@ def get_parent_theme(sub_theme):
 def get_all_hierarchical_keywords():
     """Get flattened list of all keywords from hierarchical structure"""
     all_keywords = []
-    for theme_data in BABCOCK_THEMES_HIERARCHICAL.values():
+    for theme_data in STRATEGIC_THEMES_HIERARCHICAL.values():
         for keywords in theme_data['sub_themes'].values():
             all_keywords.extend(keywords)
     return list(set(all_keywords))
 
 def count_themes():
     """Return counts of themes at each level"""
-    parent_count = len(BABCOCK_THEMES_HIERARCHICAL)
-    sub_theme_count = sum(len(data['sub_themes']) for data in BABCOCK_THEMES_HIERARCHICAL.values())
+    parent_count = len(STRATEGIC_THEMES_HIERARCHICAL)
+    sub_theme_count = sum(len(data['sub_themes']) for data in STRATEGIC_THEMES_HIERARCHICAL.values())
     return {
         'parent_themes': parent_count,
         'sub_themes': sub_theme_count,
@@ -506,7 +506,7 @@ def _test_hierarchical_structure():
     print(f"  Sub-themes: {counts['sub_themes']}")
     print(f"  Total: {counts['total_hierarchical']}")
     print(f"\nSub-themes per parent:")
-    for parent in BABCOCK_THEMES_HIERARCHICAL:
+    for parent in STRATEGIC_THEMES_HIERARCHICAL:
         sub_count = len(get_sub_themes_for_parent(parent))
         print(f"  {parent}: {sub_count} sub-themes")
     

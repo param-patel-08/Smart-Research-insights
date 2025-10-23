@@ -1,6 +1,6 @@
 """
 OpenAlex Paper Collector with Theme-Based Filtering
-Fetches papers matching Babcock's 9 strategic themes using keyword filters
+Fetches papers matching the organization's 9 strategic themes using keyword filters
 """
 
 import sys
@@ -15,7 +15,7 @@ from tqdm import tqdm
 import time
 import logging
 
-from config.themes import BABCOCK_THEMES
+from config.themes import STRATEGIC_THEMES
 from config.settings import ALL_UNIVERSITIES
 
 logger = logging.getLogger(__name__)
@@ -23,7 +23,7 @@ logger = logging.getLogger(__name__)
 
 class PaperCollector:
     """
-    Collect papers from OpenAlex filtered by Babcock theme keywords
+    Collect papers from OpenAlex filtered by organization theme keywords
     """
     
     def __init__(self, email: str, start_date: datetime, end_date: datetime):
@@ -41,7 +41,7 @@ class PaperCollector:
         self.end_date = end_date
         self.session = requests.Session()
         self.session.headers.update({
-            'User-Agent': f'BabcockResearchTrends/1.0 (mailto:{email})'
+            'User-Agent': f'SmartResearchInsights/1.0 (mailto:{email})'
         })
         
         logger.info("ThemeBasedCollector initialized")
@@ -53,13 +53,13 @@ class PaperCollector:
         Build OpenAlex search query from theme keywords
         
         Args:
-            theme_name: Name of the Babcock theme
+            theme_name: Name of the strategic theme
             top_n_keywords: Number of top keywords to use (expanded for better coverage)
             
         Returns:
             Search query string for theme keywords
         """
-        theme_data = BABCOCK_THEMES[theme_name]
+        theme_data = STRATEGIC_THEMES[theme_name]
         theme_keywords = theme_data['keywords'][:top_n_keywords]
         
         # Build query with just theme keywords
@@ -79,7 +79,7 @@ class PaperCollector:
         Fetch papers for a specific theme from specified universities
         
         Args:
-            theme_name: Babcock theme name
+            theme_name: Strategic theme name
             universities: Dict of {university_name: openalex_id}
             max_papers: Maximum papers to fetch for this theme
             per_page: Results per page (max 200)
@@ -292,7 +292,7 @@ class PaperCollector:
     
     def calculate_relevance_score(self, paper: Dict, theme_name: str) -> float:
         """
-        Calculate Babcock-specific relevance score for a paper
+        Calculate organization-specific relevance score for a paper
         
         Checks for:
         1. Theme keyword matches in title/abstract
@@ -302,7 +302,7 @@ class PaperCollector:
         Returns:
             Score from 0.0 (irrelevant) to 1.0 (highly relevant)
         """
-        theme_data = BABCOCK_THEMES[theme_name]
+        theme_data = STRATEGIC_THEMES[theme_name]
         keywords = [kw.lower() for kw in theme_data['keywords']]
         
         text = f"{paper.get('title', '')} {paper.get('abstract', '')}".lower()
@@ -325,7 +325,7 @@ class PaperCollector:
         tech_score = min(tech_matches / 4, 1.0)  # 4+ matches = full score
         score += tech_score * 0.3
         
-        # 3. Babcock domain indicators (30% weight)
+        # 3. Domain indicators (30% weight)
         domain_indicators = [
             'naval', 'maritime', 'defense', 'defence', 'military', 'autonomous',
             'marine', 'aerospace', 'security', 'cyber', 'energy', 'manufacturing',
@@ -339,7 +339,7 @@ class PaperCollector:
     
     def filter_by_relevance(self, df: pd.DataFrame, min_score: float = 0.2) -> pd.DataFrame:
         """
-        Filter papers by Babcock relevance score
+        Filter papers by organization relevance score
         
         Args:
             df: DataFrame with papers
@@ -351,7 +351,7 @@ class PaperCollector:
         if df.empty:
             return df
         
-        logger.info(f"\nCalculating Babcock relevance scores...")
+        logger.info(f"\nCalculating relevance scores...")
         
         scores = []
         for _, paper in df.iterrows():
@@ -380,23 +380,23 @@ class PaperCollector:
         min_relevance: float = 0.5
     ) -> pd.DataFrame:
         """
-        Fetch papers for all Babcock themes with relevance filtering
+        Fetch papers for all strategic themes with relevance filtering
         
         Args:
             universities: Dict of {university_name: openalex_id}
             max_per_theme: Max papers per theme
             priority_only: If True, only fetch HIGH priority themes
-            min_relevance: Minimum Babcock relevance score (0.0-1.0)
+            min_relevance: Minimum relevance score (0.0-1.0)
             
         Returns:
             Combined DataFrame with relevant theme papers
         """
         all_papers = []
         
-        themes_to_fetch = list(BABCOCK_THEMES.keys())
+        themes_to_fetch = list(STRATEGIC_THEMES.keys())
         if priority_only:
             themes_to_fetch = [
-                name for name, data in BABCOCK_THEMES.items()
+                name for name, data in STRATEGIC_THEMES.items()
                 if data['strategic_priority'] == 'HIGH'
             ]
         
@@ -432,18 +432,18 @@ class PaperCollector:
             logger.info(f"{'='*80}")
             logger.info(f"Total papers collected: {len(combined_df)}")
             
-            # Apply Babcock relevance filtering
+            # Apply relevance filtering
             combined_df = self.filter_by_relevance(combined_df, min_score=min_relevance)
             
             logger.info(f"\n{'='*80}")
-            logger.info(f"FINAL COLLECTION (BABCOCK-RELEVANT ONLY)")
+            logger.info(f"FINAL COLLECTION (RELEVANT ONLY)")
             logger.info(f"{'='*80}")
             logger.info(f"Total papers: {len(combined_df)}")
             logger.info(f"Themes covered: {combined_df['theme'].nunique()}")
             logger.info(f"Date range: {combined_df['date'].min()} to {combined_df['date'].max()}")
             
             # Show distribution
-            logger.info("\nPapers by theme (Babcock-relevant):")
+            logger.info("\nPapers by theme (relevant):")
             for theme, count in combined_df['theme'].value_counts().items():
                 avg_score = combined_df[combined_df['theme'] == theme]['relevance_score'].mean()
                 logger.info(f"  {theme}: {count} papers (avg relevance: {avg_score:.3f})")
@@ -491,14 +491,14 @@ if __name__ == "__main__":
         universities=test_unis,
         max_per_theme=100,
         priority_only=True,  # Only fetch HIGH priority themes
-        min_relevance=0.5    # Minimum 50% relevance to Babcock domains
+        min_relevance=0.5    # Minimum 50% relevance to target domains
     )
     
     df = collector.deduplicate_papers(df)
     collector.save_to_csv(df, 'data/raw/papers_theme_filtered.csv')
     
     print(f"\n{'='*80}")
-    print(f"✓ Collected {len(df)} Babcock-relevant papers!")
+    print(f"✓ Collected {len(df)} relevant papers!")
     print(f"{'='*80}")
     print(f"\nSample papers:")
     for i, row in df.head(3).iterrows():

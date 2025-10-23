@@ -1,5 +1,5 @@
 """
-Configuration settings for Babcock Research Trends Analysis
+Configuration settings for Smarter Research Insights
 """
 
 import os
@@ -89,5 +89,5 @@ TOPIC_MODEL_PARAMS = {
 }
 
 # Dashboard Configuration
-DASHBOARD_TITLE = "Babcock Research Trends Dashboard"
+DASHBOARD_TITLE = "Smarter Research Insights"
 DASHBOARD_DESCRIPTION = "Analysis of research trends across Australasian universities"

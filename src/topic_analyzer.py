@@ -1,5 +1,5 @@
 """
-BERTopic Topic Analyzer for Babcock Research Trends
+BERTopic Topic Analyzer
 Discovers research topics from papers using BERTopic
 """
 
@@ -20,7 +20,7 @@ logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
 
 
-class BabcockTopicAnalyzer:
+class TopicAnalyzer:
     """
     BERTopic analysis optimized for academic papers
     """
@@ -238,7 +238,7 @@ class BabcockTopicAnalyzer:
 
 def main():
     """
-    Example usage of BabcockTopicAnalyzer
+    Example usage of TopicAnalyzer
     """
     from config.settings import (
         EMBEDDINGS_PATH,
@@ -267,7 +267,7 @@ def main():
     timestamps = pd.to_datetime(metadata['date']).tolist()
     
     # Initialize analyzer
-    analyzer = BabcockTopicAnalyzer(min_topic_size=15, nr_topics=60)
+    analyzer = TopicAnalyzer(min_topic_size=15, nr_topics=60)
     
     # Train model
     topics, probs = analyzer.fit_transform(

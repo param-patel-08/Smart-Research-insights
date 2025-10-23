@@ -6,7 +6,7 @@ import plotly.express as px
 
 from dashboard.utils.insights import create_emerging_topics_bubble
 from dashboard.utils.styling import apply_fig_theme
-from config.themes import BABCOCK_THEMES
+from config.themes import STRATEGIC_THEMES
 
 
 def render_emerging_topics_tab(filtered, mapping, start_date, end_date, papers_df):
@@ -29,7 +29,7 @@ def render_emerging_topics_tab(filtered, mapping, start_date, end_date, papers_d
         top_n = st.slider("Number of Topics to Show", 10, 30, 20, step=5)
     with col2:
         # Theme selection
-        theme_names = [t.replace("_", " ").title() for t in BABCOCK_THEMES.keys()]
+        theme_names = [t.replace("_", " ").title() for t in STRATEGIC_THEMES.keys()]
         selected_themes = st.multiselect(
             "Select Themes to Analyze",
             options=["All Themes"] + theme_names,

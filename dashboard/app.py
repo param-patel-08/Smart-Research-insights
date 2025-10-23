@@ -20,7 +20,7 @@ from dashboard.tabs.trends_tab import render_trends_tab
 from dashboard.tabs.emerging_topics_tab import render_emerging_topics_tab
 
 # Import config
-from config.themes import BABCOCK_THEMES
+from config.themes import STRATEGIC_THEMES
 from config.settings import ALL_UNIVERSITIES
 
 # Page Configuration
@@ -127,7 +127,7 @@ except FileNotFoundError as e:
 
 # Sidebar Filters
 filtered, start_date, end_date, sel_themes, sel_sub_themes, sel_unis = render_filters(
-    papers_df, ALL_UNIVERSITIES, BABCOCK_THEMES
+    papers_df, ALL_UNIVERSITIES, STRATEGIC_THEMES
 )
 
 # Header
@@ -178,7 +178,7 @@ def render_filter_summary():
             
             # Theme filter
             st.markdown('<p style="color: #cbd5e1; font-weight: 600; margin-bottom: 0.5rem; font-size: 0.95rem;">Parent Themes</p>', unsafe_allow_html=True)
-            all_themes = sorted(list(BABCOCK_THEMES.keys()))
+            all_themes = sorted(list(STRATEGIC_THEMES.keys()))
             new_sel_themes = st.multiselect("Themes", options=all_themes, default=sel_themes, key=f"inline_themes_{st.session_state.get('active_tab', 'overview')}", label_visibility="collapsed")
             
             st.divider()
@@ -242,7 +242,7 @@ with tab_overview:
 with tab_theme:
     st.session_state['active_tab'] = 'theme'
     render_filter_summary()
-    render_theme_analysis_tab(filtered, papers_df, trends, mapping, BABCOCK_THEMES)
+    render_theme_analysis_tab(filtered, papers_df, trends, mapping, STRATEGIC_THEMES)
 
 with tab_unis:
     st.session_state['active_tab'] = 'unis'

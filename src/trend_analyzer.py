@@ -1,6 +1,6 @@
 """
-Trend Analyzer for Babcock Research Trends
-Analyzes temporal trends across Babcock themes
+Trend Analyzer
+Analyzes temporal trends across strategic themes
 """
 
 import pandas as pd
@@ -16,19 +16,19 @@ logger = logging.getLogger(__name__)
 
 class TrendAnalyzer:
     """
-    Analyze temporal trends across Babcock themes
+    Analyze temporal trends across strategic themes
     """
     
-    def __init__(self, topic_theme_mapping: Dict, babcock_themes: Dict):
+    def __init__(self, topic_theme_mapping: Dict, strategic_themes: Dict):
         """
         Initialize analyzer
         
         Args:
             topic_theme_mapping: Mapping of topics to themes
-            babcock_themes: Babcock strategic themes
+            strategic_themes: Organization's strategic themes
         """
         self.topic_theme_mapping = topic_theme_mapping
-        self.babcock_themes = babcock_themes
+        self.strategic_themes = strategic_themes
         logger.info("Trend Analyzer initialized")
     
     def calculate_growth_rate(self, counts: List[int]) -> float:
@@ -56,7 +56,7 @@ class TrendAnalyzer:
                             papers_df: pd.DataFrame,
                             topics_over_time: pd.DataFrame = None) -> Dict:
         """
-        Analyze trends for each Babcock theme
+        Analyze trends for each strategic theme
         
         Args:
             papers_df: DataFrame with papers and topic assignments
@@ -82,7 +82,7 @@ class TrendAnalyzer:
         papers_df['quarter'] = pd.to_datetime(papers_df['date']).dt.to_period('Q')
         
         theme_trends = {}
-        all_themes = list(self.babcock_themes.keys())
+        all_themes = list(self.strategic_themes.keys())
         
         for theme in all_themes:
             theme_papers = papers_df[papers_df['theme'] == theme]
@@ -212,7 +212,7 @@ class TrendAnalyzer:
         """
         Calculate strategic priority score for each theme
         
-        Priority = growth_rate * babcock_relevance_weight * paper_volume_factor
+    Priority = growth_rate * declared_priority_weight * paper_volume_factor
         
         Returns:
             List of themes with priority scores
@@ -222,11 +222,11 @@ class TrendAnalyzer:
         priorities = []
         
         for theme, data in theme_trends.items():
-            # Get Babcock's stated priority for this theme
-            babcock_priority = self.babcock_themes.get(theme, {}).get('strategic_priority', 'MEDIUM')
+            # Get the organization's stated priority for this theme
+            declared_priority = self.strategic_themes.get(theme, {}).get('strategic_priority', 'MEDIUM')
             
             priority_weights = {'HIGH': 1.5, 'MEDIUM': 1.0, 'LOW': 0.5}
-            weight = priority_weights.get(babcock_priority, 1.0)
+            weight = priority_weights.get(declared_priority, 1.0)
             
             # Calculate composite score
             growth_score = max(0, data['growth_rate'])  # Negative growth = 0
@@ -248,7 +248,7 @@ class TrendAnalyzer:
                 'category': category,
                 'growth_rate': float(data['growth_rate']),
                 'total_papers': int(data['total_papers']),
-                'babcock_priority': babcock_priority
+                'declared_priority': declared_priority
             })
         
         priorities.sort(key=lambda x: x['priority_score'], reverse=True)
@@ -270,7 +270,7 @@ def main():
         TOPIC_MAPPING_PATH,
         TREND_ANALYSIS_PATH
     )
-    from config.themes import BABCOCK_THEMES
+    from config.themes import STRATEGIC_THEMES
     
     logger.info("="*80)
     logger.info("TREND ANALYSIS")
@@ -287,7 +287,7 @@ def main():
     logger.info(f"[OK] Loaded topic-theme mapping")
     
     # Initialize analyzer
-    trend_analyzer = TrendAnalyzer(mapping, BABCOCK_THEMES)
+    trend_analyzer = TrendAnalyzer(mapping, STRATEGIC_THEMES)
     
     # Analyze trends
     theme_trends = trend_analyzer.analyze_theme_trends(papers_df)

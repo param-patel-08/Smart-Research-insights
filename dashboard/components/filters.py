@@ -5,14 +5,14 @@ import streamlit as st
 import pandas as pd
 
 
-def render_filters(papers_df, all_universities, babcock_themes):
+def render_filters(papers_df, all_universities, strategic_themes):
     """
     Render sidebar filters and return filtered dataframe and selected values.
     
     Args:
         papers_df: Full papers dataframe
-        all_universities: Dictionary of all universities
-        babcock_themes: Dictionary of Babcock themes
+    all_universities: Dictionary of all universities
+    strategic_themes: Dictionary of strategic themes
         
     Returns:
         Tuple: (filtered_df, start_date, end_date, sel_themes, sel_sub_themes, sel_unis)
@@ -22,7 +22,7 @@ def render_filters(papers_df, all_universities, babcock_themes):
     # Logo
     try:
         st.sidebar.image(
-            "https://dummyimage.com/260x60/111827/ffffff.png&text=BABCOCK",
+            "https://dummyimage.com/260x60/111827/ffffff.png&text=RESEARCH+INSIGHTS",
             use_container_width=True,
         )
     except Exception:
@@ -37,7 +37,7 @@ def render_filters(papers_df, all_universities, babcock_themes):
     end_date = cd2.date_input("To", value=max_date, min_value=min_date, max_value=max_date, key="to_date")
     
     # Theme filter
-    all_themes = sorted(list(babcock_themes.keys()))
+    all_themes = sorted(list(strategic_themes.keys()))
     sel_themes = st.sidebar.multiselect("Parent Themes", options=all_themes, default=all_themes, key="themes")
     
     # Sub-theme filter (hierarchical)

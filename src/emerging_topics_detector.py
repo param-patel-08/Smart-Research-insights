@@ -1,5 +1,5 @@
 """
-Emerging Topics Detector for Babcock Research Trends
+Emerging Topics Detector
 Identifies emerging research topics and generates human-readable labels using ChatGPT
 """
 

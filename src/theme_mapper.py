@@ -1,6 +1,6 @@
 """
-Theme Mapper for Babcock Research Trends
-Maps BERTopic topics to Babcock's 9 strategic themes.
+Theme Mapper
+Maps BERTopic topics to the organization's 9 strategic themes.
 """
 
 from __future__ import annotations
@@ -24,28 +24,28 @@ DEFAULT_THEME_THRESHOLDS: Dict[str, float] = {
 
 class ThemeMapper:
     """
-    Map BERTopic topics to Babcock's strategic themes using keyword similarity.
+    Map BERTopic topics to the organization's strategic themes using keyword similarity.
     """
 
     def __init__(
         self,
-        babcock_themes: Dict[str, Dict],
+    strategic_themes: Dict[str, Dict],
         min_similarity: float = 0.01,
         theme_thresholds: Optional[Dict[str, float]] = None,
     ):
         """
         Args:
-            babcock_themes: Dictionary of themes with keywords and metadata.
+            strategic_themes: Dictionary of themes with keywords and metadata.
             min_similarity: Minimum cosine similarity required to assign a theme.
         """
-        self.babcock_themes = babcock_themes
+        self.strategic_themes = strategic_themes
         self.min_similarity = min_similarity
         self.theme_thresholds = {**DEFAULT_THEME_THRESHOLDS, **(theme_thresholds or {})}
         self.topic_theme_mapping: Dict[str, Dict] = {}
         self._vectorizer = TfidfVectorizer()
         logger.info(
             "Theme Mapper initialized with %d themes (default threshold=%.3f)",
-            len(babcock_themes),
+            len(strategic_themes),
             min_similarity,
         )
         if self.theme_thresholds:
@@ -85,7 +85,7 @@ class ThemeMapper:
         Determine the best matching theme for a topic.
         """
         scores: Dict[str, float] = {}
-        for theme_name, theme_data in self.babcock_themes.items():
+        for theme_name, theme_data in self.strategic_themes.items():
             score = self.calculate_keyword_similarity(topic_keywords, theme_data.get("keywords", []))
             scores[theme_name] = score
 
@@ -130,7 +130,7 @@ class ThemeMapper:
 
     def create_theme_mapping(self, topic_model, hierarchical_themes: Optional[Dict] = None) -> Dict[str, Dict]:
         """
-        Build mapping from BERTopic model to Babcock themes.
+        Build mapping from BERTopic model to strategic themes.
         
         Args:
             topic_model: BERTopic model
@@ -138,7 +138,7 @@ class ThemeMapper:
                                 If provided, will also map topics to sub-themes
         """
         logger.info("=" * 80)
-        logger.info("MAPPING TOPICS TO BABCOCK THEMES")
+        logger.info("MAPPING TOPICS TO STRATEGIC THEMES")
         if hierarchical_themes:
             logger.info("Using HIERARCHICAL mapping (parent + sub-themes)")
         logger.info("=" * 80)
@@ -266,14 +266,14 @@ def main():
     from bertopic import BERTopic
 
     from config.settings import BERTOPIC_MODEL_PATH, TOPIC_MAPPING_PATH
-    from config.themes import BABCOCK_THEMES
+    from config.themes import STRATEGIC_THEMES
 
     logger.info("=" * 80)
     logger.info("THEME MAPPING")
     logger.info("=" * 80)
 
     topic_model = BERTopic.load(BERTOPIC_MODEL_PATH)
-    mapper = ThemeMapper(BABCOCK_THEMES)
+    mapper = ThemeMapper(STRATEGIC_THEMES)
 
     mapper.create_theme_mapping(topic_model)
     mapper.identify_cross_theme_topics(threshold=0.6)
@@ -290,7 +290,7 @@ def _test_hierarchical_mapping():
     sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
     
     from bertopic import BERTopic
-    from config.themes import BABCOCK_THEMES, BABCOCK_THEMES_HIERARCHICAL
+    from config.themes import STRATEGIC_THEMES, STRATEGIC_THEMES_HIERARCHICAL
     from config.settings import BERTOPIC_MODEL_PATH, TOPIC_MAPPING_PATH
     import json
     
@@ -310,8 +310,8 @@ def _test_hierarchical_mapping():
     
     # Create mapper and generate hierarchical mapping
     logger.info("Creating hierarchical theme mapping...")
-    mapper = ThemeMapper(BABCOCK_THEMES)
-    mapping = mapper.create_theme_mapping(topic_model, hierarchical_themes=BABCOCK_THEMES_HIERARCHICAL)
+    mapper = ThemeMapper(STRATEGIC_THEMES)
+    mapping = mapper.create_theme_mapping(topic_model, hierarchical_themes=STRATEGIC_THEMES_HIERARCHICAL)
     
     # Display sample mappings
     logger.info("\nSample topic mappings with sub-themes:")
