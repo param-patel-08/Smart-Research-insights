@@ -45,10 +45,10 @@ except Exception as e:
 
 # Test src imports
 try:
-    from src import theme_based_collector
-    print("✓    src.theme_based_collector imported")
+    from src import paper_collector
+    print("✓    src.paper_collector imported")
 except Exception as e:
-    print(f"✗    src.theme_based_collector failed: {e}")
+    print(f"✗    src.paper_collector failed: {e}")
 
 try:
     from src import paper_preprocessor
@@ -61,7 +61,7 @@ print("\n3. Checking file existence...")
 required_files = [
     'config/settings.py',
     'config/themes.py',
-    'src/theme_based_collector.py',
+    'src/paper_collector.py',
     'src/paper_preprocessor.py',
     'src/topic_analyzer.py',
     'src/theme_mapper.py',

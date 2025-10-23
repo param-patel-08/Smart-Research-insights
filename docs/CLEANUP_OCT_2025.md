@@ -27,17 +27,17 @@ Major cleanup and reorganization to remove duplicate files, consolidate collecto
 - `src/openalex_collector.py` - Generic OpenAlex collector (435 lines)
 
 **Kept:**
-- `src/theme_based_collector.py` - Theme-filtered collector (509 lines)
+- `src/paper_collector.py` - Theme-filtered collector (509 lines)
 
 **Reason:** 
-- The project **only uses `theme_based_collector.py`** (confirmed in `run_full_analysis.py` line 128)
+- The project **only uses `paper_collector.py`** (confirmed in `run_full_analysis.py` line 128)
 - Having two collectors was redundant and confusing
-- Theme-based collector is more sophisticated and specifically designed for Babcock's 9 strategic themes
+- Paper collector is more sophisticated and specifically designed for Babcock's 9 strategic themes
 - Includes relevance scoring and keyword filtering built-in
 
 **Updated Files:**
-- `tests/test_setup.py` - Changed import from `openalex_collector` to `theme_based_collector`
-- `tests/test_focused.py` - Changed import from `openalex_collector` to `theme_based_collector`
+- `tests/test_setup.py` - Changed import from `openalex_collector` to `paper_collector`
+- `tests/test_focused.py` - Changed import from `openalex_collector` to `paper_collector`
 - `tests/debug/fix_imports.py` - Updated imports and file checks
 
 ---
@@ -89,7 +89,7 @@ Smart-Research-insights/
 │   └── themes.py
 │
 ├── src/                           # Core pipeline (6 files)
-│   ├── theme_based_collector.py   # ← Single collector (theme-filtered)
+│   ├── paper_collector.py         # ← Single collector (theme-filtered)
 │   ├── paper_preprocessor.py
 │   ├── topic_analyzer.py
 │   ├── theme_mapper.py

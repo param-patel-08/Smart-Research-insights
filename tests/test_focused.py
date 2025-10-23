@@ -43,8 +43,8 @@ def test_modules():
     print("="*80)
     
     try:
-        from src.theme_based_collector import ThemeBasedCollector
-        print("✓ theme_based_collector.py")
+        from src.paper_collector import PaperCollector
+        print("✓ paper_collector.py")
         
         from src.paper_preprocessor import PaperPreprocessor
         print("✓ paper_preprocessor.py")

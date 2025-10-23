@@ -125,9 +125,9 @@ def main():
     # ==================== STEP 1: DATA COLLECTION ====================
     
     def step1_collect():
-        from src.theme_based_collector import ThemeBasedCollector
+        from src.paper_collector import PaperCollector
         
-        collector = ThemeBasedCollector(
+        collector = PaperCollector(
             email=OPENALEX_EMAIL,
             start_date=ANALYSIS_START_DATE,
             end_date=ANALYSIS_END_DATE

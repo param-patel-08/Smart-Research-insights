@@ -125,8 +125,8 @@ def test_modules():
     print("=" * 80)
 
     try:
-        from src.theme_based_collector import ThemeBasedCollector  # noqa: F401
-        print("✓ theme_based_collector.py")
+        from src.paper_collector import PaperCollector  # noqa: F401
+        print("✓ paper_collector.py")
 
         from src.paper_preprocessor import PaperPreprocessor  # noqa: F401
         print("✓ paper_preprocessor.py")

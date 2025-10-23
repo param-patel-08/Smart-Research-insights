@@ -1,5 +1,5 @@
 """
-OpenAlex Collector with Theme-Based Filtering
+OpenAlex Paper Collector with Theme-Based Filtering
 Fetches papers matching Babcock's 9 strategic themes using keyword filters
 """
 
@@ -21,7 +21,7 @@ from config.settings import ALL_UNIVERSITIES
 logger = logging.getLogger(__name__)
 
 
-class ThemeBasedCollector:
+class PaperCollector:
     """
     Collect papers from OpenAlex filtered by Babcock theme keywords
     """
@@ -478,7 +478,7 @@ if __name__ == "__main__":
     
     from config.settings import OPENALEX_EMAIL, ALL_UNIVERSITIES, ANALYSIS_START_DATE, ANALYSIS_END_DATE
     
-    collector = ThemeBasedCollector(
+    collector = PaperCollector(
         email=OPENALEX_EMAIL,
         start_date=ANALYSIS_START_DATE,
         end_date=ANALYSIS_END_DATE
