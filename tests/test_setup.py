@@ -125,17 +125,17 @@ def test_modules():
     print("=" * 80)
 
     try:
-        from src.openalex_collector import OpenAlexCollector  # noqa: F401
-        print("  openalex_collector.py")
+        from src.theme_based_collector import ThemeBasedCollector  # noqa: F401
+        print("✓ theme_based_collector.py")
 
         from src.paper_preprocessor import PaperPreprocessor  # noqa: F401
-        print("  paper_preprocessor.py")
+        print("✓ paper_preprocessor.py")
 
         from config.themes import BABCOCK_THEMES  # noqa: F401
-        print("  themes.py")
+        print("✓ themes.py")
 
         from config.settings import ALL_UNIVERSITIES  # noqa: F401
-        print("  settings.py")
+        print("✓ settings.py")
 
         return True
 

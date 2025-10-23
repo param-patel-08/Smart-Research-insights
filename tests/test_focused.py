@@ -43,22 +43,22 @@ def test_modules():
     print("="*80)
     
     try:
-        from src.openalex_collector import OpenAlexCollector
-        print("  openalex_collector.py")
+        from src.theme_based_collector import ThemeBasedCollector
+        print("✓ theme_based_collector.py")
         
         from src.paper_preprocessor import PaperPreprocessor
-        print("  paper_preprocessor.py")
+        print("✓ paper_preprocessor.py")
         
         from config.themes import BABCOCK_THEMES
-        print("  themes.py")
+        print("✓ themes.py")
         
         from config.settings import ALL_UNIVERSITIES
-        print("  settings.py")
+        print("✓ settings.py")
         
         return True
         
     except Exception as e:
-        print(f"  Module import failed: {e}")
+        print(f"✗ Module import failed: {e}")
         return False
 
 def test_openalex_connection():
