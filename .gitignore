@@ -9,5 +9,36 @@
 *api_key*
 *API_KEY*
 
-# Python virtual environment
+# Virtual environment
 .venv/
+venv/
+
+# Model artifacts
+models/bertopic_model.pkl
+models/bertopic_model_local.pkl
+
+# Logs
+logs/
+
+# Cache files
+**/__pycache__/
+*.pyc
+
+# Processed data (large files)
+data/processed/embeddings.npy
+data/processed/documents.txt
+data/processed/metadata.csv
+data/processed/papers_processed.csv
+data/processed/topics_over_time.csv
+data/raw/papers_raw.csv
+data/raw/papers_theme_filtered.csv
+models/bertopic_model.pkl
+data/processed/topics_over_time.csv
+data/processed/papers_processed.csv
+data/processed/topic_mapping.csv
+data/processed/topic_mapping.json
+data/processed/trend_analysis.json
+data/processed/trend_analysis.csv
+data/processed/papers_with_themes.csv
+
+documents/

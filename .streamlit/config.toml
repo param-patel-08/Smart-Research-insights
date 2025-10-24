@@ -1,0 +1,10 @@
+[theme]
+base = "light"
+primaryColor = "#22c55e"          # green accent
+backgroundColor = "#f8fafc"       # light content background
+secondaryBackgroundColor = "#1f2937"  # dark sidebar / panels
+textColor = "#0b0f19"             # near-black text
+font = "sans serif"
+
+[browser]
+gatherUsageStats = false

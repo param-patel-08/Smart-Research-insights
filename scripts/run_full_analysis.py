@@ -1,0 +1,360 @@
+"""
+BABCOCK RESEARCH TRENDS - FULL ANALYSIS PIPELINE
+Run this script to execute the complete analysis from start to finish
+"""
+
+import sys
+import os
+from datetime import datetime
+import logging
+
+# Setup logging
+log_file = f'logs/full_analysis_{datetime.now().strftime("%Y%m%d_%H%M%S")}.log'
+os.makedirs('logs', exist_ok=True)
+
+logging.basicConfig(
+    level=logging.INFO,
+    format='%(asctime)s - %(name)s - %(levelname)s - %(message)s',
+    handlers=[
+        logging.FileHandler(log_file),
+        logging.StreamHandler()
+    ]
+)
+
+logger = logging.getLogger(__name__)
+
+
+def print_banner(text):
+    """Print a nice banner"""
+    print("\n" + "="*80)
+    print(f"  {text}")
+    print("="*80 + "\n")
+
+
+def run_step(step_name, function, *args, **kwargs):
+    """Run a pipeline step with error handling"""
+    print_banner(f"STEP: {step_name}")
+    
+    start_time = datetime.now()
+    
+    try:
+        result = function(*args, **kwargs)
+        elapsed = (datetime.now() - start_time).total_seconds()
+        
+        logger.info(f"[OK] {step_name} completed in {elapsed:.1f} seconds")
+        return result, True
+        
+    except Exception as e:
+        elapsed = (datetime.now() - start_time).total_seconds()
+        logger.error(f"[ERROR] {step_name} failed after {elapsed:.1f} seconds: {e}")
+        import traceback
+        traceback.print_exc()
+        return None, False
+
+
+def main():
+    """
+    Run complete analysis pipeline
+    """
+    print_banner("BABCOCK RESEARCH TRENDS - FULL ANALYSIS")
+    
+    logger.info(f"Analysis started at: {datetime.now()}")
+    logger.info(f"Log file: {log_file}")
+    
+    overall_start = datetime.now()
+    
+    # Import configurations
+    from config.settings import (
+        OPENALEX_EMAIL,
+        ALL_UNIVERSITIES,
+        ANALYSIS_START_DATE,
+        ANALYSIS_END_DATE,
+        RAW_PAPERS_CSV,
+        METADATA_CSV,
+        EMBEDDINGS_PATH,
+        BERTOPIC_MODEL_PATH,
+        PROCESSED_PAPERS_CSV,
+        TOPICS_OVER_TIME_CSV,
+        TOPIC_MAPPING_PATH,
+        TREND_ANALYSIS_PATH,
+        NR_TIME_BINS,
+        MIN_RELEVANCE_SCORE,
+        MIN_ABSTRACT_LENGTH
+    )
+    from config.themes import BABCOCK_THEMES
+    
+    # Print configuration
+    logger.info("\n" + "="*80)
+    logger.info("CONFIGURATION")
+    logger.info(f"Email: {OPENALEX_EMAIL}")
+    logger.info(f"Date range: {ANALYSIS_START_DATE.date()} to {ANALYSIS_END_DATE.date()}")
+    logger.info(f"Universities: {len(ALL_UNIVERSITIES)}")
+    logger.info(f"Themes: {len(BABCOCK_THEMES)}")
+    logger.info(f"Theme-based filtering: ENABLED (with relevance scoring)")
+    logger.info(f"Minimum relevance threshold: 0.2 (20% Babcock-specific)")
+    
+    # Ask user for data collection scope
+    print("\n" + "="*80)
+    print("DATA COLLECTION SCOPE")
+    print("="*80)
+    print("\nOptions:")
+    print("  1. Quick test (3 universities, ~1000-1500 papers) - 8-10 minutes")
+    print("  2. Medium test (10 universities, ~4000-6000 papers) - 20-25 minutes")
+    print("  3. Full collection (43 universities, ~15000-25000 papers) - 60-120 minutes")
+    
+    # Check for command line argument
+    if len(sys.argv) > 1:
+        choice = sys.argv[1]
+        print(f"\nUsing command line choice: {choice}")
+    else:
+        choice = input("\nEnter your choice (1/2/3) [default: 1]: ").strip() or "1"
+    
+    if choice == "1":
+        test_universities = dict(list(ALL_UNIVERSITIES.items())[:3])
+        max_per_uni = 100
+        logger.info("Mode: Quick test")
+    elif choice == "2":
+        test_universities = dict(list(ALL_UNIVERSITIES.items())[:10])
+        max_per_uni = 500
+        logger.info("Mode: Medium test")
+    else:
+        test_universities = ALL_UNIVERSITIES
+        max_per_uni = None
+        logger.info("Mode: Full collection")
+    
+    # ==================== STEP 1: DATA COLLECTION ====================
+    
+    def step1_collect():
+        from src.paper_collector import PaperCollector
+        
+        collector = PaperCollector(
+            email=OPENALEX_EMAIL,
+            start_date=ANALYSIS_START_DATE,
+            end_date=ANALYSIS_END_DATE
+        )
+        
+        # Map collection scope to theme parameters
+        # Lower thresholds since OpenAlex concepts already provide good filtering
+        if choice == "1":  # Quick test
+            max_per_theme = 500
+            priority_only = False  # All 9 themes (changed from True to collect all themes)
+            min_relevance = 0.15  # Lower threshold for more papers
+        elif choice == "2":  # Medium test
+            max_per_theme = 2000
+            priority_only = False  # All 9 themes (changed from True to collect all themes)
+            min_relevance = 0.15  # Lower threshold for more papers
+        else:  # Full collection
+            max_per_theme = 10000
+            priority_only = False  # All 9 themes
+            min_relevance = 0.15  # Lower threshold for more papers
+        
+        # Fetch theme-filtered papers with relevance scoring
+        logger.info(f"Fetching papers with theme-based filtering (priority_only={priority_only})")
+        logger.info(f"Collection params: max_per_theme={max_per_theme}, min_relevance={min_relevance}")
+        df = collector.fetch_all_themes(
+            universities=test_universities,
+            max_per_theme=max_per_theme,
+            priority_only=priority_only,
+            min_relevance=min_relevance
+        )
+        
+        df = collector.deduplicate_papers(df)
+        
+        # Filter to keep only papers from major AU/NZ universities
+        # Papers from other AU/NZ institutions (research labs, small colleges) are excluded
+        initial_count = len(df)
+        major_unis = set(ALL_UNIVERSITIES.keys())
+        df_filtered = df[df['university'].isin(major_unis)].copy()
+        other_aus_papers = initial_count - len(df_filtered)
+        
+        logger.info(f"Filtered to major universities: {len(df_filtered)} papers (removed {other_aus_papers} from other AU/NZ institutions)")
+        
+        collector.save_to_csv(df_filtered, RAW_PAPERS_CSV)
+        
+        logger.info(f"Collected {len(df_filtered)} Babcock-relevant papers from {len(df_filtered['university'].unique())} major AU/NZ universities")
+        return df_filtered
+    
+    df_raw, success = run_step("1. DATA COLLECTION", step1_collect)
+    if not success:
+        logger.error("Pipeline stopped due to data collection failure")
+        return
+    
+    # ==================== STEP 2: PREPROCESSING ====================
+    
+    def step2_preprocess():
+        import pandas as pd
+        from src.paper_preprocessor import PaperPreprocessor
+        
+        df = pd.read_csv(RAW_PAPERS_CSV)
+        
+        preprocessor = PaperPreprocessor(
+            min_abstract_length=MIN_ABSTRACT_LENGTH
+        )
+        
+        df = preprocessor.preprocess_abstracts(df)
+        
+        # Prepare documents and metadata for BERTopic
+        documents = df['processed_text'].tolist()
+        # IMPORTANT: Preserve the 'theme' column from collection for strategic priority tracking
+        metadata = df[['title', 'university', 'date', 'authors', 'journal', 'citations', 'theme']].copy()
+        
+        # Save
+        metadata.to_csv(METADATA_CSV, index=False)
+        
+        documents_file = METADATA_CSV.replace('metadata.csv', 'documents.txt')
+        with open(documents_file, 'w', encoding='utf-8') as f:
+            f.write('\n'.join(documents))
+        
+        return (documents, metadata)
+    
+    result, success = run_step("2. PREPROCESSING", step2_preprocess)
+    if not success:
+        logger.error("Pipeline stopped due to preprocessing failure")
+        return
+    
+    documents, metadata = result
+    
+    # ==================== STEP 3: TOPIC MODELING ====================
+    
+    def step3_topic_modeling():
+        import pandas as pd
+        from src.topic_analyzer import BabcockTopicAnalyzer
+        
+        # Load documents
+        documents_file = METADATA_CSV.replace('metadata.csv', 'documents.txt')
+        with open(documents_file, 'r', encoding='utf-8') as f:
+            documents = [line.strip() for line in f if line.strip()]
+        
+        metadata = pd.read_csv(METADATA_CSV)
+        timestamps = pd.to_datetime(metadata['date']).tolist()
+        
+        # Train model
+        analyzer = BabcockTopicAnalyzer(min_topic_size=15, nr_topics=60)
+        topics, probs = analyzer.fit_transform(documents, embeddings_path=EMBEDDINGS_PATH)
+        
+        # Temporal analysis
+        topics_over_time = analyzer.get_topics_over_time(
+            documents, timestamps, topics, nr_bins=NR_TIME_BINS
+        )
+        
+        # Save
+        analyzer.save_model(BERTOPIC_MODEL_PATH)
+        
+        metadata['topic_id'] = topics
+        metadata['topic_probability'] = [p.max() if len(p) > 0 else 0 for p in probs]
+        metadata.to_csv(PROCESSED_PAPERS_CSV, index=False)
+        
+        topics_over_time.to_csv(TOPICS_OVER_TIME_CSV, index=False)
+        
+        return analyzer
+    
+    analyzer, success = run_step("3. TOPIC MODELING (BERTopic)", step3_topic_modeling)
+    if not success:
+        logger.error("Pipeline stopped due to topic modeling failure")
+        return
+    
+    # ==================== STEP 4: THEME MAPPING ====================
+    
+    def step4_theme_mapping():
+        from src.theme_mapper import ThemeMapper
+        from bertopic import BERTopic
+        from config.themes import BABCOCK_THEMES_HIERARCHICAL
+        
+        topic_model = BERTopic.load(BERTOPIC_MODEL_PATH)
+        
+        mapper = ThemeMapper(BABCOCK_THEMES)
+        # Use hierarchical themes for sub-theme detection
+        mapping = mapper.create_theme_mapping(topic_model, hierarchical_themes=BABCOCK_THEMES_HIERARCHICAL)
+        mapper.identify_cross_theme_topics(threshold=0.6)
+        mapper.save_mapping(TOPIC_MAPPING_PATH)
+        
+        return mapper
+    
+    mapper, success = run_step("4. THEME MAPPING", step4_theme_mapping)
+    if not success:
+        logger.error("Pipeline stopped due to theme mapping failure")
+        return
+    
+    # ==================== STEP 5: TREND ANALYSIS ====================
+    
+    def step5_trend_analysis():
+        import pandas as pd
+        import json
+        from src.trend_analyzer import TrendAnalyzer
+        
+        papers_df = pd.read_csv(PROCESSED_PAPERS_CSV)
+        
+        with open(TOPIC_MAPPING_PATH, 'r') as f:
+            mapping = json.load(f)
+        
+        trend_analyzer = TrendAnalyzer(mapping, BABCOCK_THEMES)
+        
+        theme_trends = trend_analyzer.analyze_theme_trends(papers_df)
+        emerging_topics = trend_analyzer.identify_emerging_topics(papers_df, threshold=0.5)
+        strategic_priorities = trend_analyzer.calculate_strategic_priority(theme_trends)
+        
+        # Save
+        results = {
+            'theme_trends': theme_trends,
+            'emerging_topics': emerging_topics,
+            'strategic_priorities': strategic_priorities
+        }
+        
+        with open(TREND_ANALYSIS_PATH, 'w') as f:
+            json.dump(results, f, indent=2)
+        
+        return results
+    
+    results, success = run_step("5. TREND ANALYSIS", step5_trend_analysis)
+    if not success:
+        logger.error("Pipeline stopped due to trend analysis failure")
+        return
+    
+    # ==================== COMPLETION ====================
+    
+    total_time = (datetime.now() - overall_start).total_seconds()
+    
+    print_banner("ANALYSIS COMPLETE!")
+    
+    logger.info(f"\n{'='*80}")
+    logger.info("SUMMARY")
+    logger.info("="*80)
+    logger.info(f"Total processing time: {total_time/60:.1f} minutes")
+    logger.info(f"Papers analyzed: {len(metadata)}")
+    if 'topic_id' in metadata.columns:
+        logger.info(f"Topics discovered: {len(set(metadata['topic_id'])) - 1}")
+    else:
+        logger.info("Topics discovered: Processing...")
+    logger.info(f"Themes covered: {len(BABCOCK_THEMES)}")
+    
+    logger.info(f"\n{'='*80}")
+    logger.info("OUTPUT FILES")
+    logger.info("="*80)
+    logger.info(f"[OK] Raw papers: {RAW_PAPERS_CSV}")
+    logger.info(f"[OK] Processed papers: {PROCESSED_PAPERS_CSV}")
+    logger.info(f"[OK] BERTopic model: {BERTOPIC_MODEL_PATH}")
+    logger.info(f"[OK] Topic-theme mapping: {TOPIC_MAPPING_PATH}")
+    logger.info(f"[OK] Trend analysis: {TREND_ANALYSIS_PATH}")
+    logger.info(f"[OK] Log file: {log_file}")
+    
+    logger.info(f"\n{'='*80}")
+    logger.info("NEXT STEPS")
+    logger.info("="*80)
+    logger.info("1. View results: python view_results.py")
+    logger.info("2. Launch dashboard: streamlit run dashboard/app.py")
+    logger.info("3. Generate reports: python scripts/generate_report.py")
+    
+    print_banner("SUCCESS! [OK]")
+
+
+if __name__ == "__main__":
+    try:
+        main()
+    except KeyboardInterrupt:
+        logger.info("\n\nAnalysis interrupted by user")
+        sys.exit(1)
+    except Exception as e:
+        logger.error(f"\n\nFatal error: {e}")
+        import traceback
+        traceback.print_exc()
+        sys.exit(1)
